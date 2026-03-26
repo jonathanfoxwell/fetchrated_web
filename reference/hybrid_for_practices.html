@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FetchRated | Institutional Practice Register</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#b22222",
+                        "secondary-container": "#fd6b79",
+                        "on-secondary-fixed": "#40000c",
+                        "tertiary-fixed-dim": "#accec5",
+                        "secondary-fixed-dim": "#ffb3b6",
+                        "surface-dim": "#dcdad5",
+                        "surface-variant": "#e5e2dd",
+                        "tertiary": "#43625b",
+                        "surface-bright": "#fcf9f4",
+                        "inverse-surface": "#31302d",
+                        "secondary-fixed": "#ffdada",
+                        "outline": "#8b7171",
+                        "error": "#ba1a1a",
+                        "primary-container": "#d53c37",
+                        "on-tertiary-fixed": "#00201b",
+                        "surface-tint": "#b52424",
+                        "on-surface": "#1c1c19",
+                        "on-tertiary-fixed-variant": "#2d4c46",
+                        "on-primary-fixed": "#410003",
+                        "on-primary-container": "#fffbff",
+                        "primary-fixed": "#ffdad6",
+                        "inverse-on-surface": "#f3f0eb",
+                        "error-container": "#ffdad6",
+                        "on-tertiary": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "outline-variant": "#dfbfbf",
+                        "on-secondary-container": "#6c001b",
+                        "surface-container-high": "#ebe8e3",
+                        "tertiary-fixed": "#c7eae1",
+                        "background": "#fcf9f4",
+                        "secondary": "#ac2f41",
+                        "tertiary-container": "#5b7b74",
+                        "on-error-container": "#93000a",
+                        "on-secondary-fixed-variant": "#8b152b",
+                        "surface-container-lowest": "#ffffff",
+                        "on-background": "#1c1c19",
+                        "surface": "#fcf9f4",
+                        "surface-container-highest": "#e5e2dd",
+                        "inverse-primary": "#ffb4ac",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed-variant": "#92030f",
+                        "surface-container": "#f0ede9",
+                        "on-error": "#ffffff",
+                        "surface-container-low": "#f6f3ee",
+                        "primary-fixed-dim": "#ffb4ac",
+                        "on-surface-variant": "#584142",
+                        "on-tertiary-container": "#f4fffb"
+                    },
+                    fontFamily: {
+                        "headline": ["Newsreader", "serif"],
+                        "body": ["Plus Jakarta Sans", "sans-serif"],
+                        "label": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #ffffff;
+            color: #1c1c19;
+        }
+    </style>
+</head>
+<body class="bg-surface-container-lowest">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-8 py-4 max-w-full bg-[#fcf9f4]/85 dark:bg-stone-900/85 backdrop-blur-md shadow-[0_8px_32px_0_rgba(28,28,25,0.04)]">
+<div class="text-2xl font-bold font-serif text-[#b22222] dark:text-[#d44d5c]">FetchRated</div>
+<nav class="hidden md:flex items-center space-x-8">
+<a class="text-stone-600 dark:text-stone-400 font-medium font-sans hover:text-[#b22222] transition-colors duration-200" href="#">Medical</a>
+<a class="text-stone-600 dark:text-stone-400 font-medium font-sans hover:text-[#b22222] transition-colors duration-200" href="#">Behavioral</a>
+<a class="text-stone-600 dark:text-stone-400 font-medium font-sans hover:text-[#b22222] transition-colors duration-200" href="#">Nutrition</a>
+<a class="text-stone-600 dark:text-stone-400 font-medium font-sans hover:text-[#b22222] transition-colors duration-200" href="#">Lifestyle</a>
+<a class="text-stone-600 dark:text-stone-400 font-medium font-sans hover:text-[#b22222] transition-colors duration-200" href="#">Ethics</a>
+</nav>
+<div class="flex items-center space-x-6">
+<button class="text-stone-600 font-sans text-sm font-bold uppercase tracking-wider">Sign In</button>
+<button class="bg-primary text-on-primary px-6 py-2.5 rounded-sm text-sm font-bold uppercase tracking-widest hover:bg-primary-container transition-all active:scale-[0.99]">Register for Assessment</button>
+</div>
+</header>
+<main class="pt-32 pb-24">
+<!-- Hero Section -->
+<section class="max-w-7xl mx-auto px-8 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+<div class="lg:col-span-7">
+<div class="inline-block px-3 py-1 bg-secondary text-white text-[10px] font-bold tracking-[0.2em] uppercase rounded-sm mb-6">Institutional Programme</div>
+<h1 class="font-headline text-5xl md:text-7xl font-bold tracking-tight text-on-surface leading-[1.1] mb-8">
+                    FetchRated is running a national pilot programme for <span class="italic font-medium">quality pet care.</span>
+</h1>
+<p class="font-body text-xl text-on-surface-variant max-w-xl leading-relaxed mb-10">
+                    We are standardising the landscape of animal welfare through rigorous institutional vetting. Apply now to join the primary qualification gate.
+                </p>
+<div class="flex items-center space-x-4">
+<button class="bg-primary text-on-primary px-8 py-4 rounded-sm font-bold text-sm uppercase tracking-widest shadow-lg hover:bg-primary-container transition-all">
+                        Apply for Assessment
+                    </button>
+<button class="px-8 py-4 border border-outline/20 text-primary font-bold text-sm uppercase tracking-widest rounded-sm hover:bg-surface-container-low transition-all">
+                        Download Protocol
+                    </button>
+</div>
+</div>
+<div class="lg:col-span-5 relative">
+<div class="aspect-[4/5] bg-surface-container-low rounded-xl overflow-hidden relative border border-outline-variant/20">
+<img alt="UK Registry Map" class="w-full h-full object-cover mix-blend-multiply opacity-80 grayscale" data-alt="UK map highlighting active and pending assessment zones" data-location="United Kingdom" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBA5GLNdM8OBVai5qO9ubdBPT0CakpznluxQBCjTzZgAxAFAUtrmQI6PLx47Jv3JQI0ImdveuNn5B1oHGM7VYZx8zUdK9n4AeVaPg3g4hphpvZFCukenKIb5Xh6WolR39wfkVws2e9AMnZs_F09gHrc7sRdJRQjoxUZYm6EUhMKwN0zXiLfNEYsrbXysC48rog6yWv49QOX0yomra8bY_2KKUlEGY3sGNVvviIsP1EP6lYErq-Of8doyeBFB_JhAOHx9i9SE5kUitE"/>
+<div class="absolute inset-0 p-8 flex flex-col justify-end bg-gradient-to-t from-white via-transparent to-transparent">
+<div class="flex items-center space-x-4 mb-4">
+<div class="flex items-center">
+<span class="w-3 h-3 bg-primary rounded-full mr-2"></span>
+<span class="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">Active Pilot Area</span>
+</div>
+<div class="flex items-center">
+<span class="w-3 h-3 bg-stone-300 rounded-full mr-2"></span>
+<span class="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">Registry Pending</span>
+</div>
+</div>
+<div class="text-xs font-medium text-stone-500 font-body">Current cohort coverage: 64% of UK Veterinary Districts</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Qualification Gate Grid -->
+<section class="mt-40 bg-surface-container-low py-32">
+<div class="max-w-7xl mx-auto px-8">
+<div class="mb-20">
+<h2 class="font-headline text-4xl font-medium tracking-tight mb-4">The Qualification Gate</h2>
+<p class="font-body text-on-surface-variant max-w-2xl">A rigorous three-stage verification process ensuring every practice meets the FetchRated benchmark for clinical excellence and ethical welfare.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-px bg-outline-variant/20">
+<!-- Step 1 -->
+<div class="bg-surface-container-low py-12 pr-12">
+<div class="text-primary font-headline italic text-4xl mb-6">01.</div>
+<h3 class="font-body font-bold text-lg uppercase tracking-wider mb-4">Submission</h3>
+<p class="font-body text-on-surface-variant leading-relaxed">
+                            Initial data ingestion of practice credentials, professional indemnity coverage, and senior clinical staff certifications for the current cohort year.
+                        </p>
+</div>
+<!-- Step 2 -->
+<div class="bg-surface-container-low py-12 px-12">
+<div class="text-primary font-headline italic text-4xl mb-6">02.</div>
+<h3 class="font-body font-bold text-lg uppercase tracking-wider mb-4">Clinical Audit</h3>
+<p class="font-body text-on-surface-variant leading-relaxed">
+                            A remote-first audit of treatment outcomes, surgical suite standards, and patient recovery protocols reviewed by our peer committee.
+                        </p>
+</div>
+<!-- Step 3 -->
+<div class="bg-surface-container-low py-12 pl-12">
+<div class="text-primary font-headline italic text-4xl mb-6">03.</div>
+<h3 class="font-body font-bold text-lg uppercase tracking-wider mb-4">Trust Mark Issuance</h3>
+<p class="font-body text-on-surface-variant leading-relaxed">
+                            Granting of the FetchRated Physical Seal and digital credentials, allowing public placement on the National Integrated Practice Register.
+                        </p>
+</div>
+</div>
+</div>
+</section>
+<!-- Assessment Criteria -->
+<section class="max-w-7xl mx-auto px-8 py-40 grid grid-cols-1 lg:grid-cols-2 gap-24">
+<div>
+<h2 class="font-headline text-4xl font-medium tracking-tight mb-8">Assessment <span class="italic">Protocol</span></h2>
+<p class="font-body text-on-surface-variant mb-12 leading-relaxed">
+                    Our assessment criteria are built upon the 2024 Welfare Framework. Practices must demonstrate compliance across four primary axes to achieve FetchRated accreditation.
+                </p>
+<div class="space-y-4">
+<div class="flex items-start space-x-4 p-6 bg-surface border border-outline-variant/10 rounded-sm">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">verified</span>
+<div>
+<h4 class="font-bold text-sm uppercase tracking-widest mb-1">Mandatory Accreditation</h4>
+<p class="text-sm text-on-surface-variant">Proof of RCVS or equivalent national standing is a prerequisite for pilot entry.</p>
+</div>
+</div>
+<div class="flex items-start space-x-4 p-6 bg-surface border border-outline-variant/10 rounded-sm">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">gavel</span>
+<div>
+<h4 class="font-bold text-sm uppercase tracking-widest mb-1">Ethical Framework</h4>
+<p class="text-sm text-on-surface-variant">Adherence to the FetchRated Patient Advocacy Charter and Transparent Pricing policy.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-white p-12 shadow-[0_8px_32px_0_rgba(0,0,0,0.03)] border border-outline-variant/10">
+<h3 class="font-body font-bold text-xs uppercase tracking-[0.3em] text-primary mb-10">Verification Checklist</h3>
+<ul class="space-y-6">
+<li class="flex items-center justify-between pb-6 border-b border-outline-variant/10">
+<span class="font-body text-on-surface font-medium">Surgical Suite Calibration Records</span>
+<span class="material-symbols-outlined text-tertiary">check_circle</span>
+</li>
+<li class="flex items-center justify-between pb-6 border-b border-outline-variant/10">
+<span class="font-body text-on-surface font-medium">Nurse-to-Patient Ratio (24hr Cover)</span>
+<span class="material-symbols-outlined text-tertiary">check_circle</span>
+</li>
+<li class="flex items-center justify-between pb-6 border-b border-outline-variant/10">
+<span class="font-body text-on-surface font-medium">Post-Op Recovery Outcome Data</span>
+<span class="material-symbols-outlined text-tertiary">check_circle</span>
+</li>
+<li class="flex items-center justify-between pb-6 border-b border-outline-variant/10">
+<span class="font-body text-on-surface font-medium">Bi-Annual CPD Audit Compliance</span>
+<span class="material-symbols-outlined text-tertiary">check_circle</span>
+</li>
+<li class="flex items-center justify-between pb-6 border-b border-outline-variant/10">
+<span class="font-body text-on-surface font-medium">Clinical Waste &amp; Sustainability Protocol</span>
+<span class="material-symbols-outlined text-tertiary">check_circle</span>
+</li>
+</ul>
+<div class="mt-12 bg-surface-container-low p-6 flex items-center justify-between">
+<div>
+<div class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Status</div>
+<div class="text-sm font-bold text-primary italic">Cohort Alpha Open</div>
+</div>
+<button class="bg-primary text-white px-6 py-2 text-xs font-bold uppercase tracking-widest rounded-sm">Join Registry</button>
+</div>
+</div>
+</section>
+<!-- Final CTA -->
+<section class="max-w-7xl mx-auto px-8 mb-24">
+<div class="bg-primary p-16 text-center text-on-primary rounded-sm shadow-xl relative overflow-hidden">
+<div class="relative z-10">
+<h2 class="font-headline text-4xl md:text-5xl font-bold mb-6 italic">Secure your practice's place in the 2024 register.</h2>
+<p class="font-body text-white/80 max-w-2xl mx-auto mb-10">Start your institutional vetting process today and join the national standard for pet care excellence.</p>
+<button class="bg-white text-primary px-10 py-5 font-bold text-sm uppercase tracking-[0.2em] hover:bg-stone-100 transition-colors">
+                        Apply for Assessment
+                    </button>
+</div>
+<!-- Abstract Watermark -->
+<div class="absolute -right-20 -bottom-20 opacity-10">
+<span class="material-symbols-outlined text-[300px]" style="font-variation-settings: 'wght' 700;">verified_user</span>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full px-8 py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 bg-white dark:bg-stone-950 border-t border-[#dfbfbf]/20">
+<div>
+<div class="font-serif font-bold text-[#b22222] text-xl mb-4">FetchRated</div>
+<p class="text-stone-500 dark:text-stone-400 font-sans text-sm tracking-wide">
+                © 2024 FetchRated. The Independent Authority in UK Pet Care Verification.
+            </p>
+</div>
+<div>
+<h4 class="font-bold text-xs uppercase tracking-widest mb-6">Registry Resources</h4>
+<ul class="space-y-3">
+<li><a class="text-stone-500 hover:text-stone-900 transition-all font-sans text-sm tracking-wide" href="#">Methodology</a></li>
+<li><a class="text-stone-500 hover:text-stone-900 transition-all font-sans text-sm tracking-wide" href="#">Peer Review Process</a></li>
+<li><a class="text-stone-500 hover:text-stone-900 transition-all font-sans text-sm tracking-wide" href="#">Ethical Standards</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold text-xs uppercase tracking-widest mb-6">Legal &amp; Governance</h4>
+<ul class="space-y-3">
+<li><a class="text-stone-500 hover:text-stone-900 transition-all font-sans text-sm tracking-wide" href="#">Privacy Policy</a></li>
+<li><a class="text-stone-500 hover:text-stone-900 transition-all font-sans text-sm tracking-wide" href="#">Terms of Service</a></li>
+</ul>
+</div>
+<div class="flex flex-col items-start lg:items-end">
+<div class="px-4 py-2 border-2 border-primary text-primary font-bold text-[10px] uppercase tracking-[0.3em] mb-4">
+                Official Pilot Participant
+            </div>
+<p class="text-stone-400 text-[10px] text-left lg:text-right uppercase tracking-widest">
+                Regulated by the National Standards Board (2024-2025)
+            </p>
+</div>
+</footer>
+</body></html>

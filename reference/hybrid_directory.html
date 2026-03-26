@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FetchRated | Verified Directory</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#b22222",
+              "secondary-container": "#fd6b79",
+              "on-secondary-fixed": "#40000c",
+              "tertiary-fixed-dim": "#accec5",
+              "secondary-fixed-dim": "#ffb3b6",
+              "surface-dim": "#dcdad5",
+              "surface-variant": "#e5e2dd",
+              "tertiary": "#43625b",
+              "surface-bright": "#fcf9f4",
+              "inverse-surface": "#31302d",
+              "secondary-fixed": "#ffdada",
+              "outline": "#8b7171",
+              "error": "#ba1a1a",
+              "primary-container": "#d53c37",
+              "on-tertiary-fixed": "#00201b",
+              "surface-tint": "#b52424",
+              "on-surface": "#1c1c19",
+              "on-tertiary-fixed-variant": "#2d4c46",
+              "on-primary-fixed": "#410003",
+              "on-primary-container": "#fffbff",
+              "primary-fixed": "#ffdad6",
+              "inverse-on-surface": "#f3f0eb",
+              "error-container": "#ffdad6",
+              "on-tertiary": "#ffffff",
+              "on-primary": "#ffffff",
+              "outline-variant": "#dfbfbf",
+              "on-secondary-container": "#6c001b",
+              "surface-container-high": "#ebe8e3",
+              "tertiary-fixed": "#c7eae1",
+              "background": "#fcf9f4",
+              "secondary": "#ac2f41",
+              "tertiary-container": "#5b7b74",
+              "on-error-container": "#93000a",
+              "on-secondary-fixed-variant": "#8b152b",
+              "surface-container-lowest": "#ffffff",
+              "on-background": "#1c1c19",
+              "surface": "#fcf9f4",
+              "surface-container-highest": "#e5e2dd",
+              "inverse-primary": "#ffb4ac",
+              "on-secondary": "#ffffff",
+              "on-primary-fixed-variant": "#92030f",
+              "surface-container": "#f0ede9",
+              "on-error": "#ffffff",
+              "surface-container-low": "#f6f3ee",
+              "primary-fixed-dim": "#ffb4ac",
+              "on-surface-variant": "#584142",
+              "on-tertiary-container": "#f4fffb"
+            },
+            fontFamily: {
+              "headline": ["Newsreader", "serif"],
+              "body": ["Plus Jakarta Sans", "sans-serif"],
+              "label": ["Plus Jakarta Sans", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+      body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #fcf9f4; color: #1c1c19; }
+      .font-serif { font-family: 'Newsreader', serif; }
+      .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-8 py-4 max-w-full bg-[#fcf9f4]/85 backdrop-blur-md shadow-[0_8px_32px_0_rgba(28,28,25,0.04)]">
+<div class="flex items-center gap-8">
+<span class="text-2xl font-bold font-serif text-[#b22222]">FetchRated</span>
+<nav class="hidden md:flex gap-6 items-center">
+<a class="text-stone-600 font-medium font-sans hover:text-[#b22222] transition-colors duration-200" href="#">Medical</a>
+<a class="text-stone-600 font-medium font-sans hover:text-[#b22222] transition-colors duration-200" href="#">Behavioral</a>
+<a class="text-stone-600 font-medium font-sans hover:text-[#b22222] transition-colors duration-200" href="#">Nutrition</a>
+<a class="text-stone-600 font-medium font-sans hover:text-[#b22222] transition-colors duration-200" href="#">Lifestyle</a>
+<a class="text-stone-600 font-medium font-sans hover:text-[#b22222] transition-colors duration-200" href="#">Ethics</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="hidden lg:block text-stone-600 font-medium px-4 py-2 hover:text-primary transition-colors">Sign In</button>
+<button class="bg-primary text-on-primary px-6 py-2.5 rounded-sm font-bold text-sm tracking-wide shadow-sm hover:bg-primary-container transition-all">Register for Assessment</button>
+</div>
+</header>
+<main class="pt-32 pb-24 max-w-7xl mx-auto px-6 lg:px-8">
+<!-- Hero & Search Section -->
+<section class="mb-16">
+<h1 class="font-serif text-5xl lg:text-6xl font-bold tracking-tight mb-4">
+                The Verified <span class="italic">Registry</span>
+</h1>
+<p class="font-body text-on-surface-variant max-w-2xl text-lg mb-10">
+                Independent, peer-reviewed verification of veterinary practices and pet services across the United Kingdom.
+            </p>
+<!-- Institutional Search Bar -->
+<div class="bg-surface-container-low p-2 rounded-lg flex flex-col md:flex-row gap-2 shadow-sm">
+<div class="flex-1 flex items-center bg-surface-container-lowest px-4 py-3 rounded-sm">
+<span class="material-symbols-outlined text-outline mr-3" data-icon="search">search</span>
+<input class="w-full bg-transparent border-none focus:ring-0 text-on-surface placeholder:text-stone-400" placeholder="Search by practice name or keyword..." type="text"/>
+</div>
+<div class="flex-1 flex items-center bg-surface-container-lowest px-4 py-3 rounded-sm">
+<span class="material-symbols-outlined text-outline mr-3" data-icon="location_on">location_on</span>
+<input class="w-full bg-transparent border-none focus:ring-0 text-on-surface placeholder:text-stone-400" placeholder="London, UK" type="text"/>
+</div>
+<div class="relative group">
+<button class="h-full bg-surface-container-lowest px-6 py-3 rounded-sm flex items-center justify-between min-w-[160px] text-on-surface-variant font-medium">
+                        Service Type
+                        <span class="material-symbols-outlined ml-2 text-sm" data-icon="expand_more">expand_more</span>
+</button>
+</div>
+<button class="bg-primary text-on-primary px-10 py-3 rounded-sm font-bold tracking-wider hover:bg-primary-container transition-all">
+                    SEARCH
+                </button>
+</div>
+</section>
+<div class="flex flex-col lg:flex-row gap-12">
+<!-- Sidebar Filters -->
+<aside class="w-full lg:w-64 space-y-10">
+<div>
+<h3 class="font-label text-xs tracking-widest text-on-surface-variant mb-6 uppercase">Institutional Grade</h3>
+<div class="space-y-4">
+<label class="flex items-center gap-3 cursor-pointer group">
+<input checked="" class="rounded-sm border-outline-variant text-primary focus:ring-primary w-4 h-4" type="checkbox"/>
+<span class="text-sm font-medium text-on-surface group-hover:text-primary transition-colors">Verified Only</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="rounded-sm border-outline-variant text-primary focus:ring-primary w-4 h-4" type="checkbox"/>
+<span class="text-sm font-medium text-on-surface group-hover:text-primary transition-colors">RCVS Accredited</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="rounded-sm border-outline-variant text-primary focus:ring-primary w-4 h-4" type="checkbox"/>
+<span class="text-sm font-medium text-on-surface group-hover:text-primary transition-colors">24/7 Emergency</span>
+</label>
+</div>
+</div>
+<div>
+<h3 class="font-label text-xs tracking-widest text-on-surface-variant mb-6 uppercase">Minimum Rating</h3>
+<div class="space-y-3">
+<div class="flex items-center justify-between text-sm">
+<span class="font-serif italic">Exceptional (9.0+)</span>
+<span class="text-primary font-bold">124</span>
+</div>
+<div class="w-full bg-surface-container-high h-1 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[85%]"></div>
+</div>
+</div>
+</div>
+<div class="p-6 bg-tertiary-fixed rounded-sm">
+<span class="material-symbols-outlined text-tertiary mb-3" data-icon="verified_user" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+<h4 class="font-serif font-bold text-tertiary-fixed-variant text-lg leading-tight mb-2">FetchRated Integrity Guarantee</h4>
+<p class="text-xs text-on-tertiary-fixed-variant leading-relaxed">Our clinical scores are derived from onsite audits and peer-reviewed performance metrics, never paid placements.</p>
+</div>
+</aside>
+<!-- Results Grid -->
+<div class="flex-1">
+<div class="flex items-center justify-between mb-8 pb-4 border-b border-outline-variant/20">
+<span class="font-body text-sm text-on-surface-variant">Showing <span class="font-bold text-on-surface">1,402</span> certified practices</span>
+<div class="flex items-center gap-4 text-sm font-medium">
+<span class="text-outline">Sort by:</span>
+<select class="bg-transparent border-none focus:ring-0 text-on-surface font-bold py-0 pr-8">
+<option>Verification Score</option>
+<option>Proximity</option>
+<option>Reviews</option>
+</select>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<!-- Card 1 -->
+<div class="group relative bg-surface-container-low rounded-sm p-6 transition-all duration-300 hover:shadow-[0_8px_32px_0_rgba(28,28,25,0.04)]">
+<div class="absolute top-4 right-4 bg-secondary text-on-secondary text-[10px] font-bold px-2 py-1 rounded-sm uppercase tracking-widest flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]" data-icon="stars" style="font-variation-settings: 'FILL' 1;">stars</span>
+                            Verified
+                        </div>
+<div class="flex items-start gap-6 mb-6">
+<div class="w-24 h-24 shrink-0 rounded-full overflow-hidden border-4 border-surface-container-lowest shadow-sm">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Professional veterinarian examining a dog" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxj_sIybSSNpSus8fbflUo9pCyPluFBSh_fkGNc-unhSKuWQh2rg6wzP_8WGO9eN0mbLi61_nOPUIOW9DX9iBPLDI_TV8dPBNXtJ-gEWd3RzWbbX3YsHIFO4adtbcDkYicsxV4_0b-B3MwLpI6wTJrL2y53U9hoM5LtOAUCTnTJOqJO55DoYZTOxO4WtRtEJlK099EsnNAfxkOoMd9ptjYl8awXURkChHVKFhwsFDrPxtVVl_OQIh0MxFdYRvU1JdPNqZW-0pLnEk"/>
+</div>
+<div>
+<h3 class="font-serif text-2xl font-bold text-on-surface leading-tight mb-1 group-hover:text-primary transition-colors">The Royal Oak Veterinary Hospital</h3>
+<p class="text-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-xs" data-icon="location_on">location_on</span>
+                                    Richmond, Surrey
+                                </p>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4 mb-6 py-4 border-y border-outline-variant/10">
+<div>
+<p class="text-[10px] font-label text-outline uppercase tracking-widest mb-1">Clinic Score</p>
+<p class="text-2xl font-serif font-bold text-primary italic">9.8<span class="text-sm font-sans not-italic text-on-surface-variant">/10</span></p>
+</div>
+<div>
+<p class="text-[10px] font-label text-outline uppercase tracking-widest mb-1">Reviews</p>
+<p class="text-sm font-bold text-on-surface">412 Verified Records</p>
+</div>
+</div>
+<div class="mb-6">
+<p class="text-[10px] font-label text-outline uppercase tracking-widest mb-2">Core Specialties</p>
+<div class="flex flex-wrap gap-2">
+<span class="px-2 py-1 bg-surface-container-high rounded-sm text-[10px] font-bold text-on-surface-variant">Orthopaedics</span>
+<span class="px-2 py-1 bg-surface-container-high rounded-sm text-[10px] font-bold text-on-surface-variant">Critical Care</span>
+<span class="px-2 py-1 bg-surface-container-high rounded-sm text-[10px] font-bold text-on-surface-variant">Neurology</span>
+</div>
+</div>
+<a class="block w-full text-center py-3 border border-outline/20 text-primary font-bold text-xs uppercase tracking-widest hover:bg-primary hover:text-on-primary transition-all duration-300" href="#">
+                            View Full Transcript
+                        </a>
+</div>
+<!-- Card 2 -->
+<div class="group relative bg-surface-container-low rounded-sm p-6 transition-all duration-300 hover:shadow-[0_8px_32px_0_rgba(28,28,25,0.04)]">
+<div class="absolute top-4 right-4 bg-secondary text-on-secondary text-[10px] font-bold px-2 py-1 rounded-sm uppercase tracking-widest flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]" data-icon="stars" style="font-variation-settings: 'FILL' 1;">stars</span>
+                            Verified
+                        </div>
+<div class="flex items-start gap-6 mb-6">
+<div class="w-24 h-24 shrink-0 rounded-full overflow-hidden border-4 border-surface-container-lowest shadow-sm">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Modern veterinary reception area" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCi9cvxWaAl2eBsLzuDfAkJICTQEpbHkQOlzAAlzHad5Ln6Sptv79jUhGqPZH-6h66gcqvCxCZxRRupm-t-ostv23-uqTHRzqbSDVUzxIuXCvf0PhOYfVxhCH54WAOJL5_blBHT9lToXVDLYEBgdRN0Ek2xPv9wMIa7DjnNXcfe9xs5HMXJwPKttyMpkVuNKTKYFslEpM9EM1mADK96bjoIlnrsF-F-zRIOhftmulL8GL4SpNBfggAVRcy02I_OeEqG6jtrEd2uSd0"/>
+</div>
+<div>
+<h3 class="font-serif text-2xl font-bold text-on-surface leading-tight mb-1 group-hover:text-primary transition-colors">Kensington Canine Specialists</h3>
+<p class="text-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-xs" data-icon="location_on">location_on</span>
+                                    London, SW7
+                                </p>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4 mb-6 py-4 border-y border-outline-variant/10">
+<div>
+<p class="text-[10px] font-label text-outline uppercase tracking-widest mb-1">Clinic Score</p>
+<p class="text-2xl font-serif font-bold text-primary italic">9.4<span class="text-sm font-sans not-italic text-on-surface-variant">/10</span></p>
+</div>
+<div>
+<p class="text-[10px] font-label text-outline uppercase tracking-widest mb-1">Reviews</p>
+<p class="text-sm font-bold text-on-surface">289 Verified Records</p>
+</div>
+</div>
+<div class="mb-6">
+<p class="text-[10px] font-label text-outline uppercase tracking-widest mb-2">Core Specialties</p>
+<div class="flex flex-wrap gap-2">
+<span class="px-2 py-1 bg-surface-container-high rounded-sm text-[10px] font-bold text-on-surface-variant">Advanced Dental</span>
+<span class="px-2 py-1 bg-surface-container-high rounded-sm text-[10px] font-bold text-on-surface-variant">Ophthalmology</span>
+</div>
+</div>
+<a class="block w-full text-center py-3 border border-outline/20 text-primary font-bold text-xs uppercase tracking-widest hover:bg-primary hover:text-on-primary transition-all duration-300" href="#">
+                            View Full Transcript
+                        </a>
+</div>
+<!-- Card 3 -->
+<div class="group relative bg-surface-container-low rounded-sm p-6 transition-all duration-300 hover:shadow-[0_8px_32px_0_rgba(28,28,25,0.04)]">
+<div class="absolute top-4 right-4 bg-secondary text-on-secondary text-[10px] font-bold px-2 py-1 rounded-sm uppercase tracking-widest flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]" data-icon="stars" style="font-variation-settings: 'FILL' 1;">stars</span>
+                            Verified
+                        </div>
+<div class="flex items-start gap-6 mb-6">
+<div class="w-24 h-24 shrink-0 rounded-full overflow-hidden border-4 border-surface-container-lowest shadow-sm">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Professional dog trainer with golden retriever" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbQDbyNGdUN8vW_l7mj-gWM3jUf-F0xTexJfDTbPrg78ZEGvvgqnG0kPYx822xy1uSMrfhO2DAHn8zGGhZ2K0O--jta_-3pJxvfbNOj2GOQ0YOjIjV4Yrgv8voM-s_tXR67SMtoyhqVO1g1ub11eF6VFGFp_fOYo7QnXxxWo3vzWh7-q9XCGvf2cm1tnX3TbSkfdTNtwkCmjJT9AFVggaMDOjHL41zYRfFGj8A8zqvI52oYg_L9jv4k_0T6L60P9Izh8Lazf6wk0Y"/>
+</div>
+<div>
+<h3 class="font-serif text-2xl font-bold text-on-surface leading-tight mb-1 group-hover:text-primary transition-colors">Barkshire Behavioral Institute</h3>
+<p class="text-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-xs" data-icon="location_on">location_on</span>
+                                    Reading, RG1
+                                </p>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4 mb-6 py-4 border-y border-outline-variant/10">
+<div>
+<p class="text-[10px] font-label text-outline uppercase tracking-widest mb-1">Clinic Score</p>
+<p class="text-2xl font-serif font-bold text-primary italic">9.1<span class="text-sm font-sans not-italic text-on-surface-variant">/10</span></p>
+</div>
+<div>
+<p class="text-[10px] font-label text-outline uppercase tracking-widest mb-1">Reviews</p>
+<p class="text-sm font-bold text-on-surface">156 Verified Records</p>
+</div>
+</div>
+<div class="mb-6">
+<p class="text-[10px] font-label text-outline uppercase tracking-widest mb-2">Core Specialties</p>
+<div class="flex flex-wrap gap-2">
+<span class="px-2 py-1 bg-surface-container-high rounded-sm text-[10px] font-bold text-on-surface-variant">Positive Reinforcement</span>
+<span class="px-2 py-1 bg-surface-container-high rounded-sm text-[10px] font-bold text-on-surface-variant">Agility</span>
+</div>
+</div>
+<a class="block w-full text-center py-3 border border-outline/20 text-primary font-bold text-xs uppercase tracking-widest hover:bg-primary hover:text-on-primary transition-all duration-300" href="#">
+                            View Full Transcript
+                        </a>
+</div>
+<!-- Card 4 -->
+<div class="group relative bg-surface-container-low rounded-sm p-6 transition-all duration-300 hover:shadow-[0_8px_32px_0_rgba(28,28,25,0.04)]">
+<div class="absolute top-4 right-4 bg-secondary text-on-secondary text-[10px] font-bold px-2 py-1 rounded-sm uppercase tracking-widest flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]" data-icon="stars" style="font-variation-settings: 'FILL' 1;">stars</span>
+                            Verified
+                        </div>
+<div class="flex items-start gap-6 mb-6">
+<div class="w-24 h-24 shrink-0 rounded-full overflow-hidden border-4 border-surface-container-lowest shadow-sm">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Staff caring for animals in clean facility" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcw-hBxVioxPbTZWFtqbiHVknjCIWLt6_ly6hSxOzl3CDYUK86bUWxGD5RjmFM0Gd6dvJTLP9RSPZf0UvSvBlnUJxbp04_I3pNuipoA9LCvy80ouCd4l6rMYcVIxIiPMu4VKuqfghzTMFwynuYZOOOMF1uza7hqEweOJC_RlHYFg07yY0NhL_lF8thYxXCaWXajC4X0RT40tz_oIAosbDtKTMR45BN9MCusOb3fFvsF4gAf6rHSuIoVq1mDD-wSG6aSGBHfClc-BI"/>
+</div>
+<div>
+<h3 class="font-serif text-2xl font-bold text-on-surface leading-tight mb-1 group-hover:text-primary transition-colors">North London Holistic Vets</h3>
+<p class="text-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-xs" data-icon="location_on">location_on</span>
+                                    Hampstead, NW3
+                                </p>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4 mb-6 py-4 border-y border-outline-variant/10">
+<div>
+<p class="text-[10px] font-label text-outline uppercase tracking-widest mb-1">Clinic Score</p>
+<p class="text-2xl font-serif font-bold text-primary italic">8.9<span class="text-sm font-sans not-italic text-on-surface-variant">/10</span></p>
+</div>
+<div>
+<p class="text-[10px] font-label text-outline uppercase tracking-widest mb-1">Reviews</p>
+<p class="text-sm font-bold text-on-surface">94 Verified Records</p>
+</div>
+</div>
+<div class="mb-6">
+<p class="text-[10px] font-label text-outline uppercase tracking-widest mb-2">Core Specialties</p>
+<div class="flex flex-wrap gap-2">
+<span class="px-2 py-1 bg-surface-container-high rounded-sm text-[10px] font-bold text-on-surface-variant">Integrative Medicine</span>
+<span class="px-2 py-1 bg-surface-container-high rounded-sm text-[10px] font-bold text-on-surface-variant">Acupuncture</span>
+</div>
+</div>
+<a class="block w-full text-center py-3 border border-outline/20 text-primary font-bold text-xs uppercase tracking-widest hover:bg-primary hover:text-on-primary transition-all duration-300" href="#">
+                            View Full Transcript
+                        </a>
+</div>
+</div>
+<!-- Pagination -->
+<div class="mt-16 flex items-center justify-center gap-2">
+<button class="w-10 h-10 flex items-center justify-center rounded-sm text-outline hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-sm bg-primary text-on-primary font-bold text-sm">1</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-sm text-on-surface font-bold text-sm hover:bg-surface-container-high transition-colors">2</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-sm text-on-surface font-bold text-sm hover:bg-surface-container-high transition-colors">3</button>
+<span class="px-2 text-outline">...</span>
+<button class="w-10 h-10 flex items-center justify-center rounded-sm text-on-surface font-bold text-sm hover:bg-surface-container-high transition-colors">42</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-sm text-outline hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full px-8 py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 bg-white dark:bg-stone-950 border-t border-[#dfbfbf]/20">
+<div class="lg:col-span-1">
+<span class="font-serif font-bold text-[#b22222] text-xl block mb-4">FetchRated</span>
+<p class="font-sans text-sm tracking-wide text-stone-500 max-w-xs leading-relaxed">
+                © 2024 FetchRated. The Independent Authority in UK Pet Care Verification.
+            </p>
+</div>
+<div class="space-y-4">
+<h4 class="font-label text-xs tracking-widest text-on-surface-variant uppercase">Ecosystem</h4>
+<ul class="space-y-2">
+<li><a class="font-sans text-sm tracking-wide text-stone-500 hover:text-stone-900 transition-all duration-300" href="#">Methodology</a></li>
+<li><a class="font-sans text-sm tracking-wide text-stone-500 hover:text-stone-900 transition-all duration-300" href="#">Peer Review Process</a></li>
+<li><a class="font-sans text-sm tracking-wide text-stone-500 hover:text-stone-900 transition-all duration-300" href="#">Ethical Standards</a></li>
+</ul>
+</div>
+<div class="space-y-4">
+<h4 class="font-label text-xs tracking-widest text-on-surface-variant uppercase">Legal</h4>
+<ul class="space-y-2">
+<li><a class="font-sans text-sm tracking-wide text-stone-500 hover:text-stone-900 transition-all duration-300" href="#">Privacy Policy</a></li>
+<li><a class="font-sans text-sm tracking-wide text-stone-500 hover:text-stone-900 transition-all duration-300" href="#">Terms of Service</a></li>
+</ul>
+</div>
+<div class="space-y-4">
+<h4 class="font-label text-xs tracking-widest text-on-surface-variant uppercase">Verify a Practice</h4>
+<p class="text-sm text-stone-500 leading-relaxed mb-4">Are you a pet care professional? Submit your practice for independent audit.</p>
+<button class="bg-primary text-on-primary px-4 py-2 text-xs font-bold uppercase tracking-widest hover:bg-primary-container transition-all">Submit Entry</button>
+</div>
+</footer>
+</body></html>

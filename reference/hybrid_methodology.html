@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Methodology | FetchRated</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,700;1,400;1,500&amp;family=Plus+Jakarta+Sans:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#b22222",
+                        "secondary-container": "#fd6b79",
+                        "on-secondary-fixed": "#40000c",
+                        "tertiary-fixed-dim": "#accec5",
+                        "secondary-fixed-dim": "#ffb3b6",
+                        "surface-dim": "#dcdad5",
+                        "surface-variant": "#e5e2dd",
+                        "tertiary": "#43625b",
+                        "surface-bright": "#fcf9f4",
+                        "inverse-surface": "#31302d",
+                        "secondary-fixed": "#ffdada",
+                        "outline": "#8b7171",
+                        "error": "#ba1a1a",
+                        "primary-container": "#d53c37",
+                        "on-tertiary-fixed": "#00201b",
+                        "surface-tint": "#b52424",
+                        "on-surface": "#1c1c19",
+                        "on-tertiary-fixed-variant": "#2d4c46",
+                        "on-primary-fixed": "#410003",
+                        "on-primary-container": "#fffbff",
+                        "primary-fixed": "#ffdad6",
+                        "inverse-on-surface": "#f3f0eb",
+                        "error-container": "#ffdad6",
+                        "on-tertiary": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "outline-variant": "#dfbfbf",
+                        "on-secondary-container": "#6c001b",
+                        "surface-container-high": "#ebe8e3",
+                        "tertiary-fixed": "#c7eae1",
+                        "background": "#fcf9f4",
+                        "secondary": "#ac2f41",
+                        "tertiary-container": "#5b7b74",
+                        "on-error-container": "#93000a",
+                        "on-secondary-fixed-variant": "#8b152b",
+                        "surface-container-lowest": "#ffffff",
+                        "on-background": "#1c1c19",
+                        "surface": "#fcf9f4",
+                        "surface-container-highest": "#e5e2dd",
+                        "inverse-primary": "#ffb4ac",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed-variant": "#92030f",
+                        "surface-container": "#f0ede9",
+                        "on-error": "#ffffff",
+                        "surface-container-low": "#f6f3ee",
+                        "primary-fixed-dim": "#ffb4ac",
+                        "on-surface-variant": "#584142",
+                        "on-tertiary-container": "#f4fffb"
+                    },
+                    fontFamily: {
+                        "headline": ["Newsreader", "serif"],
+                        "body": ["Plus Jakarta Sans", "sans-serif"],
+                        "label": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .serif-italic { font-family: 'Newsreader', serif; font-style: italic; }
+        .bg-signature-gradient { background: linear-gradient(135deg, #b22222 0%, #d53c37 100%); }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface selection:bg-primary/10">
+<!-- TopAppBar Shell -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-8 py-4 max-w-full bg-[#fcf9f4]/85 dark:bg-stone-900/85 backdrop-blur-md shadow-[0_8px_32px_0_rgba(28,28,25,0.04)]">
+<div class="flex items-center gap-8">
+<span class="text-2xl font-bold font-serif text-[#b22222] dark:text-[#d44d5c]">FetchRated</span>
+<nav class="hidden md:flex gap-6">
+<a class="text-stone-600 dark:text-stone-400 font-medium font-sans hover:text-[#b22222] transition-colors duration-200" href="#">Medical</a>
+<a class="text-stone-600 dark:text-stone-400 font-medium font-sans hover:text-[#b22222] transition-colors duration-200" href="#">Behavioral</a>
+<a class="text-stone-600 dark:text-stone-400 font-medium font-sans hover:text-[#b22222] transition-colors duration-200" href="#">Nutrition</a>
+<a class="text-stone-600 dark:text-stone-400 font-medium font-sans hover:text-[#b22222] transition-colors duration-200" href="#">Lifestyle</a>
+<a class="text-[#b22222] dark:text-[#d44d5c] border-b-2 border-[#b22222] pb-1 font-medium font-sans" href="#">Ethics</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-stone-600 dark:text-stone-400 font-sans text-sm font-bold hover:text-[#b22222]">Sign In</button>
+<button class="bg-signature-gradient text-white px-5 py-2 text-sm font-bold tracking-tight rounded-sm shadow-sm active:scale-[0.99] transition-transform">Register for Assessment</button>
+</div>
+</header>
+<main class="pt-32 pb-24">
+<!-- Hero Section -->
+<section class="max-w-screen-xl mx-auto px-8 mb-24 grid md:grid-cols-12 gap-12 items-end">
+<div class="md:col-span-8">
+<div class="mb-4 flex items-center gap-2">
+<span class="w-12 h-[1px] bg-primary"></span>
+<span class="text-xs font-bold uppercase tracking-widest text-primary">Volume IV • Section II</span>
+</div>
+<h1 class="text-6xl md:text-8xl font-serif font-bold tracking-tight leading-[0.9] text-on-surface mb-8">
+                    The Science of <br/>
+<span class="serif-italic font-medium">Editorial Trust.</span>
+</h1>
+<p class="text-xl md:text-2xl text-on-surface-variant font-body leading-relaxed max-w-2xl">
+                    Our methodology isn't just a list of rules—it's an institutional standard designed to bring transparency to an opaque industry. Discover the 48-point framework that defines FetchRated.
+                </p>
+</div>
+<div class="md:col-span-4 flex justify-end">
+<div class="relative w-64 h-64">
+<div class="absolute inset-0 rounded-full border border-outline-variant/30 animate-pulse"></div>
+<div class="absolute inset-4 rounded-full border border-outline/20"></div>
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-6xl" data-icon="verified_user" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Weighting Distribution -->
+<section class="bg-surface-container-low py-24 mb-24">
+<div class="max-w-screen-xl mx-auto px-8">
+<div class="grid lg:grid-cols-2 gap-16 items-start">
+<div>
+<h2 class="text-4xl font-serif font-bold text-on-surface mb-6">Weighting Distribution</h2>
+<p class="text-on-surface-variant mb-12 max-w-md">
+                            Integrity is measured through diverse vectors. We weight clinical outcomes most heavily, followed by the physical environment and the human expertise behind it.
+                        </p>
+<div class="space-y-8">
+<!-- Clinical -->
+<div class="space-y-2">
+<div class="flex justify-between items-end">
+<span class="font-bold text-sm tracking-widest uppercase">Clinical Standards</span>
+<span class="text-3xl font-serif italic text-primary">45%</span>
+</div>
+<div class="w-full h-4 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-signature-gradient" style="width: 45%"></div>
+</div>
+</div>
+<!-- Infrastructure -->
+<div class="space-y-2">
+<div class="flex justify-between items-end">
+<span class="font-bold text-sm tracking-widest uppercase">Facility Infrastructure</span>
+<span class="text-3xl font-serif italic text-primary">35%</span>
+</div>
+<div class="w-full h-4 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-signature-gradient opacity-80" style="width: 35%"></div>
+</div>
+</div>
+<!-- Staff -->
+<div class="space-y-2">
+<div class="flex justify-between items-end">
+<span class="font-bold text-sm tracking-widest uppercase">Staff Certification</span>
+<span class="text-3xl font-serif italic text-primary">20%</span>
+</div>
+<div class="w-full h-4 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-signature-gradient opacity-60" style="width: 20%"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="aspect-square rounded-full overflow-hidden bg-surface-container-highest flex items-center justify-center p-8">
+<img alt="Clinical lab environment" class="w-full h-full object-cover opacity-80 mix-blend-multiply" data-alt="Microscope in a sterile laboratory setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDroRlKCPzLekQtgo0veCNgn6FLEWiUR-kIBMTsawHqoAVis9zOD8fmvVEfutzoGLxJ_DneP4vRlCzqaG7q1MvP9Dq2RLjJf1wyBcphlt57c008PCDNvyMk8JUZESVEr67jXZXCQG0M1_WzU05qSi1n3Znuh_CWUbjCEn3KPAb_kf-6FXTq09tKw55V4qM1XnSSM4PjhOZtZKwCBmL0s_j4bFL7QhiddDxpjO8PmyBpLMcWXecUuK6k4Z0Ai7eS8cXCubLCGCfiooQ"/>
+</div>
+<div class="aspect-square rounded-full overflow-hidden bg-primary/5 flex items-center justify-center p-12 mt-12">
+<img alt="Expert consultation" class="w-full h-full object-cover grayscale" data-alt="Professional checking animal health records on tablet" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3GMTGxyQDpv7uDxi5gosTQwdIW1IzZloAtQ2lecaXuSJaGaeIfNBOL7dxPcxe-YOuIVAJR_dkFPgBrRkXqEOfUQJ4mGSYxm2ZdFoRFryd8ReVngCWQCcvj0wK3XR1BVmoIfnuHKwk6RW3EPpPLtPkk5Mv6colAod9-I3RVk5dYkjO44waQOJKl8MfXNZphMF3s3sHuAsEyZXPwt5QI-OaAGc3ZqhDz2XeqyslW1qVKPPfWb67-vK_Pi3978eGc76lIGQqcckS_nA"/>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Detailed Criteria Matrix -->
+<section class="max-w-screen-xl mx-auto px-8 mb-32">
+<h2 class="text-4xl font-serif font-bold text-on-surface mb-12">Detailed Criteria Matrix</h2>
+<div class="overflow-x-auto">
+<table class="w-full border-collapse text-left">
+<thead>
+<tr class="border-b-2 border-primary">
+<th class="py-6 px-4 font-serif text-2xl font-bold italic text-primary w-1/4">Factor</th>
+<th class="py-6 px-4 font-serif text-2xl font-bold text-on-surface w-2/4">Measurement</th>
+<th class="py-6 px-4 font-serif text-2xl font-bold text-on-surface w-1/4 text-right">Impact</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/20">
+<tr class="hover:bg-surface-container-lowest transition-colors group">
+<td class="py-8 px-4">
+<span class="font-bold text-sm tracking-widest uppercase block mb-1">Medical</span>
+<span class="text-lg font-bold">Clinical Rigor</span>
+</td>
+<td class="py-8 px-4 text-on-surface-variant leading-relaxed">
+                                Bi-annual review of on-site medical equipment, emergency protocols, and pharmacy management systems.
+                            </td>
+<td class="py-8 px-4 text-right">
+<span class="inline-block px-3 py-1 bg-tertiary/10 text-tertiary text-xs font-bold rounded-sm">CRITICAL</span>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-lowest transition-colors group">
+<td class="py-8 px-4">
+<span class="font-bold text-sm tracking-widest uppercase block mb-1">Operational</span>
+<span class="text-lg font-bold">Patient Outcomes</span>
+</td>
+<td class="py-8 px-4 text-on-surface-variant leading-relaxed">
+                                Statistical analysis of recovery rates, secondary infection incidents, and long-term wellness tracking post-discharge.
+                            </td>
+<td class="py-8 px-4 text-right">
+<span class="inline-block px-3 py-1 bg-secondary/10 text-secondary text-xs font-bold rounded-sm">HIGH</span>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-lowest transition-colors group">
+<td class="py-8 px-4">
+<span class="font-bold text-sm tracking-widest uppercase block mb-1">Ethical</span>
+<span class="text-lg font-bold">Transparency Index</span>
+</td>
+<td class="py-8 px-4 text-on-surface-variant leading-relaxed">
+                                Audit of pricing structures, ownership disclosures, and clarity of customer-facing contracts.
+                            </td>
+<td class="py-8 px-4 text-right">
+<span class="inline-block px-3 py-1 bg-primary/10 text-primary text-xs font-bold rounded-sm">VITAL</span>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-lowest transition-colors group">
+<td class="py-8 px-4">
+<span class="font-bold text-sm tracking-widest uppercase block mb-1">Physical</span>
+<span class="text-lg font-bold">Environmental Safety</span>
+</td>
+<td class="py-8 px-4 text-on-surface-variant leading-relaxed">
+                                Evaluation of air filtration systems (HEPA), non-porous surface integrity, and sound management for reduced stress.
+                            </td>
+<td class="py-8 px-4 text-right">
+<span class="inline-block px-3 py-1 bg-tertiary/10 text-tertiary text-xs font-bold rounded-sm">MODERATE</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- Fraud Protection -->
+<section class="max-w-screen-xl mx-auto px-8">
+<div class="relative bg-on-surface text-surface-container-lowest p-12 md:p-24 overflow-hidden rounded-sm">
+<!-- Watermark Background -->
+<div class="absolute -right-24 -bottom-24 opacity-5 rotate-12 pointer-events-none">
+<span class="material-symbols-outlined text-[32rem]" data-icon="shield">shield</span>
+</div>
+<div class="relative z-10 grid md:grid-cols-2 gap-16 items-center">
+<div>
+<div class="inline-flex items-center gap-2 px-3 py-1 bg-primary text-white text-[10px] font-bold tracking-[0.2em] uppercase mb-8">
+                            Encrypted Verification
+                        </div>
+<h2 class="text-4xl md:text-5xl font-serif font-bold leading-tight mb-8">
+                            Immutable <br/>
+<span class="serif-italic font-medium text-secondary-container">Fraud Protection.</span>
+</h2>
+<p class="text-lg text-surface-variant font-body leading-relaxed mb-8">
+                            Every FetchRated Trust Mark is tied to a unique blockchain hash, ensuring that verification data cannot be altered or falsified. We protect the integrity of our ratings as fiercely as we protect the welfare of animals.
+                        </p>
+<div class="flex gap-4">
+<button class="bg-primary hover:bg-primary-container text-white px-8 py-3 font-bold text-sm transition-colors rounded-sm">Verify a Mark</button>
+<button class="border border-outline-variant/30 hover:border-white px-8 py-3 font-bold text-sm transition-colors rounded-sm">Security Protocols</button>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-white/5 p-6 backdrop-blur-sm rounded-sm">
+<span class="material-symbols-outlined text-secondary-container mb-4" data-icon="fingerprint">fingerprint</span>
+<h3 class="font-bold mb-2">Digital Signature</h3>
+<p class="text-sm text-surface-variant/70">Each certificate carries a cryptographic anchor.</p>
+</div>
+<div class="bg-white/5 p-6 backdrop-blur-sm rounded-sm translate-y-8">
+<span class="material-symbols-outlined text-secondary-container mb-4" data-icon="lock">lock</span>
+<h3 class="font-bold mb-2">Vaulted Data</h3>
+<p class="text-sm text-surface-variant/70">Raw assessment data is stored in air-gapped ledgers.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer Shell -->
+<footer class="w-full px-8 py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 bg-white dark:bg-stone-950 border-t border-[#dfbfbf]/20">
+<div class="lg:col-span-1">
+<span class="font-serif font-bold text-2xl text-[#b22222] block mb-4">FetchRated</span>
+<p class="text-stone-500 dark:text-stone-400 font-sans text-sm leading-relaxed">
+                The Independent Authority in UK Pet Care Verification. Establishing the standard for ethical excellence.
+            </p>
+</div>
+<div>
+<h4 class="font-sans font-bold text-xs tracking-widest uppercase text-on-surface mb-6">Our Process</h4>
+<ul class="space-y-4">
+<li><a class="text-stone-500 dark:text-stone-400 text-sm hover:text-stone-900 transition-all duration-300 underline underline-offset-4 decoration-primary/30" href="#">Methodology</a></li>
+<li><a class="text-stone-500 dark:text-stone-400 text-sm hover:text-stone-900 transition-all duration-300" href="#">Peer Review Process</a></li>
+<li><a class="text-stone-500 dark:text-stone-400 text-sm hover:text-stone-900 transition-all duration-300" href="#">Ethical Standards</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-sans font-bold text-xs tracking-widest uppercase text-on-surface mb-6">Legal</h4>
+<ul class="space-y-4">
+<li><a class="text-stone-500 dark:text-stone-400 text-sm hover:text-stone-900 transition-all duration-300" href="#">Privacy Policy</a></li>
+<li><a class="text-stone-500 dark:text-stone-400 text-sm hover:text-stone-900 transition-all duration-300" href="#">Terms of Service</a></li>
+</ul>
+</div>
+<div class="flex flex-col items-start justify-between">
+<div class="w-16 h-16 opacity-20 grayscale mb-6">
+<span class="material-symbols-outlined text-6xl" data-icon="verified_user">verified_user</span>
+</div>
+<p class="text-stone-500 dark:text-stone-400 font-sans text-[10px] tracking-wide uppercase">
+                © 2024 FetchRated. The Independent Authority in UK Pet Care Verification.
+            </p>
+</div>
+</footer>
+</body></html>
