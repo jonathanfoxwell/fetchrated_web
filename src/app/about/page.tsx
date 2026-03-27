@@ -1,4 +1,3 @@
-import Image from "next/image";
 import {
   Navigation,
   Footer,
@@ -142,35 +141,6 @@ export default function AboutPage() {
               </div>
             </div>
           </div>
-        </section>
-
-        {/* Founder */}
-        <section className="max-w-4xl mx-auto px-6 lg:px-8 mb-24">
-          <h2 className="text-2xl font-bold mb-6">The Founder</h2>
-          <Card className="p-8 md:p-12">
-            <div className="flex flex-col md:flex-row gap-8 items-start">
-              <div className="w-24 h-24 rounded-full bg-surface-container-high shrink-0 overflow-hidden relative">
-                <Image
-                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80"
-                  alt="Jonathan Foxwell, Founder"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <div>
-                <h3 className="text-xl font-bold mb-2">Jonathan Foxwell</h3>
-                <p className="text-primary text-sm mb-4">Founder & Director</p>
-                <p className="text-on-surface-variant leading-relaxed">
-                  After spending years helping businesses improve their online visibility,
-                  I saw firsthand how broken the review ecosystem had become—and how
-                  difficult it was for genuinely good businesses to stand out from
-                  those gaming the system. FetchRated started from a simple question:
-                  what if there was an independent body that actually verified quality,
-                  the way consumer organisations do for products?
-                </p>
-              </div>
-            </div>
-          </Card>
         </section>
 
         {/* Independence Statement */}
