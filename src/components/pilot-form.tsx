@@ -60,7 +60,7 @@ export function PilotForm({
     <Card className={`p-8 md:p-12 border-outline-variant/20 ${className ?? ""}`}>
       {(area || cohort) && (
         <div className="mb-8 pb-8 border-b border-outline-variant/20">
-          <p className="text-sm text-on-surface-variant mb-2">You&apos;re applying for:</p>
+          <p className="text-sm text-on-surface-variant mb-2">Your place is reserved in:</p>
           <div className="flex flex-wrap gap-4">
             {area && (
               <div>
@@ -143,8 +143,12 @@ export function PilotForm({
           disabled={isSubmitting}
           className="w-full h-14 bg-primary hover:bg-primary-container text-white font-bold text-sm uppercase tracking-widest"
         >
-          {isSubmitting ? "Submitting..." : "Accept Your Pilot Place"}
+          {isSubmitting ? "Confirming..." : "Confirm Your Place"}
         </Button>
+
+        <p className="text-xs text-center text-on-surface-variant mt-4">
+          No payment required. No obligation to continue after the pilot.
+        </p>
       </form>
     </Card>
   );
@@ -159,9 +163,10 @@ interface ConfirmationCardProps {
 export function PilotConfirmation({
   practiceName,
   steps = [
-    "We'll review your application within 48 hours",
-    "You'll receive an email with your assessment schedule",
-    "A FetchRated advisor will contact you to discuss next steps",
+    "We'll send a confirmation email with everything you need to know",
+    "We'll begin your visibility assessment—you don't need to do anything",
+    "We'll reach out to your recent customers to collect verified reviews",
+    "Within a few weeks, you'll receive your personalised video report",
   ],
   className,
 }: ConfirmationCardProps) {

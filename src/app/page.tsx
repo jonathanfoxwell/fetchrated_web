@@ -23,17 +23,17 @@ const howItWorksFeatures = [
   {
     icon: ClipboardCheck,
     title: "Assess",
-    description: "We conduct rigorous on-site clinical and behavioral audits across all verified practices.",
+    description: "We review each practice's online presence, reviews, and local reputation.",
   },
   {
     icon: Shield,
     title: "Verify",
-    description: "Data is analyzed through our independent peer-review process to ensure objective scoring.",
+    description: "We contact real customers to confirm their reviews are genuine.",
   },
   {
     icon: Award,
     title: "Trust",
-    description: "Consumers gain access to the definitive record of quality for their pet's wellbeing.",
+    description: "Verified practices earn a badge you can trust when choosing care for your pet.",
   },
 ];
 
@@ -120,19 +120,19 @@ export default function Home() {
             <div className="flex flex-col md:flex-row">
               <div className="p-8 md:p-12 md:w-2/3 space-y-6">
                 <Badge className="bg-primary/10 text-primary">
-                  Institutional Partnership
+                  For Practices
                 </Badge>
                 <h2 className="text-3xl font-headline font-bold text-on-surface">
-                  Are you a practice owner?
+                  Received our letter?
                 </h2>
                 <p className="text-on-surface-variant text-lg leading-relaxed">
-                  Join the national pilot programme for clinical excellence. Gain access to peer-reviewed verification, professional benchmarks, and the FetchRated trust mark.
+                  If you've been invited to the FetchRated pilot, your place is reserved. You'll receive a free visibility audit, verified Google reviews from your customers, and a listing in our directory.
                 </p>
                 <a
                   href="/for-practices"
                   className="inline-flex items-center justify-center h-9 px-4 bg-tertiary hover:bg-tertiary-container text-white text-sm font-medium rounded-lg transition-colors"
                 >
-                  See if your area is active
+                  Learn more about the pilot
                 </a>
               </div>
               <div className="md:w-1/3 relative overflow-hidden min-h-[200px]">

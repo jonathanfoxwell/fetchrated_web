@@ -3,11 +3,16 @@ import {
   Navigation,
   Footer,
   WeightingBars,
-  CriteriaMatrix,
   Card,
 } from "@/components";
-import { weightingData, criteriaData } from "@/lib/data";
-import { Shield, Fingerprint, Lock, MessageCircle, ChevronDown } from "lucide-react";
+import { Shield, MessageCircle, ChevronDown, Eye, Star, Users, TrendingUp } from "lucide-react";
+
+const assessmentWeighting = [
+  { label: "Review Quality & Volume", percentage: 35 },
+  { label: "Online Visibility", percentage: 30 },
+  { label: "Review Authenticity", percentage: 20 },
+  { label: "Local Competitive Position", percentage: 15 },
+];
 
 const petOwnerFaqs = [
   {
@@ -25,8 +30,8 @@ const petOwnerFaqs = [
 ];
 
 export const metadata = {
-  title: "How We Assess | FetchRated Methodology",
-  description: "Our assessment methodology covers online visibility, review quality and volume, review authenticity, and competitive position. Learn how we verify pet care practices.",
+  title: "How We Assess | FetchRated",
+  description: "We assess practices on online visibility, review quality, review authenticity, and local competitive position. No facility inspections—just your online reputation.",
 };
 
 export default function HowWeAssessPage() {
@@ -45,12 +50,12 @@ export default function HowWeAssessPage() {
               </span>
             </div>
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-headline font-bold tracking-tight leading-[0.95] text-on-surface mb-8">
-              The Science of{" "}
-              <span className="serif-italic font-medium">Editorial Trust.</span>
+              How We{" "}
+              <span className="serif-italic font-medium">Assess Practices.</span>
             </h1>
             <p className="text-xl md:text-2xl text-on-surface-variant leading-relaxed max-w-2xl">
-              Our methodology isn't just a list of rules—it's an institutional standard
-              designed to bring transparency to an opaque industry.
+              We measure what pet owners actually care about: your reputation, your visibility,
+              and whether the reviews you have are genuine.
             </p>
           </div>
           <div className="md:col-span-4 flex justify-end">
@@ -75,13 +80,13 @@ export default function HowWeAssessPage() {
             <div className="grid lg:grid-cols-2 gap-16 items-start">
               <div>
                 <h2 className="text-4xl font-headline font-bold text-on-surface mb-6">
-                  Weighting Distribution
+                  What We Measure
                 </h2>
                 <p className="text-on-surface-variant mb-12 max-w-md">
-                  Integrity is measured through diverse vectors. We weight clinical outcomes
-                  most heavily, followed by the physical environment and the human expertise behind it.
+                  Our assessment focuses on your online presence and reputation—the things
+                  pet owners see when they're deciding which practice to trust.
                 </p>
-                <WeightingBars items={weightingData} />
+                <WeightingBars items={assessmentWeighting} />
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div className="aspect-square rounded-full overflow-hidden bg-surface-container-highest relative">
@@ -105,34 +110,80 @@ export default function HowWeAssessPage() {
           </div>
         </section>
 
-        {/* Criteria Matrix */}
+        {/* What This Means In Practice */}
         <section className="max-w-7xl mx-auto px-6 lg:px-8 mb-32">
-          <h2 className="text-4xl font-headline font-bold text-on-surface mb-12">
-            Detailed Criteria Matrix
+          <h2 className="text-4xl font-headline font-bold text-on-surface mb-6">
+            What This Means <span className="serif-italic">In Practice</span>
           </h2>
-          <CriteriaMatrix criteria={criteriaData} />
+          <p className="text-on-surface-variant mb-12 max-w-2xl">
+            We don't inspect your facilities or audit your clinical procedures. We assess what's already
+            publicly visible—and we verify that your reviews are genuine.
+          </p>
+          <div className="grid md:grid-cols-2 gap-8">
+            <Card className="p-8 border-outline-variant/10">
+              <div className="flex items-start gap-4">
+                <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center shrink-0">
+                  <span className="text-green-600 text-lg">✓</span>
+                </div>
+                <div>
+                  <h3 className="font-bold mb-2">What We Do Assess</h3>
+                  <ul className="text-sm text-on-surface-variant space-y-2">
+                    <li>• Your Google reviews (volume, recency, sentiment)</li>
+                    <li>• Your website and online presence</li>
+                    <li>• How you appear in local search results</li>
+                    <li>• How you appear in AI-generated recommendations</li>
+                    <li>• Consistency of your business information online</li>
+                  </ul>
+                </div>
+              </div>
+            </Card>
+            <Card className="p-8 border-outline-variant/10">
+              <div className="flex items-start gap-4">
+                <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center shrink-0">
+                  <span className="text-gray-400 text-lg">✗</span>
+                </div>
+                <div>
+                  <h3 className="font-bold mb-2">What We Don't Do</h3>
+                  <ul className="text-sm text-on-surface-variant space-y-2">
+                    <li>• On-site inspections or facility audits</li>
+                    <li>• Clinical procedure reviews</li>
+                    <li>• Staff certification checks</li>
+                    <li>• Equipment calibration assessments</li>
+                    <li>• Anything that requires access to your premises</li>
+                  </ul>
+                </div>
+              </div>
+            </Card>
+          </div>
         </section>
 
         {/* Four Assessment Dimensions */}
         <section className="max-w-7xl mx-auto px-6 lg:px-8 mb-24">
-          <h2 className="text-4xl font-headline font-bold text-on-surface mb-12">
+          <h2 className="text-4xl font-headline font-bold text-on-surface mb-6">
             Four Assessment <span className="serif-italic">Dimensions</span>
           </h2>
+          <p className="text-on-surface-variant mb-12 max-w-2xl">
+            Every practice in the pilot is assessed across four dimensions. Together, these form your Standards Score.
+          </p>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { num: "01", title: "Online Visibility", desc: "How easily can customers find you? We assess website quality, search rankings, and digital presence." },
-              { num: "02", title: "Review Quality", desc: "Volume and sentiment of genuine customer reviews across platforms, weighted by recency and detail." },
-              { num: "03", title: "Review Authenticity", desc: "Our Conversation Methodology verifies reviews through direct customer contact." },
-              { num: "04", title: "Competitive Position", desc: "How you compare to peers in your area across all quality metrics." },
-            ].map((item) => (
-              <Card key={item.num} className="p-6 border-outline-variant/10">
-                <span className="text-3xl font-headline italic text-primary mb-4 block">
-                  {item.num}
-                </span>
-                <h3 className="font-bold uppercase tracking-wider mb-3">{item.title}</h3>
-                <p className="text-sm text-on-surface-variant">{item.desc}</p>
-              </Card>
-            ))}
+              { icon: Eye, num: "01", title: "Online Visibility", desc: "Can pet owners find you easily? We check your website, search rankings, Google Business profile, and overall digital footprint." },
+              { icon: Star, num: "02", title: "Review Quality", desc: "What are your customers saying? We analyse the volume, recency, and sentiment of your reviews across platforms." },
+              { icon: Users, num: "03", title: "Review Authenticity", desc: "Are your reviews real? We contact your customers directly to verify their experiences are genuine." },
+              { icon: TrendingUp, num: "04", title: "Local Position", desc: "How do you compare? We benchmark you against other practices in your area across all metrics." },
+            ].map((item) => {
+              const Icon = item.icon;
+              return (
+                <Card key={item.num} className="p-6 border-outline-variant/10">
+                  <Icon className="w-8 h-8 text-primary mb-4" />
+                  <span className="text-2xl font-headline italic text-primary/50 mb-2 block">
+                    {item.num}
+                  </span>
+                  <h3 className="font-bold mb-3">{item.title}</h3>
+                  <p className="text-sm text-on-surface-variant">{item.desc}</p>
+                </Card>
+              );
+            })}
           </div>
         </section>
 
@@ -196,91 +247,72 @@ export default function HowWeAssessPage() {
         <section className="bg-surface-container-low py-24 mb-24">
           <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center">
             <h2 className="text-4xl font-headline font-bold text-on-surface mb-6">
-              The Standards <span className="serif-italic">Score</span>
+              The Three <span className="serif-italic">Tiers</span>
             </h2>
-            <p className="text-lg text-on-surface-variant leading-relaxed mb-8">
-              The Standards Score is a composite measure of a practice's assessed position across
-              the four dimensions. It informs the membership tier a practice is invited to and
-              appears in the practice's FetchRated profile for pet owners.
+            <p className="text-lg text-on-surface-variant leading-relaxed mb-12">
+              Based on your assessment, you'll receive one of three badges. Each represents
+              a genuine achievement—there's no "basic" tier that everyone gets.
             </p>
-            <div className="grid grid-cols-3 gap-8 max-w-2xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-3xl mx-auto">
               <div className="text-center">
-                <div className="w-16 h-16 rounded-full bg-secondary/20 flex items-center justify-center mx-auto mb-3">
-                  <Shield className="w-8 h-8 text-secondary" />
+                <div className="w-20 h-20 rounded-full bg-secondary/20 flex items-center justify-center mx-auto mb-4">
+                  <Shield className="w-10 h-10 text-secondary" />
                 </div>
-                <h3 className="font-bold text-sm uppercase tracking-wider">Verified</h3>
-                <p className="text-xs text-on-surface-variant mt-1">Meets baseline standards</p>
+                <h3 className="font-bold text-lg mb-2">Verified</h3>
+                <p className="text-sm text-on-surface-variant">
+                  Meets our standards for visibility and review quality. A solid, trustworthy practice.
+                </p>
               </div>
               <div className="text-center">
-                <div className="w-16 h-16 rounded-full bg-tertiary/20 flex items-center justify-center mx-auto mb-3">
-                  <Shield className="w-8 h-8 text-tertiary" />
+                <div className="w-20 h-20 rounded-full bg-tertiary/20 flex items-center justify-center mx-auto mb-4">
+                  <Shield className="w-10 h-10 text-tertiary" />
                 </div>
-                <h3 className="font-bold text-sm uppercase tracking-wider">Excellent</h3>
-                <p className="text-xs text-on-surface-variant mt-1">Exceeds across dimensions</p>
+                <h3 className="font-bold text-lg mb-2">Excellent</h3>
+                <p className="text-sm text-on-surface-variant">
+                  Exceeds standards across multiple dimensions. Strong reputation with consistently positive reviews.
+                </p>
               </div>
               <div className="text-center">
-                <div className="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-3">
-                  <Shield className="w-8 h-8 text-primary" />
+                <div className="w-20 h-20 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-4">
+                  <Shield className="w-10 h-10 text-primary" />
                 </div>
-                <h3 className="font-bold text-sm uppercase tracking-wider">Outstanding</h3>
-                <p className="text-xs text-on-surface-variant mt-1">Top-tier performance</p>
+                <h3 className="font-bold text-lg mb-2">Outstanding</h3>
+                <p className="text-sm text-on-surface-variant">
+                  Top-tier across all dimensions. Among the best-reviewed and most visible practices in your area.
+                </p>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Fraud Protection */}
+        {/* Verification */}
         <section className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="relative bg-on-surface text-card p-12 md:p-24 overflow-hidden rounded-sm">
-            <div className="relative z-10 grid md:grid-cols-2 gap-16 items-center">
+          <Card className="p-8 md:p-12 bg-on-surface text-card">
+            <div className="grid md:grid-cols-2 gap-12 items-center">
               <div>
-                <div className="inline-flex items-center gap-2 px-3 py-1 bg-primary text-white text-[10px] font-bold tracking-[0.2em] uppercase mb-8">
-                  Encrypted Verification
-                </div>
-                <h2 className="text-4xl md:text-5xl font-headline font-bold leading-tight mb-8">
-                  Immutable{" "}
+                <h2 className="text-3xl md:text-4xl font-headline font-bold leading-tight mb-6">
+                  Every Badge is{" "}
                   <span className="serif-italic font-medium text-secondary-container">
-                    Fraud Protection.
+                    Verifiable.
                   </span>
                 </h2>
-                <p className="text-lg text-surface-container-high leading-relaxed mb-8">
-                  Every FetchRated Trust Mark is tied to a unique verification hash,
-                  ensuring that certification data cannot be altered or falsified.
-                  We protect the integrity of our ratings as fiercely as we protect the welfare of animals.
+                <p className="text-surface-container-high leading-relaxed mb-6">
+                  When you see a FetchRated badge on a practice's website or window, you can verify
+                  it's genuine. Each badge links to a verification page showing the practice's
+                  current status and assessment date.
                 </p>
-                <div className="flex flex-wrap gap-4">
-                  <a
-                    href="/verify"
-                    className="inline-flex items-center justify-center h-12 px-8 bg-primary text-white font-bold text-sm rounded-sm hover:bg-primary-container transition-colors"
-                  >
-                    Verify a Mark
-                  </a>
-                  <a
-                    href="#"
-                    className="inline-flex items-center justify-center h-12 px-8 border border-outline-variant/30 font-bold text-sm rounded-sm hover:border-white transition-colors"
-                  >
-                    Security Protocols
-                  </a>
-                </div>
+                <p className="text-surface-container-high/70 text-sm">
+                  This protects both pet owners (from fake badges) and practices (from competitors
+                  misusing the mark).
+                </p>
               </div>
-              <div className="grid grid-cols-2 gap-4">
-                <div className="bg-white/5 p-6 backdrop-blur-sm rounded-sm">
-                  <Fingerprint className="w-8 h-8 text-secondary-container mb-4" />
-                  <h3 className="font-bold mb-2">Digital Signature</h3>
-                  <p className="text-sm text-surface-container-high/70">
-                    Each certificate carries a cryptographic anchor.
-                  </p>
-                </div>
-                <div className="bg-white/5 p-6 backdrop-blur-sm rounded-sm translate-y-8">
-                  <Lock className="w-8 h-8 text-secondary-container mb-4" />
-                  <h3 className="font-bold mb-2">Vaulted Data</h3>
-                  <p className="text-sm text-surface-container-high/70">
-                    Raw assessment data is stored in secure ledgers.
-                  </p>
+              <div className="flex justify-center">
+                <div className="w-48 h-48 rounded-lg bg-white/10 flex items-center justify-center">
+                  <Shield className="w-20 h-20 text-primary" />
                 </div>
               </div>
             </div>
-          </div>
+          </Card>
         </section>
 
         {/* Independence Statement */}

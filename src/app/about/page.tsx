@@ -3,7 +3,7 @@ import {
   Footer,
   Card,
 } from "@/components";
-import { Mail, Shield, Users, Target } from "lucide-react";
+import { Mail, Shield, Users, Target, Building2, FileCheck } from "lucide-react";
 
 export const metadata = {
   title: "About FetchRated | Independent Pet Care Standards",
@@ -19,32 +19,36 @@ export default function AboutPage() {
         {/* Hero */}
         <section className="max-w-4xl mx-auto px-6 lg:px-8 mb-24">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-headline font-bold tracking-tight text-on-surface leading-[1.1] mb-8">
-            Bringing transparency to{" "}
-            <span className="serif-italic">pet care.</span>
+            Helping great practices{" "}
+            <span className="serif-italic">get found.</span>
           </h1>
           <p className="text-xl text-on-surface-variant leading-relaxed">
-            Finding quality pet care shouldn't be a gamble. Yet for most pet owners,
-            choosing a vet, groomer, or trainer means relying on word of mouth,
-            questionable online reviews, or simply hoping for the best.
+            FetchRated exists for two reasons: to help pet owners find practices they can trust,
+            and to help excellent practices stand out from the crowd. We do this through
+            independent assessment, verified reviews, and transparent standards.
           </p>
         </section>
 
         {/* The Problem */}
         <section className="max-w-4xl mx-auto px-6 lg:px-8 mb-24">
-          <h2 className="text-2xl font-bold mb-6">The Problem</h2>
-          <div className="prose prose-lg text-on-surface-variant max-w-none">
-            <p>
-              The pet care industry lacks transparency. Online reviews are often
-              unreliable—plagued by fake reviews, competitor sabotage, and businesses
-              that cherry-pick feedback. Professional accreditations exist but are
-              rarely visible to consumers. And there's no independent body helping
-              pet owners understand which practices truly deliver excellent care.
-            </p>
-            <p>
-              Meanwhile, excellent practices struggle to stand out from the crowd.
-              They invest in training, facilities, and patient care, but have no
-              way to credibly demonstrate this to potential customers.
-            </p>
+          <h2 className="text-2xl font-bold mb-6">The Problem We're Solving</h2>
+          <div className="grid md:grid-cols-2 gap-8">
+            <Card className="p-6 border-outline-variant/10">
+              <h3 className="font-bold mb-3">For Pet Owners</h3>
+              <p className="text-on-surface-variant text-sm leading-relaxed">
+                Choosing a vet or groomer often means relying on online reviews that may be fake,
+                outdated, or incentivised. There's no easy way to know which practices genuinely
+                deliver excellent care versus those that are just good at marketing.
+              </p>
+            </Card>
+            <Card className="p-6 border-outline-variant/10">
+              <h3 className="font-bold mb-3">For Practices</h3>
+              <p className="text-on-surface-variant text-sm leading-relaxed">
+                Excellent practices struggle to stand out. You invest in training, facilities,
+                and patient care—but have no credible way to demonstrate this to potential customers.
+                Your happy clients often don't think to leave reviews; your unhappy ones always do.
+              </p>
+            </Card>
           </div>
         </section>
 
@@ -78,29 +82,33 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* Mission */}
+        {/* What We Actually Do */}
         <section className="max-w-4xl mx-auto px-6 lg:px-8 mb-24">
-          <h2 className="text-2xl font-bold mb-6">Our Mission</h2>
+          <h2 className="text-2xl font-bold mb-6">What We Actually Do</h2>
           <p className="text-xl text-on-surface-variant leading-relaxed mb-8">
-            To improve the visibility of quality pet care through independent assessment,
-            verified customer feedback, and transparent standards—helping pet owners
-            make informed choices and helping excellent practices get the recognition they deserve.
+            We identify practices that are already doing excellent work. We reach out to invite them
+            to our pilot programme. We assess their online presence, collect verified reviews from
+            their real customers, and list them in our directory with a badge that pet owners can trust.
+          </p>
+          <p className="text-on-surface-variant leading-relaxed">
+            We don't inspect facilities. We don't audit clinical procedures. We focus on what pet owners
+            can already see when they search for a practice—and we verify that it's genuine.
           </p>
         </section>
 
-        {/* How It Works */}
+        {/* How the Pilot Works */}
         <section className="max-w-4xl mx-auto px-6 lg:px-8 mb-24">
-          <h2 className="text-2xl font-bold mb-6">How It Works</h2>
+          <h2 className="text-2xl font-bold mb-6">How the Pilot Works</h2>
           <div className="space-y-6">
             <div className="flex gap-4">
               <span className="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-bold shrink-0">
                 1
               </span>
               <div>
-                <h3 className="font-bold mb-1">We identify practices</h3>
+                <h3 className="font-bold mb-1">We identify promising practices</h3>
                 <p className="text-on-surface-variant">
-                  Using public data, we build a comprehensive picture of pet care
-                  providers in each area—their online presence, reviews, and public credentials.
+                  We analyse publicly available data—Google reviews, online presence, local reputation—
+                  to find practices that are already doing good work.
                 </p>
               </div>
             </div>
@@ -109,10 +117,10 @@ export default function AboutPage() {
                 2
               </span>
               <div>
-                <h3 className="font-bold mb-1">We verify reviews</h3>
+                <h3 className="font-bold mb-1">We invite them to the pilot</h3>
                 <p className="text-on-surface-variant">
-                  Our Conversation Methodology involves contacting reviewers directly
-                  to confirm their experiences are genuine and recent.
+                  Selected practices receive a letter or email inviting them to participate.
+                  If you received one, your place is already reserved.
                 </p>
               </div>
             </div>
@@ -121,10 +129,10 @@ export default function AboutPage() {
                 3
               </span>
               <div>
-                <h3 className="font-bold mb-1">We assess against standards</h3>
+                <h3 className="font-bold mb-1">We collect verified reviews</h3>
                 <p className="text-on-surface-variant">
-                  Practices that meet our criteria receive a FetchRated trust mark,
-                  visible to consumers searching our directory.
+                  We contact the practice's recent customers with a short, friendly message.
+                  Happy customers are invited to share their experience on Google.
                 </p>
               </div>
             </div>
@@ -133,10 +141,10 @@ export default function AboutPage() {
                 4
               </span>
               <div>
-                <h3 className="font-bold mb-1">We help you find quality</h3>
+                <h3 className="font-bold mb-1">We deliver results</h3>
                 <p className="text-on-surface-variant">
-                  Our directory and guides help pet owners discover verified practices
-                  and understand what to look for in quality care.
+                  Each practice receives a personalised video report, their verified reviews,
+                  and a listing in our directory with an appropriate badge.
                 </p>
               </div>
             </div>
@@ -159,6 +167,35 @@ export default function AboutPage() {
           </Card>
         </section>
 
+        {/* Company Info */}
+        <section className="max-w-4xl mx-auto px-6 lg:px-8 mb-16">
+          <h2 className="text-2xl font-bold mb-6">Company Information</h2>
+          <div className="grid md:grid-cols-2 gap-6">
+            <Card className="p-6 border-outline-variant/10">
+              <div className="flex items-start gap-4">
+                <Building2 className="w-5 h-5 text-primary mt-0.5" />
+                <div>
+                  <h3 className="font-bold mb-1">Registered in England</h3>
+                  <p className="text-sm text-on-surface-variant">
+                    FetchRated Ltd is a company registered in England and Wales.
+                  </p>
+                </div>
+              </div>
+            </Card>
+            <Card className="p-6 border-outline-variant/10">
+              <div className="flex items-start gap-4">
+                <FileCheck className="w-5 h-5 text-primary mt-0.5" />
+                <div>
+                  <h3 className="font-bold mb-1">Data Protection</h3>
+                  <p className="text-sm text-on-surface-variant">
+                    Registered with the ICO. We handle personal data in accordance with UK GDPR.
+                  </p>
+                </div>
+              </div>
+            </Card>
+          </div>
+        </section>
+
         {/* Contact */}
         <section className="max-w-4xl mx-auto px-6 lg:px-8">
           <h2 className="text-2xl font-bold mb-6">Get in Touch</h2>
@@ -175,6 +212,9 @@ export default function AboutPage() {
                 </a>
               </div>
             </div>
+            <p className="text-sm text-on-surface-variant mt-4">
+              We aim to respond to all enquiries within one working day.
+            </p>
           </Card>
         </section>
       </main>

@@ -48,7 +48,7 @@ export function Footer() {
                 FetchRated
               </Link>
               <p className="text-sm text-on-surface-variant leading-relaxed">
-                The Independent Authority in UK Pet Care Verification. Setting the standard for clinical and ethical excellence across the nation.
+                Helping pet owners find quality care, and helping excellent practices get recognised. Independent. Transparent. Free for pilot participants.
               </p>
               <div className="flex gap-3 pt-2">
                 <a
@@ -131,7 +131,7 @@ export function Footer() {
           {/* Bottom Bar */}
           <div className="pt-10 mt-10 border-t border-outline-variant/20 flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm text-on-surface-variant">
-              © {new Date().getFullYear()} FetchRated. The Independent Authority in UK Pet Care Verification.
+              © {new Date().getFullYear()} FetchRated. Independent pet care verification for the UK.
             </p>
             <div className="flex gap-6 text-sm">
               <Link href="/privacy" className="text-on-surface-variant hover:text-primary transition-colors">

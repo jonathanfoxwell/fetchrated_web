@@ -49,12 +49,12 @@ export default async function PilotTokenPage({ params }: PilotPageProps) {
         <section className="max-w-3xl mx-auto px-6 lg:px-8 py-8">
           <div className="text-center mb-12">
             <h1 className="text-3xl md:text-4xl font-headline font-bold text-on-surface mb-4">
-              {token === "apply" ? "Apply for the Pilot" : "Accept Your Pilot Place"}
+              {token === "apply" ? "Join the Pilot" : "Confirm Your Place"}
             </h1>
             <p className="text-on-surface-variant text-lg max-w-xl mx-auto">
               {token === "apply"
-                ? "Submit your practice details to be considered for the FetchRated pilot programme."
-                : "You've been selected for the FetchRated pilot programme. Complete your registration below."}
+                ? "Enter your details below. We'll review your practice and let you know if there's space in the current cohort."
+                : "You've been selected because your practice is already doing excellent work. Just confirm your details below—it takes less than two minutes."}
             </p>
           </div>
 

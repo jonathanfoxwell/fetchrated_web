@@ -3,48 +3,46 @@ import {
   Footer,
   NumberedSteps,
   CoverageMap,
-  VerificationChecklist,
   AssessmentProtocol,
   Badge,
   CTABanner,
   Card,
 } from "@/components";
-import { verificationItems } from "@/lib/data";
 import { Shield, Scale, Eye, Star, BarChart3, Video, MapPin, ChevronDown } from "lucide-react";
 
 export const metadata = {
-  title: "For Practices | FetchRated National Pilot Programme",
-  description: "Join the FetchRated national pilot programme. Selected practices receive visibility audit, verified reviews, and standards assessment at no cost.",
+  title: "For Practices | FetchRated Pilot Programme",
+  description: "You've been selected for the FetchRated pilot. Receive a free visibility audit, verified Google reviews from your customers, and a listing in our directory.",
 };
 
 const qualificationSteps = [
   {
     number: "01.",
-    title: "Submission",
-    description: "Initial data ingestion of practice credentials, professional indemnity coverage, and senior clinical staff certifications for the current cohort year.",
+    title: "You Confirm",
+    description: "Accept your pilot place and share basic practice details. Takes about two minutes. No paperwork, no fees.",
   },
   {
     number: "02.",
-    title: "Clinical Audit",
-    description: "A remote-first audit of treatment outcomes, surgical suite standards, and patient recovery protocols reviewed by our peer committee.",
+    title: "We Assess",
+    description: "We review your online presence, collect verified reviews from your existing customers, and compile your results. You don't need to do anything.",
   },
   {
     number: "03.",
-    title: "Trust Mark Issuance",
-    description: "Granting of the FetchRated Physical Seal and digital credentials, allowing public placement on the National Integrated Practice Register.",
+    title: "You Receive",
+    description: "A personalised video report with your visibility score, verified reviews posted to Google, and your FetchRated directory listing.",
   },
 ];
 
 const protocolItems = [
   {
     icon: Shield,
-    title: "Mandatory Accreditation",
-    description: "Proof of RCVS or equivalent national standing is a prerequisite for pilot entry.",
+    title: "RCVS Registered",
+    description: "The pilot is open to practices registered with the RCVS or equivalent professional body.",
   },
   {
     icon: Scale,
-    title: "Ethical Framework",
-    description: "Adherence to the FetchRated Patient Advocacy Charter and Transparent Pricing policy.",
+    title: "Genuine Reviews Only",
+    description: "We collect real feedback from real customers. No fake reviews, no gaming the system.",
   },
 ];
 
@@ -83,24 +81,32 @@ const pilotBenefits = [
 
 const faqs = [
   {
+    question: "Who is FetchRated?",
+    answer: "We're an independent UK organisation building a national directory of verified pet care practices. We're not a marketing agency, not a software vendor, and we don't sell your data. Our goal is simple: help pet owners find quality care and help excellent practices get the recognition they deserve.",
+  },
+  {
+    question: "Why was my practice selected?",
+    answer: "We analyse publicly available data—your Google reviews, online presence, and local reputation—to identify practices that are already doing good work. If you received our letter, it's because your practice stood out. This is recognition, not inspection.",
+  },
+  {
     question: "Is it really free?",
-    answer: "Yes. There is no charge at any stage of the pilot. If you later choose to join membership, that is a separate decision made after you've seen your results.",
+    answer: "Yes. The pilot is completely free. There are no hidden fees, no contracts, and no obligation to continue afterwards. We're building a national picture of quality pet care, and your participation helps us do that.",
   },
   {
-    question: "Who contacts my clients?",
-    answer: "FetchRated contacts them independently, using our Conversation Methodology—a warm, unhurried check-in approach. We do not cold-pitch or spam.",
+    question: "How do you contact my clients?",
+    answer: "We reach out to recent customers with a short, friendly message about their pet's visit. We ask how it went. If they had a good experience, we invite them to share it on Google. If they had concerns, we listen first and share that feedback with you privately. One message per customer, no spam, no sales pitch.",
   },
   {
-    question: "Will my clients be bothered?",
-    answer: "We contact each client once. The message is personalised to their pet and their visit. Most clients respond positively—they appreciate being asked.",
+    question: "Will my clients mind being contacted?",
+    answer: "In our experience, most clients appreciate being asked. The message is personalised to their pet by name and their recent visit. It takes less than a minute to respond. We've found that clients who had a good experience are happy to say so.",
   },
   {
     question: "What happens after the pilot?",
-    answer: "We present your results and extend a membership invitation if appropriate. You are under no obligation to continue. The reviews we collected are yours to keep.",
+    answer: "You receive your results—a personalised video walkthrough of your visibility score, your verified reviews, and how you compare locally. If you'd like to continue with ongoing review collection and membership, we'll extend an invitation. But there's no obligation. The reviews we collected during the pilot are yours to keep either way.",
   },
   {
-    question: "Who is FetchRated?",
-    answer: "An independent organisation—not a marketing agency, not a software vendor. Our interest is in helping pet owners find quality care and helping excellent practices get recognised.",
+    question: "What data do you need from me?",
+    answer: "Just your practice name, a contact name, email, and optionally a phone number. We handle everything else using publicly available information. We don't need access to your practice management system or customer database.",
   },
 ];
 
@@ -114,15 +120,16 @@ export default function ForPracticesPage() {
         <section className="max-w-7xl mx-auto px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
           <div className="lg:col-span-7">
             <Badge className="bg-secondary text-white uppercase text-[10px] tracking-[0.2em] mb-6">
-              Institutional Programme
+              By Invitation
             </Badge>
             <h1 className="font-headline text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-on-surface leading-[1.1] mb-8">
-              FetchRated is running a national pilot programme for{" "}
-              <span className="serif-italic font-medium">quality pet care.</span>
+              Your practice has been selected for the{" "}
+              <span className="serif-italic font-medium">FetchRated pilot.</span>
             </h1>
             <p className="text-xl text-on-surface-variant max-w-xl leading-relaxed mb-10">
-              Selected practices receive a comprehensive visibility audit, verified customer reviews,
-              and standards assessment—at no cost during the pilot phase.
+              We've identified your practice as one that's already doing excellent work.
+              The pilot gives you a free visibility audit, verified Google reviews from your existing customers,
+              and a listing in our national directory.
             </p>
             <div className="flex flex-wrap items-center gap-4">
               <a
@@ -174,38 +181,76 @@ export default function ForPracticesPage() {
         {/* How the Pilot Works */}
         <NumberedSteps steps={qualificationSteps} className="mt-8" />
 
-        {/* Assessment Protocol */}
+        {/* What We Look At */}
         <section className="max-w-7xl mx-auto px-6 lg:px-8 py-32 grid grid-cols-1 lg:grid-cols-2 gap-24">
           <div>
             <h2 className="font-headline text-4xl font-medium tracking-tight mb-8">
-              Assessment <span className="serif-italic">Protocol</span>
+              What We <span className="serif-italic">Look At</span>
             </h2>
             <p className="text-on-surface-variant mb-12 leading-relaxed">
-              Our assessment criteria are built upon the 2024 Welfare Framework.
-              Practices must demonstrate compliance across four primary axes to achieve FetchRated accreditation.
+              Our assessment focuses on your online presence and reputation—not
+              an inspection of your facilities. We review what pet owners can
+              already see when they search for you.
             </p>
             <AssessmentProtocol items={protocolItems} />
           </div>
 
           <div>
-            <VerificationChecklist
-              title="Verification Checklist"
-              items={verificationItems}
-            />
+            <div className="bg-surface border border-outline-variant/10 rounded-sm p-8">
+              <h3 className="font-bold text-lg mb-6">What We Assess</h3>
+              <ul className="space-y-4">
+                <li className="flex items-start gap-3">
+                  <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center mt-0.5">
+                    <div className="w-2 h-2 rounded-full bg-primary" />
+                  </div>
+                  <div>
+                    <span className="font-medium">Online Visibility</span>
+                    <p className="text-sm text-on-surface-variant">How easily customers can find you through search</p>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center mt-0.5">
+                    <div className="w-2 h-2 rounded-full bg-primary" />
+                  </div>
+                  <div>
+                    <span className="font-medium">Review Quality</span>
+                    <p className="text-sm text-on-surface-variant">Volume, recency, and sentiment of your existing reviews</p>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center mt-0.5">
+                    <div className="w-2 h-2 rounded-full bg-primary" />
+                  </div>
+                  <div>
+                    <span className="font-medium">Local Position</span>
+                    <p className="text-sm text-on-surface-variant">How you compare to other practices in your area</p>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center mt-0.5">
+                    <div className="w-2 h-2 rounded-full bg-primary" />
+                  </div>
+                  <div>
+                    <span className="font-medium">AI Search Presence</span>
+                    <p className="text-sm text-on-surface-variant">How your practice appears in AI-generated recommendations</p>
+                  </div>
+                </li>
+              </ul>
+            </div>
             <div className="mt-6 bg-surface-container-low p-6 flex items-center justify-between">
               <div>
                 <div className="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">
                   Status
                 </div>
                 <div className="text-sm font-bold text-primary italic">
-                  Cohort Alpha Open
+                  Now Accepting Practices
                 </div>
               </div>
               <a
                 href="/for-practices/pilot/apply"
                 className="inline-flex items-center justify-center h-10 px-6 bg-primary text-white text-xs font-bold uppercase tracking-widest rounded-sm hover:bg-primary-container transition-colors"
               >
-                Join Registry
+                Get Started
               </a>
             </div>
           </div>
@@ -226,22 +271,22 @@ export default function ForPracticesPage() {
           </Card>
         </section>
 
-        {/* Qualification */}
+        {/* Already Invited */}
         <section className="max-w-7xl mx-auto px-6 lg:px-8 py-16">
           <Card className="p-8 md:p-12 bg-surface-container-low border-outline-variant/10">
             <h2 className="font-headline text-2xl font-bold text-on-surface mb-4">
-              Qualification
+              Received Our Letter?
             </h2>
             <p className="text-on-surface-variant leading-relaxed mb-6 max-w-3xl">
-              Not every practice is selected. Eligibility depends on your area being active
-              in the current cohort. If you've received direct mail or a personalised link,
-              your place may already be reserved.
+              If you've received a letter or email from us, your place in the pilot is already reserved.
+              Use the link in your invitation to confirm your details, or enter your practice name below
+              to check your status.
             </p>
             <a
               href="/for-practices/pilot/apply"
               className="inline-flex items-center justify-center h-12 px-8 bg-primary text-white font-bold text-sm uppercase tracking-widest rounded-sm hover:bg-primary-container transition-colors"
             >
-              Apply for the Pilot
+              Confirm Your Place
             </a>
           </Card>
         </section>
@@ -271,9 +316,9 @@ export default function ForPracticesPage() {
 
         {/* Final CTA */}
         <CTABanner
-          headline="Secure your practice's place in the pilot."
-          description="Start your assessment process today and join the national standard for pet care excellence."
-          actionLabel="Apply for the Pilot"
+          headline="Ready to get started?"
+          description="Confirm your place in the pilot. It takes two minutes and there's no obligation to continue."
+          actionLabel="Confirm Your Place"
           actionHref="/for-practices/pilot/apply"
         />
       </main>

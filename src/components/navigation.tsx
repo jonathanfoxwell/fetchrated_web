@@ -67,10 +67,10 @@ export function Navigation({ items = defaultNavItems, currentPath }: NavigationP
           Sign In
         </Link>
         <Link
-          href="/for-practices/pilot/apply"
+          href="/for-practices"
           className="px-5 py-2.5 bg-primary text-white text-sm font-semibold rounded-lg shadow-button hover:shadow-button-hover hover:bg-primary-container hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200"
         >
-          Register for Assessment
+          For Practices
         </Link>
       </div>
 
@@ -112,10 +112,10 @@ export function Navigation({ items = defaultNavItems, currentPath }: NavigationP
                 Sign In
               </Link>
               <Link
-                href="/for-practices/pilot/apply"
+                href="/for-practices"
                 className="px-4 py-3 bg-primary text-white text-center font-semibold rounded-lg shadow-button"
               >
-                Register for Assessment
+                For Practices
               </Link>
             </div>
           </div>
