@@ -6,170 +6,188 @@ interface CoverageMapProps {
   className?: string;
 }
 
-// UK cities with accurate relative positions on the map
-const regions = [
-  { id: "london", name: "London", cx: 335, cy: 385, r: 10, status: "active" },
-  { id: "birmingham", name: "Birmingham", cx: 285, cy: 330, r: 8, status: "active" },
-  { id: "manchester", name: "Manchester", cx: 265, cy: 270, r: 8, status: "active" },
-  { id: "cambridge", name: "Cambridge", cx: 350, cy: 350, r: 6, status: "active" },
-  { id: "bristol", name: "Bristol", cx: 240, cy: 380, r: 7, status: "active" },
-  { id: "leeds", name: "Leeds", cx: 290, cy: 255, r: 7, status: "pending" },
-  { id: "edinburgh", name: "Edinburgh", cx: 275, cy: 130, r: 7, status: "active" },
-  { id: "cardiff", name: "Cardiff", cx: 220, cy: 385, r: 6, status: "pending" },
-  { id: "glasgow", name: "Glasgow", cx: 240, cy: 140, r: 7, status: "pending" },
-  { id: "newcastle", name: "Newcastle", cx: 295, cy: 200, r: 6, status: "active" },
-  { id: "liverpool", name: "Liverpool", cx: 245, cy: 280, r: 6, status: "active" },
-  { id: "sheffield", name: "Sheffield", cx: 290, cy: 285, r: 6, status: "pending" },
-  { id: "nottingham", name: "Nottingham", cx: 305, cy: 310, r: 5, status: "pending" },
-  { id: "southampton", name: "Southampton", cx: 295, cy: 420, r: 5, status: "active" },
-  { id: "brighton", name: "Brighton", cx: 325, cy: 430, r: 5, status: "active" },
+// Convert geographic coordinates to SVG coordinates
+// UK bounding box: lon -8 to 2, lat 49 to 61
+// SVG viewBox: 0 0 300 360
+const geoToSvg = (lon: number, lat: number): [number, number] => {
+  const x = (lon + 8) * 30;
+  const y = (61 - lat) * 30;
+  return [x, y];
+};
+
+// UK cities with actual geographic coordinates
+const cities = [
+  { id: "london", name: "London", lon: -0.1276, lat: 51.5074, status: "active" },
+  { id: "birmingham", name: "Birmingham", lon: -1.8904, lat: 52.4862, status: "active" },
+  { id: "manchester", name: "Manchester", lon: -2.2426, lat: 53.4808, status: "active" },
+  { id: "cambridge", name: "Cambridge", lon: 0.1218, lat: 52.2053, status: "active" },
+  { id: "bristol", name: "Bristol", lon: -2.5879, lat: 51.4545, status: "active" },
+  { id: "leeds", name: "Leeds", lon: -1.5491, lat: 53.8008, status: "pending" },
+  { id: "edinburgh", name: "Edinburgh", lon: -3.1883, lat: 55.9533, status: "active" },
+  { id: "cardiff", name: "Cardiff", lon: -3.1791, lat: 51.4816, status: "pending" },
+  { id: "glasgow", name: "Glasgow", lon: -4.2518, lat: 55.8642, status: "pending" },
+  { id: "newcastle", name: "Newcastle", lon: -1.6178, lat: 54.9783, status: "active" },
+  { id: "liverpool", name: "Liverpool", lon: -2.9916, lat: 53.4084, status: "active" },
+  { id: "sheffield", name: "Sheffield", lon: -1.4701, lat: 53.3811, status: "pending" },
+  { id: "nottingham", name: "Nottingham", lon: -1.1581, lat: 52.9548, status: "pending" },
+  { id: "southampton", name: "Southampton", lon: -1.4044, lat: 50.9097, status: "active" },
+  { id: "brighton", name: "Brighton", lon: -0.1372, lat: 50.8225, status: "active" },
 ];
+
+// Convert cities to SVG coordinates
+const regions = cities.map(city => {
+  const [cx, cy] = geoToSvg(city.lon, city.lat);
+  return { ...city, cx, cy };
+});
+
+// Real UK GeoJSON coordinates converted to SVG path
+// Great Britain mainland
+const gbPath = `M ${[
+  [-3.005005, 58.635], [-4.073828, 57.553025], [-3.055002, 57.690019], [-1.959281, 57.6848],
+  [-2.219988, 56.870017], [-3.119003, 55.973793], [-2.085009, 55.909998], [-2.005676, 55.804903],
+  [-1.114991, 54.624986], [-0.430485, 54.464376], [0.184981, 53.325014], [0.469977, 52.929999],
+  [1.681531, 52.73952], [1.559988, 52.099998], [1.050562, 51.806761], [1.449865, 51.289428],
+  [0.550334, 50.765739], [-0.787517, 50.774989], [-2.489998, 50.500019], [-2.956274, 50.69688],
+  [-3.617448, 50.228356], [-4.542508, 50.341837], [-5.245023, 49.96], [-5.776567, 50.159678],
+  [-4.30999, 51.210001], [-3.414851, 51.426009], [-3.422719, 51.426848], [-4.984367, 51.593466],
+  [-5.267296, 51.9914], [-4.222347, 52.301356], [-4.770013, 52.840005], [-4.579999, 53.495004],
+  [-3.093831, 53.404547], [-3.09208, 53.404441], [-2.945009, 53.985], [-3.614701, 54.600937],
+  [-3.630005, 54.615013], [-4.844169, 54.790971], [-5.082527, 55.061601], [-4.719112, 55.508473],
+  [-5.047981, 55.783986], [-5.586398, 55.311146], [-5.644999, 56.275015], [-6.149981, 56.78501],
+  [-5.786825, 57.818848], [-5.009999, 58.630013], [-4.211495, 58.550845], [-3.005005, 58.635]
+].map(([lon, lat]) => geoToSvg(lon, lat).join(',')).join(' L ')} Z`;
+
+// Northern Ireland
+const niPath = `M ${[
+  [-5.661949, 54.554603], [-6.197885, 53.867565], [-6.95373, 54.073702], [-7.572168, 54.059956],
+  [-7.366031, 54.595841], [-7.572168, 55.131622], [-6.733847, 55.17286], [-5.661949, 54.554603]
+].map(([lon, lat]) => geoToSvg(lon, lat).join(',')).join(' L ')} Z`;
 
 export function CoverageMap({ className }: CoverageMapProps) {
   const [hoveredRegion, setHoveredRegion] = useState<string | null>(null);
 
   return (
     <div className={`relative ${className ?? ""}`}>
-      {/* Map Container */}
-      <div className="aspect-[4/5] bg-gradient-to-b from-surface-container-low to-surface-container rounded-2xl overflow-hidden border border-outline-variant/20 shadow-card p-4">
-        <svg
-          viewBox="100 0 320 500"
-          className="w-full h-full"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          {/* Definitions */}
-          <defs>
-            <radialGradient id="activeGlow" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stopColor="var(--color-primary)" stopOpacity="0.4" />
-              <stop offset="100%" stopColor="var(--color-primary)" stopOpacity="0" />
-            </radialGradient>
-            <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-              <feGaussianBlur stdDeviation="2" result="coloredBlur" />
-              <feMerge>
-                <feMergeNode in="coloredBlur" />
-                <feMergeNode in="SourceGraphic" />
-              </feMerge>
-            </filter>
-          </defs>
+      <div className="aspect-[4/5] bg-gradient-to-b from-surface-container-low to-surface-container rounded-2xl overflow-hidden border border-outline-variant/20 shadow-card">
+        <div className="relative w-full h-full p-4 pb-24">
+          <svg
+            viewBox="30 50 270 330"
+            className="w-full h-full"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <defs>
+              <filter id="landShadow" x="-10%" y="-10%" width="120%" height="120%">
+                <feDropShadow dx="1" dy="1" stdDeviation="1.5" floodColor="#000" floodOpacity="0.08"/>
+              </filter>
+              <radialGradient id="activeGlow" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stopColor="var(--color-primary)" stopOpacity="0.5" />
+                <stop offset="100%" stopColor="var(--color-primary)" stopOpacity="0" />
+              </radialGradient>
+              <filter id="markerGlow" x="-100%" y="-100%" width="300%" height="300%">
+                <feGaussianBlur stdDeviation="1.5" result="blur" />
+                <feMerge>
+                  <feMergeNode in="blur" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+            </defs>
 
-          {/* Scotland */}
-          <path
-            d="M220 20 L240 15 L270 25 L300 20 L320 35 L310 60 L325 80 L315 100 L330 120 L310 140 L320 160 L295 175 L280 165 L260 175 L240 165 L220 180 L200 165 L190 140 L200 120 L185 100 L200 80 L190 60 L210 40 Z"
-            className="fill-surface-container-high stroke-outline-variant"
-            strokeWidth="2"
-          />
+            {/* Great Britain - actual geographic outline */}
+            <path
+              d={gbPath}
+              className="fill-surface-container-high stroke-outline-variant/60"
+              strokeWidth="0.8"
+              strokeLinejoin="round"
+              filter="url(#landShadow)"
+            />
 
-          {/* England */}
-          <path
-            d="M220 180 L260 175 L280 165 L295 175 L320 160 L340 180 L360 200 L380 230 L385 270 L375 310 L385 350 L370 390 L350 420 L330 445 L300 455 L270 450 L250 430 L230 445 L210 430 L195 400 L180 370 L175 340 L185 310 L175 280 L190 250 L185 220 L200 195 Z"
-            className="fill-surface-container-high stroke-outline-variant"
-            strokeWidth="2"
-          />
+            {/* Northern Ireland - actual geographic outline */}
+            <path
+              d={niPath}
+              className="fill-surface-container stroke-outline-variant/60"
+              strokeWidth="0.8"
+              strokeLinejoin="round"
+              filter="url(#landShadow)"
+            />
 
-          {/* Wales */}
-          <path
-            d="M175 280 L185 310 L175 340 L180 370 L195 400 L180 410 L160 395 L145 370 L140 340 L150 310 L145 280 L160 260 L175 270 Z"
-            className="fill-surface-container stroke-outline-variant"
-            strokeWidth="2"
-          />
+            {/* City markers */}
+            {regions.map((region) => {
+              const isActive = region.status === "active";
+              const isHovered = hoveredRegion === region.id;
+              const baseR = 5;
+              const r = isHovered ? baseR + 1.5 : baseR;
 
-          {/* Northern Ireland (small, to the left) */}
-          <path
-            d="M140 160 L165 150 L180 165 L175 185 L155 195 L135 185 L130 170 Z"
-            className="fill-surface-container stroke-outline-variant"
-            strokeWidth="2"
-          />
+              return (
+                <g
+                  key={region.id}
+                  onMouseEnter={() => setHoveredRegion(region.id)}
+                  onMouseLeave={() => setHoveredRegion(null)}
+                  style={{ cursor: "pointer" }}
+                >
+  {/* Hover glow */}
+                  {isHovered && (
+                    <circle
+                      cx={region.cx}
+                      cy={region.cy}
+                      r={r + 5}
+                      fill="url(#activeGlow)"
+                    />
+                  )}
 
-          {/* Region markers */}
-          {regions.map((region) => {
-            const isActive = region.status === "active";
-            const isHovered = hoveredRegion === region.id;
-
-            return (
-              <g
-                key={region.id}
-                onMouseEnter={() => setHoveredRegion(region.id)}
-                onMouseLeave={() => setHoveredRegion(null)}
-                className="cursor-pointer"
-              >
-                {/* Pulse animation for active regions */}
-                {isActive && (
+                  {/* Main marker */}
                   <circle
                     cx={region.cx}
                     cy={region.cy}
-                    r={region.r + 5}
-                    className="fill-primary/20 animate-ping"
-                    style={{ animationDuration: "2s" }}
+                    r={r}
+                    className={isActive ? "fill-primary" : "fill-outline-variant"}
+                    stroke="white"
+                    strokeWidth="1.5"
+                    filter={isActive ? "url(#markerGlow)" : undefined}
                   />
-                )}
 
-                {/* Glow effect on hover */}
-                {isHovered && (
-                  <circle
-                    cx={region.cx}
-                    cy={region.cy}
-                    r={region.r + 10}
-                    fill="url(#activeGlow)"
-                  />
-                )}
+                  {/* Inner highlight */}
+                  {isActive && (
+                    <circle
+                      cx={region.cx - 1.5}
+                      cy={region.cy - 1.5}
+                      r={1.5}
+                      className="fill-white/60"
+                    />
+                  )}
+                </g>
+              );
+            })}
+          </svg>
 
-                {/* Main dot */}
-                <circle
-                  cx={region.cx}
-                  cy={region.cy}
-                  r={isHovered ? region.r + 2 : region.r}
-                  className={`transition-all duration-200 ${
-                    isActive ? "fill-primary" : "fill-outline-variant"
-                  }`}
-                  filter={isActive ? "url(#glow)" : undefined}
-                />
-
-                {/* Inner highlight */}
-                {isActive && (
-                  <circle
-                    cx={region.cx - region.r * 0.25}
-                    cy={region.cy - region.r * 0.25}
-                    r={region.r * 0.3}
-                    className="fill-white/50"
-                  />
-                )}
-              </g>
-            );
-          })}
-        </svg>
-
-        {/* Hover tooltip */}
-        {hoveredRegion && (
-          <div className="absolute top-4 left-1/2 -translate-x-1/2 bg-on-surface text-card px-3 py-1.5 rounded-lg text-sm font-medium shadow-lg z-10">
-            {regions.find((r) => r.id === hoveredRegion)?.name}
-            <span className="ml-2 text-xs opacity-75">
-              {regions.find((r) => r.id === hoveredRegion)?.status === "active"
-                ? "Active"
-                : "Coming Soon"}
-            </span>
-          </div>
-        )}
-      </div>
-
-      {/* Legend */}
-      <div className="absolute bottom-4 left-4 right-4 bg-card/95 backdrop-blur-sm p-4 rounded-xl border border-outline-variant/20 shadow-card">
-        <div className="flex flex-wrap items-center gap-5 mb-3">
-          <div className="flex items-center gap-2">
-            <span className="relative flex h-3 w-3">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
-            </span>
-            <span className="text-xs font-bold uppercase tracking-wider text-on-surface-variant">Active</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="w-3 h-3 bg-outline-variant rounded-full"></span>
-            <span className="text-xs font-bold uppercase tracking-wider text-on-surface-variant">Coming Soon</span>
-          </div>
+          {/* Tooltip */}
+          {hoveredRegion && (
+            <div className="absolute top-2 left-1/2 -translate-x-1/2 bg-on-surface text-card px-3 py-1.5 rounded-lg text-sm font-medium shadow-lg z-20 whitespace-nowrap">
+              {regions.find((r) => r.id === hoveredRegion)?.name}
+              <span className="ml-2 text-xs opacity-75">
+                {regions.find((r) => r.id === hoveredRegion)?.status === "active"
+                  ? "Active"
+                  : "Coming Soon"}
+              </span>
+            </div>
+          )}
         </div>
-        <p className="text-xs text-on-surface-variant">
-          Pilot active in <span className="font-semibold text-primary">10 regions</span> across England & Scotland
-        </p>
+
+        {/* Legend */}
+        <div className="absolute bottom-3 left-3 right-3 bg-card/95 backdrop-blur-sm p-3 rounded-xl border border-outline-variant/20 shadow-card z-10">
+          <div className="flex flex-wrap items-center gap-4 mb-2">
+            <div className="flex items-center gap-2">
+              <span className="w-2.5 h-2.5 bg-primary rounded-full"></span>
+              <span className="text-xs font-bold uppercase tracking-wider text-on-surface-variant">Active</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="w-2.5 h-2.5 bg-outline-variant rounded-full"></span>
+              <span className="text-xs font-bold uppercase tracking-wider text-on-surface-variant">Coming Soon</span>
+            </div>
+          </div>
+          <p className="text-xs text-on-surface-variant">
+            Pilot active in <span className="font-semibold text-primary">10 regions</span> across England & Scotland
+          </p>
+        </div>
       </div>
     </div>
   );
