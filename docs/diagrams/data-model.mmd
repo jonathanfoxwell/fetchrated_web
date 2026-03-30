@@ -1,0 +1,111 @@
+%%{init: {'theme': 'neutral'}}%%
+
+erDiagram
+    PRACTICES ||--o{ VERIFIED_REVIEWS : "has"
+    PRACTICES ||--o{ REVIEWS : "has (Google)"
+    PRACTICES ||--|| REVIEW_AGGREGATES : "has"
+    PRACTICES }o--o{ ARTICLES : "featured in"
+    ARTICLES ||--o{ ARTICLE_SECTIONS : "contains"
+    CONVERSATIONS ||--o{ VERIFIED_REVIEWS : "generates"
+
+    PRACTICES {
+        uuid id PK
+        string google_place_id UK
+        string name
+        string slug UK
+        string city
+        string postcode
+        decimal latitude
+        decimal longitude
+        string phone
+        string website
+        string email
+        decimal google_rating
+        int google_review_count
+        decimal profile_strength_score
+        boolean is_fetchrated_member
+        string membership_tier
+        string headline
+        text description
+        jsonb services
+        jsonb opening_hours
+        boolean show_in_directory
+        timestamp directory_published_at
+    }
+
+    ARTICLES {
+        uuid id PK
+        string slug UK
+        string audience "consumer|practice"
+        string category
+        array tags
+        string title
+        string excerpt
+        jsonb sections
+        int word_count "computed"
+        int read_time "computed"
+        string meta_title
+        string meta_description
+        string featured_image_url
+        array related_slugs
+        string pillar_slug FK
+        boolean is_pillar
+        array featured_practice_ids
+        string cta_type
+        string cta_href
+        string cta_label
+        string status "draft|published|archived"
+        timestamp published_at
+    }
+
+    ARTICLE_SECTIONS {
+        string type PK "markdown|callout|checklist|..."
+        jsonb data "type-specific fields"
+    }
+
+    VERIFIED_REVIEWS {
+        uuid id PK
+        uuid practice_id FK
+        string reviewer_name
+        string reviewer_email
+        int rating "1-5"
+        string title
+        text content
+        date visit_date
+        boolean is_verified
+        string verification_method
+        timestamp verified_at
+        uuid conversation_id FK
+        string status "pending|approved|rejected"
+        timestamp published_at
+    }
+
+    REVIEWS {
+        uuid id PK
+        uuid practice_id FK
+        string author_name
+        int rating
+        text review_text
+        timestamp review_date
+        boolean has_owner_response
+        text owner_response_text
+        string source "Google"
+    }
+
+    REVIEW_AGGREGATES {
+        uuid id PK
+        uuid practice_id FK
+        int total_reviews
+        decimal average_rating
+        decimal monthly_review_velocity
+        decimal response_rate
+        timestamp most_recent_review_date
+    }
+
+    CONVERSATIONS {
+        uuid id PK
+        uuid practice_id FK
+        uuid customer_id FK
+        string status
+        boolean review_posted
+    }

@@ -12,12 +12,12 @@ export const metadata = {
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-card">
+    <div className="min-h-screen bg-surface-container-low">
       <Navigation currentPath="/about" />
 
       <main className="pt-32 pb-24">
         {/* Hero */}
-        <section className="max-w-4xl mx-auto px-6 lg:px-8 mb-24">
+        <section className="max-w-6xl mx-auto px-6 lg:px-8 mb-24">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-headline font-bold tracking-tight text-on-surface leading-[1.1] mb-8">
             Helping great practices{" "}
             <span className="serif-italic">get found.</span>
@@ -30,7 +30,7 @@ export default function AboutPage() {
         </section>
 
         {/* The Problem */}
-        <section className="max-w-4xl mx-auto px-6 lg:px-8 mb-24">
+        <section className="max-w-6xl mx-auto px-6 lg:px-8 mb-24">
           <h2 className="text-2xl font-bold mb-6">The Problem We're Solving</h2>
           <div className="grid md:grid-cols-2 gap-8">
             <Card className="p-6 border-outline-variant/10">
@@ -54,7 +54,7 @@ export default function AboutPage() {
 
         {/* What FetchRated Is */}
         <section className="bg-surface-container-low py-24 mb-24">
-          <div className="max-w-4xl mx-auto px-6 lg:px-8">
+          <div className="max-w-6xl mx-auto px-6 lg:px-8">
             <h2 className="text-2xl font-bold mb-6">What FetchRated Is</h2>
             <div className="grid md:grid-cols-3 gap-8">
               <Card className="p-6 bg-card">
@@ -83,7 +83,7 @@ export default function AboutPage() {
         </section>
 
         {/* What We Actually Do */}
-        <section className="max-w-4xl mx-auto px-6 lg:px-8 mb-24">
+        <section className="max-w-6xl mx-auto px-6 lg:px-8 mb-24">
           <h2 className="text-2xl font-bold mb-6">What We Actually Do</h2>
           <p className="text-xl text-on-surface-variant leading-relaxed mb-8">
             We identify practices that are already doing excellent work. We reach out to invite them
@@ -97,7 +97,7 @@ export default function AboutPage() {
         </section>
 
         {/* How the Pilot Works */}
-        <section className="max-w-4xl mx-auto px-6 lg:px-8 mb-24">
+        <section className="max-w-6xl mx-auto px-6 lg:px-8 mb-24">
           <h2 className="text-2xl font-bold mb-6">How the Pilot Works</h2>
           <div className="space-y-6">
             <div className="flex gap-4">
@@ -152,7 +152,7 @@ export default function AboutPage() {
         </section>
 
         {/* Independence Statement */}
-        <section className="max-w-4xl mx-auto px-6 lg:px-8 mb-24">
+        <section className="max-w-6xl mx-auto px-6 lg:px-8 mb-24">
           <Card className="p-8 md:p-12 border-primary/20 bg-primary/5">
             <h2 className="text-xl font-bold mb-4">Our Independence</h2>
             <p className="text-on-surface-variant leading-relaxed">
@@ -168,7 +168,7 @@ export default function AboutPage() {
         </section>
 
         {/* Company Info */}
-        <section className="max-w-4xl mx-auto px-6 lg:px-8 mb-16">
+        <section className="max-w-6xl mx-auto px-6 lg:px-8 mb-16">
           <h2 className="text-2xl font-bold mb-6">Company Information</h2>
           <div className="grid md:grid-cols-2 gap-6">
             <Card className="p-6 border-outline-variant/10">
@@ -197,7 +197,7 @@ export default function AboutPage() {
         </section>
 
         {/* Contact */}
-        <section className="max-w-4xl mx-auto px-6 lg:px-8">
+        <section className="max-w-6xl mx-auto px-6 lg:px-8">
           <h2 className="text-2xl font-bold mb-6">Get in Touch</h2>
           <Card className="p-8">
             <div className="flex items-center gap-4">

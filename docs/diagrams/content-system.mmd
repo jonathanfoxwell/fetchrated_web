@@ -1,0 +1,85 @@
+%%{init: {'theme': 'neutral', 'themeVariables': { 'primaryColor': '#b22222', 'primaryTextColor': '#fff', 'primaryBorderColor': '#8b1a1a', 'lineColor': '#584142', 'secondaryColor': '#f6f3ee', 'tertiaryColor': '#43625b'}}}%%
+
+flowchart TB
+    subgraph SUPABASE["Supabase Database"]
+        direction TB
+
+        subgraph CORE["Core Platform Tables"]
+            practices[(practices)]
+            reviews_google[(reviews<br/>Google)]
+            review_agg[(review_aggregates)]
+            reports[(reports)]
+        end
+
+        subgraph WEBSITE["Website Tables"]
+            articles[(articles)]
+            verified_reviews[(verified_reviews)]
+        end
+
+        subgraph VIEWS["Views"]
+            directory_view[("directory_listings<br/>(VIEW)")]
+        end
+
+        practices --> directory_view
+        review_agg --> directory_view
+    end
+
+    subgraph NEXTJS["Next.js Application"]
+        direction TB
+
+        subgraph CACHE["Caching Layer"]
+            unstable_cache["unstable_cache()"]
+            revalidate["revalidateTag()"]
+        end
+
+        subgraph COMPONENTS["Components"]
+            article_components["Article Components<br/>Callout, Checklist, FAQ..."]
+            practice_components["Practice Components<br/>Card, Hero, Reviews..."]
+        end
+
+        subgraph PAGES["Pages"]
+            learn["/learn/*"]
+            resources["/for-practices/resources/*"]
+            find["/find/*"]
+        end
+    end
+
+    subgraph CDN["Edge Network"]
+        static["Static HTML<br/>Cached at Edge"]
+    end
+
+    subgraph USERS["Users"]
+        consumers["Pet Owners"]
+        practices_users["Practice Owners"]
+    end
+
+    articles --> unstable_cache
+    directory_view --> unstable_cache
+    verified_reviews --> unstable_cache
+
+    unstable_cache --> article_components
+    unstable_cache --> practice_components
+
+    article_components --> learn
+    article_components --> resources
+    practice_components --> find
+
+    learn --> static
+    resources --> static
+    find --> static
+
+    static --> consumers
+    static --> practices_users
+
+    webhook["Supabase Webhook"] --> revalidate
+    revalidate -.->|invalidates| static
+
+    classDef supabase fill:#3ecf8e,stroke:#2a9d68,color:#fff
+    classDef nextjs fill:#000,stroke:#333,color:#fff
+    classDef cdn fill:#f6f3ee,stroke:#584142,color:#1c1c19
+    classDef users fill:#b22222,stroke:#8b1a1a,color:#fff
+
+    class SUPABASE supabase
+    class NEXTJS nextjs
+    class CDN cdn
+    class USERS users

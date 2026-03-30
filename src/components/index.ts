@@ -39,6 +39,28 @@ export {
   ItemListSchema,
 } from "./schema";
 
+// Article Components (for rendering markdown/CMS content)
+export {
+  ArticleContent,
+  Callout,
+  Checklist,
+  ChecklistItem,
+  ProTip,
+  FAQ,
+  FAQItem,
+  KeyMetric,
+  KeyMetricGroup,
+  CodeBlock,
+  DataTable,
+  PullQuote,
+  NumberedSection,
+  ArticleNumberedSteps,
+  StatusBar,
+  SummaryBox,
+  ImageWithCaption,
+  TableOfContents,
+} from "./article";
+
 // Re-export UI primitives for convenience
 export { Button } from "./ui/button";
 export { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from "./ui/card";
