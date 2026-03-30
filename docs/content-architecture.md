@@ -678,11 +678,11 @@ Potential future enhancements:
 ## Implementation Checklist
 
 ### Phase 1: Schema & Data Layer
-- [ ] Create `articles` table in Supabase
-- [ ] Create `verified_reviews` table
-- [ ] Add website fields to `practices` table
-- [ ] Create `directory_listings` view
-- [ ] Set up database triggers for computed fields
+- [x] Create `articles` table in Supabase
+- [x] Create `verified_reviews` table
+- [x] Add website fields to `practices` table
+- [x] Create `directory_listings` view
+- [x] Set up database triggers for computed fields
 
 ### Phase 2: Next.js Integration
 - [ ] Install `next-mdx-remote` (if using MDX)

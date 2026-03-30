@@ -8,9 +8,10 @@ Technical documentation for the FetchRated website content system.
 
 | Document | Description |
 |----------|-------------|
+| [MCP Server Guide](./mcp-server-guide.md) | **Start here** - How to create articles with Claude Code |
 | [Content Architecture](./content-architecture.md) | Full system design: database schema, caching, SEO, components |
 | [Article Sections Reference](./article-sections-reference.md) | Quick reference for all article section types with JSON examples |
-| [Article Workflow](./article-workflow.md) | How Claude Code creates articles via MCP server |
+| [Article Workflow](./article-workflow.md) | Technical details of the MCP server implementation |
 
 ## Diagrams
 
@@ -26,12 +27,12 @@ Technical documentation for the FetchRated website content system.
 ## Implementation Status
 
 ### Phase 1: Schema & Data Layer
-- [ ] Create `articles` table in Supabase
-- [ ] Create `verified_reviews` table
-- [ ] Add website fields to `practices` table
-- [ ] Create `directory_listings` view
-- [ ] Set up database triggers for computed fields
-- [ ] Build MCP server for article creation
+- [x] Create `articles` table in Supabase
+- [x] Create `verified_reviews` table
+- [x] Add website fields to `practices` table
+- [x] Create `directory_listings` view
+- [x] Set up database triggers for computed fields
+- [x] Build MCP server for article creation
 
 ### Phase 2: Next.js Integration
 - [ ] Create data fetching layer with caching

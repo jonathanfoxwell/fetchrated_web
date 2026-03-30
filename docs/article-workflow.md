@@ -4,6 +4,19 @@
 
 ---
 
+## Quick Start
+
+The MCP server is configured and ready. Just ask Claude Code to create content:
+
+```
+"Write an article about what to look for when choosing a vet"
+"Create a guide for practices on responding to negative reviews"
+"List all draft articles"
+"Publish the choosing-a-vet article"
+```
+
+---
+
 ## Overview
 
 ```
