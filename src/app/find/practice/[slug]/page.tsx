@@ -3,22 +3,21 @@ import {
   Navigation,
   Footer,
   Breadcrumbs,
-  Badge,
   Card,
   LocalBusinessSchema,
   BreadcrumbSchema,
 } from "@/components";
-import { samplePracticeDetails } from "@/lib/data";
 import {
-  Shield,
-  MapPin,
-  Phone,
-  Mail,
-  Globe,
-  Clock,
-  Star,
-  CheckCircle,
-} from "lucide-react";
+  PracticeHero,
+  PracticeInfo,
+  PracticeServices,
+  PracticeGallery,
+  PracticeAssessment,
+  PracticeMap,
+} from "@/components/practice";
+import { getPracticeBySlug } from "@/lib/data/practices";
+import { samplePracticeDetails } from "@/lib/data";
+import ReactMarkdown from "react-markdown";
 
 interface PracticePageProps {
   params: Promise<{ slug: string }>;
@@ -26,27 +25,155 @@ interface PracticePageProps {
 
 export async function generateMetadata({ params }: PracticePageProps) {
   const { slug } = await params;
-  // In real app, fetch practice by slug
-  const practice = slug === samplePracticeDetails.slug ? samplePracticeDetails : null;
 
-  if (!practice) {
+  // Try database first
+  const practice = await getPracticeBySlug(slug);
+
+  if (practice) {
+    return {
+      title: `${practice.name} | Verified by FetchRated`,
+      description: practice.headline || `${practice.name} in ${practice.city}. View verified reviews and learn more about this practice.`,
+      openGraph: {
+        title: practice.name,
+        description: practice.headline || practice.description?.slice(0, 160),
+        images: practice.cover_image_url ? [practice.cover_image_url] : undefined,
+      },
+    };
+  }
+
+  // Fallback to static data
+  const staticPractice = slug === samplePracticeDetails.slug ? samplePracticeDetails : null;
+  if (!staticPractice) {
     return { title: "Practice Not Found | FetchRated" };
   }
 
   return {
-    title: `${practice.name} | Verified by FetchRated`,
-    description: `${practice.name} in ${practice.location}. Excellence Rank: ${practice.excellenceRank}. Read verified reviews and learn more about this practice.`,
+    title: `${staticPractice.name} | Verified by FetchRated`,
+    description: `${staticPractice.name} in ${staticPractice.location}. Excellence Rank: ${staticPractice.excellenceRank}.`,
   };
 }
 
 export default async function PracticePage({ params }: PracticePageProps) {
   const { slug } = await params;
-  // In real app, fetch practice by slug
-  const practice = slug === samplePracticeDetails.slug ? samplePracticeDetails : null;
 
-  if (!practice) {
+  // Try database first
+  const practice = await getPracticeBySlug(slug);
+
+  if (practice) {
+    return <DatabasePracticePage practice={practice} />;
+  }
+
+  // Fallback to static data
+  const staticPractice = slug === samplePracticeDetails.slug ? samplePracticeDetails : null;
+  if (!staticPractice) {
     notFound();
   }
+
+  // Import and render static page (keeping backward compatibility)
+  return <StaticPracticePage practice={staticPractice} />;
+}
+
+// Database-driven practice page
+import type { DirectoryListing } from "@/lib/data/practices";
+
+function DatabasePracticePage({ practice }: { practice: DirectoryListing }) {
+  const practiceUrl = `https://fetchrated.com/find/practice/${practice.slug}`;
+
+  return (
+    <div className="min-h-screen bg-surface">
+      <LocalBusinessSchema
+        practice={{
+          id: practice.id,
+          name: practice.name,
+          slug: practice.slug,
+          location: practice.city || "",
+          address: practice.formatted_address || "",
+          phone: practice.phone || "",
+          email: practice.email || "",
+          website: practice.website || "",
+          excellenceRank: practice.profile_strength_score || 0,
+          badgeTier: practice.badge_tier || "verified",
+        }}
+      />
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", url: "https://fetchrated.com" },
+          { name: "Find Services", url: "https://fetchrated.com/find" },
+          { name: practice.name, url: practiceUrl },
+        ]}
+      />
+      <Navigation currentPath="/find" />
+
+      <main className="pt-24">
+        {/* Hero */}
+        <PracticeHero practice={practice} />
+
+        {/* Breadcrumbs */}
+        <div className="max-w-6xl mx-auto px-6 lg:px-8 py-6">
+          <Breadcrumbs
+            items={[
+              { label: "Find Services", href: "/find" },
+              { label: practice.city || "Practices" },
+              { label: practice.name },
+            ]}
+          />
+        </div>
+
+        {/* Content Grid */}
+        <div className="max-w-6xl mx-auto px-6 lg:px-8 py-8">
+          <div className="grid lg:grid-cols-3 gap-8">
+            {/* Main Content */}
+            <div className="lg:col-span-2 space-y-8">
+              {/* About */}
+              {practice.description && (
+                <Card className="p-6 md:p-8">
+                  <h2 className="text-xl font-bold mb-4">About this practice</h2>
+                  <div className="prose prose-slate max-w-none text-on-surface-variant">
+                    <ReactMarkdown>{practice.description}</ReactMarkdown>
+                  </div>
+                </Card>
+              )}
+
+              {/* Services */}
+              {practice.services && practice.services.length > 0 && (
+                <PracticeServices services={practice.services} />
+              )}
+
+              {/* Gallery */}
+              {practice.gallery_urls && practice.gallery_urls.length > 0 && (
+                <PracticeGallery
+                  images={practice.gallery_urls}
+                  practiceName={practice.name}
+                />
+              )}
+
+              {/* Assessment */}
+              <PracticeAssessment practice={practice} />
+            </div>
+
+            {/* Sidebar */}
+            <div className="space-y-6">
+              <PracticeInfo practice={practice} />
+              <PracticeMap
+                latitude={practice.latitude}
+                longitude={practice.longitude}
+                name={practice.name}
+                address={practice.formatted_address}
+              />
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <Footer />
+    </div>
+  );
+}
+
+// Static practice page (backward compatibility)
+function StaticPracticePage({ practice }: { practice: typeof samplePracticeDetails }) {
+  const { Shield, MapPin, Phone, Mail, Globe, Clock, Star, CheckCircle } = require("lucide-react");
+  const { Badge } = require("@/components");
 
   const badgeStyles = {
     verified: { bg: "bg-secondary", label: "Verified" },
@@ -58,19 +185,9 @@ export default async function PracticePage({ params }: PracticePageProps) {
 
   return (
     <div className="min-h-screen bg-surface">
-      <LocalBusinessSchema practice={practice} />
-      <BreadcrumbSchema
-        items={[
-          { name: "Home", url: "https://fetchrated.com" },
-          { name: "Find Services", url: "https://fetchrated.com/find" },
-          { name: "Veterinary Practices", url: "https://fetchrated.com/find/vets" },
-          { name: practice.name, url: `https://fetchrated.com/find/practice/${practice.slug}` },
-        ]}
-      />
       <Navigation currentPath="/find" />
 
       <main className="pt-24">
-        {/* Breadcrumbs */}
         <div className="max-w-7xl mx-auto px-6 lg:px-8 py-4">
           <Breadcrumbs
             items={[
@@ -81,17 +198,14 @@ export default async function PracticePage({ params }: PracticePageProps) {
           />
         </div>
 
-        {/* Practice Header */}
         <section className="max-w-7xl mx-auto px-6 lg:px-8 py-8">
           <div className="flex flex-col md:flex-row gap-8">
-            {/* Profile Image */}
             <div className="shrink-0">
               <div className="w-32 h-32 md:w-40 md:h-40 rounded-full bg-surface-container-high border-4 border-card shadow-lg flex items-center justify-center">
                 <Shield className="w-16 h-16 text-primary/30" />
               </div>
             </div>
 
-            {/* Info */}
             <div className="flex-1">
               <div className="flex flex-wrap items-start gap-3 mb-4">
                 <h1 className="text-3xl md:text-4xl font-headline font-bold text-on-surface">
@@ -136,12 +250,9 @@ export default async function PracticePage({ params }: PracticePageProps) {
           </div>
         </section>
 
-        {/* Content Grid */}
         <section className="max-w-7xl mx-auto px-6 lg:px-8 py-8">
           <div className="grid lg:grid-cols-3 gap-8">
-            {/* Main Content */}
             <div className="lg:col-span-2 space-y-8">
-              {/* About */}
               <Card className="p-6 md:p-8">
                 <h2 className="text-xl font-bold mb-4">About this practice</h2>
                 <p className="text-on-surface-variant leading-relaxed">
@@ -149,7 +260,6 @@ export default async function PracticePage({ params }: PracticePageProps) {
                 </p>
               </Card>
 
-              {/* Services */}
               <Card className="p-6 md:p-8">
                 <h2 className="text-xl font-bold mb-4">Services offered</h2>
                 <div className="flex flex-wrap gap-2">
@@ -164,7 +274,6 @@ export default async function PracticePage({ params }: PracticePageProps) {
                 </div>
               </Card>
 
-              {/* Reviews */}
               <Card className="p-6 md:p-8">
                 <div className="flex items-center justify-between mb-6">
                   <h2 className="text-xl font-bold">Verified Reviews</h2>
@@ -190,10 +299,7 @@ export default async function PracticePage({ params }: PracticePageProps) {
                         </div>
                         <div className="flex items-center gap-1">
                           {Array.from({ length: review.rating }).map((_, i) => (
-                            <Star
-                              key={i}
-                              className="w-4 h-4 text-primary fill-current"
-                            />
+                            <Star key={i} className="w-4 h-4 text-primary fill-current" />
                           ))}
                         </div>
                       </div>
@@ -211,39 +317,25 @@ export default async function PracticePage({ params }: PracticePageProps) {
               </Card>
             </div>
 
-            {/* Sidebar */}
             <div className="space-y-6">
-              {/* Contact */}
               <Card className="p-6">
                 <h3 className="font-bold mb-4">Contact</h3>
                 <div className="space-y-3">
-                  <a
-                    href={`tel:${practice.phone}`}
-                    className="flex items-center gap-3 text-on-surface-variant hover:text-primary transition-colors"
-                  >
+                  <a href={`tel:${practice.phone}`} className="flex items-center gap-3 text-on-surface-variant hover:text-primary transition-colors">
                     <Phone className="w-4 h-4" />
                     {practice.phone}
                   </a>
-                  <a
-                    href={`mailto:${practice.email}`}
-                    className="flex items-center gap-3 text-on-surface-variant hover:text-primary transition-colors"
-                  >
+                  <a href={`mailto:${practice.email}`} className="flex items-center gap-3 text-on-surface-variant hover:text-primary transition-colors">
                     <Mail className="w-4 h-4" />
                     {practice.email}
                   </a>
-                  <a
-                    href={practice.website}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-3 text-on-surface-variant hover:text-primary transition-colors"
-                  >
+                  <a href={practice.website} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-on-surface-variant hover:text-primary transition-colors">
                     <Globe className="w-4 h-4" />
                     Website
                   </a>
                 </div>
               </Card>
 
-              {/* Opening Hours */}
               <Card className="p-6">
                 <h3 className="font-bold mb-4 flex items-center gap-2">
                   <Clock className="w-4 h-4" />
@@ -263,27 +355,6 @@ export default async function PracticePage({ params }: PracticePageProps) {
                     <span>{practice.openingHours.sunday}</span>
                   </div>
                 </div>
-              </Card>
-
-              {/* Verification Badge */}
-              <Card className="p-6 bg-surface-container-low border-0">
-                <div className="flex items-center gap-3 mb-3">
-                  <Shield className="w-8 h-8 text-primary" />
-                  <div>
-                    <p className="font-bold text-sm uppercase tracking-widest">
-                      FetchRated {badge.label}
-                    </p>
-                    <p className="text-xs text-on-surface-variant">
-                      Independently verified
-                    </p>
-                  </div>
-                </div>
-                <a
-                  href={`/verify/${practice.id}`}
-                  className="text-xs text-primary hover:underline"
-                >
-                  Verify this badge →
-                </a>
               </Card>
             </div>
           </div>

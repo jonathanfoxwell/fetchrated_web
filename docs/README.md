@@ -48,10 +48,10 @@ Technical documentation for the FetchRated website content system.
 - [x] Ensure consistent styling across pages
 
 ### Phase 4: Pages
-- [ ] Update `/learn/[slug]` to use new data layer
-- [ ] Create `/for-practices/resources` hub
-- [ ] Update `/find` to use directory view
-- [ ] Generate sitemap from database
+- [x] Update `/learn/[slug]` to use new data layer
+- [x] Create `/for-practices/resources` hub
+- [x] Update `/find/practice/[slug]` to use new components
+- [x] Generate sitemap from database
 
 ---
 
