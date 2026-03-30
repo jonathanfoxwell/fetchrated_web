@@ -19,7 +19,7 @@ export function CodeBlockSection({ code, language, filename }: CodeBlockSectionP
   };
 
   return (
-    <div className="rounded-xl overflow-hidden border border-outline-variant">
+    <div className="rounded-xl overflow-hidden border border-outline-variant/10 shadow-card">
       {(filename || language) && (
         <div className="flex items-center justify-between px-4 py-2 bg-surface-container-highest border-b border-outline-variant">
           <div className="flex items-center gap-2">

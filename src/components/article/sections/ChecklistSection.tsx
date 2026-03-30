@@ -27,7 +27,7 @@ export function ChecklistSection({ title, items }: ChecklistSectionProps) {
   const progress = (checkedItems.size / items.length) * 100;
 
   return (
-    <div className="bg-surface-container rounded-xl p-6 border border-outline-variant">
+    <div className="bg-card rounded-xl p-6 border border-outline-variant/10 shadow-card">
       <div className="flex items-center gap-3 mb-4">
         <div className="p-2 bg-primary-container rounded-lg">
           <ClipboardCheck className="h-5 w-5 text-primary" />

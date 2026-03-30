@@ -8,7 +8,7 @@ export function KeyMetricsSection({ metrics }: KeyMetricsSectionProps) {
       {metrics.map((metric, index) => (
         <div
           key={index}
-          className="bg-surface-container rounded-xl p-6 text-center border border-outline-variant"
+          className="bg-card rounded-xl p-6 text-center border border-outline-variant/10 shadow-card"
         >
           <div className="flex items-baseline justify-center gap-1">
             <span className="text-3xl md:text-4xl font-bold text-primary">

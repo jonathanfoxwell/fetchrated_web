@@ -9,7 +9,7 @@ export function PracticeServices({ services }: PracticeServicesProps) {
   if (!services.length) return null;
 
   return (
-    <div className="bg-surface rounded-xl border border-outline-variant p-6">
+    <div className="bg-card rounded-xl border border-outline-variant/10 shadow-card p-6">
       <h2 className="text-lg font-semibold text-on-surface mb-4 flex items-center gap-2">
         <Stethoscope className="h-5 w-5 text-primary" />
         Services

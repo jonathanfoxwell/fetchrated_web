@@ -6,7 +6,7 @@ interface DataTableSectionProps {
 
 export function DataTableSection({ title, columns, data }: DataTableSectionProps) {
   return (
-    <div className="border border-outline-variant rounded-xl overflow-hidden">
+    <div className="border border-outline-variant/10 rounded-xl overflow-hidden shadow-card">
       {title && (
         <div className="px-6 py-4 bg-surface-container border-b border-outline-variant">
           <h3 className="text-lg font-semibold text-on-surface">{title}</h3>

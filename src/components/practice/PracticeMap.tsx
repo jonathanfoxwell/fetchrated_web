@@ -12,7 +12,7 @@ interface PracticeMapProps {
 export function PracticeMap({ latitude, longitude, name, address }: PracticeMapProps) {
   if (!latitude || !longitude) {
     return (
-      <div className="bg-surface rounded-xl border border-outline-variant p-6">
+      <div className="bg-card rounded-xl border border-outline-variant/10 shadow-card p-6">
         <h2 className="text-lg font-semibold text-on-surface mb-4">Location</h2>
         <div className="aspect-video bg-surface-container rounded-lg flex items-center justify-center">
           <div className="text-center text-on-surface-variant">

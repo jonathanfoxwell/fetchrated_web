@@ -9,20 +9,20 @@ const badgeConfig = {
   outstanding: {
     label: 'Outstanding',
     icon: Award,
-    bg: 'bg-amber-500',
+    bg: 'bg-primary',
     text: 'text-white',
   },
   excellent: {
     label: 'Excellent',
     icon: Star,
-    bg: 'bg-primary',
-    text: 'text-on-primary',
+    bg: 'bg-tertiary',
+    text: 'text-white',
   },
   verified: {
     label: 'Verified',
     icon: CheckCircle,
     bg: 'bg-secondary',
-    text: 'text-on-secondary',
+    text: 'text-white',
   },
 };
 

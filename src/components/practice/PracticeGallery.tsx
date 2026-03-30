@@ -27,7 +27,7 @@ export function PracticeGallery({ images, practiceName }: PracticeGalleryProps) 
 
   return (
     <>
-      <div className="bg-surface rounded-xl border border-outline-variant p-6">
+      <div className="bg-card rounded-xl border border-outline-variant/10 shadow-card p-6">
         <h2 className="text-lg font-semibold text-on-surface mb-4">Gallery</h2>
 
         <div className="grid grid-cols-2 md:grid-cols-3 gap-3">

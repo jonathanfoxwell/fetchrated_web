@@ -12,7 +12,7 @@ export function FAQSection({ title, items }: FAQSectionProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <div className="border border-outline-variant rounded-xl overflow-hidden">
+    <div className="border border-outline-variant/10 rounded-xl overflow-hidden shadow-card">
       {title && (
         <div className="flex items-center gap-2 px-6 py-4 bg-surface-container border-b border-outline-variant">
           <HelpCircle className="h-5 w-5 text-primary" />
