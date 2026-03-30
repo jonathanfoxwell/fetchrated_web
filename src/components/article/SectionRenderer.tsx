@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import { type ArticleSection } from '@/lib/data/articles';
 import { MarkdownSection } from './sections/MarkdownSection';
 import { CalloutSection } from './sections/CalloutSection';
@@ -12,6 +13,8 @@ import { ImageSection } from './sections/ImageSection';
 import { CodeBlockSection } from './sections/CodeBlockSection';
 import { SummaryBoxSection } from './sections/SummaryBoxSection';
 import { NumberedSectionSection } from './sections/NumberedSectionSection';
+import { PracticeCardSection } from './sections/PracticeCardSection';
+import { PracticeGridSection } from './sections/PracticeGridSection';
 
 interface SectionRendererProps {
   sections: ArticleSection[];
@@ -134,15 +137,43 @@ function SectionSwitch({ section }: { section: ArticleSection }) {
       );
 
     case 'practice-card':
-    case 'practice-grid':
-      // These will be implemented when practice components are built
       return (
-        <div className="p-4 border border-dashed border-outline-variant rounded-lg text-on-surface-variant text-sm">
-          Practice component: {section.type}
-        </div>
+        <Suspense fallback={<PracticeSkeleton />}>
+          <PracticeCardSection practiceId={section.practiceId} />
+        </Suspense>
+      );
+
+    case 'practice-grid':
+      return (
+        <Suspense fallback={<PracticeGridSkeleton count={section.practiceIds.length} />}>
+          <PracticeGridSection practiceIds={section.practiceIds} title={section.title} />
+        </Suspense>
       );
 
     default:
       return null;
   }
+}
+
+function PracticeSkeleton() {
+  return (
+    <div className="max-w-sm bg-surface rounded-xl border border-outline-variant overflow-hidden animate-pulse">
+      <div className="h-32 bg-surface-container" />
+      <div className="p-4 space-y-3">
+        <div className="h-5 bg-surface-container rounded w-3/4" />
+        <div className="h-4 bg-surface-container rounded w-1/2" />
+        <div className="h-4 bg-surface-container rounded w-1/3" />
+      </div>
+    </div>
+  );
+}
+
+function PracticeGridSkeleton({ count }: { count: number }) {
+  return (
+    <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {Array.from({ length: Math.min(count, 6) }).map((_, i) => (
+        <PracticeSkeleton key={i} />
+      ))}
+    </div>
+  );
 }
