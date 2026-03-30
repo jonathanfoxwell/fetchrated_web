@@ -35,13 +35,14 @@ Technical documentation for the FetchRated website content system.
 - [x] Build MCP server for article creation
 
 ### Phase 2: Next.js Integration
-- [ ] Create data fetching layer with caching
-- [ ] Set up webhook endpoint for revalidation
-- [ ] Configure Supabase webhook
-- [ ] Build `SectionRenderer` component
+- [x] Create data fetching layer with caching
+- [x] Set up webhook endpoint for revalidation
+- [ ] **TODO:** Configure Supabase webhook (see mcp-server-guide.md for setup)
+- [x] Build `SectionRenderer` component
 
 ### Phase 3: Components
-- [ ] Test all article section types
+- [x] Test all article section types (test article created)
+- [x] Update /learn/[slug] to use SectionRenderer
 - [ ] Build practice detail page components
 - [ ] Ensure consistent styling across pages
 

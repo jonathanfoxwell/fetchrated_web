@@ -25,7 +25,14 @@
       "Bash(powershell.exe -Command \"cd ''C:\\\\Code\\\\personal\\\\github\\\\fetchrated\\\\fetchrated_website''; Remove-Item package.json; npx create-next-app@latest . --typescript --tailwind --eslint --app --src-dir --import-alias ''@/*'' --use-npm --turbopack --yes\")",
       "Bash(powershell.exe -Command \"\ncd ''C:\\\\Code\\\\personal\\\\github\\\\fetchrated\\\\fetchrated_website''\nMove-Item reference ../reference_temp\nMove-Item .claude ../.claude_temp\nnpx create-next-app@latest . --typescript --tailwind --eslint --app --src-dir --import-alias ''@/*'' --use-npm --turbopack --yes\nMove-Item ../reference_temp reference\nMove-Item ../.claude_temp .claude\n\")",
       "Bash(powershell.exe -Command \"cd ''C:\\\\Code\\\\personal\\\\github\\\\fetchrated\\\\fetchrated_website''; npx shadcn@latest init -y --style new-york --base-color neutral\")",
-      "Bash(powershell.exe -Command \"cd ''C:\\\\Code\\\\personal\\\\github\\\\fetchrated\\\\fetchrated_website''; npx shadcn@latest init --help\")"
+      "Bash(powershell.exe -Command \"cd ''C:\\\\Code\\\\personal\\\\github\\\\fetchrated\\\\fetchrated_website''; npx shadcn@latest init --help\")",
+      "WebFetch(domain:stitch.withgoogle.com)",
+      "Bash(npm run build:*)",
+      "Bash(npx tsc --noEmit)",
+      "Bash(npm install:*)",
+      "Bash(psql:*)",
+      "Bash(npm ls:*)",
+      "Bash(node scripts/phase1-remaining-schema.cjs:*)"
     ]
   }
 }

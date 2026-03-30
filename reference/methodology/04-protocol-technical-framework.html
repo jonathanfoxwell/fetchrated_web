@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Technical Protocol v4.2 | FetchRated Institutional Registry</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "error-container": "#FFDAD6",
+                        "surface-container-highest": "#E5E2DD",
+                        "surface-container-lowest": "#FFFFFF",
+                        "on-error": "#FFFFFF",
+                        "primary": "#B22222",
+                        "surface-container-high": "#EBE8E3",
+                        "on-error-container": "#93000A",
+                        "tertiary-container": "#5B7B74",
+                        "surface-variant": "#E5E2DD",
+                        "on-tertiary-container": "#F4FFFB",
+                        "surface": "#FCF9F4",
+                        "primary-container": "#D53C37",
+                        "primary-fixed": "#FFDAD6",
+                        "on-primary": "#FFFFFF",
+                        "inverse-surface": "#31302D",
+                        "secondary": "#AC2F41",
+                        "on-secondary": "#FFFFFF",
+                        "background": "#FCF9F4",
+                        "on-surface-variant": "#584142",
+                        "tertiary": "#43625B",
+                        "tertiary-fixed": "#C7EAE1",
+                        "inverse-primary": "#FFB4AC",
+                        "primary-fixed-dim": "#FFB4AC",
+                        "on-primary-fixed-variant": "#92030F",
+                        "on-secondary-fixed": "#40000C",
+                        "secondary-fixed-dim": "#FFB3B6",
+                        "on-background": "#1C1C19",
+                        "surface-tint": "#B22222",
+                        "on-secondary-container": "#6C001B",
+                        "on-primary-container": "#FFFBFF",
+                        "error": "#BA1A1A",
+                        "surface-container-low": "#F6F3EE",
+                        "surface-container": "#F0EDE9",
+                        "tertiary-fixed-dim": "#ACCEC5",
+                        "on-tertiary-fixed": "#00201B",
+                        "on-secondary-fixed-variant": "#8B152B",
+                        "on-primary-fixed": "#410003",
+                        "on-tertiary": "#FFFFFF",
+                        "on-tertiary-fixed-variant": "#2D4C46",
+                        "secondary-fixed": "#FFDADA",
+                        "surface-bright": "#FCF9F4",
+                        "outline-variant": "#DFBFBF",
+                        "inverse-on-surface": "#F3F0EB",
+                        "outline": "#8B7171",
+                        "secondary-container": "#FD6B79",
+                        "on-surface": "#1C1C19",
+                        "surface-dim": "#DCDAD5"
+                    },
+                    fontFamily: {
+                        "headline": ["Newsreader", "serif"],
+                        "body": ["Plus Jakarta Sans", "sans-serif"],
+                        "label": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #FCF9F4; }
+        .serif-italic { font-family: 'Newsreader', serif; font-style: italic; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+        .registry-banner-gradient { background: linear-gradient(135deg, #B22222 0%, #8B152B 100%); }
+    </style>
+</head>
+<body class="text-on-surface antialiased">
+<!-- TopNavBar Implementation -->
+<nav class="fixed top-0 w-full z-50 bg-[#FCF9F4]/85 dark:bg-[#1C1C19]/85 backdrop-blur-md border-b border-[#F6F3EE]/50 dark:border-[#2C2C29] shadow-sm dark:shadow-none">
+<div class="flex justify-between items-center h-20 px-8 max-w-7xl mx-auto">
+<div class="flex items-center gap-8">
+<span class="text-2xl font-serif italic text-[#B22222] dark:text-[#E53935]">FetchRated</span>
+<div class="hidden md:flex items-center gap-6">
+<a class="text-[#1C1C19] dark:text-[#FCF9F4] font-medium hover:text-[#B22222] transition-colors duration-300" href="#">Standards</a>
+<a class="text-[#1C1C19] dark:text-[#FCF9F4] font-medium hover:text-[#B22222] transition-colors duration-300" href="#">Directory</a>
+<a class="text-[#B22222] dark:text-[#E53935] font-bold border-b-2 border-[#B22222] pb-1" href="#">Resources</a>
+<a class="text-[#1C1C19] dark:text-[#FCF9F4] font-medium hover:text-[#B22222] transition-colors duration-300" href="#">About</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden lg:flex items-center bg-surface-container-low px-4 py-2 rounded-lg">
+<span class="material-symbols-outlined text-outline text-sm mr-2">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-48 font-body" placeholder="Search registry..." type="text"/>
+</div>
+<button class="bg-primary text-on-primary px-6 py-2.5 font-label text-sm font-bold tracking-wider hover:opacity-90 transition-all">VERIFY BADGE</button>
+</div>
+</div>
+</nav>
+<main class="pt-32 pb-24 px-6 md:px-12 max-w-7xl mx-auto">
+<!-- Breadcrumbs -->
+<div class="flex items-center gap-2 text-xs font-label uppercase tracking-widest text-outline mb-8">
+<a class="hover:text-primary transition-colors" href="#">Resources</a>
+<span class="material-symbols-outlined text-[10px]">chevron_right</span>
+<a class="hover:text-primary transition-colors" href="#">Technical Documents</a>
+<span class="material-symbols-outlined text-[10px]">chevron_right</span>
+<span class="text-on-surface font-semibold">Protocol v4.2</span>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
+<!-- Sidebar Navigation -->
+<aside class="lg:col-span-3 space-y-10 order-2 lg:order-1">
+<div class="sticky top-32">
+<h3 class="font-headline text-xl mb-6 border-b border-primary/10 pb-4">Document Outline</h3>
+<nav class="space-y-4">
+<a class="flex items-center group" href="#overview">
+<span class="w-1 h-6 bg-primary mr-4 opacity-100"></span>
+<span class="text-sm font-bold text-primary group-hover:translate-x-1 transition-transform">0.0 Executive Summary</span>
+</a>
+<a class="flex items-center group" href="#audit-steps">
+<span class="w-1 h-6 bg-outline-variant mr-4 group-hover:bg-primary/50 transition-colors"></span>
+<span class="text-sm font-medium text-on-surface-variant group-hover:text-primary group-hover:translate-x-1 transition-transform">1.0 Procedural Audit</span>
+</a>
+<a class="flex items-center group" href="#data-nodes">
+<span class="w-1 h-6 bg-outline-variant mr-4 group-hover:bg-primary/50 transition-colors"></span>
+<span class="text-sm font-medium text-on-surface-variant group-hover:text-primary group-hover:translate-x-1 transition-transform">2.0 Technical Node Specs</span>
+</a>
+<a class="flex items-center group" href="#scoring">
+<span class="w-1 h-6 bg-outline-variant mr-4 group-hover:bg-primary/50 transition-colors"></span>
+<span class="text-sm font-medium text-on-surface-variant group-hover:text-primary group-hover:translate-x-1 transition-transform">3.0 Scoring Matrix</span>
+</a>
+<a class="flex items-center group" href="#compliance">
+<span class="w-1 h-6 bg-outline-variant mr-4 group-hover:bg-primary/50 transition-colors"></span>
+<span class="text-sm font-medium text-on-surface-variant group-hover:text-primary group-hover:translate-x-1 transition-transform">4.0 Compliance Annex</span>
+</a>
+</nav>
+<div class="mt-12 p-6 bg-surface-container-low rounded-xl border-l-4 border-primary">
+<p class="text-xs font-label text-outline mb-2 uppercase tracking-widest">Document Status</p>
+<p class="text-sm font-semibold mb-1">Official Registry Release</p>
+<p class="text-xs text-on-surface-variant leading-relaxed italic">Approved by the FetchRated Clinical Council on Oct 2024.</p>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<article class="lg:col-span-9 order-1 lg:order-2">
+<header class="mb-12">
+<span class="inline-block bg-primary/10 text-primary px-3 py-1 rounded text-[10px] font-bold tracking-widest uppercase mb-6">Institutional Methodology</span>
+<h1 class="font-headline text-5xl md:text-6xl leading-[1.1] mb-6">
+                        Technical Protocol v4.2: <span class="serif-italic">The Audit Framework</span>
+</h1>
+<p class="font-body text-lg text-on-surface-variant leading-relaxed max-w-3xl">
+                        This document outlines the rigorous clinical and technical procedures used to verify pet-care institutions within the FetchRated Registry. It establishes the <span class="serif-italic">gold standard</span> for operational integrity in the modern veterinary ecosystem.
+                    </p>
+</header>
+<!-- Registry Status Banner -->
+<section class="mb-16">
+<div class="registry-banner-gradient rounded-xl p-8 text-on-primary flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl shadow-primary/20">
+<div class="flex items-center gap-6">
+<div class="w-16 h-16 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+</div>
+<div>
+<h4 class="font-headline text-2xl">Active Registry Status</h4>
+<p class="text-on-primary/80 font-body text-sm">Real-time sync with Central Data Node 4.2.1</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="text-right px-4 border-r border-white/20">
+<p class="text-[10px] font-label uppercase tracking-widest opacity-70">Audited Labs</p>
+<p class="text-2xl font-bold">412</p>
+</div>
+<div class="text-right px-4">
+<p class="text-[10px] font-label uppercase tracking-widest opacity-70">Trust Index</p>
+<p class="text-2xl font-bold">99.8%</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Section: Audit Steps -->
+<section class="mb-20" id="audit-steps">
+<h2 class="font-headline text-3xl mb-8 flex items-center gap-4">
+<span class="text-primary/20 text-5xl italic font-serif">01</span>
+                        Procedural Audit Requirements
+                    </h2>
+<div class="space-y-8 pl-4 border-l-2 border-surface-container-high">
+<div class="relative pl-10">
+<span class="absolute left-[-1.1rem] top-0 w-8 h-8 bg-surface-container-lowest rounded-full border-2 border-primary flex items-center justify-center text-xs font-bold">1</span>
+<h4 class="font-body font-bold text-lg mb-2">Initial Institutional Intake</h4>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-4">Verification of legal standing and local licensing via regional clinical databases. Institutions must provide 36 months of incident-free records.</p>
+<ul class="space-y-2">
+<li class="flex items-start gap-3 text-sm">
+<span class="material-symbols-outlined text-primary text-base">check_circle</span>
+<span>Formal verification of Registered Veterinary Surgeons (RVS).</span>
+</li>
+<li class="flex items-start gap-3 text-sm">
+<span class="material-symbols-outlined text-primary text-base">check_circle</span>
+<span>Validation of professional liability insurance minimums (£5M).</span>
+</li>
+</ul>
+</div>
+<div class="relative pl-10">
+<span class="absolute left-[-1.1rem] top-0 w-8 h-8 bg-surface-container-lowest rounded-full border-2 border-primary flex items-center justify-center text-xs font-bold">2</span>
+<h4 class="font-body font-bold text-lg mb-2">Facility Inspection Protocol</h4>
+<p class="text-on-surface-variant text-sm leading-relaxed">On-site audit involving 142 distinct data points across three domains: Hygiene, Safety, and Technological Infrastructure.</p>
+</div>
+<div class="relative pl-10">
+<span class="absolute left-[-1.1rem] top-0 w-8 h-8 bg-surface-container-lowest rounded-full border-2 border-primary flex items-center justify-center text-xs font-bold">3</span>
+<h4 class="font-body font-bold text-lg mb-2">Post-Audit Review</h4>
+<p class="text-on-surface-variant text-sm leading-relaxed">Final deliberation by the Clinical Deanery before issuance of the FetchRated Institutional Badge.</p>
+</div>
+</div>
+</section>
+<!-- Section: Code Block -->
+<section class="mb-20" id="data-nodes">
+<h2 class="font-headline text-3xl mb-8 flex items-center gap-4">
+<span class="text-primary/20 text-5xl italic font-serif">02</span>
+                        Technical Data Node Definitions
+                    </h2>
+<p class="mb-6 text-on-surface-variant font-body text-sm italic">Define the XML/JSON standard for institutional registry broadcast.</p>
+<div class="bg-[#1C1C19] rounded-lg p-6 shadow-xl relative overflow-hidden">
+<div class="absolute top-0 right-0 p-3 flex gap-2">
+<div class="w-3 h-3 rounded-full bg-red-500/20"></div>
+<div class="w-3 h-3 rounded-full bg-yellow-500/20"></div>
+<div class="w-3 h-3 rounded-full bg-green-500/20"></div>
+</div>
+<pre class="text-primary-fixed-dim text-xs leading-relaxed"><code>{
+  "registry_item": {
+    "version": "4.2.1",
+    "institutional_id": "FR-UK-9012-B",
+    "verification_status": "ACTIVE_GOLD",
+    "compliance_metrics": {
+      "hygiene_index": 0.985,
+      "clinical_oversight": true,
+      "staff_ratio_compliance": 1.4
+    },
+    "audit_trail": [
+      { "event": "site_inspection", "timestamp": "2024-09-15T10:00:00Z" },
+      { "event": "deanery_approval", "timestamp": "2024-10-02T14:30:00Z" }
+    ]
+  }
+}</code></pre>
+</div>
+</section>
+<!-- Section: Scoring Matrix -->
+<section class="mb-20" id="scoring">
+<h2 class="font-headline text-3xl mb-8 flex items-center gap-4">
+<span class="text-primary/20 text-5xl italic font-serif">03</span>
+                        Audit Scoring Matrix
+                    </h2>
+<div class="overflow-x-auto border border-surface-container-high rounded-xl">
+<table class="w-full text-left font-body text-sm">
+<thead class="bg-surface-container-low border-b border-surface-container-high">
+<tr>
+<th class="px-6 py-4 font-bold text-on-surface uppercase tracking-wider text-[10px]">Criterion Domain</th>
+<th class="px-6 py-4 font-bold text-on-surface uppercase tracking-wider text-[10px]">Weight</th>
+<th class="px-6 py-4 font-bold text-on-surface uppercase tracking-wider text-[10px]">Threshold</th>
+<th class="px-6 py-4 font-bold text-on-surface uppercase tracking-wider text-[10px]">Clinical Impact</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container-high">
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="px-6 py-5 font-semibold">Clinical Infrastructure</td>
+<td class="px-6 py-5">40%</td>
+<td class="px-6 py-5 text-primary">≥ 95%</td>
+<td class="px-6 py-5">High: Direct impact on pet safety and emergency response.</td>
+</tr>
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="px-6 py-5 font-semibold">Staff Accreditation</td>
+<td class="px-6 py-5">30%</td>
+<td class="px-6 py-5 text-primary">100%</td>
+<td class="px-6 py-5">Critical: Mandatory compliance for registry listing.</td>
+</tr>
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="px-6 py-5 font-semibold">Operational Transparency</td>
+<td class="px-6 py-5">20%</td>
+<td class="px-6 py-5 text-primary">≥ 80%</td>
+<td class="px-6 py-5">Medium: Evaluation of reporting and disclosure protocols.</td>
+</tr>
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="px-6 py-5 font-semibold">Environmental UX</td>
+<td class="px-6 py-5">10%</td>
+<td class="px-6 py-5 text-primary">≥ 70%</td>
+<td class="px-6 py-5">Low: Assessment of physical space stress-reduction factors.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<footer class="pt-12 border-t border-surface-container-high">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
+<div>
+<p class="font-body text-sm font-bold mb-1">Next Protocol Review Cycle</p>
+<p class="text-xs text-on-surface-variant">Scheduled for April 2025. Technical amendments welcome via the Deanery Portal.</p>
+</div>
+<div class="flex gap-4">
+<button class="flex items-center gap-2 px-4 py-2 bg-surface-container-low border border-outline-variant hover:bg-surface-container-high transition-colors rounded text-xs font-bold uppercase tracking-widest">
+<span class="material-symbols-outlined text-sm">download</span>
+                                Download PDF
+                            </button>
+<button class="flex items-center gap-2 px-4 py-2 bg-primary text-on-primary hover:opacity-90 transition-opacity rounded text-xs font-bold uppercase tracking-widest">
+<span class="material-symbols-outlined text-sm">share</span>
+                                Cite Document
+                            </button>
+</div>
+</div>
+</footer>
+</article>
+</div>
+</main>
+<!-- Footer Implementation -->
+<footer class="w-full border-t border-[#B22222]/10 bg-[#F6F3EE] dark:bg-[#121210]">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 px-12 py-16 max-w-7xl mx-auto">
+<div class="col-span-1">
+<span class="text-xl font-serif text-[#1C1C19] dark:text-[#FCF9F4] block mb-4">FetchRated</span>
+<p class="text-[14px] font-body text-[#1C1C19]/70 dark:text-[#FCF9F4]/70 leading-relaxed">
+                    © 2024 FetchRated Institutional Registry. All rights reserved. Clinical rigor in pet care.
+                </p>
+</div>
+<div>
+<h5 class="font-headline text-[20px] mb-6">Standards</h5>
+<ul class="space-y-3">
+<li><a class="text-[14px] font-body text-[#1C1C19]/70 dark:text-[#FCF9F4]/70 hover:text-[#B22222] dark:hover:text-[#E53935] hover:translate-x-1 transition-all inline-block" href="#">Ethics Charter</a></li>
+<li><a class="text-[14px] font-body text-[#1C1C19]/70 dark:text-[#FCF9F4]/70 hover:text-[#B22222] dark:hover:text-[#E53935] hover:translate-x-1 transition-all inline-block" href="#">Verification Process</a></li>
+</ul>
+</div>
+<div>
+<h5 class="font-headline text-[20px] mb-6">Directory</h5>
+<ul class="space-y-3">
+<li><a class="text-[14px] font-body text-[#1C1C19]/70 dark:text-[#FCF9F4]/70 hover:text-[#B22222] dark:hover:text-[#E53935] hover:translate-x-1 transition-all inline-block" href="#">Registry Search</a></li>
+<li><a class="text-[14px] font-body text-[#1C1C19]/70 dark:text-[#FCF9F4]/70 hover:text-[#B22222] dark:hover:text-[#E53935] hover:translate-x-1 transition-all inline-block" href="#">Contact Deanery</a></li>
+</ul>
+</div>
+<div>
+<h5 class="font-headline text-[20px] mb-6">Legal</h5>
+<ul class="space-y-3">
+<li><a class="text-[14px] font-body text-[#1C1C19]/70 dark:text-[#FCF9F4]/70 hover:text-[#B22222] dark:hover:text-[#E53935] hover:translate-x-1 transition-all inline-block" href="#">Privacy Policy</a></li>
+<li><a class="text-[14px] font-body text-[#1C1C19]/70 dark:text-[#FCF9F4]/70 hover:text-[#B22222] dark:hover:text-[#E53935] hover:translate-x-1 transition-all inline-block" href="#">Compliance Data</a></li>
+</ul>
+</div>
+</div>
+</footer>
+</body></html>

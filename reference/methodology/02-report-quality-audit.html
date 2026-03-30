@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Plus+Jakarta+Sans:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "error-container": "#FFDAD6",
+              "surface-container-highest": "#E5E2DD",
+              "surface-container-lowest": "#FFFFFF",
+              "on-error": "#FFFFFF",
+              "primary": "#B22222",
+              "surface-container-high": "#EBE8E3",
+              "on-error-container": "#93000A",
+              "tertiary-container": "#5B7B74",
+              "surface-variant": "#E5E2DD",
+              "on-tertiary-container": "#F4FFFB",
+              "surface": "#FCF9F4",
+              "primary-container": "#D53C37",
+              "primary-fixed": "#FFDAD6",
+              "on-primary": "#FFFFFF",
+              "inverse-surface": "#31302D",
+              "secondary": "#AC2F41",
+              "on-secondary": "#FFFFFF",
+              "background": "#FCF9F4",
+              "on-surface-variant": "#584142",
+              "tertiary": "#43625B",
+              "tertiary-fixed": "#C7EAE1",
+              "inverse-primary": "#FFB4AC",
+              "primary-fixed-dim": "#FFB4AC",
+              "on-primary-fixed-variant": "#92030F",
+              "on-secondary-fixed": "#40000C",
+              "secondary-fixed-dim": "#FFB3B6",
+              "on-background": "#1C1C19",
+              "surface-tint": "#B22222",
+              "on-secondary-container": "#6C001B",
+              "on-primary-container": "#FFFBFF",
+              "error": "#BA1A1A",
+              "surface-container-low": "#F6F3EE",
+              "surface-container": "#F0EDE9",
+              "tertiary-fixed-dim": "#ACCEC5",
+              "on-tertiary-fixed": "#00201B",
+              "on-secondary-fixed-variant": "#8B152B",
+              "on-primary-fixed": "#410003",
+              "on-tertiary": "#FFFFFF",
+              "on-tertiary-fixed-variant": "#2D4C46",
+              "secondary-fixed": "#FFDADA",
+              "surface-bright": "#FCF9F4",
+              "outline-variant": "#DFBFBF",
+              "inverse-on-surface": "#F3F0EB",
+              "outline": "#8B7171",
+              "secondary-container": "#FD6B79",
+              "on-surface": "#1C1C19",
+              "surface-dim": "#DCDAD5"
+            },
+            fontFamily: {
+              "headline": ["Newsreader", "serif"],
+              "body": ["Plus Jakarta Sans", "sans-serif"],
+              "label": ["Plus Jakarta Sans", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .serif-italic { font-style: italic; }
+        .academic-grid {
+            background-image: radial-gradient(#B22222 0.5px, transparent 0.5px);
+            background-size: 24px 24px;
+            opacity: 0.03;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary-fixed">
+<!-- Top Navigation (Shared Component) -->
+<nav class="fixed top-0 w-full z-50 bg-[#FCF9F4]/85 backdrop-blur-md border-b border-[#F6F3EE]/50 shadow-sm transition-all duration-300">
+<div class="flex justify-between items-center h-20 px-8 max-w-7xl mx-auto">
+<div class="text-2xl font-headline italic text-primary">FetchRated</div>
+<div class="hidden md:flex space-x-8 items-center">
+<a class="text-on-surface font-medium hover:text-primary transition-colors duration-300" href="#">Standards</a>
+<a class="text-primary font-bold border-b-2 border-primary pb-1" href="#">Directory</a>
+<a class="text-on-surface font-medium hover:text-primary transition-colors duration-300" href="#">Resources</a>
+<a class="text-on-surface font-medium hover:text-primary transition-colors duration-300" href="#">About</a>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative hidden lg:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-sm">search</span>
+<input class="pl-10 pr-4 py-2 bg-surface-container-low border-none focus:ring-1 focus:ring-primary text-sm w-48" placeholder="Search registry..." type="text"/>
+</div>
+<button class="bg-primary text-on-primary px-6 py-2 text-sm font-bold active:opacity-80 active:scale-95 transition-all">
+                    Verify Badge
+                </button>
+</div>
+</div>
+</nav>
+<main class="pt-32 pb-24 max-w-5xl mx-auto px-6 lg:px-12 relative">
+<div class="absolute inset-0 academic-grid -z-10 pointer-events-none"></div>
+<!-- Header Section -->
+<header class="mb-20">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-8 border-b-4 border-primary pb-8">
+<div class="max-w-2xl">
+<p class="font-label text-xs uppercase tracking-[0.2em] text-primary font-bold mb-4">Institutional Registry — Vol. XIV</p>
+<h1 class="font-headline text-5xl md:text-7xl leading-[1.1] tracking-tight text-on-surface">
+                        2024 National <span class="serif-italic">Pet Care</span> Quality Report
+                    </h1>
+</div>
+<div class="text-right">
+<div class="w-32 h-32 md:w-40 md:h-40 bg-surface-container-low flex items-center justify-center relative overflow-hidden">
+<img alt="Institutional Seal" class="w-full h-full object-cover opacity-90 grayscale hover:grayscale-0 transition-all duration-700" data-alt="A vintage circular wax seal or institutional crest embossed on high-quality parchment paper with subtle texture and professional lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbGLSTPZzGNthFf4bM9ZpOFIutvFAAd26t9rg-CB7b1ffAPy85ZrkXOpy5M0JxXjrLaMOzU-kumyH5CnjvwsGk56ydpcV8A3lHzfmq9Wg0jIkRx-_vir9PxW9v2pFGjsCUKx_IRPgW3SwlVPWG67qLyBi6UIdCLWxarjZuLXiUBK_Q8KImzc4PprHUcIl-KckKVmjSxAAo_n7K9rLZUGzCDCg62MXNDr680piHrKaauBQHa2yogVeUV5PvaourDRDSHacVd-dQU_Q"/>
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-6xl opacity-20" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+</div>
+</div>
+<p class="font-label text-[10px] uppercase tracking-widest mt-2 text-outline">Official Auditor Seal #8821</p>
+</div>
+</div>
+<div class="mt-8 flex flex-wrap gap-8 text-sm font-label text-on-surface-variant">
+<div><span class="font-bold text-on-surface">Date:</span> October 14, 2023</div>
+<div><span class="font-bold text-on-surface">Status:</span> Final Audit — Peer Reviewed</div>
+<div><span class="font-bold text-on-surface">Classification:</span> Institutional Public Record</div>
+</div>
+</header>
+<!-- Executive Summary -->
+<section class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-20">
+<div class="md:col-span-4 border-l border-outline-variant pl-6">
+<h3 class="font-headline text-2xl mb-4">Key Metrics</h3>
+<div class="space-y-8">
+<div>
+<p class="text-xs font-label uppercase text-outline mb-1">National Safety Index</p>
+<div class="flex items-center gap-3">
+<span class="text-3xl font-headline text-primary">94.2%</span>
+<div class="flex-1 h-2 bg-surface-container-high relative">
+<div class="absolute inset-y-0 left-0 bg-primary" style="width: 94%"></div>
+</div>
+</div>
+</div>
+<div>
+<p class="text-xs font-label uppercase text-outline mb-1">Clinical Compliance</p>
+<div class="flex items-center gap-3">
+<span class="text-3xl font-headline text-tertiary">88.7%</span>
+<div class="flex-1 h-2 bg-surface-container-high relative">
+<div class="absolute inset-y-0 left-0 bg-tertiary" style="width: 88%"></div>
+</div>
+</div>
+</div>
+<div>
+<p class="text-xs font-label uppercase text-outline mb-1">Practitioner Retention</p>
+<div class="flex items-center gap-3">
+<span class="text-3xl font-headline text-on-surface">76.4%</span>
+<div class="flex-1 h-2 bg-surface-container-high relative">
+<div class="absolute inset-y-0 left-0 bg-on-surface" style="width: 76%"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="md:col-span-8">
+<p class="font-headline text-2xl leading-relaxed text-on-surface mb-6">
+                    This document provides a <span class="serif-italic">comprehensive longitudinal analysis</span> of veterinary and pet care facility standards across North America. Following the 2023 regulatory shifts, institutional rigor has emerged as the primary differentiator for market stability.
+                </p>
+<div class="font-headline text-lg text-on-surface-variant space-y-4 leading-relaxed">
+<p>The audit observed a 12% increase in voluntary clinical oversight among private practices. However, the data reveals significant regional disparities in "Standards of Empathy" (SoE) scores, particularly within metropolitan transit zones where facility density remains high but per-capita care hours have decreased.</p>
+<p>Our findings suggest that the <span class="text-primary font-bold">FetchRated Gold Standard</span> is now held by fewer than 4% of active clinics, representing a tightening of the quality funnel essential for public trust.</p>
+</div>
+</div>
+</section>
+<!-- Data Deep Dive: Regional Performance -->
+<section class="mb-20">
+<div class="flex items-center gap-4 mb-8">
+<h2 class="font-headline text-3xl">Regional Performance Audit</h2>
+<div class="h-px flex-1 bg-outline-variant"></div>
+</div>
+<div class="overflow-hidden border border-surface-container-high shadow-sm bg-surface-container-lowest">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low font-label text-[11px] uppercase tracking-widest text-on-surface">
+<th class="px-6 py-4 border-b border-surface-container-high">Jurisdiction</th>
+<th class="px-6 py-4 border-b border-surface-container-high">Audit Score</th>
+<th class="px-6 py-4 border-b border-surface-container-high">Standard Deviation</th>
+<th class="px-6 py-4 border-b border-surface-container-high">Growth Trend</th>
+<th class="px-6 py-4 border-b border-surface-container-high text-right">Verification Status</th>
+</tr>
+</thead>
+<tbody class="font-body text-sm text-on-surface-variant">
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="px-6 py-5 border-b border-surface-container-low font-bold text-on-surface">Northeast Division</td>
+<td class="px-6 py-5 border-b border-surface-container-low">92.4/100</td>
+<td class="px-6 py-5 border-b border-surface-container-low">
+<div class="flex items-end gap-0.5 h-6">
+<div class="w-1 bg-primary/20 h-2"></div>
+<div class="w-1 bg-primary/40 h-4"></div>
+<div class="w-1 bg-primary h-6"></div>
+<div class="w-1 bg-primary/60 h-3"></div>
+<div class="w-1 bg-primary/20 h-1"></div>
+</div>
+</td>
+<td class="px-6 py-5 border-b border-surface-container-low text-tertiary">
+<span class="material-symbols-outlined align-middle text-xs">trending_up</span> +4.2%
+                            </td>
+<td class="px-6 py-5 border-b border-surface-container-low text-right">
+<span class="px-2 py-1 bg-tertiary/10 text-tertiary text-[10px] font-bold uppercase tracking-wider">Accredited</span>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="px-6 py-5 border-b border-surface-container-low font-bold text-on-surface">Pacific Northwest</td>
+<td class="px-6 py-5 border-b border-surface-container-low">96.1/100</td>
+<td class="px-6 py-5 border-b border-surface-container-low">
+<div class="flex items-end gap-0.5 h-6">
+<div class="w-1 bg-primary/40 h-3"></div>
+<div class="w-1 bg-primary/60 h-4"></div>
+<div class="w-1 bg-primary h-5"></div>
+<div class="w-1 bg-primary h-6"></div>
+<div class="w-1 bg-primary/80 h-5"></div>
+</div>
+</td>
+<td class="px-6 py-5 border-b border-surface-container-low text-tertiary">
+<span class="material-symbols-outlined align-middle text-xs">trending_up</span> +1.8%
+                            </td>
+<td class="px-6 py-5 border-b border-surface-container-low text-right">
+<span class="px-2 py-1 bg-primary text-on-primary text-[10px] font-bold uppercase tracking-wider">Top Tier</span>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="px-6 py-5 border-b border-surface-container-low font-bold text-on-surface">Central Corridor</td>
+<td class="px-6 py-5 border-b border-surface-container-low text-primary font-bold">78.9/100</td>
+<td class="px-6 py-5 border-b border-surface-container-low">
+<div class="flex items-end gap-0.5 h-6">
+<div class="w-1 bg-on-surface/10 h-6"></div>
+<div class="w-1 bg-on-surface/10 h-2"></div>
+<div class="w-1 bg-on-surface/10 h-5"></div>
+<div class="w-1 bg-on-surface/10 h-1"></div>
+<div class="w-1 bg-on-surface/10 h-4"></div>
+</div>
+</td>
+<td class="px-6 py-5 border-b border-surface-container-low text-primary">
+<span class="material-symbols-outlined align-middle text-xs">trending_down</span> -2.4%
+                            </td>
+<td class="px-6 py-5 border-b border-surface-container-low text-right">
+<span class="px-2 py-1 bg-error-container text-on-error-container text-[10px] font-bold uppercase tracking-wider">Review Required</span>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="px-6 py-5 border-b border-surface-container-low font-bold text-on-surface">Southeastern Hub</td>
+<td class="px-6 py-5 border-b border-surface-container-low">84.5/100</td>
+<td class="px-6 py-5 border-b border-surface-container-low">
+<div class="flex items-end gap-0.5 h-6">
+<div class="w-1 bg-primary/10 h-2"></div>
+<div class="w-1 bg-primary/20 h-4"></div>
+<div class="w-1 bg-primary/40 h-6"></div>
+<div class="w-1 bg-primary/20 h-3"></div>
+<div class="w-1 bg-primary/10 h-1"></div>
+</div>
+</td>
+<td class="px-6 py-5 border-b border-surface-container-low text-outline">
+<span class="material-symbols-outlined align-middle text-xs">horizontal_rule</span> 0.0%
+                            </td>
+<td class="px-6 py-5 border-b border-surface-container-low text-right">
+<span class="px-2 py-1 bg-surface-container-high text-on-surface-variant text-[10px] font-bold uppercase tracking-wider">Pending Audit</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- Asymmetric Content Section -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center mb-20">
+<div class="lg:col-span-5 relative">
+<div class="aspect-[4/5] bg-surface-container-high shadow-2xl overflow-hidden">
+<img alt="Clinical Excellence" class="w-full h-full object-cover grayscale brightness-90 hover:grayscale-0 transition-all duration-1000" data-alt="A clean, minimalist veterinary laboratory setting with modern stainless steel equipment and soft, natural morning light through a large window" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAad1BGpK0-5NftqDm_UOl3b3mp4qHMse8fZjP1Xb1uDScrrhTXTBs2P2TATDZSIEmtIJDnMUiD9qImOyOd6XQdFlUofAMEr4lalk4-PgbADARYA1Vv9aM48QZw5IedQw0QNsAcA-WXh9RZ5SuGUgE4eqn8EmWRYSwMkkVrGUCCqLmuyUtjpBaIw6gABZAAD8x-3BOquo4xtM52MKYH-Gh1AWznx-0JZmY2eXOHuHV0b_06QJoFnAeBWnG-xWX2316grnFAvWApR4M"/>
+</div>
+<div class="absolute -bottom-6 -right-6 w-32 h-32 bg-primary flex flex-col items-center justify-center text-on-primary text-center p-4">
+<span class="text-3xl font-headline italic leading-none">A+</span>
+<span class="text-[10px] font-label uppercase tracking-tighter mt-1">Institutional Grade</span>
+</div>
+</div>
+<div class="lg:col-span-7">
+<h3 class="font-headline text-3xl mb-6">The Shift Toward <span class="serif-italic">Clinical Transparency</span></h3>
+<div class="font-body text-on-surface-variant space-y-6">
+<p>Modern consumers no longer accept proximity as the primary driver for clinic selection. Audit data suggests that "Process Transparency"—the ability for pet owners to view real-time data on care protocols—has increased institutional loyalty by 44% in the last 18 months.</p>
+<div class="p-6 bg-surface-container-low border-l-4 border-primary">
+<p class="font-headline text-xl text-on-surface italic">"The intersection of clinical rigor and editorial clarity is where public trust is rebuilt."</p>
+<p class="font-label text-xs uppercase tracking-widest mt-4 text-primary font-bold">— Dean of Registry Compliance</p>
+</div>
+<p>Moving into 2025, the FetchRated Registry will begin mandating secondary-party environmental audits for all facilities serving more than 500 active patients per annum.</p>
+</div>
+</div>
+</section>
+<!-- Summary for Practitioners -->
+<section class="bg-on-surface text-surface px-8 py-12 md:px-12 md:py-16 shadow-xl relative overflow-hidden">
+<div class="absolute top-0 right-0 p-8 opacity-10">
+<span class="material-symbols-outlined text-9xl">inventory_2</span>
+</div>
+<div class="relative z-10">
+<div class="flex items-center gap-4 mb-8">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">assignment</span>
+<h2 class="font-headline text-2xl uppercase tracking-widest">Summary for Practitioners</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-12 font-body">
+<div>
+<h4 class="text-primary font-bold text-xs uppercase tracking-widest mb-4">Immediate Actions</h4>
+<ul class="text-surface-variant text-sm space-y-4">
+<li class="flex gap-3"><span class="text-primary">01.</span> Review Level 2 safety protocols before Q1 audit window.</li>
+<li class="flex gap-3"><span class="text-primary">02.</span> Update facility sanitation logs to the 2024 digital standard.</li>
+<li class="flex gap-3"><span class="text-primary">03.</span> Submit practitioner credentialing for dual-verification status.</li>
+</ul>
+</div>
+<div>
+<h4 class="text-primary font-bold text-xs uppercase tracking-widest mb-4">Risk Factors</h4>
+<ul class="text-surface-variant text-sm space-y-4">
+<li class="flex gap-3"><span class="text-error">!</span> Elevated noise pollution levels in urban-fringe boarding.</li>
+<li class="flex gap-3"><span class="text-error">!</span> Inconsistent archival of post-operative recovery data.</li>
+</ul>
+</div>
+<div class="border-l border-surface-variant/20 pl-8">
+<h4 class="text-primary font-bold text-xs uppercase tracking-widest mb-4">Institutional Support</h4>
+<p class="text-surface-variant text-xs leading-loose">Practitioners requiring guidance on the 2024 standards may contact the Deanery directly for an expedited consultation or site-visit scheduling.</p>
+<button class="mt-6 border border-surface-variant/30 px-6 py-2 text-xs uppercase tracking-widest hover:bg-surface hover:text-on-surface transition-all">Request Audit Prep</button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer (Shared Component) -->
+<footer class="w-full border-t border-primary/10 bg-[#F6F3EE]">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 px-12 py-16 max-w-7xl mx-auto">
+<div class="col-span-1">
+<div class="text-xl font-headline text-on-surface mb-4">FetchRated</div>
+<p class="font-body text-sm text-on-surface/70 leading-relaxed">Dedicated to the elevation of pet care standards through institutional rigor and ethical auditing.</p>
+</div>
+<div>
+<h5 class="font-headline text-[20px] mb-6">Governance</h5>
+<ul class="space-y-4">
+<li><a class="font-body text-[14px] text-on-surface/70 hover:text-primary transition-all hover:translate-x-1 inline-block" href="#">Ethics Charter</a></li>
+<li><a class="font-body text-[14px] text-on-surface/70 hover:text-primary transition-all hover:translate-x-1 inline-block" href="#">Verification Process</a></li>
+<li><a class="font-body text-[14px] text-on-surface/70 hover:text-primary transition-all hover:translate-x-1 inline-block underline text-primary" href="#">Registry Search</a></li>
+</ul>
+</div>
+<div>
+<h5 class="font-headline text-[20px] mb-6">Inquiries</h5>
+<ul class="space-y-4">
+<li><a class="font-body text-[14px] text-on-surface/70 hover:text-primary transition-all hover:translate-x-1 inline-block" href="#">Contact Deanery</a></li>
+<li><a class="font-body text-[14px] text-on-surface/70 hover:text-primary transition-all hover:translate-x-1 inline-block" href="#">Privacy Policy</a></li>
+</ul>
+</div>
+<div class="bg-surface-container-lowest p-6 border border-primary/5">
+<h5 class="font-label text-[10px] uppercase tracking-widest text-primary font-bold mb-4">Publication ID</h5>
+<div class="text-[10px] font-body text-outline space-y-2">
+<p>ISSN: 2024-FR-991</p>
+<p>ISBN: 978-3-16-148410-0</p>
+<p>Digital Archive Ver: 4.2.1</p>
+</div>
+</div>
+</div>
+<div class="max-w-7xl mx-auto px-12 pb-12 border-t border-primary/5 pt-8">
+<p class="font-body text-[14px] text-on-surface/50">© 2024 FetchRated Institutional Registry. All rights reserved. Clinical rigor in pet care.</p>
+</div>
+</footer>
+</body></html>

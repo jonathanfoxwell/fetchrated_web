@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Plus+Jakarta+Sans:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "error-container": "#FFDAD6",
+              "surface-container-highest": "#E5E2DD",
+              "surface-container-lowest": "#FFFFFF",
+              "on-error": "#FFFFFF",
+              "primary": "#B22222",
+              "surface-container-high": "#EBE8E3",
+              "on-error-container": "#93000A",
+              "tertiary-container": "#5B7B74",
+              "surface-variant": "#E5E2DD",
+              "on-tertiary-container": "#F4FFFB",
+              "surface": "#FCF9F4",
+              "primary-container": "#D53C37",
+              "primary-fixed": "#FFDAD6",
+              "on-primary": "#FFFFFF",
+              "inverse-surface": "#31302D",
+              "secondary": "#AC2F41",
+              "on-secondary": "#FFFFFF",
+              "background": "#FCF9F4",
+              "on-surface-variant": "#584142",
+              "tertiary": "#43625B",
+              "tertiary-fixed": "#C7EAE1",
+              "inverse-primary": "#FFB4AC",
+              "primary-fixed-dim": "#FFB4AC",
+              "on-primary-fixed-variant": "#92030F",
+              "on-secondary-fixed": "#40000C",
+              "secondary-fixed-dim": "#FFB3B6",
+              "on-background": "#1C1C19",
+              "surface-tint": "#B22222",
+              "on-secondary-container": "#6C001B",
+              "on-primary-container": "#FFFBFF",
+              "error": "#BA1A1A",
+              "surface-container-low": "#F6F3EE",
+              "surface-container": "#F0EDE9",
+              "tertiary-fixed-dim": "#ACCEC5",
+              "on-tertiary-fixed": "#00201B",
+              "on-secondary-fixed-variant": "#8B152B",
+              "on-primary-fixed": "#410003",
+              "on-tertiary": "#FFFFFF",
+              "on-tertiary-fixed-variant": "#2D4C46",
+              "secondary-fixed": "#FFDADA",
+              "surface-bright": "#FCF9F4",
+              "outline-variant": "#DFBFBF",
+              "inverse-on-surface": "#F3F0EB",
+              "outline": "#8B7171",
+              "secondary-container": "#FD6B79",
+              "on-surface": "#1C1C19",
+              "surface-dim": "#DCDAD5"
+            },
+            fontFamily: {
+              "headline": ["Newsreader", "serif"],
+              "body": ["Plus Jakarta Sans", "sans-serif"],
+              "label": ["Plus Jakarta Sans", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .serif-italic { font-style: italic; }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-[#FCF9F4]/85 dark:bg-[#1C1C19]/85 backdrop-blur-md border-b border-[#F6F3EE]/50 dark:border-[#2C2C29] shadow-sm dark:shadow-none">
+<div class="flex justify-between items-center h-20 px-8 max-w-7xl mx-auto">
+<div class="text-2xl font-serif italic text-[#B22222] dark:text-[#E53935]">FetchRated</div>
+<div class="hidden md:flex items-center space-x-8">
+<a class="text-[#1C1C19] dark:text-[#FCF9F4] font-medium hover:text-[#B22222] transition-colors duration-300" href="#">Standards</a>
+<a class="text-[#B22222] dark:text-[#E53935] font-bold border-b-2 border-[#B22222] pb-1" href="#">Directory</a>
+<a class="text-[#1C1C19] dark:text-[#FCF9F4] font-medium hover:text-[#B22222] transition-colors duration-300" href="#">Resources</a>
+<a class="text-[#1C1C19] dark:text-[#FCF9F4] font-medium hover:text-[#B22222] transition-colors duration-300" href="#">About</a>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden lg:flex items-center bg-surface-container-low px-4 py-2 rounded-full border border-outline-variant/20">
+<span class="material-symbols-outlined text-outline text-sm mr-2">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-48 font-body" placeholder="Search registry..." type="text"/>
+</div>
+<button class="bg-primary text-on-primary px-6 py-2.5 font-label text-sm font-bold tracking-wider hover:opacity-90 active:scale-95 transition-all">
+                    Verify Badge
+                </button>
+</div>
+</div>
+</nav>
+<main class="pt-32 pb-24 px-8 max-w-7xl mx-auto">
+<!-- Header Section -->
+<header class="mb-16">
+<div class="flex items-center gap-3 mb-4">
+<span class="w-12 h-[1px] bg-primary"></span>
+<span class="font-label text-xs font-bold tracking-[0.2em] uppercase text-primary">Official Archives</span>
+</div>
+<h1 class="font-headline text-5xl md:text-6xl text-on-surface max-w-3xl leading-tight">
+                Latest <span class="serif-italic">Bulletins</span> &amp; Regulatory Updates
+            </h1>
+<p class="mt-6 text-on-surface-variant font-body text-lg max-w-2xl leading-relaxed">
+                Stay informed with clinical insights, ethical standards, and legal frameworks governing the premium pet care industry.
+            </p>
+</header>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
+<!-- Main Content Area -->
+<section class="lg:col-span-8 space-y-12">
+<!-- Article 1 -->
+<article class="group flex flex-col md:flex-row gap-8 items-start p-6 rounded-xl hover:bg-surface-container-lowest transition-all duration-500 hover:shadow-sm">
+<div class="relative flex-shrink-0">
+<img class="w-32 h-32 rounded-full object-cover border-4 border-surface shadow-2xl grayscale group-hover:grayscale-0 transition-all duration-700" data-alt="Close-up of a golden retriever being examined by a professional vet in a clean clinical environment with soft natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2lVAbDC735x066QhY7Z10CAaXvOAtNi1nAgJlVukBhXe_ybJNXt8A5CgJBkaO4ESU8uzASSJTSPp-oH7PAgM69lN1gFZZfoSP7LHZ78m5qQRBprewNIwb5FCV5bgL0ro7AzAPapVZJfPb9ZTJrtpqbSSqY2Kt4YJK1EgD0oJY4dtBmmIhR9KwAKNqXUpIHS7LR3RZbQIvNp8UtFzv415I8CNRGIF0s7cuExsVXngZGFYZRue56TkVmYp6HStoU0SgB8xbgLGH0wQ"/>
+</div>
+<div class="flex-grow">
+<div class="flex items-center gap-4 mb-3">
+<span class="bg-tertiary/10 text-tertiary px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider">Regulatory</span>
+<span class="text-on-surface-variant/60 text-xs font-label">October 24, 2024</span>
+</div>
+<h2 class="font-headline text-2xl mb-3 group-hover:text-primary transition-colors cursor-pointer">New Standards for Canine Nutrition Labeling in Professional Care</h2>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-4">
+                            Recent legislative shifts demand increased transparency in ingredient sourcing for high-end kennel facilities. We explore the implications for independent practitioners...
+                        </p>
+<a class="inline-flex items-center text-primary font-bold text-xs font-label uppercase tracking-widest group/link" href="#">
+                            Read Full Bulletin
+                            <span class="material-symbols-outlined text-sm ml-2 group-hover/link:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+</div>
+</article>
+<!-- Article 2 -->
+<article class="group flex flex-col md:flex-row gap-8 items-start p-6 rounded-xl hover:bg-surface-container-lowest transition-all duration-500 hover:shadow-sm">
+<div class="relative flex-shrink-0">
+<img class="w-32 h-32 rounded-full object-cover border-4 border-surface shadow-2xl grayscale group-hover:grayscale-0 transition-all duration-700" data-alt="Sophisticated black labrador sitting in a high-end grooming studio with marble details and brass accents" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxsY6ZYa2TENN-F8_0rh2xhLoeFqr2jbPhzwb2hY9Vz_BxJQNO9d4lZdpO3yNnHUgNGdW52G8QSYILG0rD2uSoZrtvRMlesjB-0aa_YG_S5QkVTefej1-a9ZZ1uGt97FhMe-OMJE4F-lHt3XsGlTqsV3B3Vao-qKRJ9Zg2knurs6_SYovs01s7EnTfOiwBzjk9-tSC7zzrfcvIc66Z8alFeGWxBu8oseX7QfTxUNmD_dyE624x3s8BtT5qpoD4C-KWfPPobWi-GhI"/>
+</div>
+<div class="flex-grow">
+<div class="flex items-center gap-4 mb-3">
+<span class="bg-secondary/10 text-secondary px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider">Ethics</span>
+<span class="text-on-surface-variant/60 text-xs font-label">October 18, 2024</span>
+</div>
+<h2 class="font-headline text-2xl mb-3 group-hover:text-primary transition-colors cursor-pointer">The Ethics of Behavioral Modification: A Clinical Perspective</h2>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-4">
+                            Addressing the delicate balance between corrective training and the emotional welfare of high-performance breeds within domestic environments.
+                        </p>
+<a class="inline-flex items-center text-primary font-bold text-xs font-label uppercase tracking-widest group/link" href="#">
+                            Read Full Bulletin
+                            <span class="material-symbols-outlined text-sm ml-2 group-hover/link:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+</div>
+</article>
+<!-- Article 3 -->
+<article class="group flex flex-col md:flex-row gap-8 items-start p-6 rounded-xl hover:bg-surface-container-lowest transition-all duration-500 hover:shadow-sm">
+<div class="relative flex-shrink-0">
+<img class="w-32 h-32 rounded-full object-cover border-4 border-surface shadow-2xl grayscale group-hover:grayscale-0 transition-all duration-700" data-alt="Detailed view of a leather dog collar with a brass nameplate on a weathered wooden background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBOYElmIyM7IrAZgAa3bUIdz4N_zmPbFAzwjbcZNXpy9gXQBOaLENCbuvPKNkxfodn6n4awREgmCA87ZSIxgz4g7Wsr19DaK0EBx8maIDUlxwv_XeBCM8s2E_HtSooFzbM3D4nhKHkGk5_MxtlsNA2MWeLotqrPP3LYjMTvm1_zQ9R2GHOkslGFsccCrBDYlkPJIZPs99RmfzLKFrGQEwexbAwX64fyy1aLwWVSYn7aJ0A_l_jPC_jT4pHCporUlngJ2pcAVqvGsa4"/>
+</div>
+<div class="flex-grow">
+<div class="flex items-center gap-4 mb-3">
+<span class="bg-tertiary/10 text-tertiary px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider">Verification</span>
+<span class="text-on-surface-variant/60 text-xs font-label">October 12, 2024</span>
+</div>
+<h2 class="font-headline text-2xl mb-3 group-hover:text-primary transition-colors cursor-pointer">Registry Updates: Enhanced Security for Digital Certifications</h2>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-4">
+                            Announcing the transition to blockchain-backed verification for all 'Elite' tier service providers starting Q1 of the next fiscal year.
+                        </p>
+<a class="inline-flex items-center text-primary font-bold text-xs font-label uppercase tracking-widest group/link" href="#">
+                            Read Full Bulletin
+                            <span class="material-symbols-outlined text-sm ml-2 group-hover/link:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+</div>
+</article>
+<!-- Pagination -->
+<nav class="flex items-center justify-center space-x-2 pt-8 border-t border-outline-variant/30">
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-lg">chevron_left</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-primary text-on-primary font-bold text-sm">1</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-high font-medium text-sm transition-colors">2</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-high font-medium text-sm transition-colors">3</button>
+<span class="px-2 text-on-surface-variant/40">...</span>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-high font-medium text-sm transition-colors">12</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-lg">chevron_right</span>
+</button>
+</nav>
+</section>
+<!-- Sidebar -->
+<aside class="lg:col-span-4 space-y-10">
+<!-- Verification Badge -->
+<div class="bg-primary p-8 rounded-xl text-on-primary relative overflow-hidden shadow-2xl">
+<div class="relative z-10">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="font-label text-xs font-extrabold tracking-[0.2em] uppercase">Trusted Institution</span>
+</div>
+<h3 class="font-headline text-2xl mb-4 leading-tight">Authenticity is Our Primary <span class="serif-italic">Mandate</span></h3>
+<p class="text-on-primary/80 text-sm mb-6 leading-relaxed">FetchRated ensures every clinical bulletin is vetted by our Council of Veterinary Ethics.</p>
+<button class="w-full bg-on-primary text-primary py-3 font-label text-xs font-bold uppercase tracking-widest hover:bg-surface-container-lowest transition-all">
+                            Verify Your Credentials
+                        </button>
+</div>
+<!-- Decorative Circle Background -->
+<div class="absolute -bottom-12 -right-12 w-48 h-48 rounded-full bg-white/10 blur-3xl"></div>
+</div>
+<!-- Most Read Articles -->
+<div class="bg-surface-container-low p-8 rounded-xl border border-outline-variant/10">
+<h3 class="font-headline text-xl mb-6 flex items-center gap-2">
+                        Most <span class="serif-italic">Read</span>
+</h3>
+<ul class="space-y-6">
+<li class="group">
+<span class="font-label text-[10px] font-bold text-primary uppercase tracking-widest">01</span>
+<h4 class="mt-1 font-headline text-base group-hover:underline cursor-pointer">Understanding the Grooming Safety Act of 2024</h4>
+</li>
+<li class="group">
+<span class="font-label text-[10px] font-bold text-primary uppercase tracking-widest">02</span>
+<h4 class="mt-1 font-headline text-base group-hover:underline cursor-pointer">Post-Surgical Care: Premium Boarding Protocols</h4>
+</li>
+<li class="group">
+<span class="font-label text-[10px] font-bold text-primary uppercase tracking-widest">03</span>
+<h4 class="mt-1 font-headline text-base group-hover:underline cursor-pointer">Liability Insurance Shifts for Walkers</h4>
+</li>
+</ul>
+</div>
+<!-- Newsletter Signup -->
+<div class="p-8 border border-primary/20 rounded-xl bg-surface-container-lowest">
+<h3 class="font-headline text-xl mb-4">Institutional <span class="serif-italic">Briefing</span></h3>
+<p class="text-on-surface-variant text-sm mb-6 leading-relaxed">Join 4,500+ professionals receiving monthly regulatory audits and industry insights.</p>
+<div class="space-y-4">
+<input class="w-full bg-surface-container-low border-none p-4 text-sm font-body focus:ring-1 focus:ring-primary" placeholder="professional@institution.com" type="email"/>
+<button class="w-full bg-primary text-on-primary py-4 font-label text-xs font-bold uppercase tracking-widest hover:opacity-90 transition-all">
+                            Subscribe to Updates
+                        </button>
+<p class="text-[10px] text-center text-on-surface-variant/50 font-label">Your data is secured by our clinical privacy protocols.</p>
+</div>
+</div>
+</aside>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-[#F6F3EE] dark:bg-[#121210] w-full border-t border-[#B22222]/10">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 px-12 py-16 max-w-7xl mx-auto">
+<div class="md:col-span-1">
+<div class="text-xl font-serif text-[#1C1C19] dark:text-[#FCF9F4] mb-4">FetchRated</div>
+<p class="text-[#1C1C19]/70 dark:text-[#FCF9F4]/70 text-sm font-body leading-relaxed">
+                    Setting the global standard for clinical rigor and ethical verification in premium pet care.
+                </p>
+</div>
+<div class="md:col-span-1 space-y-4">
+<h4 class="font-headline text-[20px] text-on-surface">Registry</h4>
+<nav class="flex flex-col space-y-2">
+<a class="text-[#1C1C19]/70 dark:text-[#FCF9F4]/70 text-[14px] hover:text-[#B22222] transition-all hover:translate-x-1" href="#">Verification Process</a>
+<a class="text-[#1C1C19]/70 dark:text-[#FCF9F4]/70 text-[14px] hover:text-[#B22222] transition-all hover:translate-x-1" href="#">Registry Search</a>
+<a class="text-[#B22222] underline text-[14px]" href="#">Ethics Charter</a>
+</nav>
+</div>
+<div class="md:col-span-1 space-y-4">
+<h4 class="font-headline text-[20px] text-on-surface">Institution</h4>
+<nav class="flex flex-col space-y-2">
+<a class="text-[#1C1C19]/70 dark:text-[#FCF9F4]/70 text-[14px] hover:text-[#B22222] transition-all hover:translate-x-1" href="#">Contact Deanery</a>
+<a class="text-[#1C1C19]/70 dark:text-[#FCF9F4]/70 text-[14px] hover:text-[#B22222] transition-all hover:translate-x-1" href="#">Privacy Policy</a>
+</nav>
+</div>
+<div class="md:col-span-1">
+<h4 class="font-headline text-[20px] text-on-surface mb-4">Follow</h4>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full border border-primary/20 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined text-lg">public</span>
+</a>
+<a class="w-10 h-10 rounded-full border border-primary/20 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined text-lg">description</span>
+</a>
+</div>
+</div>
+</div>
+<div class="py-8 border-t border-primary/5 text-center">
+<p class="text-[#1C1C19]/50 dark:text-[#FCF9F4]/50 text-[12px] font-label">© 2024 FetchRated Institutional Registry. All rights reserved. Clinical rigor in pet care.</p>
+</div>
+</footer>
+</body></html>
