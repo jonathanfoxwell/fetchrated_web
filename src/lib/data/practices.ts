@@ -1,20 +1,31 @@
 import { unstable_cache } from 'next/cache';
 import { createServerClient } from '../supabase';
 
+/**
+ * DirectoryListing represents a practice in the public directory view.
+ * This interface matches the `directory_listings` Supabase view which
+ * exposes only the fields needed by the website (sensitive data stays
+ * in the underlying `practices` table).
+ */
 export interface DirectoryListing {
+  // Identity
   id: string;
-  google_place_id: string;
   name: string;
   slug: string;
+
+  // Location
   formatted_address: string | null;
-  street_address: string | null;
   city: string | null;
   postcode: string | null;
   latitude: number | null;
   longitude: number | null;
+
+  // Contact
   phone: string | null;
   website: string | null;
   email: string | null;
+
+  // Content
   headline: string | null;
   description: string | null;
   logo_url: string | null;
@@ -22,18 +33,24 @@ export interface DirectoryListing {
   gallery_urls: string[] | null;
   services: Service[] | null;
   opening_hours: OpeningHours | null;
-  google_rating: number | null;
-  google_review_count: number | null;
+
+  // Scores
   profile_strength_score: number | null;
+
+  // Membership
   is_fetchrated_member: boolean;
   membership_tier: string | null;
+
+  // Review aggregates
   average_rating: number | null;
   total_reviews: number | null;
   monthly_review_velocity: number | null;
   response_rate: number | null;
-  most_recent_review_date: string | null;
+
+  // Computed
   badge_tier: 'outstanding' | 'excellent' | 'verified' | null;
-  directory_published_at: string | null;
+
+  // Timestamps
   last_updated_at: string;
 }
 
