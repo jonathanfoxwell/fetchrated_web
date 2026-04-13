@@ -7,8 +7,8 @@ export { Breadcrumbs } from "./breadcrumbs";
 export { Hero, HeroVisual } from "./hero";
 export { SectionHeader } from "./section-header";
 export { FeatureStrip, NumberedSteps, CTABanner } from "./feature-strip";
-export { LocationCard, LocationCardGrid } from "./location-card";
-export type { Location, BadgeTier } from "./location-card";
+export { LocationCard, LocationCardGrid } from "./location/LocationCard";
+export type { LocationCard as LocationCardType } from "@/lib/data/locations";
 
 // Directory Components
 export { SearchBar } from "./search-bar";

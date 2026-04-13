@@ -14,10 +14,9 @@ import {
   OrganizationSchema,
   WebSiteSchema,
 } from "@/components";
-import { sampleLocations, pillarGuides } from "@/lib/data";
+import { pillarGuides } from "@/lib/data";
+import { getDirectoryListings } from "@/lib/data/locations";
 import { ClipboardCheck, Shield, Award, ArrowRight } from "lucide-react";
-
-const featuredLocations = sampleLocations.slice(0, 3);
 
 const howItWorksFeatures = [
   {
@@ -37,7 +36,8 @@ const howItWorksFeatures = [
   },
 ];
 
-export default function Home() {
+export default async function Home() {
+  const { data: featuredLocations } = await getDirectoryListings({ limit: 3 });
   return (
     <div className="min-h-screen bg-surface">
       <OrganizationSchema />

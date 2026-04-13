@@ -7,7 +7,8 @@ import {
   LocationCardGrid,
   Badge,
 } from "@/components";
-import { serviceCategories, sampleLocations } from "@/lib/data";
+import { serviceCategories } from "@/lib/data";
+import { getDirectoryListings } from "@/lib/data/locations";
 import { Shield } from "lucide-react";
 
 export const metadata = {
@@ -15,7 +16,8 @@ export const metadata = {
   description: "Search our directory of verified veterinary practices, groomers, trainers, and boarding facilities across the UK.",
 };
 
-export default function FindPage() {
+export default async function FindPage() {
+  const { data: featuredLocations } = await getDirectoryListings({ limit: 12 });
   return (
     <div className="min-h-screen bg-surface bg-soft-gradient">
       <Navigation currentPath="/find" />
@@ -91,7 +93,7 @@ export default function FindPage() {
             title={<>Featured <span className="serif-italic">practices</span></>}
             subtitle="Recently verified practices in our directory"
           />
-          <LocationCardGrid locations={sampleLocations} />
+          <LocationCardGrid locations={featuredLocations} />
         </section>
       </main>
 

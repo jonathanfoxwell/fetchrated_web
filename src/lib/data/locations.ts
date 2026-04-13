@@ -124,44 +124,40 @@ export const getLocationById = unstable_cache(
 
 /**
  * Get all directory listings with optional filters.
+ * Returns both the data and total count for pagination.
  */
-export const getDirectoryListings = unstable_cache(
-  async (options?: {
-    city?: string;
-    limit?: number;
-    offset?: number;
-  }): Promise<LocationCard[]> => {
-    const supabase = createServerClient();
+export async function getDirectoryListings(options?: {
+  city?: string;
+  limit?: number;
+  offset?: number;
+}): Promise<{ data: LocationCard[]; totalCount: number }> {
+  const supabase = createServerClient();
 
-    let query = supabase
-      .from('directory_listings')
-      .select('id, name, slug, city, postcode, logo_url, headline, average_rating, total_reviews, badge_tier, is_fetchrated_member')
-      .order('profile_strength_score', { ascending: false });
+  let query = supabase
+    .from('directory_listings')
+    .select('id, name, slug, city, postcode, logo_url, headline, average_rating, total_reviews, badge_tier, is_fetchrated_member', { count: 'exact' })
+    .order('average_rating', { ascending: false, nullsFirst: false });
 
-    if (options?.city) {
-      query = query.ilike('city', `%${options.city}%`);
-    }
+  if (options?.city) {
+    query = query.ilike('city', `%${options.city}%`);
+  }
 
-    if (options?.limit) {
-      query = query.limit(options.limit);
-    }
+  const limit = options?.limit ?? 24;
+  const offset = options?.offset ?? 0;
+  query = query.range(offset, offset + limit - 1);
 
-    if (options?.offset) {
-      query = query.range(options.offset, options.offset + (options.limit || 20) - 1);
-    }
+  const { data, error, count } = await query;
 
-    const { data, error } = await query;
+  if (error) {
+    console.error('Error fetching directory listings:', error);
+    return { data: [], totalCount: 0 };
+  }
 
-    if (error) {
-      console.error('Error fetching directory listings:', error);
-      return [];
-    }
-
-    return (data ?? []) as LocationCard[];
-  },
-  ['directory-listings'],
-  { tags: ['directory'], revalidate: 3600 }
-);
+  return {
+    data: (data ?? []) as LocationCard[],
+    totalCount: count ?? 0,
+  };
+}
 
 /**
  * Get featured/top locations.
@@ -230,3 +226,35 @@ export async function getAllLocationSlugs(): Promise<{ slug: string; last_update
 
   return data ?? [];
 }
+
+/**
+ * Get distinct cities with location counts for directory navigation.
+ */
+export const getDirectoryCities = unstable_cache(
+  async (): Promise<{ city: string; count: number }[]> => {
+    const supabase = createServerClient();
+
+    const { data, error } = await supabase
+      .from('directory_listings')
+      .select('city');
+
+    if (error) {
+      console.error('Error fetching directory cities:', error);
+      return [];
+    }
+
+    // Aggregate in JS since Supabase doesn't support GROUP BY via REST
+    const counts: Record<string, number> = {};
+    (data ?? []).forEach((row: { city: string | null }) => {
+      if (row.city) {
+        counts[row.city] = (counts[row.city] || 0) + 1;
+      }
+    });
+
+    return Object.entries(counts)
+      .map(([city, count]) => ({ city, count }))
+      .sort((a, b) => b.count - a.count);
+  },
+  ['directory-cities'],
+  { tags: ['directory'], revalidate: 3600 }
+);

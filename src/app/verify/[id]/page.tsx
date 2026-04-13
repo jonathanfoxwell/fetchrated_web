@@ -6,7 +6,7 @@ import {
   Card,
   Badge,
 } from "@/components";
-import { sampleLocationDetails } from "@/lib/data";
+import { getLocationById } from "@/lib/data/locations";
 import { Shield, CheckCircle, Calendar, MapPin, ExternalLink } from "lucide-react";
 
 interface VerifyPageProps {
@@ -15,8 +15,7 @@ interface VerifyPageProps {
 
 export async function generateMetadata({ params }: VerifyPageProps) {
   const { id } = await params;
-  // In real app, fetch location by ID
-  const verifiedLocation = id === "1" ? sampleLocationDetails : null;
+  const verifiedLocation = await getLocationById(id);
 
   if (!verifiedLocation) {
     return { title: "Verification Not Found | FetchRated" };
@@ -31,8 +30,7 @@ export async function generateMetadata({ params }: VerifyPageProps) {
 export default async function VerifyPage({ params }: VerifyPageProps) {
   const { id } = await params;
 
-  // In real app, fetch verification data by ID
-  const verifiedLocation = id === "1" ? sampleLocationDetails : null;
+  const verifiedLocation = await getLocationById(id);
 
   if (!verifiedLocation) {
     notFound();
@@ -42,7 +40,7 @@ export default async function VerifyPage({ params }: VerifyPageProps) {
     verifiedDate: "2024-02-01",
     expiryDate: "2025-02-01",
     assessmentId: `FR-2024-${id.padStart(6, "0")}`,
-    tier: verifiedLocation.badgeTier,
+    tier: verifiedLocation.badge_tier || "verified" as const,
     status: "active" as const,
   };
 
@@ -97,7 +95,7 @@ export default async function VerifyPage({ params }: VerifyPageProps) {
               <h2 className="text-xl font-bold mb-2">{verifiedLocation.name}</h2>
               <p className="flex items-center justify-center gap-2 text-on-surface-variant mb-4">
                 <MapPin className="w-4 h-4" />
-                {verifiedLocation.location}
+                {verifiedLocation.city}
               </p>
               <Link
                 href={`/find/location/${verifiedLocation.slug}`}
