@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS articles (
   related_slugs TEXT[],
   pillar_slug TEXT,
   is_pillar BOOLEAN DEFAULT FALSE,
-  featured_practice_ids UUID[],
+  featured_location_ids UUID[],
 
   -- CTA Configuration
   cta_type TEXT,

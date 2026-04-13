@@ -33,8 +33,8 @@ export interface Article {
   related_slugs?: string[];
   pillar_slug?: string;
   is_pillar?: boolean;
-  featured_practice_ids?: string[];
-  cta_type?: 'find-practice' | 'join-pilot' | 'get-verified' | 'custom';
+  featured_location_ids?: string[];
+  cta_type?: 'find-location' | 'join-pilot' | 'get-verified' | 'custom';
   cta_href?: string;
   cta_label?: string;
   status?: 'draft' | 'published' | 'archived';
@@ -57,5 +57,5 @@ export type ArticleSection =
   | { type: 'code-block'; code: string; language?: string; filename?: string }
   | { type: 'summary-box'; title?: string; content: string; variant?: 'default' | 'highlight' | 'dark'; action?: { label: string; href: string } }
   | { type: 'numbered-section'; number: number; title: string; content: string }
-  | { type: 'practice-card'; practiceId: string }
-  | { type: 'practice-grid'; practiceIds: string[]; title?: string };
+  | { type: 'location-card'; locationId: string }
+  | { type: 'location-grid'; locationIds: string[]; title?: string };

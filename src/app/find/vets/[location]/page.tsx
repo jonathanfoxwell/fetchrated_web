@@ -1,12 +1,12 @@
 import {
   Navigation,
   Footer,
-  PracticeCardGrid,
+  LocationCardGrid,
   Breadcrumbs,
   SearchBar,
   Card,
 } from "@/components";
-import { samplePractices } from "@/lib/data";
+import { sampleLocations } from "@/lib/data";
 import { MapPin } from "lucide-react";
 
 // Location data for UK areas
@@ -135,22 +135,22 @@ export default async function LocalVetsPage({ params }: { params: Promise<{ loca
   const locationInfo = locationData[location.toLowerCase()];
   const locationName = locationInfo?.name ?? location.charAt(0).toUpperCase() + location.slice(1);
 
-  // Filter practices by location (case-insensitive match)
-  const localPractices = samplePractices.filter(
+  // Filter locations by area (case-insensitive match)
+  const localLocations = sampleLocations.filter(
     (p) =>
       p.category === "vets" &&
       p.location.toLowerCase().includes(location.toLowerCase())
   );
 
-  // Get nearby practices if not enough local ones
-  const nearbyPractices =
-    localPractices.length < 6
-      ? samplePractices
-          .filter((p) => p.category === "vets" && !localPractices.includes(p))
-          .slice(0, 6 - localPractices.length)
+  // Get nearby locations if not enough local ones
+  const nearbyLocations =
+    localLocations.length < 6
+      ? sampleLocations
+          .filter((p) => p.category === "vets" && !localLocations.includes(p))
+          .slice(0, 6 - localLocations.length)
       : [];
 
-  const allPractices = [...localPractices, ...nearbyPractices];
+  const allLocations = [...localLocations, ...nearbyLocations];
 
   return (
     <div className="min-h-screen bg-surface">
@@ -192,19 +192,19 @@ export default async function LocalVetsPage({ params }: { params: Promise<{ loca
         <section className="max-w-7xl mx-auto px-6 lg:px-8 mb-16">
           <div className="flex items-center justify-between mb-8">
             <h2 className="text-2xl font-bold text-on-surface">
-              {allPractices.length} Verified Vets
+              {allLocations.length} Verified Vets
             </h2>
             <span className="text-sm text-on-surface-variant">
               Sorted by Excellence Rank
             </span>
           </div>
-          {allPractices.length > 0 ? (
-            <PracticeCardGrid practices={allPractices} />
+          {allLocations.length > 0 ? (
+            <LocationCardGrid locations={allLocations} />
           ) : (
             <Card className="p-12 text-center">
-              <h3 className="text-xl font-bold mb-2">No practices found</h3>
+              <h3 className="text-xl font-bold mb-2">No locations found</h3>
               <p className="text-on-surface-variant mb-6">
-                We don't have verified practices in this area yet. Check back soon or search another location.
+                We don't have verified locations in this area yet. Check back soon or search another location.
               </p>
               <a
                 href="/find"

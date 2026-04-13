@@ -1,4 +1,4 @@
-import type { Practice } from "./practice-card";
+import type { Location } from "./location-card";
 import type { Guide } from "./guide-card";
 
 // Base schema component
@@ -65,9 +65,9 @@ export function WebSiteSchema() {
   return <JsonLd data={data} />;
 }
 
-// LocalBusiness schema (for practice profiles)
+// LocalBusiness schema (for location profiles)
 interface LocalBusinessSchemaProps {
-  practice: {
+  location: {
     name: string;
     address: string;
     location: string;
@@ -90,37 +90,37 @@ interface LocalBusinessSchemaProps {
   };
 }
 
-export function LocalBusinessSchema({ practice }: LocalBusinessSchemaProps) {
+export function LocalBusinessSchema({ location }: LocalBusinessSchemaProps) {
   const data: Record<string, unknown> = {
     "@context": "https://schema.org",
     "@type": "VeterinaryCare",
-    name: practice.name,
+    name: location.name,
     address: {
       "@type": "PostalAddress",
-      streetAddress: practice.address,
-      addressLocality: practice.location.split(",")[0]?.trim(),
+      streetAddress: location.address,
+      addressLocality: location.location.split(",")[0]?.trim(),
       addressCountry: "GB",
     },
-    description: practice.description,
-    telephone: practice.phone,
-    email: practice.email,
-    url: practice.website,
+    description: location.description,
+    telephone: location.phone,
+    email: location.email,
+    url: location.website,
   };
 
   // Add aggregate rating if available
-  if (practice.excellenceRank && practice.reviews?.length) {
+  if (location.excellenceRank && location.reviews?.length) {
     data.aggregateRating = {
       "@type": "AggregateRating",
-      ratingValue: practice.excellenceRank,
+      ratingValue: location.excellenceRank,
       bestRating: 10,
       worstRating: 0,
-      reviewCount: practice.reviews.length,
+      reviewCount: location.reviews.length,
     };
   }
 
   // Add reviews
-  if (practice.reviews?.length) {
-    data.review = practice.reviews.map((review) => ({
+  if (location.reviews?.length) {
+    data.review = location.reviews.map((review) => ({
       "@type": "Review",
       author: {
         "@type": "Person",
@@ -233,7 +233,7 @@ export function FAQSchema({ faqs }: FAQSchemaProps) {
 
 // ItemList schema (for directory listings)
 interface ItemListSchemaProps {
-  items: Practice[];
+  items: Location[];
   listName: string;
 }
 
@@ -254,7 +254,7 @@ export function ItemListSchema({ items, listName }: ItemListSchemaProps) {
           addressLocality: item.location,
           addressCountry: "GB",
         },
-        url: `https://fetchrated.com/find/practice/${item.slug}`,
+        url: `https://fetchrated.com/find/location/${item.slug}`,
       },
     })),
   };

@@ -4,10 +4,10 @@ import {
   SearchBar,
   CategoryCardGrid,
   SectionHeader,
-  PracticeCardGrid,
+  LocationCardGrid,
   Badge,
 } from "@/components";
-import { serviceCategories, samplePractices } from "@/lib/data";
+import { serviceCategories, sampleLocations } from "@/lib/data";
 import { Shield } from "lucide-react";
 
 export const metadata = {
@@ -91,7 +91,7 @@ export default function FindPage() {
             title={<>Featured <span className="serif-italic">practices</span></>}
             subtitle="Recently verified practices in our directory"
           />
-          <PracticeCardGrid practices={samplePractices} />
+          <LocationCardGrid locations={sampleLocations} />
         </section>
       </main>
 

@@ -4,12 +4,12 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 
-interface PracticeGalleryProps {
+interface LocationGalleryProps {
   images: string[];
-  practiceName: string;
+  locationName: string;
 }
 
-export function PracticeGallery({ images, practiceName }: PracticeGalleryProps) {
+export function LocationGallery({ images, locationName }: LocationGalleryProps) {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -39,7 +39,7 @@ export function PracticeGallery({ images, practiceName }: PracticeGalleryProps) 
             >
               <Image
                 src={url}
-                alt={`${practiceName} photo ${index + 1}`}
+                alt={`${locationName} photo ${index + 1}`}
                 fill
                 className="object-cover group-hover:scale-105 transition-transform"
               />
@@ -75,7 +75,7 @@ export function PracticeGallery({ images, practiceName }: PracticeGalleryProps) 
           <div className="relative w-full max-w-4xl aspect-[4/3] mx-16">
             <Image
               src={images[currentIndex]}
-              alt={`${practiceName} photo ${currentIndex + 1}`}
+              alt={`${locationName} photo ${currentIndex + 1}`}
               fill
               className="object-contain"
             />

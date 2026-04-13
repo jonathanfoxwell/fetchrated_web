@@ -8,157 +8,147 @@ import {
   BreadcrumbSchema,
 } from "@/components";
 import {
-  PracticeHero,
-  PracticeInfo,
-  PracticeServices,
-  PracticeGallery,
-  PracticeAssessment,
-  PracticeMap,
-} from "@/components/practice";
-import { getPracticeBySlug } from "@/lib/data/practices";
-import { samplePracticeDetails } from "@/lib/data";
+  LocationHero,
+  LocationInfo,
+  LocationServices,
+  LocationGallery,
+  LocationAssessment,
+  LocationMap,
+} from "@/components/location";
+import { getLocationBySlug } from "@/lib/data/locations";
+import { sampleLocationDetails } from "@/lib/data";
 import ReactMarkdown from "react-markdown";
 
-interface PracticePageProps {
+interface LocationPageProps {
   params: Promise<{ slug: string }>;
 }
 
-export async function generateMetadata({ params }: PracticePageProps) {
+export async function generateMetadata({ params }: LocationPageProps) {
   const { slug } = await params;
 
   // Try database first
-  const practice = await getPracticeBySlug(slug);
+  const location = await getLocationBySlug(slug);
 
-  if (practice) {
+  if (location) {
     return {
-      title: `${practice.name} | Verified by FetchRated`,
-      description: practice.headline || `${practice.name} in ${practice.city}. View verified reviews and learn more about this practice.`,
+      title: `${location.name} | Verified by FetchRated`,
+      description: location.headline || `${location.name} in ${location.city}. View verified reviews and learn more about this location.`,
       openGraph: {
-        title: practice.name,
-        description: practice.headline || practice.description?.slice(0, 160),
-        images: practice.cover_image_url ? [practice.cover_image_url] : undefined,
+        title: location.name,
+        description: location.headline || location.description?.slice(0, 160),
+        images: location.cover_image_url ? [location.cover_image_url] : undefined,
       },
     };
   }
 
   // Fallback to static data
-  const staticPractice = slug === samplePracticeDetails.slug ? samplePracticeDetails : null;
-  if (!staticPractice) {
-    return { title: "Practice Not Found | FetchRated" };
+  const staticLocation = slug === sampleLocationDetails.slug ? sampleLocationDetails : null;
+  if (!staticLocation) {
+    return { title: "Location Not Found | FetchRated" };
   }
 
   return {
-    title: `${staticPractice.name} | Verified by FetchRated`,
-    description: `${staticPractice.name} in ${staticPractice.location}. Excellence Rank: ${staticPractice.excellenceRank}.`,
+    title: `${staticLocation.name} | Verified by FetchRated`,
+    description: `${staticLocation.name} in ${staticLocation.location}. Excellence Rank: ${staticLocation.excellenceRank}.`,
   };
 }
 
-export default async function PracticePage({ params }: PracticePageProps) {
+export default async function LocationPage({ params }: LocationPageProps) {
   const { slug } = await params;
 
   // Try database first
-  const practice = await getPracticeBySlug(slug);
+  const location = await getLocationBySlug(slug);
 
-  if (practice) {
-    return <DatabasePracticePage practice={practice} />;
+  if (location) {
+    return <DatabaseLocationPage location={location} />;
   }
 
   // Fallback to static data
-  const staticPractice = slug === samplePracticeDetails.slug ? samplePracticeDetails : null;
-  if (!staticPractice) {
+  const staticLocation = slug === sampleLocationDetails.slug ? sampleLocationDetails : null;
+  if (!staticLocation) {
     notFound();
   }
 
-  // Import and render static page (keeping backward compatibility)
-  return <StaticPracticePage practice={staticPractice} />;
+  return <StaticLocationPage location={staticLocation} />;
 }
 
-// Database-driven practice page
-import type { DirectoryListing } from "@/lib/data/practices";
+// Database-driven location page
+import type { DirectoryListing } from "@/lib/data/locations";
 
-function DatabasePracticePage({ practice }: { practice: DirectoryListing }) {
-  const practiceUrl = `https://fetchrated.com/find/practice/${practice.slug}`;
+function DatabaseLocationPage({ location }: { location: DirectoryListing }) {
+  const locationUrl = `https://fetchrated.com/find/location/${location.slug}`;
 
   return (
     <div className="min-h-screen bg-surface">
       <LocalBusinessSchema
-        practice={{
-          id: practice.id,
-          name: practice.name,
-          slug: practice.slug,
-          location: practice.city || "",
-          address: practice.formatted_address || "",
-          phone: practice.phone || "",
-          email: practice.email || "",
-          website: practice.website || "",
-          excellenceRank: practice.profile_strength_score || 0,
-          badgeTier: practice.badge_tier || "verified",
+        location={{
+          id: location.id,
+          name: location.name,
+          slug: location.slug,
+          location: location.city || "",
+          address: location.formatted_address || "",
+          phone: location.phone || "",
+          email: location.email || "",
+          website: location.website || "",
+          excellenceRank: location.profile_strength_score || 0,
+          badgeTier: location.badge_tier || "verified",
         }}
       />
       <BreadcrumbSchema
         items={[
           { name: "Home", url: "https://fetchrated.com" },
           { name: "Find Services", url: "https://fetchrated.com/find" },
-          { name: practice.name, url: practiceUrl },
+          { name: location.name, url: locationUrl },
         ]}
       />
       <Navigation currentPath="/find" />
 
       <main className="pt-24">
-        {/* Hero */}
-        <PracticeHero practice={practice} />
+        <LocationHero location={location} />
 
-        {/* Breadcrumbs */}
         <div className="max-w-6xl mx-auto px-6 lg:px-8 py-6">
           <Breadcrumbs
             items={[
               { label: "Find Services", href: "/find" },
-              { label: practice.city || "Practices" },
-              { label: practice.name },
+              { label: location.city || "Locations" },
+              { label: location.name },
             ]}
           />
         </div>
 
-        {/* Content Grid */}
         <div className="max-w-6xl mx-auto px-6 lg:px-8 py-8">
           <div className="grid lg:grid-cols-3 gap-8">
-            {/* Main Content */}
             <div className="lg:col-span-2 space-y-8">
-              {/* About */}
-              {practice.description && (
+              {location.description && (
                 <Card className="p-6 md:p-8">
-                  <h2 className="text-xl font-bold mb-4">About this practice</h2>
+                  <h2 className="text-xl font-bold mb-4">About this location</h2>
                   <div className="prose prose-slate max-w-none text-on-surface-variant">
-                    <ReactMarkdown>{practice.description}</ReactMarkdown>
+                    <ReactMarkdown>{location.description}</ReactMarkdown>
                   </div>
                 </Card>
               )}
 
-              {/* Services */}
-              {practice.services && practice.services.length > 0 && (
-                <PracticeServices services={practice.services} />
+              {location.services && location.services.length > 0 && (
+                <LocationServices services={location.services} />
               )}
 
-              {/* Gallery */}
-              {practice.gallery_urls && practice.gallery_urls.length > 0 && (
-                <PracticeGallery
-                  images={practice.gallery_urls}
-                  practiceName={practice.name}
+              {location.gallery_urls && location.gallery_urls.length > 0 && (
+                <LocationGallery
+                  images={location.gallery_urls}
+                  locationName={location.name}
                 />
               )}
 
-              {/* Assessment */}
-              <PracticeAssessment practice={practice} />
+              <LocationAssessment location={location} />
             </div>
 
-            {/* Sidebar */}
             <div className="space-y-6">
-              <PracticeInfo practice={practice} />
-              <PracticeMap
-                latitude={practice.latitude}
-                longitude={practice.longitude}
-                name={practice.name}
-                address={practice.formatted_address}
+              <LocationInfo location={location} />
+              <LocationMap
+                latitude={location.latitude}
+                longitude={location.longitude}
+                name={location.name}
+                address={location.formatted_address}
               />
             </div>
           </div>
@@ -170,8 +160,8 @@ function DatabasePracticePage({ practice }: { practice: DirectoryListing }) {
   );
 }
 
-// Static practice page (backward compatibility)
-function StaticPracticePage({ practice }: { practice: typeof samplePracticeDetails }) {
+// Static location page (backward compatibility)
+function StaticLocationPage({ location }: { location: typeof sampleLocationDetails }) {
   const { Shield, MapPin, Phone, Mail, Globe, Clock, Star, CheckCircle } = require("lucide-react");
   const { Badge } = require("@/components");
 
@@ -181,7 +171,7 @@ function StaticPracticePage({ practice }: { practice: typeof samplePracticeDetai
     outstanding: { bg: "bg-primary", label: "Outstanding" },
   };
 
-  const badge = badgeStyles[practice.badgeTier];
+  const badge = badgeStyles[location.badgeTier];
 
   return (
     <div className="min-h-screen bg-surface">
@@ -193,7 +183,7 @@ function StaticPracticePage({ practice }: { practice: typeof samplePracticeDetai
             items={[
               { label: "Find Services", href: "/find" },
               { label: "Veterinary Practices", href: "/find/vets" },
-              { label: practice.name },
+              { label: location.name },
             ]}
           />
         </div>
@@ -209,7 +199,7 @@ function StaticPracticePage({ practice }: { practice: typeof samplePracticeDetai
             <div className="flex-1">
               <div className="flex flex-wrap items-start gap-3 mb-4">
                 <h1 className="text-3xl md:text-4xl font-headline font-bold text-on-surface">
-                  {practice.name}
+                  {location.name}
                 </h1>
                 <Badge className={`${badge.bg} text-white uppercase text-xs tracking-widest`}>
                   {badge.label}
@@ -219,25 +209,25 @@ function StaticPracticePage({ practice }: { practice: typeof samplePracticeDetai
               <div className="flex flex-wrap items-center gap-4 text-on-surface-variant mb-6">
                 <span className="flex items-center gap-1">
                   <MapPin className="w-4 h-4" />
-                  {practice.address}
+                  {location.address}
                 </span>
                 <span className="flex items-center gap-1">
                   <Star className="w-4 h-4 text-primary" />
-                  <span className="font-bold text-on-surface">{practice.excellenceRank}</span>
+                  <span className="font-bold text-on-surface">{location.excellenceRank}</span>
                   <span>Excellence Rank</span>
                 </span>
               </div>
 
               <div className="flex flex-wrap gap-4">
                 <a
-                  href={`tel:${practice.phone}`}
+                  href={`tel:${location.phone}`}
                   className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg font-medium hover:bg-primary-container transition-colors"
                 >
                   <Phone className="w-4 h-4" />
                   Call Now
                 </a>
                 <a
-                  href={practice.website}
+                  href={location.website}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-4 py-2 border border-outline-variant/20 rounded-lg font-medium hover:bg-surface-container-low transition-colors"
@@ -254,16 +244,16 @@ function StaticPracticePage({ practice }: { practice: typeof samplePracticeDetai
           <div className="grid lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2 space-y-8">
               <Card className="p-6 md:p-8">
-                <h2 className="text-xl font-bold mb-4">About this practice</h2>
+                <h2 className="text-xl font-bold mb-4">About this location</h2>
                 <p className="text-on-surface-variant leading-relaxed">
-                  {practice.description}
+                  {location.description}
                 </p>
               </Card>
 
               <Card className="p-6 md:p-8">
                 <h2 className="text-xl font-bold mb-4">Services offered</h2>
                 <div className="flex flex-wrap gap-2">
-                  {practice.services.map((service) => (
+                  {location.services.map((service) => (
                     <span
                       key={service}
                       className="px-3 py-1 bg-surface-container-low rounded-full text-sm"
@@ -278,11 +268,11 @@ function StaticPracticePage({ practice }: { practice: typeof samplePracticeDetai
                 <div className="flex items-center justify-between mb-6">
                   <h2 className="text-xl font-bold">Verified Reviews</h2>
                   <span className="text-sm text-on-surface-variant">
-                    {practice.reviews.length} reviews
+                    {location.reviews.length} reviews
                   </span>
                 </div>
                 <div className="space-y-6">
-                  {practice.reviews.map((review) => (
+                  {location.reviews.map((review) => (
                     <div
                       key={review.id}
                       className="pb-6 border-b border-outline-variant/10 last:border-0 last:pb-0"
@@ -321,15 +311,15 @@ function StaticPracticePage({ practice }: { practice: typeof samplePracticeDetai
               <Card className="p-6">
                 <h3 className="font-bold mb-4">Contact</h3>
                 <div className="space-y-3">
-                  <a href={`tel:${practice.phone}`} className="flex items-center gap-3 text-on-surface-variant hover:text-primary transition-colors">
+                  <a href={`tel:${location.phone}`} className="flex items-center gap-3 text-on-surface-variant hover:text-primary transition-colors">
                     <Phone className="w-4 h-4" />
-                    {practice.phone}
+                    {location.phone}
                   </a>
-                  <a href={`mailto:${practice.email}`} className="flex items-center gap-3 text-on-surface-variant hover:text-primary transition-colors">
+                  <a href={`mailto:${location.email}`} className="flex items-center gap-3 text-on-surface-variant hover:text-primary transition-colors">
                     <Mail className="w-4 h-4" />
-                    {practice.email}
+                    {location.email}
                   </a>
-                  <a href={practice.website} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-on-surface-variant hover:text-primary transition-colors">
+                  <a href={location.website} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-on-surface-variant hover:text-primary transition-colors">
                     <Globe className="w-4 h-4" />
                     Website
                   </a>
@@ -344,15 +334,15 @@ function StaticPracticePage({ practice }: { practice: typeof samplePracticeDetai
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between">
                     <span className="text-on-surface-variant">Mon - Fri</span>
-                    <span>{practice.openingHours.weekdays}</span>
+                    <span>{location.openingHours.weekdays}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-on-surface-variant">Saturday</span>
-                    <span>{practice.openingHours.saturday}</span>
+                    <span>{location.openingHours.saturday}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-on-surface-variant">Sunday</span>
-                    <span>{practice.openingHours.sunday}</span>
+                    <span>{location.openingHours.sunday}</span>
                   </div>
                 </div>
               </Card>

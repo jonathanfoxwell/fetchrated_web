@@ -2,14 +2,14 @@
 
 import { MapPin } from 'lucide-react';
 
-interface PracticeMapProps {
+interface LocationMapProps {
   latitude: number | null;
   longitude: number | null;
   name: string;
   address?: string | null;
 }
 
-export function PracticeMap({ latitude, longitude, name, address }: PracticeMapProps) {
+export function LocationMap({ latitude, longitude, name, address }: LocationMapProps) {
   if (!latitude || !longitude) {
     return (
       <div className="bg-card rounded-xl border border-outline-variant/10 shadow-card p-6">

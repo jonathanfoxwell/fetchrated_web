@@ -12,7 +12,7 @@ const PRACTICE_CATEGORIES = ['marketing', 'compliance', 'operations', 'growth', 
 const SECTION_TYPES = [
   'markdown', 'callout', 'checklist', 'pro-tip', 'faq', 'key-metrics',
   'status-bar', 'data-table', 'pull-quote', 'image', 'code-block',
-  'summary-box', 'numbered-section', 'practice-card', 'practice-grid'
+  'summary-box', 'numbered-section', 'location-card', 'location-grid'
 ];
 
 export function validateSlug(slug: string): ValidationError | null {
@@ -230,15 +230,15 @@ export function validateSection(section: Record<string, unknown>, index: number)
       }
       break;
 
-    case 'practice-card':
-      if (!section.practiceId) {
-        return { code: 'INVALID_SECTION', message: `Practice-card at index ${index} requires "practiceId"` };
+    case 'location-card':
+      if (!section.locationId) {
+        return { code: 'INVALID_SECTION', message: `Location-card at index ${index} requires "locationId"` };
       }
       break;
 
-    case 'practice-grid':
-      if (!Array.isArray(section.practiceIds) || section.practiceIds.length === 0) {
-        return { code: 'INVALID_SECTION', message: `Practice-grid at index ${index} requires non-empty "practiceIds" array` };
+    case 'location-grid':
+      if (!Array.isArray(section.locationIds) || section.locationIds.length === 0) {
+        return { code: 'INVALID_SECTION', message: `Location-grid at index ${index} requires non-empty "locationIds" array` };
       }
       break;
   }

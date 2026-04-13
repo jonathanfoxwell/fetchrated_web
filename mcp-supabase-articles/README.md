@@ -87,5 +87,5 @@ See `docs/article-sections-reference.md` for all available section types:
 - `code-block` - Code snippet
 - `summary-box` - Summary with CTA
 - `numbered-section` - Numbered step
-- `practice-card` - Embedded practice
-- `practice-grid` - Grid of practices
+- `location-card` - Embedded location
+- `location-grid` - Grid of locations

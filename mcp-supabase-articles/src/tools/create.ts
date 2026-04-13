@@ -64,7 +64,7 @@ export const createArticleSchema = {
       },
       cta_type: {
         type: 'string',
-        enum: ['find-practice', 'join-pilot', 'get-verified', 'custom'],
+        enum: ['find-location', 'join-pilot', 'get-verified', 'custom'],
         description: 'CTA button type at end of article'
       },
       cta_href: {

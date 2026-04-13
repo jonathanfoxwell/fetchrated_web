@@ -1,11 +1,11 @@
 import { Stethoscope } from 'lucide-react';
-import type { Service } from '@/lib/data/practices';
+import type { Service } from '@/lib/data/locations';
 
-interface PracticeServicesProps {
+interface LocationServicesProps {
   services: Service[];
 }
 
-export function PracticeServices({ services }: PracticeServicesProps) {
+export function LocationServices({ services }: LocationServicesProps) {
   if (!services.length) return null;
 
   return (

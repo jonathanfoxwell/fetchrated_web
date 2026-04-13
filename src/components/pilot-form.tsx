@@ -7,14 +7,14 @@ import { Card } from "@/components/ui/card";
 import { CheckCircle } from "lucide-react";
 
 interface PilotFormData {
-  practiceName: string;
+  businessName: string;
   contactName: string;
   email: string;
   phone: string;
 }
 
 interface PilotFormProps {
-  defaultPracticeName?: string;
+  defaultBusinessName?: string;
   area?: string;
   cohort?: string;
   onSubmit?: (data: PilotFormData) => Promise<void>;
@@ -22,14 +22,14 @@ interface PilotFormProps {
 }
 
 export function PilotForm({
-  defaultPracticeName = "",
+  defaultBusinessName = "",
   area,
   cohort,
   onSubmit,
   className,
 }: PilotFormProps) {
   const [formData, setFormData] = useState<PilotFormData>({
-    practiceName: defaultPracticeName,
+    businessName: defaultBusinessName,
     contactName: "",
     email: "",
     phone: "",
@@ -81,15 +81,15 @@ export function PilotForm({
       <form onSubmit={handleSubmit} className="space-y-6">
         <div>
           <label className="block text-sm font-bold uppercase tracking-widest text-on-surface-variant mb-2">
-            Practice Name
+            Business Name
           </label>
           <Input
             type="text"
-            value={formData.practiceName}
-            onChange={(e) => setFormData({ ...formData, practiceName: e.target.value })}
+            value={formData.businessName}
+            onChange={(e) => setFormData({ ...formData, businessName: e.target.value })}
             required
             className="h-12 bg-surface border-outline-variant/20"
-            placeholder="Your practice name"
+            placeholder="Your business name"
           />
         </div>
 
@@ -117,7 +117,7 @@ export function PilotForm({
             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
             required
             className="h-12 bg-surface border-outline-variant/20"
-            placeholder="you@practice.com"
+            placeholder="you@yourbusiness.com"
           />
         </div>
 
@@ -155,13 +155,13 @@ export function PilotForm({
 }
 
 interface ConfirmationCardProps {
-  practiceName?: string;
+  businessName?: string;
   steps?: string[];
   className?: string;
 }
 
 export function PilotConfirmation({
-  practiceName,
+  businessName,
   steps = [
     "We'll send a confirmation email with everything you need to know",
     "We'll begin your visibility assessment—you don't need to do anything",
@@ -180,9 +180,9 @@ export function PilotConfirmation({
         You&apos;re in the pilot
       </h1>
 
-      {practiceName && (
+      {businessName && (
         <p className="text-lg text-on-surface-variant mb-8">
-          Welcome, <span className="font-bold text-on-surface">{practiceName}</span>
+          Welcome, <span className="font-bold text-on-surface">{businessName}</span>
         </p>
       )}
 

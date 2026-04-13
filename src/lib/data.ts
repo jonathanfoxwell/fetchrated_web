@@ -1,5 +1,5 @@
 import { Stethoscope, Scissors, GraduationCap, Home } from "lucide-react";
-import type { Practice } from "@/components";
+import type { Location } from "@/components";
 import type { ServiceCategory } from "@/components";
 import type { Guide } from "@/components";
 
@@ -10,7 +10,7 @@ export const serviceCategories: ServiceCategory[] = [
     name: "Veterinary Practices",
     description: "Find verified vets and animal hospitals near you",
     icon: Stethoscope,
-    practiceCount: 48,
+    locationCount: 48,
     imageUrl: "https://images.unsplash.com/photo-1628009368231-7bb7cfcb0def?w=800&q=80",
   },
   {
@@ -18,7 +18,7 @@ export const serviceCategories: ServiceCategory[] = [
     name: "Dog Groomers",
     description: "Professional grooming services for your pet",
     icon: Scissors,
-    practiceCount: 32,
+    locationCount: 32,
     imageUrl: "https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?w=800&q=80",
   },
   {
@@ -26,7 +26,7 @@ export const serviceCategories: ServiceCategory[] = [
     name: "Dog Trainers",
     description: "Certified trainers and behaviorists",
     icon: GraduationCap,
-    practiceCount: 24,
+    locationCount: 24,
     imageUrl: "https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=800&q=80",
   },
   {
@@ -34,13 +34,13 @@ export const serviceCategories: ServiceCategory[] = [
     name: "Boarding & Daycare",
     description: "Safe and caring facilities for your pet",
     icon: Home,
-    practiceCount: 18,
+    locationCount: 18,
     imageUrl: "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=800&q=80",
   },
 ];
 
-// Sample Practices
-export const samplePractices: Practice[] = [
+// Sample Locations
+export const sampleLocations: Location[] = [
   // Veterinary Practices
   {
     id: "1",
@@ -448,8 +448,8 @@ export const samplePractices: Practice[] = [
   },
 ];
 
-// Sample practice with full details
-export const samplePracticeDetails = {
+// Sample location with full details
+export const sampleLocationDetails = {
   id: "1",
   slug: "highgate-veterinary-centre",
   name: "Highgate Veterinary Centre",

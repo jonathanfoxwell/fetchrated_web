@@ -1,76 +1,76 @@
 import { MapPin, Phone, Mail, Globe, Clock } from 'lucide-react';
-import type { DirectoryListing, OpeningHours } from '@/lib/data/practices';
+import type { DirectoryListing, OpeningHours } from '@/lib/data/locations';
 
-interface PracticeInfoProps {
-  practice: DirectoryListing;
+interface LocationInfoProps {
+  location: DirectoryListing;
 }
 
-export function PracticeInfo({ practice }: PracticeInfoProps) {
+export function LocationInfo({ location }: LocationInfoProps) {
   return (
     <div className="bg-card rounded-xl border border-outline-variant/10 shadow-card p-6">
       <h2 className="text-lg font-semibold text-on-surface mb-4">Contact & Location</h2>
 
       <div className="space-y-4">
         {/* Address */}
-        {practice.formatted_address && (
+        {location.formatted_address && (
           <div className="flex gap-3">
             <MapPin className="h-5 w-5 text-on-surface-variant flex-shrink-0 mt-0.5" />
             <div>
-              <p className="text-on-surface">{practice.formatted_address}</p>
-              {practice.postcode && (
-                <p className="text-sm text-on-surface-variant">{practice.postcode}</p>
+              <p className="text-on-surface">{location.formatted_address}</p>
+              {location.postcode && (
+                <p className="text-sm text-on-surface-variant">{location.postcode}</p>
               )}
             </div>
           </div>
         )}
 
         {/* Phone */}
-        {practice.phone && (
+        {location.phone && (
           <div className="flex gap-3">
             <Phone className="h-5 w-5 text-on-surface-variant flex-shrink-0" />
             <a
-              href={`tel:${practice.phone}`}
+              href={`tel:${location.phone}`}
               className="text-primary hover:underline"
             >
-              {practice.phone}
+              {location.phone}
             </a>
           </div>
         )}
 
         {/* Email */}
-        {practice.email && (
+        {location.email && (
           <div className="flex gap-3">
             <Mail className="h-5 w-5 text-on-surface-variant flex-shrink-0" />
             <a
-              href={`mailto:${practice.email}`}
+              href={`mailto:${location.email}`}
               className="text-primary hover:underline"
             >
-              {practice.email}
+              {location.email}
             </a>
           </div>
         )}
 
         {/* Website */}
-        {practice.website && (
+        {location.website && (
           <div className="flex gap-3">
             <Globe className="h-5 w-5 text-on-surface-variant flex-shrink-0" />
             <a
-              href={practice.website}
+              href={location.website}
               target="_blank"
               rel="noopener noreferrer"
               className="text-primary hover:underline truncate"
             >
-              {practice.website.replace(/^https?:\/\//, '')}
+              {location.website.replace(/^https?:\/\//, '')}
             </a>
           </div>
         )}
 
         {/* Opening Hours */}
-        {practice.opening_hours && (
+        {location.opening_hours && (
           <div className="flex gap-3">
             <Clock className="h-5 w-5 text-on-surface-variant flex-shrink-0 mt-0.5" />
             <div className="flex-1">
-              <OpeningHoursDisplay hours={practice.opening_hours} />
+              <OpeningHoursDisplay hours={location.opening_hours} />
             </div>
           </div>
         )}

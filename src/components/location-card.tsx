@@ -6,7 +6,7 @@ import { MapPin } from "lucide-react";
 
 export type BadgeTier = "verified" | "excellent" | "outstanding";
 
-export interface Practice {
+export interface Location {
   id: string;
   slug: string;
   name: string;
@@ -17,8 +17,8 @@ export interface Practice {
   category?: "vets" | "groomers" | "trainers" | "boarding";
 }
 
-interface PracticeCardProps {
-  practice: Practice;
+interface LocationCardProps {
+  location: Location;
   className?: string;
 }
 
@@ -40,7 +40,7 @@ const badgeConfig: Record<BadgeTier, { label: string; className: string; gradien
   },
 };
 
-// Generate initials from practice name
+// Generate initials from location name
 function getInitials(name: string): string {
   return name
     .split(" ")
@@ -50,23 +50,23 @@ function getInitials(name: string): string {
     .toUpperCase();
 }
 
-export function PracticeCard({ practice, className }: PracticeCardProps) {
-  const badge = practice.badgeTier ? badgeConfig[practice.badgeTier] : null;
-  const initials = getInitials(practice.name);
+export function LocationCard({ location, className }: LocationCardProps) {
+  const badge = location.badgeTier ? badgeConfig[location.badgeTier] : null;
+  const initials = getInitials(location.name);
 
   return (
-    <Link href={`/find/practice/${practice.slug}`} className="block">
+    <Link href={`/find/location/${location.slug}`} className="block">
       <Card
         className={`group bg-card border-outline-variant/10 hover:border-primary/30 transition-all duration-300 shadow-card hover:shadow-card-hover hover:-translate-y-1 ${className ?? ""}`}
       >
         <CardHeader className="pb-4">
           <div className="flex items-start justify-between">
-            {/* Practice Image */}
+            {/* Location Image */}
             <div className={`w-20 h-20 rounded-full overflow-hidden border-4 border-surface shadow-md bg-gradient-to-br ${badge?.gradient ?? "from-surface-container-high to-surface-container"}`}>
-              {practice.imageUrl ? (
+              {location.imageUrl ? (
                 <Image
-                  src={practice.imageUrl}
-                  alt={practice.name}
+                  src={location.imageUrl}
+                  alt={location.name}
                   width={80}
                   height={80}
                   className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
@@ -91,19 +91,19 @@ export function PracticeCard({ practice, className }: PracticeCardProps) {
           </div>
 
           <CardTitle className="text-lg mt-4 group-hover:text-primary transition-colors duration-200">
-            {practice.name}
+            {location.name}
           </CardTitle>
           <CardDescription className="text-tertiary font-medium flex items-center gap-1.5">
             <MapPin className="w-3.5 h-3.5" />
-            {practice.location}
+            {location.location}
           </CardDescription>
         </CardHeader>
 
         <CardContent>
           <div className="pt-4 border-t border-outline-variant/10 flex justify-between items-center">
-            {practice.excellenceRank && (
+            {location.excellenceRank && (
               <span className="text-xs font-bold uppercase tracking-widest text-on-surface-variant">
-                Excellence Rank: {practice.excellenceRank.toFixed(1)}
+                Excellence Rank: {location.excellenceRank.toFixed(1)}
               </span>
             )}
             <span className="text-primary font-semibold text-sm group-hover:underline ml-auto flex items-center gap-1">
@@ -119,16 +119,16 @@ export function PracticeCard({ practice, className }: PracticeCardProps) {
   );
 }
 
-interface PracticeCardGridProps {
-  practices: Practice[];
+interface LocationCardGridProps {
+  locations: Location[];
   className?: string;
 }
 
-export function PracticeCardGrid({ practices, className }: PracticeCardGridProps) {
+export function LocationCardGrid({ locations, className }: LocationCardGridProps) {
   return (
     <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 ${className ?? ""}`}>
-      {practices.map((practice) => (
-        <PracticeCard key={practice.id} practice={practice} />
+      {locations.map((location) => (
+        <LocationCard key={location.id} location={location} />
       ))}
     </div>
   );

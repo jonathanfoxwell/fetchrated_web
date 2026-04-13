@@ -73,7 +73,7 @@ Both audiences share the same component library and rendering system, with audie
 │  │ unstable_cache  │  │ ArticleContent  │  │ /learn          │              │
 │  │ revalidateTag   │  │ SectionRenderer │  │ /learn/[slug]   │              │
 │  │ ISR + Webhooks  │  │ Article/*       │  │ /find           │              │
-│  └─────────────────┘  │ Practice/*      │  │ /find/[slug]    │              │
+│  └─────────────────┘  │ Location/*      │  │ /find/[slug]    │              │
 │                       └─────────────────┘  └─────────────────┘              │
 │                                                                              │
 └─────────────────────────────────────────────────────────────────────────────┘
@@ -122,10 +122,10 @@ CREATE TABLE articles (
   related_slugs TEXT[],           -- Manual related articles
   pillar_slug TEXT,               -- Parent pillar guide
   is_pillar BOOLEAN DEFAULT FALSE,
-  featured_practice_ids UUID[],   -- Practices to feature in article
+  featured_location_ids UUID[],   -- Locations to feature in article
 
   -- CTA Configuration
-  cta_type TEXT,    -- 'find-practice' | 'join-pilot' | 'get-verified' | 'custom'
+  cta_type TEXT,    -- 'find-location' | 'join-pilot' | 'get-verified' | 'custom'
   cta_href TEXT,
   cta_label TEXT,
 
@@ -166,9 +166,9 @@ type ArticleSection =
   | { type: 'summary-box'; title?: string; content: string; variant?: 'default' | 'highlight' | 'dark'; action?: { label: string; href: string } }
   | { type: 'numbered-section'; number: number; title: string; content: string }
 
-  // Practice integration
-  | { type: 'practice-card'; practiceId: string }
-  | { type: 'practice-grid'; practiceIds: string[]; title?: string };
+  // Location integration
+  | { type: 'location-card'; locationId: string }
+  | { type: 'location-grid'; locationIds: string[]; title?: string };
 ```
 
 ### Example Article Structure
@@ -262,13 +262,13 @@ CREATE TRIGGER article_metrics_trigger
 
 ### Data Flow
 
-The directory reads from the existing `practices` table via a filtered view:
+The directory reads from the existing `locations` table via a filtered view:
 
 ```
 Core Platform                         Website
 ─────────────                         ───────
 
-practices table
+locations table
       │
       ├── Research & audit ───────────┐
       │                               │
@@ -336,7 +336,7 @@ WHERE p.is_fetchrated_member = TRUE
 
 ### Additional Fields for Practices
 
-Fields to add to existing `practices` table for website display:
+Fields to add to existing `locations` table for website display:
 
 ```sql
 ALTER TABLE practices ADD COLUMN IF NOT EXISTS
@@ -465,9 +465,9 @@ export async function POST(request: Request) {
     revalidatePath('/learn');
   }
 
-  if (table === 'practices') {
+  if (table === 'locations') {
     revalidateTag('directory');
-    revalidatePath(`/find/practice/${record.slug}`);
+    revalidatePath(`/find/location/${record.slug}`);
     revalidatePath('/find');
   }
 
@@ -599,21 +599,20 @@ Located in `src/components/article/`:
 | `ImageWithCaption` | Image with caption/credit |
 | `TableOfContents` | Auto-generated navigation |
 
-### Practice Components
+### Location Components
 
-Located in `src/components/practice/` (to be built):
+Located in `src/components/location/`:
 
 | Component | Purpose |
 |-----------|---------|
-| `PracticeCard` | Card in directory listings |
-| `PracticeHero` | Header on detail page |
-| `PracticeInfo` | Contact, hours, location |
-| `PracticeServices` | Services grid |
-| `PracticeReviews` | Reviews section |
-| `PracticeGallery` | Photo gallery |
-| `PracticeAssessment` | Score breakdown |
-| `PracticeMap` | Location map |
-| `PracticeBadge` | Verification badge |
+| `LocationCard` | Card in directory listings |
+| `LocationHero` | Header on detail page |
+| `LocationInfo` | Contact, hours, location |
+| `LocationServices` | Services grid |
+| `LocationGallery` | Photo gallery |
+| `LocationAssessment` | Score breakdown |
+| `LocationMap` | Location map |
+| `LocationBadge` | Verification badge |
 
 ---
 
@@ -621,7 +620,7 @@ Located in `src/components/practice/` (to be built):
 
 ### Entity/Location Separation
 
-Currently each row in `practices` is a single location. Future enhancement to support multi-location businesses:
+Each row in `locations` is a single location. The `companies` table now supports grouping locations under parent companies:
 
 ```
 ┌─────────────────┐
@@ -680,7 +679,7 @@ Potential future enhancements:
 ### Phase 1: Schema & Data Layer
 - [x] Create `articles` table in Supabase
 - [x] Create `verified_reviews` table
-- [x] Add website fields to `practices` table
+- [x] Add website fields to `locations` table
 - [x] Create `directory_listings` view
 - [x] Set up database triggers for computed fields
 

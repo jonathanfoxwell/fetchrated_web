@@ -1,6 +1,6 @@
 import { Award, CheckCircle, Star } from 'lucide-react';
 
-interface PracticeBadgeProps {
+interface LocationBadgeProps {
   tier: 'outstanding' | 'excellent' | 'verified' | null;
   size?: 'sm' | 'md' | 'lg';
 }
@@ -32,7 +32,7 @@ const sizeConfig = {
   lg: { badge: 'px-4 py-1.5 text-base', icon: 'h-5 w-5' },
 };
 
-export function PracticeBadge({ tier, size = 'md' }: PracticeBadgeProps) {
+export function LocationBadge({ tier, size = 'md' }: LocationBadgeProps) {
   if (!tier) return null;
 
   const config = badgeConfig[tier];

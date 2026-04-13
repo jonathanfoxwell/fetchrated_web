@@ -51,7 +51,7 @@ export async function POST(request: NextRequest) {
       revalidated.push('path:/learn', 'path:/for-practices/resources');
     }
 
-    if (table === 'practices') {
+    if (table === 'locations') {
       // Revalidate directory cache tag
       revalidateTag('directory');
       revalidated.push('tag:directory');
@@ -59,8 +59,8 @@ export async function POST(request: NextRequest) {
       // Revalidate specific practice path
       const slug = record.directory_slug || old_record?.directory_slug;
       if (slug) {
-        revalidatePath(`/find/practice/${slug}`);
-        revalidated.push(`path:/find/practice/${slug}`);
+        revalidatePath(`/find/location/${slug}`);
+        revalidated.push(`path:/find/location/${slug}`);
       }
 
       // Revalidate directory listing

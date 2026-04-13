@@ -5,9 +5,9 @@ import {
   SearchBar,
   Breadcrumbs,
   SectionHeader,
-  PracticeCardGrid,
+  LocationCardGrid,
 } from "@/components";
-import { serviceCategories, samplePractices } from "@/lib/data";
+import { serviceCategories, sampleLocations } from "@/lib/data";
 
 interface CategoryPageProps {
   params: Promise<{ category: string }>;
@@ -43,8 +43,8 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
 
   const Icon = categoryData.icon;
 
-  // Filter practices by category
-  const practices = samplePractices.filter(
+  // Filter locations by category
+  const locations = sampleLocations.filter(
     (p) => p.category === category || !p.category
   );
 
@@ -74,7 +74,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
                 {categoryData.name}
               </h1>
               <p className="text-on-surface-variant">
-                {practices.length} verified practices
+                {locations.length} verified locations
               </p>
             </div>
           </div>
@@ -89,9 +89,9 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
         <section className="max-w-7xl mx-auto px-6 lg:px-8 py-12">
           <SectionHeader
             title={<>All <span className="serif-italic">{categoryData.name}</span></>}
-            subtitle={`${practices.length} practices found`}
+            subtitle={`${locations.length} locations found`}
           />
-          <PracticeCardGrid practices={practices} />
+          <LocationCardGrid locations={locations} />
         </section>
 
         {/* Local Areas (placeholder for SEO pages) */}

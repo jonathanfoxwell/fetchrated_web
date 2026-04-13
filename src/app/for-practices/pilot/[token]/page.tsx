@@ -59,7 +59,7 @@ export default async function PilotTokenPage({ params }: PilotPageProps) {
           </div>
 
           <PilotForm
-            defaultPracticeName={practiceData.name}
+            defaultBusinessName={practiceData.name}
             area={token !== "apply" ? practiceData.area : undefined}
             cohort={token !== "apply" ? practiceData.cohort : undefined}
           />

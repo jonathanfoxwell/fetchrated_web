@@ -8,7 +8,7 @@ export interface ServiceCategory {
   name: string;
   description: string;
   icon: LucideIcon;
-  practiceCount?: number;
+  locationCount?: number;
   imageUrl?: string;
 }
 
@@ -51,9 +51,9 @@ export function CategoryCard({ category, className }: CategoryCardProps) {
           <p className="text-sm text-on-surface-variant mt-1 line-clamp-2">
             {category.description}
           </p>
-          {category.practiceCount !== undefined && (
+          {category.locationCount !== undefined && (
             <p className="text-xs font-semibold text-primary mt-3 flex items-center gap-1 group-hover:gap-2 transition-all duration-200">
-              {category.practiceCount} verified practices
+              {category.locationCount} verified locations
               <ArrowRight className="w-3 h-3 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200" />
             </p>
           )}

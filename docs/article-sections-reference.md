@@ -245,28 +245,28 @@ Section with decorative number prefix.
 
 ---
 
-### practice-card
+### location-card
 
-Embed a practice listing card.
+Embed a location listing card.
 
 ```json
 {
-  "type": "practice-card",
-  "practiceId": "uuid-of-practice"
+  "type": "location-card",
+  "locationId": "uuid-of-location"
 }
 ```
 
 ---
 
-### practice-grid
+### location-grid
 
-Grid of multiple practice cards.
+Grid of multiple location cards.
 
 ```json
 {
-  "type": "practice-grid",
-  "title": "Featured Practices",
-  "practiceIds": ["uuid-1", "uuid-2", "uuid-3"]
+  "type": "location-grid",
+  "title": "Featured Locations",
+  "locationIds": ["uuid-1", "uuid-2", "uuid-3"]
 }
 ```
 
@@ -283,7 +283,7 @@ Grid of multiple practice cards.
   "excerpt": "A comprehensive guide to finding quality veterinary care for your pet.",
   "tags": ["veterinary", "getting-started", "quality-care"],
   "is_pillar": true,
-  "cta_type": "find-practice",
+  "cta_type": "find-location",
   "sections": [
     {
       "type": "status-bar",

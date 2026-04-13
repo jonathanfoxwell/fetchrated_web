@@ -2,10 +2,10 @@ import { unstable_cache } from 'next/cache';
 import { createServerClient } from '../supabase';
 
 /**
- * DirectoryListing represents a practice in the public directory view.
+ * DirectoryListing represents a location in the public directory view.
  * This interface matches the `directory_listings` Supabase view which
  * exposes only the fields needed by the website (sensitive data stays
- * in the underlying `practices` table).
+ * in the underlying `locations` table).
  */
 export interface DirectoryListing {
   // Identity
@@ -70,16 +70,16 @@ export interface OpeningHours {
   sunday?: { open: string; close: string };
 }
 
-export type PracticeCard = Pick<
+export type LocationCard = Pick<
   DirectoryListing,
   'id' | 'name' | 'slug' | 'city' | 'postcode' | 'logo_url' | 'headline' |
   'average_rating' | 'total_reviews' | 'badge_tier' | 'is_fetchrated_member'
 >;
 
 /**
- * Get a single practice by slug from the directory view.
+ * Get a single location by slug from the directory view.
  */
-export const getPracticeBySlug = unstable_cache(
+export const getLocationBySlug = unstable_cache(
   async (slug: string): Promise<DirectoryListing | null> => {
     const supabase = createServerClient();
 
@@ -95,14 +95,14 @@ export const getPracticeBySlug = unstable_cache(
 
     return data as DirectoryListing;
   },
-  ['practice'],
+  ['location'],
   { tags: ['directory'], revalidate: 3600 }
 );
 
 /**
- * Get a practice by ID.
+ * Get a location by ID.
  */
-export const getPracticeById = unstable_cache(
+export const getLocationById = unstable_cache(
   async (id: string): Promise<DirectoryListing | null> => {
     const supabase = createServerClient();
 
@@ -118,7 +118,7 @@ export const getPracticeById = unstable_cache(
 
     return data as DirectoryListing;
   },
-  ['practice-by-id'],
+  ['location-by-id'],
   { tags: ['directory'], revalidate: 3600 }
 );
 
@@ -130,7 +130,7 @@ export const getDirectoryListings = unstable_cache(
     city?: string;
     limit?: number;
     offset?: number;
-  }): Promise<PracticeCard[]> => {
+  }): Promise<LocationCard[]> => {
     const supabase = createServerClient();
 
     let query = supabase
@@ -157,17 +157,17 @@ export const getDirectoryListings = unstable_cache(
       return [];
     }
 
-    return (data ?? []) as PracticeCard[];
+    return (data ?? []) as LocationCard[];
   },
   ['directory-listings'],
   { tags: ['directory'], revalidate: 3600 }
 );
 
 /**
- * Get featured/top practices.
+ * Get featured/top locations.
  */
-export const getFeaturedPractices = unstable_cache(
-  async (limit = 6): Promise<PracticeCard[]> => {
+export const getFeaturedLocations = unstable_cache(
+  async (limit = 6): Promise<LocationCard[]> => {
     const supabase = createServerClient();
 
     const { data, error } = await supabase
@@ -178,21 +178,21 @@ export const getFeaturedPractices = unstable_cache(
       .limit(limit);
 
     if (error) {
-      console.error('Error fetching featured practices:', error);
+      console.error('Error fetching featured locations:', error);
       return [];
     }
 
-    return (data ?? []) as PracticeCard[];
+    return (data ?? []) as LocationCard[];
   },
-  ['featured-practices'],
+  ['featured-locations'],
   { tags: ['directory'], revalidate: 3600 }
 );
 
 /**
- * Get practices by IDs (for article embeds).
+ * Get locations by IDs (for article embeds).
  */
-export const getPracticesByIds = unstable_cache(
-  async (ids: string[]): Promise<PracticeCard[]> => {
+export const getLocationsByIds = unstable_cache(
+  async (ids: string[]): Promise<LocationCard[]> => {
     if (!ids.length) return [];
 
     const supabase = createServerClient();
@@ -203,20 +203,20 @@ export const getPracticesByIds = unstable_cache(
       .in('id', ids);
 
     if (error) {
-      console.error('Error fetching practices by IDs:', error);
+      console.error('Error fetching locations by IDs:', error);
       return [];
     }
 
-    return (data ?? []) as PracticeCard[];
+    return (data ?? []) as LocationCard[];
   },
-  ['practices-by-ids'],
+  ['locations-by-ids'],
   { tags: ['directory'], revalidate: 3600 }
 );
 
 /**
- * Get all practice slugs for sitemap.
+ * Get all location slugs for sitemap.
  */
-export async function getAllPracticeSlugs(): Promise<{ slug: string; last_updated_at: string }[]> {
+export async function getAllLocationSlugs(): Promise<{ slug: string; last_updated_at: string }[]> {
   const supabase = createServerClient();
 
   const { data, error } = await supabase
@@ -224,7 +224,7 @@ export async function getAllPracticeSlugs(): Promise<{ slug: string; last_update
     .select('slug, last_updated_at');
 
   if (error) {
-    console.error('Error fetching practice slugs:', error);
+    console.error('Error fetching location slugs:', error);
     return [];
   }
 

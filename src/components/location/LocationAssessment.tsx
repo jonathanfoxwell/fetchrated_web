@@ -1,37 +1,37 @@
 import { TrendingUp, MessageSquare, Clock, Star } from 'lucide-react';
-import type { DirectoryListing } from '@/lib/data/practices';
+import type { DirectoryListing } from '@/lib/data/locations';
 
-interface PracticeAssessmentProps {
-  practice: DirectoryListing;
+interface LocationAssessmentProps {
+  location: DirectoryListing;
 }
 
-export function PracticeAssessment({ practice }: PracticeAssessmentProps) {
+export function LocationAssessment({ location }: LocationAssessmentProps) {
   const metrics = [
     {
       icon: Star,
       label: 'Profile Score',
-      value: practice.profile_strength_score?.toFixed(1) || 'N/A',
+      value: location.profile_strength_score?.toFixed(1) || 'N/A',
       max: '/ 10',
-      color: getScoreColor(practice.profile_strength_score),
+      color: getScoreColor(location.profile_strength_score),
     },
     {
       icon: TrendingUp,
       label: 'Review Velocity',
-      value: practice.monthly_review_velocity?.toFixed(1) || '0',
+      value: location.monthly_review_velocity?.toFixed(1) || '0',
       max: '/ month',
       color: 'text-primary',
     },
     {
       icon: MessageSquare,
       label: 'Response Rate',
-      value: practice.response_rate ? `${Math.round(practice.response_rate)}%` : 'N/A',
+      value: location.response_rate ? `${Math.round(location.response_rate)}%` : 'N/A',
       max: '',
-      color: getResponseColor(practice.response_rate),
+      color: getResponseColor(location.response_rate),
     },
     {
       icon: Clock,
       label: 'Total Reviews',
-      value: practice.total_reviews?.toString() || '0',
+      value: location.total_reviews?.toString() || '0',
       max: '',
       color: 'text-on-surface',
     },
@@ -63,10 +63,10 @@ export function PracticeAssessment({ practice }: PracticeAssessmentProps) {
         })}
       </div>
 
-      {practice.badge_tier && (
+      {location.badge_tier && (
         <div className="mt-4 p-4 bg-primary-container rounded-lg">
           <p className="text-sm text-on-primary-container">
-            This practice has achieved <strong>{practice.badge_tier}</strong> status
+            This location has achieved <strong>{location.badge_tier}</strong> status
             based on their overall performance and client satisfaction.
           </p>
         </div>

@@ -1,6 +1,6 @@
 import { MetadataRoute } from 'next';
 import { getAllPublishedSlugs } from '@/lib/data/articles';
-import { getAllPracticeSlugs } from '@/lib/data/practices';
+import { getAllLocationSlugs } from '@/lib/data/locations';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://fetchrated.com';
@@ -29,14 +29,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     };
   });
 
-  // Practices from database
-  const practices = await getAllPracticeSlugs();
-  const practicePages: MetadataRoute.Sitemap = practices.map((practice) => ({
-    url: `${baseUrl}/find/practice/${practice.slug}`,
-    lastModified: new Date(practice.last_updated_at),
+  // Locations from database
+  const locations = await getAllLocationSlugs();
+  const locationPages: MetadataRoute.Sitemap = locations.map((location) => ({
+    url: `${baseUrl}/find/location/${location.slug}`,
+    lastModified: new Date(location.last_updated_at),
     priority: 0.7,
     changeFrequency: 'weekly' as const,
   }));
 
-  return [...staticPages, ...articlePages, ...practicePages];
+  return [...staticPages, ...articlePages, ...locationPages];
 }

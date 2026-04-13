@@ -29,7 +29,7 @@ Technical documentation for the FetchRated website content system.
 ### Phase 1: Schema & Data Layer
 - [x] Create `articles` table in Supabase
 - [x] Create `verified_reviews` table
-- [x] Add website fields to `practices` table
+- [x] Add website fields to `locations` table
 - [x] Create `directory_listings` view
 - [x] Set up database triggers for computed fields
 - [x] Build MCP server for article creation
@@ -43,14 +43,14 @@ Technical documentation for the FetchRated website content system.
 ### Phase 3: Components
 - [x] Test all article section types (test article created)
 - [x] Update /learn/[slug] to use SectionRenderer
-- [x] Build practice detail page components (8 components)
-- [x] Add practice data layer with caching
+- [x] Build location detail page components (8 components)
+- [x] Add location data layer with caching
 - [x] Ensure consistent styling across pages
 
 ### Phase 4: Pages
 - [x] Update `/learn/[slug]` to use new data layer
 - [x] Create `/for-practices/resources` hub
-- [x] Update `/find/practice/[slug]` to use new components
+- [x] Update `/find/location/[slug]` to use new components
 - [x] Generate sitemap from database
 
 ---
@@ -82,6 +82,6 @@ cd mcp-supabase-articles && npm install && npm run build
 |----------|--------|-----------|
 | Article storage | Hybrid (markdown + JSON sections) | Predictable structure for Claude, flexible for rich components |
 | Caching | ISR + webhooks | Static performance, instant updates on publish |
-| Directory data | View on existing `practices` table | Single source of truth with core platform |
+| Directory data | View on existing `locations` table | Single source of truth with core platform |
 | Article creation | MCP server | Direct Claude Code integration |
 | Page widths | 6xl articles, 7xl marketing | Optimal reading width vs. visual impact |

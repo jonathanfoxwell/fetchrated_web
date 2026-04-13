@@ -323,7 +323,7 @@ function StaticGuide({ guide }: { guide: (typeof staticGuides)[0] }) {
 // CTA helpers
 function getCTATitle(type: string): string {
   switch (type) {
-    case 'find-practice': return 'Ready to find verified pet care?';
+    case 'find-location': return 'Ready to find verified pet care?';
     case 'join-pilot': return 'Join the FetchRated Pilot';
     case 'get-verified': return 'Get Your Practice Verified';
     default: return 'Take the Next Step';
@@ -332,7 +332,7 @@ function getCTATitle(type: string): string {
 
 function getCTADescription(type: string): string {
   switch (type) {
-    case 'find-practice': return 'Search our directory of independently assessed practices and find quality care for your pet.';
+    case 'find-location': return 'Search our directory of independently assessed locations and find quality care for your pet.';
     case 'join-pilot': return 'Be among the first practices to benefit from verified reviews and increased visibility.';
     case 'get-verified': return 'Stand out from competitors with FetchRated verification and attract quality-conscious clients.';
     default: return '';
@@ -341,7 +341,7 @@ function getCTADescription(type: string): string {
 
 function getCTAHref(type: string): string {
   switch (type) {
-    case 'find-practice': return '/find';
+    case 'find-location': return '/find';
     case 'join-pilot': return '/for-practices';
     case 'get-verified': return '/for-practices';
     default: return '/';
@@ -350,7 +350,7 @@ function getCTAHref(type: string): string {
 
 function getCTALabel(type: string): string {
   switch (type) {
-    case 'find-practice': return 'Find a Practice';
+    case 'find-location': return 'Find a Location';
     case 'join-pilot': return 'Join the Pilot';
     case 'get-verified': return 'Get Verified';
     default: return 'Learn More';

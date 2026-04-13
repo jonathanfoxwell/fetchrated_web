@@ -6,7 +6,7 @@ import {
   Card,
   Badge,
 } from "@/components";
-import { samplePracticeDetails } from "@/lib/data";
+import { sampleLocationDetails } from "@/lib/data";
 import { Shield, CheckCircle, Calendar, MapPin, ExternalLink } from "lucide-react";
 
 interface VerifyPageProps {
@@ -15,16 +15,16 @@ interface VerifyPageProps {
 
 export async function generateMetadata({ params }: VerifyPageProps) {
   const { id } = await params;
-  // In real app, fetch practice by ID
-  const practice = id === "1" ? samplePracticeDetails : null;
+  // In real app, fetch location by ID
+  const verifiedLocation = id === "1" ? sampleLocationDetails : null;
 
-  if (!practice) {
+  if (!verifiedLocation) {
     return { title: "Verification Not Found | FetchRated" };
   }
 
   return {
-    title: `Verify ${practice.name} | FetchRated`,
-    description: `Verify the FetchRated trust mark for ${practice.name}. This practice has been independently assessed and verified.`,
+    title: `Verify ${verifiedLocation.name} | FetchRated`,
+    description: `Verify the FetchRated trust mark for ${verifiedLocation.name}. This location has been independently assessed and verified.`,
   };
 }
 
@@ -32,9 +32,9 @@ export default async function VerifyPage({ params }: VerifyPageProps) {
   const { id } = await params;
 
   // In real app, fetch verification data by ID
-  const practice = id === "1" ? samplePracticeDetails : null;
+  const verifiedLocation = id === "1" ? sampleLocationDetails : null;
 
-  if (!practice) {
+  if (!verifiedLocation) {
     notFound();
   }
 
@@ -42,7 +42,7 @@ export default async function VerifyPage({ params }: VerifyPageProps) {
     verifiedDate: "2024-02-01",
     expiryDate: "2025-02-01",
     assessmentId: `FR-2024-${id.padStart(6, "0")}`,
-    tier: practice.badgeTier,
+    tier: verifiedLocation.badgeTier,
     status: "active" as const,
   };
 
@@ -94,13 +94,13 @@ export default async function VerifyPage({ params }: VerifyPageProps) {
 
             {/* Practice Info */}
             <div className="border-t border-outline-variant/20 pt-8">
-              <h2 className="text-xl font-bold mb-2">{practice.name}</h2>
+              <h2 className="text-xl font-bold mb-2">{verifiedLocation.name}</h2>
               <p className="flex items-center justify-center gap-2 text-on-surface-variant mb-4">
                 <MapPin className="w-4 h-4" />
-                {practice.location}
+                {verifiedLocation.location}
               </p>
               <Link
-                href={`/find/practice/${practice.slug}`}
+                href={`/find/location/${verifiedLocation.slug}`}
                 className="inline-flex items-center gap-2 text-primary font-medium hover:underline"
               >
                 View full profile

@@ -93,14 +93,14 @@ SELECT
   -- Timestamps (for sitemap/caching)
   p.last_updated_at
 
-FROM practices p
-LEFT JOIN review_aggregates ra ON ra.practice_id = p.id
+FROM locations p
+LEFT JOIN review_aggregates ra ON ra.location_id = p.id
 WHERE p.show_in_directory = TRUE
   AND p.business_status = 'OPERATIONAL';
 
 -- Add comment documenting the view purpose
 COMMENT ON VIEW directory_listings IS
-'Public directory view for fetchrated_website. Exposes only fields needed for practice cards and detail pages. Sensitive data remains in practices table.';
+'Public directory view for fetchrated_website. Exposes only fields needed for location cards and detail pages. Sensitive data remains in locations table.';
 `;
 
 async function main() {
@@ -153,7 +153,7 @@ async function main() {
     const testResult = await client.query(`
       SELECT COUNT(*) as count FROM directory_listings
     `);
-    console.log('\n✓ View test: ' + testResult.rows[0].count + ' practices visible');
+    console.log('\n✓ View test: ' + testResult.rows[0].count + ' locations visible');
 
   } catch (err) {
     console.error('\nMigration failed:', err.message);

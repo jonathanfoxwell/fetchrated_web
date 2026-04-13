@@ -7,17 +7,17 @@ import {
   HeroVisual,
   SectionHeader,
   FeatureStrip,
-  PracticeCardGrid,
+  LocationCardGrid,
   CTABanner,
   Card,
   Badge,
   OrganizationSchema,
   WebSiteSchema,
 } from "@/components";
-import { samplePractices, pillarGuides } from "@/lib/data";
+import { sampleLocations, pillarGuides } from "@/lib/data";
 import { ClipboardCheck, Shield, Award, ArrowRight } from "lucide-react";
 
-const featuredPractices = samplePractices.slice(0, 3);
+const featuredLocations = sampleLocations.slice(0, 3);
 
 const howItWorksFeatures = [
   {
@@ -77,7 +77,7 @@ export default function Home() {
             }
             subtitle="The latest clinics to meet the FetchRated national standard for clinical excellence."
           />
-          <PracticeCardGrid practices={featuredPractices} />
+          <LocationCardGrid locations={featuredLocations} />
         </section>
 
         {/* From the Guides */}

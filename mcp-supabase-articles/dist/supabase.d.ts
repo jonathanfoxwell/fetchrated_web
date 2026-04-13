@@ -17,8 +17,8 @@ export interface Article {
     related_slugs?: string[];
     pillar_slug?: string;
     is_pillar?: boolean;
-    featured_practice_ids?: string[];
-    cta_type?: 'find-practice' | 'join-pilot' | 'get-verified' | 'custom';
+    featured_location_ids?: string[];
+    cta_type?: 'find-location' | 'join-pilot' | 'get-verified' | 'custom';
     cta_href?: string;
     cta_label?: string;
     status?: 'draft' | 'published' | 'archived';
@@ -112,10 +112,10 @@ export type ArticleSection = {
     title: string;
     content: string;
 } | {
-    type: 'practice-card';
-    practiceId: string;
+    type: 'location-card';
+    locationId: string;
 } | {
-    type: 'practice-grid';
-    practiceIds: string[];
+    type: 'location-grid';
+    locationIds: string[];
     title?: string;
 };

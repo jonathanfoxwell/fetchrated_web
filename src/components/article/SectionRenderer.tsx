@@ -13,8 +13,8 @@ import { ImageSection } from './sections/ImageSection';
 import { CodeBlockSection } from './sections/CodeBlockSection';
 import { SummaryBoxSection } from './sections/SummaryBoxSection';
 import { NumberedSectionSection } from './sections/NumberedSectionSection';
-import { PracticeCardSection } from './sections/PracticeCardSection';
-import { PracticeGridSection } from './sections/PracticeGridSection';
+import { LocationCardSection } from './sections/LocationCardSection';
+import { LocationGridSection } from './sections/LocationGridSection';
 
 interface SectionRendererProps {
   sections: ArticleSection[];
@@ -136,17 +136,17 @@ function SectionSwitch({ section }: { section: ArticleSection }) {
         />
       );
 
-    case 'practice-card':
+    case 'location-card':
       return (
-        <Suspense fallback={<PracticeSkeleton />}>
-          <PracticeCardSection practiceId={section.practiceId} />
+        <Suspense fallback={<LocationSkeleton />}>
+          <LocationCardSection locationId={section.locationId} />
         </Suspense>
       );
 
-    case 'practice-grid':
+    case 'location-grid':
       return (
-        <Suspense fallback={<PracticeGridSkeleton count={section.practiceIds.length} />}>
-          <PracticeGridSection practiceIds={section.practiceIds} title={section.title} />
+        <Suspense fallback={<LocationGridSkeleton count={section.locationIds.length} />}>
+          <LocationGridSection locationIds={section.locationIds} title={section.title} />
         </Suspense>
       );
 
@@ -155,7 +155,7 @@ function SectionSwitch({ section }: { section: ArticleSection }) {
   }
 }
 
-function PracticeSkeleton() {
+function LocationSkeleton() {
   return (
     <div className="max-w-sm bg-surface rounded-xl border border-outline-variant overflow-hidden animate-pulse">
       <div className="h-32 bg-surface-container" />
@@ -168,11 +168,11 @@ function PracticeSkeleton() {
   );
 }
 
-function PracticeGridSkeleton({ count }: { count: number }) {
+function LocationGridSkeleton({ count }: { count: number }) {
   return (
     <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {Array.from({ length: Math.min(count, 6) }).map((_, i) => (
-        <PracticeSkeleton key={i} />
+        <LocationSkeleton key={i} />
       ))}
     </div>
   );

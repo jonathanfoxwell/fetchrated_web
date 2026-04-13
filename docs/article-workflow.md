@@ -116,7 +116,7 @@ Claude Code uses an MCP server to interact with Supabase directly.
         description: 'Hero/OG image URL'
       },
       cta_type: {
-        enum: ['find-practice', 'join-pilot', 'get-verified', 'custom'],
+        enum: ['find-location', 'join-pilot', 'get-verified', 'custom'],
         description: 'CTA button type at end of article'
       },
       cta_href: {
@@ -204,7 +204,7 @@ Claude Code uses an MCP server to interact with Supabase directly.
      tags: ["getting-started", "puppies", "kittens", "new-owners"],
      is_pillar: false,
      pillar_slug: "choosing-a-vet",
-     cta_type: "find-practice",
+     cta_type: "find-location",
      sections: [
        {
          "type": "status-bar",

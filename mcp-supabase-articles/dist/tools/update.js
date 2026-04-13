@@ -21,7 +21,7 @@ export const updateArticleSchema = {
             meta_title: { type: 'string' },
             meta_description: { type: 'string' },
             featured_image_url: { type: 'string' },
-            cta_type: { type: 'string', enum: ['find-practice', 'join-pilot', 'get-verified', 'custom'] },
+            cta_type: { type: 'string', enum: ['find-location', 'join-pilot', 'get-verified', 'custom'] },
             cta_href: { type: 'string' },
             cta_label: { type: 'string' }
         },
