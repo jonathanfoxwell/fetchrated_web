@@ -74,7 +74,9 @@ export type LocationCard = Pick<
   DirectoryListing,
   'id' | 'name' | 'slug' | 'city' | 'postcode' | 'logo_url' | 'headline' |
   'average_rating' | 'total_reviews' | 'badge_tier' | 'is_fetchrated_member'
->;
+> & {
+  distance_miles?: number;
+};
 
 /**
  * Get a single location by slug from the directory view.
@@ -168,6 +170,54 @@ export async function getDirectoryListings(options?: {
   return {
     data: (data ?? []) as LocationCard[],
     totalCount: count ?? 0,
+  };
+}
+
+/**
+ * Get nearby directory listings sorted by distance.
+ * Uses the PostGIS-powered RPC function.
+ */
+export async function getNearbyListings(options: {
+  lat: number;
+  lng: number;
+  search?: string;
+  maxMiles?: number;
+  limit?: number;
+  offset?: number;
+}): Promise<{ data: LocationCard[]; totalCount: number }> {
+  const supabase = createServerClient();
+
+  const { data, error } = await supabase.rpc('nearby_directory_listings', {
+    user_lat: options.lat,
+    user_lng: options.lng,
+    max_distance_miles: options.maxMiles ?? 50,
+    result_limit: options.limit ?? 24,
+    result_offset: options.offset ?? 0,
+    search_term: options.search || null,
+  });
+
+  if (error) {
+    console.error('Error fetching nearby listings:', error);
+    return { data: [], totalCount: 0 };
+  }
+
+  const rows = data as Array<LocationCard & { distance_miles: number; total_count: number }>;
+  return {
+    data: rows.map(r => ({
+      id: r.id,
+      name: r.name,
+      slug: r.slug,
+      city: r.city,
+      postcode: r.postcode,
+      logo_url: r.logo_url,
+      headline: r.headline,
+      average_rating: r.average_rating,
+      total_reviews: r.total_reviews,
+      badge_tier: r.badge_tier,
+      is_fetchrated_member: r.is_fetchrated_member,
+      distance_miles: r.distance_miles,
+    })),
+    totalCount: rows[0]?.total_count ?? 0,
   };
 }
 

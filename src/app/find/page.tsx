@@ -9,14 +9,15 @@ import {
 } from "@/components";
 import { LocationCardGrid } from "@/components/location";
 import { Pagination } from "@/components/pagination";
+import { NearMeCard } from "@/components/near-me-card";
 import { serviceCategories } from "@/lib/data";
-import { getDirectoryListings } from "@/lib/data/locations";
+import { getDirectoryListings, getNearbyListings } from "@/lib/data/locations";
 import { Shield } from "lucide-react";
 
 const ITEMS_PER_PAGE = 24;
 
 interface FindPageProps {
-  searchParams: Promise<{ q?: string; location?: string; page?: string }>;
+  searchParams: Promise<{ q?: string; location?: string; lat?: string; lng?: string; page?: string }>;
 }
 
 export const metadata = {
@@ -25,17 +26,37 @@ export const metadata = {
 };
 
 export default async function FindPage({ searchParams }: FindPageProps) {
-  const { q, location, page } = await searchParams;
-  const isSearching = !!(q || location);
+  const { q, location, lat, lng, page } = await searchParams;
+  const hasCoords = !!(lat && lng);
+  const isSearching = !!(q || location || hasCoords);
   const currentPage = Math.max(1, Number(page) || 1);
   const offset = (currentPage - 1) * ITEMS_PER_PAGE;
 
-  const { data: locations, totalCount } = await getDirectoryListings({
-    search: q || undefined,
-    location: location || undefined,
-    limit: isSearching ? ITEMS_PER_PAGE : 12,
-    offset: isSearching ? offset : 0,
-  });
+  let locations;
+  let totalCount: number;
+
+  if (hasCoords) {
+    // Near me search — distance-sorted
+    const result = await getNearbyListings({
+      lat: Number(lat),
+      lng: Number(lng),
+      search: q || undefined,
+      limit: ITEMS_PER_PAGE,
+      offset,
+    });
+    locations = result.data;
+    totalCount = result.totalCount;
+  } else {
+    // Standard search or browse
+    const result = await getDirectoryListings({
+      search: q || undefined,
+      location: location || undefined,
+      limit: isSearching ? ITEMS_PER_PAGE : 12,
+      offset: isSearching ? offset : 0,
+    });
+    locations = result.data;
+    totalCount = result.totalCount;
+  }
 
   const totalPages = Math.ceil(totalCount / ITEMS_PER_PAGE);
 
@@ -58,21 +79,25 @@ export default async function FindPage({ searchParams }: FindPageProps) {
           <SearchBar
             className="max-w-4xl mx-auto"
             defaultQuery={q}
-            defaultLocation={location}
+            defaultLocation={hasCoords ? "Near me" : location}
+            defaultLat={lat}
+            defaultLng={lng}
           />
         </section>
 
         {isSearching ? (
-          /* Search Results */
+          /* Search / Near Me Results */
           <section className="max-w-7xl mx-auto px-6 lg:px-8 py-12">
             <SectionHeader
               title={
                 <>
                   {totalCount.toLocaleString()} result{totalCount !== 1 ? "s" : ""}
-                  {q ? <> for <span className="serif-italic">&ldquo;{q}&rdquo;</span></> : null}
-                  {location ? <> in <span className="serif-italic">{location}</span></> : null}
+                  {hasCoords ? " near you" : null}
+                  {q && !hasCoords ? <> for <span className="serif-italic">&ldquo;{q}&rdquo;</span></> : null}
+                  {location && !hasCoords ? <> in <span className="serif-italic">{location}</span></> : null}
                 </>
               }
+              subtitle={hasCoords ? "Sorted by distance from your location" : undefined}
             />
             {locations.length > 0 ? (
               <>
@@ -84,6 +109,8 @@ export default async function FindPage({ searchParams }: FindPageProps) {
                   searchParams={{
                     ...(q ? { q } : {}),
                     ...(location ? { location } : {}),
+                    ...(lat ? { lat } : {}),
+                    ...(lng ? { lng } : {}),
                   }}
                 />
               </>
@@ -91,15 +118,18 @@ export default async function FindPage({ searchParams }: FindPageProps) {
               <Card className="p-12 text-center">
                 <h3 className="text-xl font-bold mb-2">No results found</h3>
                 <p className="text-on-surface-variant mb-6">
-                  Try adjusting your search terms or browsing by category below.
+                  {hasCoords
+                    ? "No verified practices found within 50 miles of your location. Try searching by area name instead."
+                    : "Try adjusting your search terms or browsing by category below."}
                 </p>
               </Card>
             )}
           </section>
         ) : (
           <>
-            {/* Service Categories */}
+            {/* Near Me + Service Categories */}
             <section className="max-w-7xl mx-auto px-6 lg:px-8 py-12">
+              <NearMeCard />
               <SectionHeader
                 title="Browse by service"
                 subtitle="Find the right type of care for your pet"
