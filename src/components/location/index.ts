@@ -1,5 +1,5 @@
 export { LocationBadge } from './LocationBadge';
-export { LocationCard } from './LocationCard';
+export { LocationCard, LocationCardGrid } from './LocationCard';
 export { LocationHero } from './LocationHero';
 export { LocationInfo } from './LocationInfo';
 export { LocationServices } from './LocationServices';

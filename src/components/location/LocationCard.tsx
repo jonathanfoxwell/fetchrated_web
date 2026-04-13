@@ -88,6 +88,13 @@ export function LocationCard({ location, className }: LocationCardProps) {
           <div className="flex items-center gap-1.5 text-tertiary font-medium text-sm mt-2">
             <MapPin className="w-3.5 h-3.5" />
             {location.city || location.postcode || 'Location TBC'}
+            {location.distance_miles != null && (
+              <span className="text-on-surface-variant font-normal">
+                &middot; {location.distance_miles < 1
+                  ? `${(location.distance_miles * 1760).toFixed(0)} yards`
+                  : `${location.distance_miles.toFixed(1)} mi`}
+              </span>
+            )}
           </div>
         </CardHeader>
 

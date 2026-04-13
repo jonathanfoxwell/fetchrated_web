@@ -5,12 +5,18 @@ import {
   SearchBar,
   Breadcrumbs,
   SectionHeader,
-  LocationCardGrid,
+  Card,
 } from "@/components";
-import { serviceCategories, sampleLocations } from "@/lib/data";
+import { LocationCardGrid } from "@/components/location";
+import { Pagination } from "@/components/pagination";
+import { serviceCategories } from "@/lib/data";
+import { getDirectoryListings, getDirectoryCities } from "@/lib/data/locations";
+
+const ITEMS_PER_PAGE = 24;
 
 interface CategoryPageProps {
   params: Promise<{ category: string }>;
+  searchParams: Promise<{ page?: string }>;
 }
 
 export async function generateStaticParams() {
@@ -33,8 +39,9 @@ export async function generateMetadata({ params }: CategoryPageProps) {
   };
 }
 
-export default async function CategoryPage({ params }: CategoryPageProps) {
+export default async function CategoryPage({ params, searchParams }: CategoryPageProps) {
   const { category } = await params;
+  const { page } = await searchParams;
   const categoryData = serviceCategories.find((c) => c.slug === category);
 
   if (!categoryData) {
@@ -43,10 +50,16 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
 
   const Icon = categoryData.icon;
 
-  // Filter locations by category
-  const locations = sampleLocations.filter(
-    (p) => p.category === category || !p.category
-  );
+  // Only vets have data currently
+  const isVets = category === "vets";
+  const currentPage = Math.max(1, Number(page) || 1);
+  const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+
+  const { data: locations, totalCount } = isVets
+    ? await getDirectoryListings({ limit: ITEMS_PER_PAGE, offset })
+    : { data: [], totalCount: 0 };
+
+  const totalPages = Math.ceil(totalCount / ITEMS_PER_PAGE);
 
   return (
     <div className="min-h-screen bg-surface bg-soft-gradient">
@@ -74,7 +87,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
                 {categoryData.name}
               </h1>
               <p className="text-on-surface-variant">
-                {locations.length} verified locations
+                {totalCount.toLocaleString()} verified locations
               </p>
             </div>
           </div>
@@ -89,34 +102,70 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
         <section className="max-w-7xl mx-auto px-6 lg:px-8 py-12">
           <SectionHeader
             title={<>All <span className="serif-italic">{categoryData.name}</span></>}
-            subtitle={`${locations.length} locations found`}
+            subtitle={`${totalCount.toLocaleString()} locations found`}
           />
-          <LocationCardGrid locations={locations} />
+          {locations.length > 0 ? (
+            <>
+              <LocationCardGrid locations={locations} />
+              <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                basePath={`/find/${category}`}
+              />
+            </>
+          ) : (
+            <Card className="p-12 text-center">
+              <h3 className="text-xl font-bold mb-2">Coming soon</h3>
+              <p className="text-on-surface-variant mb-6">
+                We're working on adding verified {categoryData.name.toLowerCase()} to our directory. Check back soon.
+              </p>
+              <a
+                href="/find/vets"
+                className="inline-flex items-center justify-center h-10 px-6 bg-primary text-white font-semibold text-sm rounded-lg"
+              >
+                Browse Veterinary Practices
+              </a>
+            </Card>
+          )}
         </section>
 
-        {/* Local Areas (placeholder for SEO pages) */}
-        <section className="bg-surface-container-low py-16">
-          <div className="max-w-7xl mx-auto px-6 lg:px-8">
-            <SectionHeader
-              title="Browse by location"
-              subtitle={`Find ${categoryData.name.toLowerCase()} near you`}
-            />
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-              {["London", "Manchester", "Birmingham", "Leeds", "Bristol", "Cambridge", "Edinburgh", "Glasgow", "Cardiff", "Liverpool", "Sheffield", "Newcastle"].map((city) => (
-                <a
-                  key={city}
-                  href={`/find/${category}/${city.toLowerCase()}`}
-                  className="px-4 py-3 bg-card border border-outline-variant/10 rounded-lg text-center hover:border-primary/20 hover:text-primary transition-colors"
-                >
-                  {city}
-                </a>
-              ))}
-            </div>
-          </div>
-        </section>
+        {/* Browse by location */}
+        {isVets && (
+          <LocationLinksSection category={category} categoryName={categoryData.name} />
+        )}
       </main>
 
       <Footer />
     </div>
+  );
+}
+
+async function LocationLinksSection({ category, categoryName }: { category: string; categoryName: string }) {
+  const cities = await getDirectoryCities();
+  const topCities = cities.slice(0, 24);
+
+  if (topCities.length === 0) return null;
+
+  return (
+    <section className="bg-surface-container-low py-16">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <SectionHeader
+          title="Browse by location"
+          subtitle={`Find ${categoryName.toLowerCase()} near you`}
+        />
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+          {topCities.map(({ city, count }) => (
+            <a
+              key={city}
+              href={`/find/vets/${city.toLowerCase().replace(/\s+/g, '-')}`}
+              className="px-4 py-3 bg-card border border-outline-variant/10 rounded-lg text-center hover:border-primary/20 hover:text-primary transition-colors"
+            >
+              <span className="block font-medium">{city}</span>
+              <span className="text-xs text-on-surface-variant">{count} practices</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }

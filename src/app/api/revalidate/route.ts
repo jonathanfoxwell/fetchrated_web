@@ -31,7 +31,7 @@ export async function POST(request: NextRequest) {
 
     if (table === 'articles') {
       // Revalidate article cache tag
-      revalidateTag('articles');
+      revalidateTag('articles', { expire: 0 });
       revalidated.push('tag:articles');
 
       // Revalidate specific article path
@@ -53,7 +53,7 @@ export async function POST(request: NextRequest) {
 
     if (table === 'locations') {
       // Revalidate directory cache tag
-      revalidateTag('directory');
+      revalidateTag('directory', { expire: 0 });
       revalidated.push('tag:directory');
 
       // Revalidate specific practice path
@@ -70,7 +70,7 @@ export async function POST(request: NextRequest) {
 
     if (table === 'verified_reviews') {
       // Revalidate directory since reviews affect practice display
-      revalidateTag('directory');
+      revalidateTag('directory', { expire: 0 });
       revalidated.push('tag:directory');
     }
 

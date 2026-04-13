@@ -74,7 +74,9 @@ export type LocationCard = Pick<
   DirectoryListing,
   'id' | 'name' | 'slug' | 'city' | 'postcode' | 'logo_url' | 'headline' |
   'average_rating' | 'total_reviews' | 'badge_tier' | 'is_fetchrated_member'
->;
+> & {
+  distance_miles?: number;
+};
 
 /**
  * Get a single location by slug from the directory view.
@@ -124,44 +126,100 @@ export const getLocationById = unstable_cache(
 
 /**
  * Get all directory listings with optional filters.
+ * Returns both the data and total count for pagination.
  */
-export const getDirectoryListings = unstable_cache(
-  async (options?: {
-    city?: string;
-    limit?: number;
-    offset?: number;
-  }): Promise<LocationCard[]> => {
-    const supabase = createServerClient();
+export async function getDirectoryListings(options?: {
+  search?: string;
+  location?: string;
+  city?: string;
+  limit?: number;
+  offset?: number;
+}): Promise<{ data: LocationCard[]; totalCount: number }> {
+  const supabase = createServerClient();
 
-    let query = supabase
-      .from('directory_listings')
-      .select('id, name, slug, city, postcode, logo_url, headline, average_rating, total_reviews, badge_tier, is_fetchrated_member')
-      .order('profile_strength_score', { ascending: false });
+  let query = supabase
+    .from('directory_listings')
+    .select('id, name, slug, city, postcode, logo_url, headline, average_rating, total_reviews, badge_tier, is_fetchrated_member', { count: 'exact' })
+    .order('average_rating', { ascending: false, nullsFirst: false });
 
-    if (options?.city) {
-      query = query.ilike('city', `%${options.city}%`);
-    }
+  if (options?.search) {
+    query = query.ilike('name', `%${options.search}%`);
+  }
 
-    if (options?.limit) {
-      query = query.limit(options.limit);
-    }
+  // location: search across city OR county (e.g., "Kent", "London", "Hampshire")
+  if (options?.location) {
+    query = query.or(`city.ilike.%${options.location}%,county.ilike.%${options.location}%`);
+  }
 
-    if (options?.offset) {
-      query = query.range(options.offset, options.offset + (options.limit || 20) - 1);
-    }
+  // city: exact city filter (used by location pages)
+  if (options?.city) {
+    query = query.ilike('city', `%${options.city}%`);
+  }
 
-    const { data, error } = await query;
+  const limit = options?.limit ?? 24;
+  const offset = options?.offset ?? 0;
+  query = query.range(offset, offset + limit - 1);
 
-    if (error) {
-      console.error('Error fetching directory listings:', error);
-      return [];
-    }
+  const { data, error, count } = await query;
 
-    return (data ?? []) as LocationCard[];
-  },
-  ['directory-listings'],
-  { tags: ['directory'], revalidate: 3600 }
-);
+  if (error) {
+    console.error('Error fetching directory listings:', error);
+    return { data: [], totalCount: 0 };
+  }
+
+  return {
+    data: (data ?? []) as LocationCard[],
+    totalCount: count ?? 0,
+  };
+}
+
+/**
+ * Get nearby directory listings sorted by distance.
+ * Uses the PostGIS-powered RPC function.
+ */
+export async function getNearbyListings(options: {
+  lat: number;
+  lng: number;
+  search?: string;
+  maxMiles?: number;
+  limit?: number;
+  offset?: number;
+}): Promise<{ data: LocationCard[]; totalCount: number }> {
+  const supabase = createServerClient();
+
+  const { data, error } = await supabase.rpc('nearby_directory_listings', {
+    user_lat: options.lat,
+    user_lng: options.lng,
+    max_distance_miles: options.maxMiles ?? 50,
+    result_limit: options.limit ?? 24,
+    result_offset: options.offset ?? 0,
+    search_term: options.search || null,
+  });
+
+  if (error) {
+    console.error('Error fetching nearby listings:', error);
+    return { data: [], totalCount: 0 };
+  }
+
+  const rows = data as Array<LocationCard & { distance_miles: number; total_count: number }>;
+  return {
+    data: rows.map(r => ({
+      id: r.id,
+      name: r.name,
+      slug: r.slug,
+      city: r.city,
+      postcode: r.postcode,
+      logo_url: r.logo_url,
+      headline: r.headline,
+      average_rating: r.average_rating,
+      total_reviews: r.total_reviews,
+      badge_tier: r.badge_tier,
+      is_fetchrated_member: r.is_fetchrated_member,
+      distance_miles: r.distance_miles,
+    })),
+    totalCount: rows[0]?.total_count ?? 0,
+  };
+}
 
 /**
  * Get featured/top locations.
@@ -230,3 +288,35 @@ export async function getAllLocationSlugs(): Promise<{ slug: string; last_update
 
   return data ?? [];
 }
+
+/**
+ * Get distinct cities with location counts for directory navigation.
+ */
+export const getDirectoryCities = unstable_cache(
+  async (): Promise<{ city: string; count: number }[]> => {
+    const supabase = createServerClient();
+
+    const { data, error } = await supabase
+      .from('directory_listings')
+      .select('city');
+
+    if (error) {
+      console.error('Error fetching directory cities:', error);
+      return [];
+    }
+
+    // Aggregate in JS since Supabase doesn't support GROUP BY via REST
+    const counts: Record<string, number> = {};
+    (data ?? []).forEach((row: { city: string | null }) => {
+      if (row.city) {
+        counts[row.city] = (counts[row.city] || 0) + 1;
+      }
+    });
+
+    return Object.entries(counts)
+      .map(([city, count]) => ({ city, count }))
+      .sort((a, b) => b.count - a.count);
+  },
+  ['directory-cities'],
+  { tags: ['directory'], revalidate: 3600 }
+);
