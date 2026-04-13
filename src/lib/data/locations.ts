@@ -127,6 +127,7 @@ export const getLocationById = unstable_cache(
  * Returns both the data and total count for pagination.
  */
 export async function getDirectoryListings(options?: {
+  search?: string;
   city?: string;
   limit?: number;
   offset?: number;
@@ -137,6 +138,10 @@ export async function getDirectoryListings(options?: {
     .from('directory_listings')
     .select('id, name, slug, city, postcode, logo_url, headline, average_rating, total_reviews, badge_tier, is_fetchrated_member', { count: 'exact' })
     .order('average_rating', { ascending: false, nullsFirst: false });
+
+  if (options?.search) {
+    query = query.ilike('name', `%${options.search}%`);
+  }
 
   if (options?.city) {
     query = query.ilike('city', `%${options.city}%`);
