@@ -58,12 +58,14 @@ export default async function LocationPage({ params }: LocationPageProps) {
         location={{
           name: location.name,
           address: location.formatted_address || "",
-          location: location.city || "",
+          city: location.city || "",
           phone: location.phone || undefined,
           email: location.email || undefined,
           website: location.website || undefined,
           description: location.description || undefined,
-          excellenceRank: location.profile_strength_score || undefined,
+          averageRating: location.average_rating || undefined,
+          totalReviews: location.total_reviews || undefined,
+          openingHours: location.opening_hours || undefined,
         }}
       />
       <BreadcrumbSchema
@@ -93,7 +95,7 @@ export default async function LocationPage({ params }: LocationPageProps) {
             <div className="lg:col-span-2 space-y-8">
               {location.description && (
                 <Card className="p-6 md:p-8">
-                  <h2 className="text-xl font-bold mb-4">About this practice</h2>
+                  <h2 className="text-xl font-bold mb-4">About</h2>
                   <div className="prose prose-slate max-w-none text-on-surface-variant">
                     <ReactMarkdown>{location.description}</ReactMarkdown>
                   </div>

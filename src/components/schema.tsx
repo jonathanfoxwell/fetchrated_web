@@ -1,5 +1,5 @@
-import type { Location } from "./location-card";
 import type { Guide } from "./guide-card";
+import type { OpeningHours } from "@/lib/data/locations";
 
 // Base schema component
 interface JsonLdProps {
@@ -70,25 +70,26 @@ interface LocalBusinessSchemaProps {
   location: {
     name: string;
     address: string;
-    location: string;
+    city: string;
     phone?: string;
     email?: string;
     website?: string;
     description?: string;
-    excellenceRank?: number;
-    openingHours?: {
-      weekdays: string;
-      saturday: string;
-      sunday: string;
-    };
-    reviews?: Array<{
-      author: string;
-      rating: number;
-      text: string;
-      date: string;
-    }>;
+    averageRating?: number;
+    totalReviews?: number;
+    openingHours?: OpeningHours;
   };
 }
+
+const dayMap: Record<string, string> = {
+  monday: 'Mo',
+  tuesday: 'Tu',
+  wednesday: 'We',
+  thursday: 'Th',
+  friday: 'Fr',
+  saturday: 'Sa',
+  sunday: 'Su',
+};
 
 export function LocalBusinessSchema({ location }: LocalBusinessSchemaProps) {
   const data: Record<string, unknown> = {
@@ -98,7 +99,7 @@ export function LocalBusinessSchema({ location }: LocalBusinessSchemaProps) {
     address: {
       "@type": "PostalAddress",
       streetAddress: location.address,
-      addressLocality: location.location.split(",")[0]?.trim(),
+      addressLocality: location.city,
       addressCountry: "GB",
     },
     description: location.description,
@@ -107,33 +108,25 @@ export function LocalBusinessSchema({ location }: LocalBusinessSchemaProps) {
     url: location.website,
   };
 
-  // Add aggregate rating if available
-  if (location.excellenceRank && location.reviews?.length) {
+  if (location.averageRating && location.totalReviews) {
     data.aggregateRating = {
       "@type": "AggregateRating",
-      ratingValue: location.excellenceRank,
-      bestRating: 10,
-      worstRating: 0,
-      reviewCount: location.reviews.length,
+      ratingValue: location.averageRating,
+      bestRating: 5,
+      worstRating: 1,
+      reviewCount: location.totalReviews,
     };
   }
 
-  // Add reviews
-  if (location.reviews?.length) {
-    data.review = location.reviews.map((review) => ({
-      "@type": "Review",
-      author: {
-        "@type": "Person",
-        name: review.author,
-      },
-      reviewRating: {
-        "@type": "Rating",
-        ratingValue: review.rating,
-        bestRating: 5,
-      },
-      reviewBody: review.text,
-      datePublished: review.date,
-    }));
+  if (location.openingHours) {
+    data.openingHoursSpecification = Object.entries(location.openingHours)
+      .filter(([, hours]) => hours)
+      .map(([day, hours]) => ({
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: dayMap[day] || day,
+        opens: hours!.open,
+        closes: hours!.close,
+      }));
   }
 
   return <JsonLd data={data} />;
@@ -231,33 +224,3 @@ export function FAQSchema({ faqs }: FAQSchemaProps) {
   return <JsonLd data={data} />;
 }
 
-// ItemList schema (for directory listings)
-interface ItemListSchemaProps {
-  items: Location[];
-  listName: string;
-}
-
-export function ItemListSchema({ items, listName }: ItemListSchemaProps) {
-  const data = {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    name: listName,
-    numberOfItems: items.length,
-    itemListElement: items.map((item, index) => ({
-      "@type": "ListItem",
-      position: index + 1,
-      item: {
-        "@type": "VeterinaryCare",
-        name: item.name,
-        address: {
-          "@type": "PostalAddress",
-          addressLocality: item.location,
-          addressCountry: "GB",
-        },
-        url: `https://fetchrated.com/find/location/${item.slug}`,
-      },
-    })),
-  };
-
-  return <JsonLd data={data} />;
-}

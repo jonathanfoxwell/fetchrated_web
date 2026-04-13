@@ -36,7 +36,6 @@ export {
   ArticleSchema,
   BreadcrumbSchema,
   FAQSchema,
-  ItemListSchema,
 } from "./schema";
 
 // Article Components (for rendering markdown/CMS content)
