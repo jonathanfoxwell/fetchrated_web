@@ -1,48 +1,34 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { Search, MapPin } from "lucide-react";
 
 interface SearchBarProps {
+  /** Form action URL — defaults to /find */
+  action?: string;
   placeholder?: string;
   locationPlaceholder?: string;
   defaultQuery?: string;
   defaultLocation?: string;
-  onSearch?: (query: string, location: string) => void;
   showLocationField?: boolean;
   className?: string;
 }
 
 export function SearchBar({
+  action = "/find",
   placeholder = "Search for vets, groomers, trainers...",
   locationPlaceholder = "Location",
   defaultQuery = "",
   defaultLocation = "",
-  onSearch,
   showLocationField = true,
   className,
 }: SearchBarProps) {
-  const router = useRouter();
-  const [query, setQuery] = useState(defaultQuery);
-  const [location, setLocation] = useState(defaultLocation);
   const [isFocused, setIsFocused] = useState(false);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (onSearch) {
-      onSearch(query, location);
-    } else {
-      const params = new URLSearchParams();
-      if (query) params.set("q", query);
-      if (location) params.set("location", location);
-      router.push(`/find?${params.toString()}`);
-    }
-  };
 
   return (
     <form
-      onSubmit={handleSubmit}
+      action={action}
+      method="GET"
       className={`flex flex-col sm:flex-row gap-3 p-2 bg-card rounded-xl shadow-card border border-outline-variant/20 ${
         isFocused ? "border-primary/30 shadow-card-hover" : ""
       } transition-all duration-200 ${className ?? ""}`}
@@ -51,9 +37,9 @@ export function SearchBar({
         <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-on-surface-variant" />
         <input
           type="text"
+          name="q"
           placeholder={placeholder}
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
+          defaultValue={defaultQuery}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
           className="w-full h-12 pl-12 pr-4 bg-transparent border-0 text-on-surface placeholder:text-on-surface-variant/60 focus:outline-none focus:ring-0"
@@ -66,9 +52,9 @@ export function SearchBar({
             <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-on-surface-variant" />
             <input
               type="text"
+              name="location"
               placeholder={locationPlaceholder}
-              value={location}
-              onChange={(e) => setLocation(e.target.value)}
+              defaultValue={defaultLocation}
               onFocus={() => setIsFocused(true)}
               onBlur={() => setIsFocused(false)}
               className="w-full h-12 pl-12 pr-4 bg-transparent border-0 text-on-surface placeholder:text-on-surface-variant/60 focus:outline-none focus:ring-0"

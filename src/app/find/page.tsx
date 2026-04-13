@@ -32,7 +32,7 @@ export default async function FindPage({ searchParams }: FindPageProps) {
 
   const { data: locations, totalCount } = await getDirectoryListings({
     search: q || undefined,
-    city: location || undefined,
+    location: location || undefined,
     limit: isSearching ? ITEMS_PER_PAGE : 12,
     offset: isSearching ? offset : 0,
   });

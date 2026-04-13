@@ -128,6 +128,7 @@ export const getLocationById = unstable_cache(
  */
 export async function getDirectoryListings(options?: {
   search?: string;
+  location?: string;
   city?: string;
   limit?: number;
   offset?: number;
@@ -143,6 +144,12 @@ export async function getDirectoryListings(options?: {
     query = query.ilike('name', `%${options.search}%`);
   }
 
+  // location: search across city OR county (e.g., "Kent", "London", "Hampshire")
+  if (options?.location) {
+    query = query.or(`city.ilike.%${options.location}%,county.ilike.%${options.location}%`);
+  }
+
+  // city: exact city filter (used by location pages)
   if (options?.city) {
     query = query.ilike('city', `%${options.city}%`);
   }
