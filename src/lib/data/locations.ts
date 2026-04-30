@@ -41,6 +41,13 @@ export interface DirectoryListing {
   is_fetchrated_member: boolean;
   membership_tier: string | null;
 
+  // Editorial flag (homepage + /find Featured rail)
+  is_featured: boolean;
+
+  // Service vertical — used to constrain the public directory to vet-type entries
+  // until non-vet data has real underlying records.
+  vertical_type: string;
+
   // Review aggregates
   average_rating: number | null;
   total_reviews: number | null;
@@ -127,6 +134,9 @@ export const getLocationById = unstable_cache(
 /**
  * Get all directory listings with optional filters.
  * Returns both the data and total count for pagination.
+ *
+ * verticalType defaults to 'vet' because non-vet categories (groomers, trainers,
+ * boarding) do not yet have real underlying data. Pass null to query all verticals.
  */
 export async function getDirectoryListings(options?: {
   search?: string;
@@ -134,6 +144,7 @@ export async function getDirectoryListings(options?: {
   city?: string;
   limit?: number;
   offset?: number;
+  verticalType?: string | null;
 }): Promise<{ data: LocationCard[]; totalCount: number }> {
   const supabase = createServerClient();
 
@@ -141,6 +152,11 @@ export async function getDirectoryListings(options?: {
     .from('directory_listings')
     .select('id, name, slug, city, postcode, logo_url, headline, average_rating, total_reviews, badge_tier, is_fetchrated_member', { count: 'exact' })
     .order('average_rating', { ascending: false, nullsFirst: false });
+
+  const verticalType = options?.verticalType === undefined ? 'vet' : options.verticalType;
+  if (verticalType !== null) {
+    query = query.eq('vertical_type', verticalType);
+  }
 
   if (options?.search) {
     query = query.ilike('name', `%${options.search}%`);
@@ -184,8 +200,11 @@ export async function getNearbyListings(options: {
   maxMiles?: number;
   limit?: number;
   offset?: number;
+  verticalType?: string | null;
 }): Promise<{ data: LocationCard[]; totalCount: number }> {
   const supabase = createServerClient();
+
+  const verticalType = options.verticalType === undefined ? 'vet' : options.verticalType;
 
   const { data, error } = await supabase.rpc('nearby_directory_listings', {
     user_lat: options.lat,
@@ -194,6 +213,7 @@ export async function getNearbyListings(options: {
     result_limit: options.limit ?? 24,
     result_offset: options.offset ?? 0,
     search_term: options.search || null,
+    vertical_filter: verticalType,
   });
 
   if (error) {
@@ -222,7 +242,37 @@ export async function getNearbyListings(options: {
 }
 
 /**
- * Get featured/top locations.
+ * Get editorially featured locations (homepage + /find Featured rail).
+ * Filters on the is_featured flag, ordered by total_reviews descending so the
+ * strongest social proof leads. Constrained to vet-type entries until non-vet
+ * data has real underlying records.
+ */
+export const getFeaturedListings = unstable_cache(
+  async (limit = 3): Promise<LocationCard[]> => {
+    const supabase = createServerClient();
+
+    const { data, error } = await supabase
+      .from('directory_listings')
+      .select('id, name, slug, city, postcode, logo_url, headline, average_rating, total_reviews, badge_tier, is_fetchrated_member')
+      .eq('is_featured', true)
+      .eq('vertical_type', 'vet')
+      .order('total_reviews', { ascending: false, nullsFirst: false })
+      .limit(limit);
+
+    if (error) {
+      console.error('Error fetching featured listings:', error);
+      return [];
+    }
+
+    return (data ?? []) as LocationCard[];
+  },
+  ['featured-listings'],
+  { tags: ['directory'], revalidate: 3600 }
+);
+
+/**
+ * Legacy featured-locations query — kept for backwards compatibility.
+ * Falls back to badge_tier-based selection if no editorial featured rows exist.
  */
 export const getFeaturedLocations = unstable_cache(
   async (limit = 6): Promise<LocationCard[]> => {
