@@ -6,8 +6,8 @@ import {
 import { Mail, Shield, Users, Target, Building2, FileCheck } from "lucide-react";
 
 export const metadata = {
-  title: "About FetchRated | Independent Pet Care Standards",
-  description: "FetchRated is an independent organisation running a national programme to verify the quality of pet care services across the UK.",
+  title: "About FetchRated | Independent UK Pet Care Verification",
+  description: "Independent UK pet care verification, aligned with the CMA's March 2026 transparency findings.",
 };
 
 export default function AboutPage() {
@@ -32,7 +32,7 @@ export default function AboutPage() {
         {/* The Problem */}
         <section className="max-w-6xl mx-auto px-6 lg:px-8 mb-24">
           <h2 className="text-2xl font-bold mb-6">The Problem We're Solving</h2>
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid md:grid-cols-3 gap-8">
             <Card className="p-6 border-outline-variant/10">
               <h3 className="font-bold mb-3">For Pet Owners</h3>
               <p className="text-on-surface-variant text-sm leading-relaxed">
@@ -47,6 +47,12 @@ export default function AboutPage() {
                 Excellent practices struggle to stand out. You invest in training, facilities,
                 and patient care—but have no credible way to demonstrate this to potential customers.
                 Your happy clients often don't think to leave reviews; your unhappy ones always do.
+              </p>
+            </Card>
+            <Card className="p-6 border-outline-variant/10">
+              <h3 className="font-bold mb-3">The Regulatory Context</h3>
+              <p className="text-on-surface-variant text-sm leading-relaxed">
+                In March 2026, the CMA concluded a two-year investigation into the UK veterinary market and published findings that pet owners lack the information needed to compare practices effectively. The report identified independent comparison infrastructure as part of the answer — what FetchRated was already building.
               </p>
             </Card>
           </div>
@@ -157,8 +163,9 @@ export default function AboutPage() {
             <h2 className="text-xl font-bold mb-4">Our Independence</h2>
             <p className="text-on-surface-variant leading-relaxed">
               FetchRated is editorially independent. We do not accept payment from
-              practices in exchange for ratings, reviews, or favorable placement.
-              Our assessments are conducted using standardized criteria by trained
+              practices in exchange for ratings, reviews, or favourable placement.
+              We have no commercial relationship with any corporate veterinary group, practice management software vendor, or entity being regulated under the CMA's veterinary market remedies.
+              Our assessments are conducted using standardised criteria by trained
               evaluators. Practices cannot influence their scores through advertising,
               sponsorship, or any commercial arrangement. This independence is
               fundamental to our credibility and to the trust pet owners place in
