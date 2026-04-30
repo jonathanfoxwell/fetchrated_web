@@ -4,7 +4,9 @@ import {
   Footer,
   WeightingBars,
   Card,
+  FAQSchema,
 } from "@/components";
+import { tierDescriptions } from "@/lib/data";
 import { Shield, MessageCircle, ChevronDown, Eye, Star, Users, TrendingUp } from "lucide-react";
 
 const assessmentWeighting = [
@@ -21,7 +23,7 @@ const petOwnerFaqs = [
   },
   {
     question: "Can a practice pay for a better rating?",
-    answer: "No. FetchRated does not accept payment from practices in exchange for ratings, reviews, or favorable placement. Our assessments are conducted using standardised criteria by trained evaluators. Practices cannot influence their scores through advertising, sponsorship, or any commercial arrangement.",
+    answer: "No. FetchRated does not accept payment from practices in exchange for ratings, reviews, or favourable placement. Our assessments are conducted using standardised criteria by trained evaluators. Practices cannot influence their scores through advertising, sponsorship, or any commercial arrangement.",
   },
   {
     question: "What if I have a concern about a listed practice?",
@@ -30,13 +32,14 @@ const petOwnerFaqs = [
 ];
 
 export const metadata = {
-  title: "How We Assess | FetchRated",
-  description: "We assess practices on online visibility, review quality, review authenticity, and local competitive position. No facility inspections—just your online reputation.",
+  title: "How FetchRated Assesses Practices | Methodology",
+  description: "Independent methodology aligned with the CMA's transparency principles. Verified reviews, online visibility, review authenticity, and local competitive position.",
 };
 
 export default function HowWeAssessPage() {
   return (
     <div className="min-h-screen bg-surface">
+      <FAQSchema faqs={petOwnerFaqs} />
       <Navigation currentPath="/how-we-assess" />
 
       <main className="pt-32 pb-24">
@@ -64,7 +67,7 @@ export default function HowWeAssessPage() {
               <div className="absolute inset-4 rounded-full border border-outline/20 z-10 pointer-events-none"></div>
               <div className="absolute inset-0 rounded-full overflow-hidden">
                 <Image
-                  src="https://images.unsplash.com/photo-1551601651-2a8555f1a136?w=400&q=80"
+                  src="/images/site/methodology-medallion.jpg"
                   alt="Veterinary assessment"
                   fill
                   className="object-cover"
@@ -87,11 +90,14 @@ export default function HowWeAssessPage() {
                   pet owners see when they're deciding which practice to trust.
                 </p>
                 <WeightingBars items={assessmentWeighting} />
+                <p className="text-on-surface-variant leading-relaxed mt-10 max-w-md">
+                  With the CMA's new transparency requirements making standardised pricing publicly visible across all practices, the assessment dimensions above become even more important. When every practice publishes the same standardised price information, what differentiates one practice from another is the depth and quality of independent verification — verified reviews, online presence, and how well known you are in your local area.
+                </p>
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div className="aspect-square rounded-full overflow-hidden bg-surface-container-highest relative">
                   <Image
-                    src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600&q=80"
+                    src="/images/site/clinical-examination.jpg"
                     alt="Veterinary clinical examination"
                     fill
                     className="object-cover"
@@ -99,7 +105,7 @@ export default function HowWeAssessPage() {
                 </div>
                 <div className="aspect-square rounded-full overflow-hidden bg-primary/5 relative mt-12">
                   <Image
-                    src="https://images.unsplash.com/photo-1628009368231-7bb7cfcb0def?w=600&q=80"
+                    src="/images/categories/vets.jpg"
                     alt="Veterinarian with pet"
                     fill
                     className="object-cover"
@@ -260,7 +266,7 @@ export default function HowWeAssessPage() {
                 </div>
                 <h3 className="font-bold text-lg mb-2">Verified</h3>
                 <p className="text-sm text-on-surface-variant">
-                  Meets our standards for visibility and review quality. A solid, trustworthy practice.
+                  {tierDescriptions.verified}
                 </p>
               </div>
               <div className="text-center">
@@ -269,7 +275,7 @@ export default function HowWeAssessPage() {
                 </div>
                 <h3 className="font-bold text-lg mb-2">Excellent</h3>
                 <p className="text-sm text-on-surface-variant">
-                  Exceeds standards across multiple dimensions. Strong reputation with consistently positive reviews.
+                  {tierDescriptions.excellent}
                 </p>
               </div>
               <div className="text-center">
@@ -278,7 +284,7 @@ export default function HowWeAssessPage() {
                 </div>
                 <h3 className="font-bold text-lg mb-2">Outstanding</h3>
                 <p className="text-sm text-on-surface-variant">
-                  Top-tier across all dimensions. Among the best-reviewed and most visible practices in your area.
+                  {tierDescriptions.outstanding}
                 </p>
               </div>
             </div>
@@ -321,7 +327,7 @@ export default function HowWeAssessPage() {
             <h3 className="text-xl font-bold mb-4">Our Independence</h3>
             <p className="text-on-surface-variant leading-relaxed">
               FetchRated is independently operated. We are not affiliated with the RCVS,
-              the British Veterinary Association, or any government body. We do not receive
+              the British Veterinary Association, or any government body. Our methodology aligns with the transparency and independent comparison principles the CMA's March 2026 report identified as essential for the UK veterinary market. We do not receive
               referral fees, advertising revenue, or payments from practices in exchange for
               listings or ratings. Practices appear in the FetchRated directory because they
               meet our standards—not because they have paid to be listed.
@@ -350,6 +356,30 @@ export default function HowWeAssessPage() {
               </details>
             ))}
           </div>
+        </section>
+
+        {/* Peer Review */}
+        <section id="peer-review" className="max-w-4xl mx-auto px-6 lg:px-8 pb-12 scroll-mt-32">
+          <Card className="p-8 md:p-10 border-outline-variant/10">
+            <h2 className="text-2xl font-headline font-bold text-on-surface mb-4">
+              Peer Review
+            </h2>
+            <p className="text-on-surface-variant leading-relaxed">
+              Our methodology and assessment criteria are reviewed periodically by independent veterinary professionals and consumer rights advisers. We publish material methodology updates with a versioned changelog so practices and pet owners can track how the standards evolve.
+            </p>
+          </Card>
+        </section>
+
+        {/* Ethical Standards */}
+        <section id="ethics" className="max-w-4xl mx-auto px-6 lg:px-8 pb-24 scroll-mt-32">
+          <Card className="p-8 md:p-10 border-outline-variant/10">
+            <h2 className="text-2xl font-headline font-bold text-on-surface mb-4">
+              Ethical Standards
+            </h2>
+            <p className="text-on-surface-variant leading-relaxed">
+              We do not accept practice payments in exchange for ratings, listings, or favourable placement. We do not run advertising on the directory. We do not sell personal data. Our review collection process listens before it asks, and concerns reach the practice privately rather than appearing publicly without context.
+            </p>
+          </Card>
         </section>
       </main>
 
