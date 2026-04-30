@@ -95,6 +95,8 @@ async function DatabaseArticle({ article }: { article: Article }) {
           readTime: article.read_time || undefined,
         }}
         url={articleUrl}
+        datePublished={article.published_at}
+        dateModified={article.updated_at}
       />
       <BreadcrumbSchema
         items={[
