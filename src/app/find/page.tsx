@@ -10,19 +10,23 @@ import {
 import { LocationCardGrid } from "@/components/location";
 import { Pagination } from "@/components/pagination";
 import { NearMeCard } from "@/components/near-me-card";
-import { serviceCategories } from "@/lib/data";
-import { getDirectoryListings, getNearbyListings } from "@/lib/data/locations";
+import { serviceCategories, tierDescriptions } from "@/lib/data";
+import { getDirectoryListings, getNearbyListings, getFeaturedListings } from "@/lib/data/locations";
 import { Shield } from "lucide-react";
 
 const ITEMS_PER_PAGE = 24;
+
+// Only vet-category data is currently real. Non-vet categories (groomers, trainers,
+// boarding) return when there is real underlying data to back them.
+const visibleServiceCategories = serviceCategories.filter((c) => c.slug === "vets");
 
 interface FindPageProps {
   searchParams: Promise<{ q?: string; location?: string; lat?: string; lng?: string; page?: string }>;
 }
 
 export const metadata = {
-  title: "Find Verified Pet Care Services | FetchRated",
-  description: "Search our directory of verified veterinary practices, groomers, trainers, and boarding facilities across the UK.",
+  title: "Find Verified Pet Care | FetchRated",
+  description: "Independently verified UK veterinary practices. Real reviews from real customers.",
 };
 
 export default async function FindPage({ searchParams }: FindPageProps) {
@@ -46,16 +50,19 @@ export default async function FindPage({ searchParams }: FindPageProps) {
     });
     locations = result.data;
     totalCount = result.totalCount;
-  } else {
-    // Standard search or browse
+  } else if (isSearching) {
     const result = await getDirectoryListings({
       search: q || undefined,
       location: location || undefined,
-      limit: isSearching ? ITEMS_PER_PAGE : 12,
-      offset: isSearching ? offset : 0,
+      limit: ITEMS_PER_PAGE,
+      offset,
     });
     locations = result.data;
     totalCount = result.totalCount;
+  } else {
+    // Browse landing — show editorially featured practices, not the first N by rating.
+    locations = await getFeaturedListings(12);
+    totalCount = locations.length;
   }
 
   const totalPages = Math.ceil(totalCount / ITEMS_PER_PAGE);
@@ -83,6 +90,10 @@ export default async function FindPage({ searchParams }: FindPageProps) {
             defaultLat={lat}
             defaultLng={lng}
           />
+
+          <p className="text-sm text-on-surface-variant text-center max-w-3xl mx-auto mt-8 italic">
+            Practices completing the FetchRated pilot earn a Standards Score and verified-review badge. The directory shows pilot-completed practices and others identified through public data.
+          </p>
         </section>
 
         {isSearching ? (
@@ -131,10 +142,10 @@ export default async function FindPage({ searchParams }: FindPageProps) {
             <section className="max-w-7xl mx-auto px-6 lg:px-8 py-12">
               <NearMeCard />
               <SectionHeader
-                title="Browse by service"
-                subtitle="Find the right type of care for your pet"
+                title="Browse veterinary practices"
+                subtitle="Find a verified UK veterinary practice. Groomers, trainers, and boarding categories are coming soon."
               />
-              <CategoryCardGrid categories={serviceCategories} />
+              <CategoryCardGrid categories={visibleServiceCategories} />
             </section>
 
             {/* Badge Explainer */}
@@ -148,7 +159,7 @@ export default async function FindPage({ searchParams }: FindPageProps) {
                     <div>
                       <Badge className="bg-secondary text-white mb-2">Verified</Badge>
                       <p className="text-sm text-on-surface-variant">
-                        Practice has completed our assessment process and meets baseline quality standards.
+                        {tierDescriptions.verified}
                       </p>
                     </div>
                   </div>
@@ -159,7 +170,7 @@ export default async function FindPage({ searchParams }: FindPageProps) {
                     <div>
                       <Badge className="bg-tertiary text-white mb-2">Excellent</Badge>
                       <p className="text-sm text-on-surface-variant">
-                        Exceeds standards with outstanding patient care and facility quality.
+                        {tierDescriptions.excellent}
                       </p>
                     </div>
                   </div>
@@ -170,7 +181,7 @@ export default async function FindPage({ searchParams }: FindPageProps) {
                     <div>
                       <Badge className="bg-primary text-white mb-2">Outstanding</Badge>
                       <p className="text-sm text-on-surface-variant">
-                        Top-tier recognition for exceptional clinical excellence and ethics.
+                        {tierDescriptions.outstanding}
                       </p>
                     </div>
                   </div>
