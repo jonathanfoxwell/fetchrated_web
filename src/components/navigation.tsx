@@ -61,12 +61,6 @@ export function Navigation({ items = defaultNavItems, currentPath }: NavigationP
       {/* Desktop Actions */}
       <div className="hidden md:flex items-center gap-3">
         <Link
-          href="/signin"
-          className="px-4 py-2 text-sm font-semibold text-on-surface-variant hover:text-primary transition-colors"
-        >
-          Sign In
-        </Link>
-        <Link
           href="/for-practices"
           className="px-5 py-2.5 bg-primary text-white text-sm font-semibold rounded-lg shadow-button hover:shadow-button-hover hover:bg-primary-container hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200"
         >
@@ -105,12 +99,6 @@ export function Navigation({ items = defaultNavItems, currentPath }: NavigationP
               );
             })}
             <div className="border-t border-outline-variant/20 mt-3 pt-4 flex flex-col gap-2">
-              <Link
-                href="/signin"
-                className="px-4 py-3 text-center font-semibold text-on-surface-variant hover:text-primary transition-colors"
-              >
-                Sign In
-              </Link>
               <Link
                 href="/for-practices"
                 className="px-4 py-3 bg-primary text-white text-center font-semibold rounded-lg shadow-button"
