@@ -136,17 +136,17 @@ export function LocalBusinessSchema({ location }: LocalBusinessSchemaProps) {
 interface ArticleSchemaProps {
   guide: Guide;
   url: string;
-  datePublished?: string;
-  dateModified?: string;
+  datePublished?: string | null;
+  dateModified?: string | null;
 }
 
 export function ArticleSchema({
   guide,
   url,
-  datePublished = "2024-03-01",
-  dateModified = "2024-03-01",
+  datePublished,
+  dateModified,
 }: ArticleSchemaProps) {
-  const data = {
+  const data: Record<string, unknown> = {
     "@context": "https://schema.org",
     "@type": "Article",
     headline: guide.title,
@@ -163,14 +163,14 @@ export function ArticleSchema({
         url: "https://fetchrated.com/logo.png",
       },
     },
-    datePublished,
-    dateModified,
     mainEntityOfPage: {
       "@type": "WebPage",
       "@id": url,
     },
     articleSection: guide.category,
     ...(guide.readTime && { timeRequired: `PT${guide.readTime}M` }),
+    ...(datePublished && { datePublished }),
+    ...(dateModified && { dateModified }),
   };
 
   return <JsonLd data={data} />;

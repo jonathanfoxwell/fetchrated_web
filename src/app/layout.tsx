@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Newsreader, Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
+import { OrganizationSchema } from "@/components/schema";
 import "./globals.css";
 
 const newsreader = Newsreader({
@@ -35,7 +36,10 @@ export default function RootLayout({
       lang="en"
       className={`${newsreader.variable} ${plusJakartaSans.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <OrganizationSchema />
+        {children}
+      </body>
     </html>
   );
 }

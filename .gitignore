@@ -42,3 +42,8 @@ next-env.d.ts
 
 # database backups
 /backups
+
+# smoke test artifacts (generated locally, not source)
+/smoke-screenshots/
+/playwright-report/
+/test-results/

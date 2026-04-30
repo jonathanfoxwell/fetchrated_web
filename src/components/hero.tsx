@@ -118,7 +118,7 @@ export function HeroVisual({ children, imageUrl, imageAlt = "Hero image" }: Hero
           </span>
           <span className="font-bold text-sm uppercase tracking-widest text-on-surface">Verified</span>
         </div>
-        <p className="text-xs text-on-surface-variant leading-relaxed">Independently assessed for national excellence.</p>
+        <p className="text-xs text-on-surface-variant leading-relaxed">Independently assessed against the FetchRated standard.</p>
       </div>
     </>
   );

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import {
   Navigation,
   Footer,
@@ -7,12 +8,13 @@ import {
   Badge,
   CTABanner,
   Card,
+  FAQSchema,
 } from "@/components";
-import { Shield, Scale, Eye, Star, BarChart3, Video, MapPin, ChevronDown } from "lucide-react";
+import { Shield, Scale, Eye, Star, BarChart3, Video, MapPin, ChevronDown, FileCheck, ArrowRight } from "lucide-react";
 
 export const metadata = {
-  title: "For Practices | FetchRated Pilot Programme",
-  description: "You've been selected for the FetchRated pilot. Receive a free visibility audit, verified Google reviews from your customers, and a listing in our directory.",
+  title: "FetchRated Pilot Programme for Veterinary Practices | By Invitation",
+  description: "Free visibility audit, verified Google reviews, and CMA compliance support for invited UK veterinary practices.",
 };
 
 const qualificationSteps = [
@@ -77,6 +79,11 @@ const pilotBenefits = [
     title: "FetchRated Listing",
     description: "Your practice listed in the FetchRated directory with verified badge.",
   },
+  {
+    icon: FileCheck,
+    title: "CMA Readiness Check",
+    description: "A clear picture of where your practice stands against the CMA's new transparency requirements — and what you'll need to put in place before the deadlines arrive.",
+  },
 ];
 
 const faqs = [
@@ -106,13 +113,26 @@ const faqs = [
   },
   {
     question: "What data do you need from me?",
-    answer: "Just your practice name, a contact name, email, and optionally a phone number. We handle everything else using publicly available information. We don't need access to your practice management system or customer database.",
+    answer: "To start the pilot we need your practice name, a contact name, and an email address. To collect verified reviews from your customers, we'll ask you to share recent customer visit information — typically a simple daily email forward from your booking system, or a weekly export. We don't need integration with your practice management system, and we don't keep any data we're not actively using.",
+  },
+  {
+    question: "What about the CMA requirements?",
+    answer: "The Competition and Markets Authority has published requirements that every UK veterinary practice will need to meet — standardised pricing, ownership disclosure, complaint processes, and more. The pilot gives you a head start, and FetchRated membership includes CMA-compliant web pages that satisfy the requirements automatically. We've published a complete CMA guide for practices at /learn/cma-veterinary-report-guide.",
+  },
+  {
+    question: "Do I need to worry about CMA compliance now?",
+    answer: "The CMA Order is expected in September 2026, with compliance deadlines starting 3–6 months after that. You don't need to panic, but starting early means less pressure later. The pilot collects much of the data you'll need for compliance, and membership generates your compliant pages automatically.",
+  },
+  {
+    question: "Will FetchRated help with CMA compliance?",
+    answer: "Yes. FetchRated membership includes CMA-compliant pricing pages, complaint process documentation, and ownership disclosure — all hosted and maintained for you. A web agency would charge £3,000–£5,000 for a compliance redesign. It's included in your membership.",
   },
 ];
 
 export default function ForPracticesPage() {
   return (
     <div className="min-h-screen bg-card">
+      <FAQSchema faqs={faqs} />
       <Navigation currentPath="/for-practices" />
 
       <main className="pt-32 pb-24">
@@ -129,7 +149,7 @@ export default function ForPracticesPage() {
             <p className="text-xl text-on-surface-variant max-w-xl leading-relaxed mb-10">
               We've identified your practice as one that's already doing excellent work.
               The pilot gives you a free visibility audit, verified Google reviews from your existing customers,
-              and a listing in our national directory.
+              and a listing in our national directory. As the CMA introduces new transparency requirements for UK practices, the pilot also gives you a head start on what's coming.
             </p>
             <div className="flex flex-wrap items-center gap-4">
               <a
@@ -176,6 +196,36 @@ export default function ForPracticesPage() {
               );
             })}
           </div>
+        </section>
+
+        {/* The CMA Is Changing the Landscape */}
+        <section className="max-w-7xl mx-auto px-6 lg:px-8 py-16">
+          <Card className="p-8 md:p-12 border-secondary/20 bg-secondary/5">
+            <h2 className="font-headline text-3xl md:text-4xl font-bold text-on-surface mb-6">
+              The CMA Is <span className="serif-italic">Changing the Landscape.</span>
+            </h2>
+            <div className="space-y-5 text-on-surface-variant leading-relaxed max-w-3xl">
+              <p>
+                The Competition and Markets Authority has published requirements that will become legally binding for every UK veterinary practice later this year. Standardised price lists. Ownership disclosure. Formal complaint processes. Written estimates. Data submission to the RCVS.
+              </p>
+              <p>
+                The corporate chains caused the market problems the CMA investigated. The compliance burden, though, falls equally on everyone — including independent practices with no compliance department.
+              </p>
+              <p className="text-on-surface font-bold text-lg">
+                We think that&apos;s wrong.
+              </p>
+              <p>
+                FetchRated exists because quality should determine visibility — not marketing budgets. That&apos;s why the pilot includes a CMA Readiness Check alongside your visibility audit. And it&apos;s why FetchRated membership includes CMA-compliant pricing pages, complaint process documentation, and ownership disclosure — generated from your data, hosted, and maintained for you.
+              </p>
+            </div>
+            <Link
+              href="/learn/cma-veterinary-report-guide"
+              className="mt-8 inline-flex items-center gap-2 text-primary font-semibold hover:gap-3 transition-all"
+            >
+              Read our complete CMA guide
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </Card>
         </section>
 
         {/* How the Pilot Works */}
@@ -312,6 +362,20 @@ export default function ForPracticesPage() {
               </details>
             ))}
           </div>
+        </section>
+
+        {/* Pre-CTA contact line */}
+        <section className="max-w-4xl mx-auto px-6 lg:px-8 pb-8 text-center">
+          <p className="text-on-surface-variant">
+            Questions before confirming? Email us directly at{" "}
+            <a
+              href="mailto:hello@fetchrated.com"
+              className="text-primary font-semibold hover:underline"
+            >
+              hello@fetchrated.com
+            </a>{" "}
+            — we aim to reply within one working day.
+          </p>
         </section>
 
         {/* Final CTA */}

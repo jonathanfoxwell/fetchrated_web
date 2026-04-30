@@ -11,12 +11,16 @@ import {
   CTABanner,
   Card,
   Badge,
-  OrganizationSchema,
   WebSiteSchema,
 } from "@/components";
 import { pillarGuides } from "@/lib/data";
-import { getDirectoryListings } from "@/lib/data/locations";
+import { getFeaturedListings } from "@/lib/data/locations";
 import { ClipboardCheck, Shield, Award, ArrowRight } from "lucide-react";
+
+export const metadata = {
+  title: "FetchRated | Independent UK Veterinary Verification",
+  description: "Independent UK pet care verification with verified reviews and a three-tier quality standard for veterinary practices.",
+};
 
 const howItWorksFeatures = [
   {
@@ -37,10 +41,9 @@ const howItWorksFeatures = [
 ];
 
 export default async function Home() {
-  const { data: featuredLocations } = await getDirectoryListings({ limit: 3 });
+  const featuredLocations = await getFeaturedListings(3);
   return (
     <div className="min-h-screen bg-surface">
-      <OrganizationSchema />
       <WebSiteSchema />
       <Navigation currentPath="/" />
 
@@ -59,7 +62,7 @@ export default async function Home() {
           ]}
         >
           <HeroVisual
-            imageUrl="https://images.unsplash.com/photo-1581888227599-779811939961?w=800&q=80"
+            imageUrl="/images/site/hero-vet-with-dog.jpg"
             imageAlt="Veterinarian caring for a dog"
           />
         </Hero>
@@ -75,7 +78,7 @@ export default async function Home() {
                 Featured <span className="serif-italic">Verified</span> Practices
               </>
             }
-            subtitle="The latest clinics to meet the FetchRated national standard for clinical excellence."
+            subtitle="Recently verified practices in our directory, with strong customer review depth."
           />
           <LocationCardGrid locations={featuredLocations} />
         </section>
@@ -126,7 +129,7 @@ export default async function Home() {
                   Received our letter?
                 </h2>
                 <p className="text-on-surface-variant text-lg leading-relaxed">
-                  If you've been invited to the FetchRated pilot, your place is reserved. You'll receive a free visibility audit, verified Google reviews from your customers, and a listing in our directory.
+                  If you've been invited to the FetchRated pilot, your place is reserved. You'll receive a free visibility audit, verified Google reviews from your customers, and a listing in our directory. With the CMA's new transparency requirements coming for every UK veterinary practice, verified quality data matters more than ever.
                 </p>
                 <a
                   href="/for-practices"
@@ -137,7 +140,7 @@ export default async function Home() {
               </div>
               <div className="md:w-1/3 relative overflow-hidden min-h-[200px]">
                 <Image
-                  src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=800&q=80"
+                  src="/images/site/clinic-interior.jpg"
                   alt="Modern veterinary clinic interior"
                   fill
                   className="object-cover"

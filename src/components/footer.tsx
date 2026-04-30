@@ -1,8 +1,5 @@
-"use client";
-
 import Link from "next/link";
-import { Input } from "@/components/ui/input";
-import { Send, Mail } from "lucide-react";
+import { Mail } from "lucide-react";
 
 interface FooterLink {
   label: string;
@@ -41,7 +38,7 @@ export function Footer() {
 
       <div className="bg-surface-container-low">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
             {/* Brand Column */}
             <div className="space-y-5">
               <Link href="/" className="font-headline font-bold text-primary text-2xl hover:opacity-80 transition-opacity">
@@ -104,28 +101,6 @@ export function Footer() {
               </div>
             ))}
 
-            {/* Newsletter */}
-            <div className="space-y-4">
-              <h4 className="font-bold text-sm uppercase tracking-widest text-on-surface">
-                Newsletter
-              </h4>
-              <p className="text-sm text-on-surface-variant">
-                Stay updated on clinical findings and verified practices.
-              </p>
-              <form className="flex" onSubmit={(e) => e.preventDefault()}>
-                <Input
-                  type="email"
-                  placeholder="Email address"
-                  className="rounded-r-none h-11 bg-card border-outline-variant/30 focus-visible:ring-primary focus-visible:ring-offset-0"
-                />
-                <button
-                  type="submit"
-                  className="px-4 h-11 rounded-r-lg bg-on-surface hover:bg-primary text-card transition-colors"
-                >
-                  <Send className="w-4 h-4" />
-                </button>
-              </form>
-            </div>
           </div>
 
           {/* Bottom Bar */}
@@ -140,9 +115,12 @@ export function Footer() {
               <Link href="/terms" className="text-on-surface-variant hover:text-primary transition-colors">
                 Terms
               </Link>
-              <Link href="/about" className="text-on-surface-variant hover:text-primary transition-colors">
-                Contact
-              </Link>
+              <a
+                href="mailto:hello@fetchrated.com"
+                className="text-on-surface-variant hover:text-primary transition-colors"
+              >
+                hello@fetchrated.com
+              </a>
             </div>
           </div>
         </div>

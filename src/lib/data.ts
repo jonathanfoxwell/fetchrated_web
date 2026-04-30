@@ -10,7 +10,7 @@ export const serviceCategories: ServiceCategory[] = [
     description: "Find verified vets and animal hospitals near you",
     icon: Stethoscope,
     locationCount: 48,
-    imageUrl: "https://images.unsplash.com/photo-1628009368231-7bb7cfcb0def?w=800&q=80",
+    imageUrl: "/images/categories/vets.jpg",
   },
   {
     slug: "groomers",
@@ -18,15 +18,15 @@ export const serviceCategories: ServiceCategory[] = [
     description: "Professional grooming services for your pet",
     icon: Scissors,
     locationCount: 32,
-    imageUrl: "https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?w=800&q=80",
+    imageUrl: "/images/categories/groomers.jpg",
   },
   {
     slug: "trainers",
     name: "Dog Trainers",
-    description: "Certified trainers and behaviorists",
+    description: "Certified trainers and behaviourists",
     icon: GraduationCap,
     locationCount: 24,
-    imageUrl: "https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=800&q=80",
+    imageUrl: "/images/categories/trainers.jpg",
   },
   {
     slug: "boarding",
@@ -34,7 +34,7 @@ export const serviceCategories: ServiceCategory[] = [
     description: "Safe and caring facilities for your pet",
     icon: Home,
     locationCount: 18,
-    imageUrl: "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=800&q=80",
+    imageUrl: "/images/categories/boarding.jpg",
   },
 ];
 
@@ -47,7 +47,7 @@ export const pillarGuides: Guide[] = [
     category: "Veterinary",
     readTime: 12,
     isPillar: true,
-    imageUrl: "https://images.unsplash.com/photo-1612531386530-97286d97c2d2?w=800&q=80",
+    imageUrl: "/images/guides/how-to-choose-vet.jpg",
   },
   {
     slug: "how-to-choose-a-dog-groomer",
@@ -56,7 +56,7 @@ export const pillarGuides: Guide[] = [
     category: "Grooming",
     readTime: 8,
     isPillar: true,
-    imageUrl: "https://images.unsplash.com/photo-1597673030062-0a0f1a801a31?w=800&q=80",
+    imageUrl: "/images/guides/how-to-choose-groomer.jpg",
   },
   {
     slug: "how-to-choose-a-dog-trainer",
@@ -65,7 +65,7 @@ export const pillarGuides: Guide[] = [
     category: "Training",
     readTime: 10,
     isPillar: true,
-    imageUrl: "https://images.unsplash.com/photo-1558929996-da64ba858215?w=800&q=80",
+    imageUrl: "/images/guides/how-to-choose-trainer.jpg",
   },
   {
     slug: "understanding-vet-reviews",
@@ -74,7 +74,7 @@ export const pillarGuides: Guide[] = [
     category: "Reviews",
     readTime: 7,
     isPillar: true,
-    imageUrl: "https://images.unsplash.com/photo-1512758017271-d7b84c2113f1?w=800&q=80",
+    imageUrl: "/images/guides/understanding-vet-reviews.jpg",
   },
 ];
 
@@ -86,7 +86,7 @@ export const supportingArticles: Guide[] = [
     excerpt: "Preparing for your new pet's first veterinary appointment.",
     category: "Veterinary",
     readTime: 5,
-    imageUrl: "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=800&q=80",
+    imageUrl: "/images/guides/first-vet-visit.jpg",
   },
   {
     slug: "pet-vaccination-schedule",
@@ -94,7 +94,7 @@ export const supportingArticles: Guide[] = [
     excerpt: "Understanding which vaccinations your pet needs and when.",
     category: "Health",
     readTime: 6,
-    imageUrl: "https://images.unsplash.com/photo-1548767797-d8c844163c4c?w=800&q=80",
+    imageUrl: "/images/guides/vaccination-schedule.jpg",
   },
   {
     slug: "signs-your-pet-needs-grooming",
@@ -102,7 +102,7 @@ export const supportingArticles: Guide[] = [
     excerpt: "How to tell when it's time to book a grooming appointment.",
     category: "Grooming",
     readTime: 4,
-    imageUrl: "https://images.unsplash.com/photo-1534361960057-19889db9621e?w=800&q=80",
+    imageUrl: "/images/guides/grooming-signs.jpg",
   },
   {
     slug: "puppy-training-basics",
@@ -110,7 +110,7 @@ export const supportingArticles: Guide[] = [
     excerpt: "Essential commands and techniques for new puppy owners.",
     category: "Training",
     readTime: 8,
-    imageUrl: "https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=800&q=80",
+    imageUrl: "/images/guides/puppy-training.jpg",
   },
   {
     slug: "choosing-pet-insurance",
@@ -118,7 +118,7 @@ export const supportingArticles: Guide[] = [
     excerpt: "Comparing policies and understanding what coverage you really need.",
     category: "Finance",
     readTime: 7,
-    imageUrl: "https://images.unsplash.com/photo-1450778869180-41d0601e046e?w=800&q=80",
+    imageUrl: "/images/guides/pet-insurance.jpg",
   },
   {
     slug: "emergency-vet-when-to-go",
@@ -126,7 +126,7 @@ export const supportingArticles: Guide[] = [
     excerpt: "Recognizing the signs that require immediate veterinary attention.",
     category: "Health",
     readTime: 5,
-    imageUrl: "https://images.unsplash.com/photo-1576201836106-db1758fd1c97?w=800&q=80",
+    imageUrl: "/images/guides/emergency-vet.jpg",
   },
   {
     slug: "when-to-change-vets",
@@ -134,7 +134,7 @@ export const supportingArticles: Guide[] = [
     excerpt: "How to know when it's time to find a new veterinary practice for your pet.",
     category: "Veterinary",
     readTime: 6,
-    imageUrl: "https://images.unsplash.com/photo-1612531386530-97286d97c2d2?w=800&q=80",
+    imageUrl: "/images/guides/how-to-choose-vet.jpg",
   },
   {
     slug: "understanding-vet-fees",
@@ -142,7 +142,7 @@ export const supportingArticles: Guide[] = [
     excerpt: "A breakdown of common veterinary costs and how to budget for pet healthcare.",
     category: "Finance",
     readTime: 8,
-    imageUrl: "https://images.unsplash.com/photo-1450778869180-41d0601e046e?w=800&q=80",
+    imageUrl: "/images/guides/pet-insurance.jpg",
   },
   {
     slug: "questions-before-booking-groomer",
@@ -150,7 +150,7 @@ export const supportingArticles: Guide[] = [
     excerpt: "Essential questions to ensure your pet has a safe and positive grooming experience.",
     category: "Grooming",
     readTime: 5,
-    imageUrl: "https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?w=800&q=80",
+    imageUrl: "/images/categories/groomers.jpg",
   },
   {
     slug: "dog-anxiety-at-vet",
@@ -158,7 +158,7 @@ export const supportingArticles: Guide[] = [
     excerpt: "Practical tips to reduce your dog's stress during veterinary visits.",
     category: "Health",
     readTime: 7,
-    imageUrl: "https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=800&q=80",
+    imageUrl: "/images/categories/trainers.jpg",
   },
   {
     slug: "breed-specific-grooming-needs",
@@ -166,7 +166,7 @@ export const supportingArticles: Guide[] = [
     excerpt: "Understanding the grooming requirements for different coat types and breeds.",
     category: "Grooming",
     readTime: 9,
-    imageUrl: "https://images.unsplash.com/photo-1597673030062-0a0f1a801a31?w=800&q=80",
+    imageUrl: "/images/guides/how-to-choose-groomer.jpg",
   },
   {
     slug: "positive-vs-punitive-training",
@@ -174,9 +174,16 @@ export const supportingArticles: Guide[] = [
     excerpt: "Understanding different training approaches and choosing what's right for your dog.",
     category: "Training",
     readTime: 8,
-    imageUrl: "https://images.unsplash.com/photo-1558929996-da64ba858215?w=800&q=80",
+    imageUrl: "/images/guides/how-to-choose-trainer.jpg",
   },
 ];
+
+// Tier descriptions — shared between /how-we-assess and /find so they cannot drift
+export const tierDescriptions = {
+  verified: "Meets our standards for visibility and review quality. A solid, trustworthy practice.",
+  excellent: "Exceeds standards across multiple dimensions. Strong reputation with consistently positive reviews.",
+  outstanding: "Top-tier across all dimensions. Among the best-reviewed and most visible practices in your area.",
+};
 
 // Methodology data
 export const weightingData = [
