@@ -4,6 +4,7 @@ import { MapPin, Star, ArrowRight } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import type { LocationCard as LocationCardType } from '@/lib/data/locations';
+import { fallbackProfileImage } from '@/lib/fallback-images';
 
 interface LocationCardProps {
   location: LocationCardType;
@@ -40,6 +41,7 @@ function getInitials(name: string): string {
 export function LocationCard({ location, className }: LocationCardProps) {
   const badge = location.badge_tier ? badgeConfig[location.badge_tier] : null;
   const initials = getInitials(location.name);
+  const logoSrc = location.logo_url ?? fallbackProfileImage(location.slug);
 
   return (
     <Link href={`/find/location/${location.slug}`} className="block">
@@ -50,9 +52,9 @@ export function LocationCard({ location, className }: LocationCardProps) {
           <div className="flex items-start justify-between">
             {/* Logo */}
             <div className={`w-20 h-20 rounded-full overflow-hidden border-4 border-surface shadow-md bg-gradient-to-br ${badge?.gradient ?? 'from-surface-container-high to-surface-container'}`}>
-              {location.logo_url ? (
+              {logoSrc ? (
                 <Image
-                  src={location.logo_url}
+                  src={logoSrc}
                   alt={location.name}
                   width={80}
                   height={80}

@@ -43,20 +43,19 @@ Source resolution: each image is fetched at `w=1600&q=80&fm=jpg&fit=max` from `i
 
 ## directory/ — Directory listing imagery pool
 
-Two image types per directory listing slot, each curated via the official Unsplash API and sorted by likes-per-query to bias toward popular / higher-quality photographs:
+Two image types, both user-curated via Unsplash collections:
 
-- **`directory/profiles/`** — symbolic / iconic. Vet-themed objects (stethoscope, paw print), pet accessories (collars, leashes, bowls, tags, brushes), and textures (feathers, fur). Squarish crop. Used as the listing's profile / thumbnail image.
-- **`directory/banners/`** — fun, colourful, landscape. Action and lifestyle: dogs running, kittens playing, pets in fields, beach, snow, autumn light. Used as the listing's banner / cover image.
+- **`directory/profiles/`** — studio-style pet portraits (single animal, head/face, solid backdrop). Used as the listing's profile / thumbnail image when `logo_url` is null.
+- **`directory/banners/`** — fun, colourful, landscape pet scenes. Used as the listing's cover image when `cover_image_url` is null.
 
-The split is deliberate. Stock photography of vet *staff* on a real practice's listing implicitly misrepresents that the pictured people work there. Symbolic objects (profiles) and pure animal scenes (banners) sidestep this entirely.
+Selection per listing is deterministic by listing slug: a stable hash picks one image from the pool so the same listing always gets the same image. Implementation in `src/lib/fallback-images.ts`. Wired into `LocationCard` (profile) and `LocationHero` (profile + banner).
 
-Detailed per-photo metadata (photographer, source URL, search query, dimensions) is at `directory/_manifest.json`.
+Curation workflow:
+1. Add or remove photos in the Unsplash collection.
+2. Update collection IDs in `scripts/profile-collections.json`.
+3. Run `node scripts/pull-collection.mjs --all` from `fetchrated_website/`. The script syncs the local pool to the collection — downloads new photos, deletes any photos no longer in the collection, regenerates `directory/_manifest.json`.
 
-Curation tool: `scripts/curate-unsplash-vets.mjs` (named for the original brief — pool is now profiles + banners). Re-running is safe; search results are cached in `scripts/.unsplash-search-cache.json` so a re-run does not burn API quota.
-
-Curation tool: `scripts/curate-unsplash-vets.mjs`. Re-running is safe; search results are cached in `scripts/.unsplash-search-cache.json` so a re-run does not burn API quota.
-
-To review the pool visually, run the script and open `scripts/contact-sheet.html` in a browser. Tile-click marks any photo as a veto candidate; the export button copies the veto list to clipboard.
+Per-photo metadata (photographer, source URL, dimensions) is at `directory/_manifest.json`, written by the sync script.
 
 ---
 
