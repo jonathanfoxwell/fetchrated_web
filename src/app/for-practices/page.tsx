@@ -209,13 +209,10 @@ export default function ForPracticesPage() {
                 The Competition and Markets Authority has published requirements that will become legally binding for every UK veterinary practice later this year. Standardised price lists. Ownership disclosure. Formal complaint processes. Written estimates. Data submission to the RCVS.
               </p>
               <p>
-                The corporate chains caused the market problems the CMA investigated. The compliance burden, though, falls equally on everyone — including independent practices with no compliance department.
-              </p>
-              <p className="text-on-surface font-bold text-lg">
-                We think that&apos;s wrong.
+                The same obligations apply across the sector. The work, for most practices, is in the formatting — producing the standardised price lists, building the web pages, documenting your complaint process to meet the minimum criteria, and preparing your data for RCVS submission.
               </p>
               <p>
-                FetchRated exists because quality should determine visibility — not marketing budgets. That&apos;s why the pilot includes a CMA Readiness Check alongside your visibility audit. And it&apos;s why FetchRated membership includes CMA-compliant pricing pages, complaint process documentation, and ownership disclosure — generated from your data, hosted, and maintained for you.
+                That&apos;s why the pilot includes a CMA Readiness Check alongside your visibility audit. And it&apos;s why FetchRated membership includes CMA-compliant pricing pages, complaint process documentation, and ownership disclosure — generated from your data, hosted, and maintained for you.
               </p>
             </div>
             <Link

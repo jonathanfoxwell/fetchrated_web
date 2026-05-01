@@ -164,7 +164,7 @@ export default function AboutPage() {
             <p className="text-on-surface-variant leading-relaxed">
               FetchRated is editorially independent. We do not accept payment from
               practices in exchange for ratings, reviews, or favourable placement.
-              We have no commercial relationship with any corporate veterinary group, practice management software vendor, or entity being regulated under the CMA's veterinary market remedies.
+              We have no commercial relationship with any practice we list, regardless of ownership structure, and no commercial relationship with practice management software vendors or industry trade bodies.
               Our assessments are conducted using standardised criteria by trained
               evaluators. Practices cannot influence their scores through advertising,
               sponsorship, or any commercial arrangement. This independence is
