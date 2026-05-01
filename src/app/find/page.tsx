@@ -16,9 +16,10 @@ import { Shield } from "lucide-react";
 
 const ITEMS_PER_PAGE = 24;
 
-// Only vet-category data is currently real. Non-vet categories (groomers, trainers,
-// boarding) return when there is real underlying data to back them.
-const visibleServiceCategories = serviceCategories.filter((c) => c.slug === "vets");
+// Show every planned category. Non-vet categories carry `comingSoon: true` and
+// CategoryCard renders them grayscaled / unlinked — keeps the page conveying
+// the full breadth of FetchRated's coverage while making it clear that only
+// vets are live today.
 
 interface FindPageProps {
   searchParams: Promise<{ q?: string; location?: string; lat?: string; lng?: string; page?: string }>;
@@ -142,10 +143,10 @@ export default async function FindPage({ searchParams }: FindPageProps) {
             <section className="max-w-7xl mx-auto px-6 lg:px-8 py-12">
               <NearMeCard />
               <SectionHeader
-                title="Browse veterinary practices"
-                subtitle="Find a verified UK veterinary practice. Groomers, trainers, and boarding categories are coming soon."
+                title="Browse pet care"
+                subtitle="Veterinary practices are live across the UK today. Groomers, trainers, and boarding are coming soon."
               />
-              <CategoryCardGrid categories={visibleServiceCategories} />
+              <CategoryCardGrid categories={serviceCategories} />
             </section>
 
             {/* Badge Explainer */}

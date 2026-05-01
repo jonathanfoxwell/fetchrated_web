@@ -19,7 +19,7 @@ interface SearchBarProps {
 
 export function SearchBar({
   action = "/find",
-  placeholder = "Search for vets, groomers, trainers...",
+  placeholder = "Search for a vet by name",
   locationPlaceholder = "Location or 'Near me'",
   defaultQuery = "",
   defaultLocation = "",

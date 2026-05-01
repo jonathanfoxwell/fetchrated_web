@@ -2,14 +2,16 @@ import { Stethoscope, Scissors, GraduationCap, Home } from "lucide-react";
 import type { ServiceCategory } from "@/components";
 import type { Guide } from "@/components";
 
-// Service Categories
+// Service Categories. Pre-pilot only the `vets` category has real underlying
+// data — the others are kept here so the directory page conveys the full
+// breadth of FetchRated's planned coverage. CategoryCard renders comingSoon
+// entries grayscaled, unlinked, with a "Coming soon" badge.
 export const serviceCategories: ServiceCategory[] = [
   {
     slug: "vets",
     name: "Veterinary Practices",
     description: "Find verified vets and animal hospitals near you",
     icon: Stethoscope,
-    locationCount: 48,
     imageUrl: "/images/categories/vets.jpg",
   },
   {
@@ -17,24 +19,24 @@ export const serviceCategories: ServiceCategory[] = [
     name: "Dog Groomers",
     description: "Professional grooming services for your pet",
     icon: Scissors,
-    locationCount: 32,
     imageUrl: "/images/categories/groomers.jpg",
+    comingSoon: true,
   },
   {
     slug: "trainers",
     name: "Dog Trainers",
     description: "Certified trainers and behaviourists",
     icon: GraduationCap,
-    locationCount: 24,
     imageUrl: "/images/categories/trainers.jpg",
+    comingSoon: true,
   },
   {
     slug: "boarding",
     name: "Boarding & Daycare",
     description: "Safe and caring facilities for your pet",
     icon: Home,
-    locationCount: 18,
     imageUrl: "/images/categories/boarding.jpg",
+    comingSoon: true,
   },
 ];
 
