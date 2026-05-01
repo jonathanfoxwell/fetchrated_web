@@ -82,6 +82,15 @@
   --color-primary-container: var(--primary-container);
   --color-secondary-container: var(--secondary-container);
 
+  /* MD3 on-* contrast tokens — text colour to use on top of each container.
+     Used as `text-on-primary`, `bg-primary text-on-primary`, etc. */
+  --color-on-primary: var(--on-primary);
+  --color-on-primary-container: var(--on-primary-container);
+  --color-on-secondary: var(--on-secondary);
+  --color-on-secondary-container: var(--on-secondary-container);
+  --color-on-tertiary: var(--on-tertiary);
+  --color-on-tertiary-container: var(--on-tertiary-container);
+
   /* Border radius - subtle per designs */
   --radius-sm: calc(var(--radius) * 0.5);
   --radius-md: calc(var(--radius) * 0.75);
@@ -107,16 +116,22 @@
   --primary: oklch(0.45 0.18 25);
   --primary-foreground: oklch(1 0 0);
   --primary-container: oklch(0.52 0.2 25);      /* #d53c37 lighter red */
+  --on-primary: oklch(1 0 0);                   /* white on dark red */
+  --on-primary-container: oklch(1 0 0);         /* white on lighter red — still high contrast */
 
   /* Secondary: Deep Rose #ac2f41 */
   --secondary: oklch(0.45 0.15 15);
   --secondary-foreground: oklch(1 0 0);
   --secondary-container: oklch(0.7 0.18 15);    /* #fd6b79 pink */
+  --on-secondary: oklch(1 0 0);                 /* white on deep rose */
+  --on-secondary-container: oklch(0.15 0.005 75); /* near-black on light pink */
 
   /* Tertiary: Teal #43625b */
   --tertiary: oklch(0.43 0.04 175);
   --tertiary-foreground: oklch(1 0 0);
   --tertiary-container: oklch(0.52 0.04 175);   /* #5b7b74 */
+  --on-tertiary: oklch(1 0 0);                  /* white on teal */
+  --on-tertiary-container: oklch(1 0 0);        /* white on muted teal */
 
   /* Muted/Accent - warm grays */
   --muted: oklch(0.95 0.005 85);                /* #f6f3ee */
@@ -178,12 +193,21 @@
 
   --primary: oklch(0.7 0.15 25);
   --primary-foreground: oklch(0.15 0.005 75);
+  --primary-container: oklch(0.52 0.2 25);
+  --on-primary: oklch(0.15 0.005 75);
+  --on-primary-container: oklch(1 0 0);
 
   --secondary: oklch(0.7 0.12 15);
   --secondary-foreground: oklch(0.15 0.005 75);
+  --secondary-container: oklch(0.7 0.18 15);
+  --on-secondary: oklch(0.15 0.005 75);
+  --on-secondary-container: oklch(0.15 0.005 75);
 
   --tertiary: oklch(0.7 0.04 175);
   --tertiary-foreground: oklch(0.15 0.005 75);
+  --tertiary-container: oklch(0.52 0.04 175);
+  --on-tertiary: oklch(0.15 0.005 75);
+  --on-tertiary-container: oklch(1 0 0);
 
   --muted: oklch(0.25 0.005 75);
   --muted-foreground: oklch(0.7 0.005 85);

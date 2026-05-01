@@ -57,8 +57,11 @@ export function LocationHero({
             )}
           </div>
 
-          {/* Info */}
-          <div className="flex-1 pt-4 md:pt-8">
+          {/* Info — md+ pt clears the banner edge so the H1 sits over cream
+              rather than the dark banner gradient. Mobile is flex-col so the
+              right column already starts below the logo (which is below the
+              banner), no extra padding needed. */}
+          <div className="flex-1 pt-4 md:pt-24">
             {location.membership_tier && (
               <div className="flex flex-wrap items-center gap-3 mb-2">
                 <span className="text-sm text-on-surface-variant">
