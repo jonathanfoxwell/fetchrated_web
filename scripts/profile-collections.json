@@ -1,0 +1,5 @@
+{
+  "_comment": "Map of subcat (profiles | banners) → Unsplash collection ID. Run `node scripts/pull-collection.mjs --all` to sync. Leave a value as null until the collection exists.",
+  "profiles": "VStrVile7Hc",
+  "banners": "j-NFzv52_Uw"
+}

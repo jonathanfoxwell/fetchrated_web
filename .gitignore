@@ -47,3 +47,7 @@ next-env.d.ts
 /smoke-screenshots/
 /playwright-report/
 /test-results/
+
+# generated curation artefacts (regenerate via the curation scripts)
+/scripts/contact-sheet.html
+/scripts/.unsplash-search-cache.json
