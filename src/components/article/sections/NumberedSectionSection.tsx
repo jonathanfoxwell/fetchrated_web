@@ -25,7 +25,7 @@ export function NumberedSectionSection({ number, title, content }: NumberedSecti
       </div>
 
       <div className="flex-1 pt-1">
-        <h3 className="text-lg font-semibold text-on-surface mb-2 leading-snug">
+        <h3 className="text-base font-semibold text-on-surface mb-2 leading-snug">
           {title}
         </h3>
         <p className="text-on-surface-variant leading-relaxed">
