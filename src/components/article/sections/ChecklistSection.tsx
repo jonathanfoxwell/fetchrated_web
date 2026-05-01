@@ -29,7 +29,7 @@ export function ChecklistSection({ title, items }: ChecklistSectionProps) {
   return (
     <div className="bg-card rounded-xl p-6 border border-outline-variant/10 shadow-card">
       <div className="flex items-center gap-3 mb-4">
-        <div className="p-2 bg-primary-container rounded-lg">
+        <div className="p-2 bg-surface-container rounded-lg border border-outline-variant/40">
           <ClipboardCheck className="h-5 w-5 text-primary" />
         </div>
         {title && (
@@ -61,7 +61,7 @@ export function ChecklistSection({ title, items }: ChecklistSectionProps) {
                       : 'border-outline-variant group-hover:border-primary'
                   }`}
                 >
-                  {isChecked && <Check className="h-3 w-3 text-on-primary" />}
+                  {isChecked && <Check className="h-3 w-3 text-primary-foreground" />}
                 </div>
                 <div className="flex-1">
                   <p

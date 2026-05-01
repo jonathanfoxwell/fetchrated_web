@@ -24,20 +24,19 @@ export function SummaryBoxSection({ title, content, variant = 'default', action 
       container: 'bg-surface-container border border-outline-variant',
       title: 'text-on-surface',
       content: 'text-on-surface-variant',
-      button: 'bg-primary text-on-primary hover:bg-primary/90',
+      button: 'bg-primary text-primary-foreground hover:bg-primary/90',
     },
     highlight: {
-      container:
-        'bg-primary/5 border border-primary/20 border-l-[6px] border-l-primary',
+      container: 'bg-primary/5 border border-primary/30',
       title: 'text-on-surface',
       content: 'text-on-surface-variant',
-      button: 'bg-primary text-on-primary hover:bg-primary/90',
+      button: 'bg-primary text-primary-foreground hover:bg-primary/90',
     },
     dark: {
       container: 'bg-inverse-surface',
       title: 'text-inverse-on-surface',
       content: 'text-inverse-on-surface/80',
-      button: 'bg-inverse-primary text-inverse-on-primary hover:bg-inverse-primary/90',
+      button: 'bg-inverse-primary text-primary-foreground hover:bg-inverse-primary/90',
     },
   };
 
