@@ -16,6 +16,7 @@ Source resolution: each image is fetched at `w=1600&q=80&fm=jpg&fit=max` from `i
 | `clinic-interior.jpg` | [5Bi6MWlWMbw](https://unsplash.com/photos/5Bi6MWlWMbw) | Homepage "For Practices" panel — vet examining a kitten |
 | `methodology-medallion.jpg` | [1551601651-2a8555f1a136](https://unsplash.com/photos/1551601651-2a8555f1a136) | `/how-we-assess` hero medallion |
 | `clinical-examination.jpg` | [1576091160399-112ba8d25d1d](https://unsplash.com/photos/1576091160399-112ba8d25d1d) | `/how-we-assess` weighting section |
+| `uk-map-greyscale.png` | (user-supplied; not from Unsplash) | `/for-practices` hero — replaces the synthetic CoverageMap pre-pilot |
 
 ## categories/ — Service-category cards
 

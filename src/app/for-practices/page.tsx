@@ -1,9 +1,9 @@
 import Link from "next/link";
+import Image from "next/image";
 import {
   Navigation,
   Footer,
   NumberedSteps,
-  CoverageMap,
   AssessmentProtocol,
   Badge,
   CTABanner,
@@ -152,24 +152,30 @@ export default function ForPracticesPage() {
               and a listing in our national directory. As the CMA introduces new transparency requirements for UK practices, the pilot also gives you a head start on what's coming.
             </p>
             <div className="flex flex-wrap items-center gap-4">
-              <a
-                href="#coverage"
+              <Link
+                href="/for-practices/pilot/apply"
                 className="inline-flex items-center justify-center h-12 px-8 bg-primary text-white font-bold text-sm uppercase tracking-widest rounded-sm hover:bg-primary-container transition-colors"
               >
-                See If Your Area Is Active
-              </a>
-              <a
+                Get Started
+              </Link>
+              <Link
                 href="/how-we-assess"
                 className="inline-flex items-center justify-center h-12 px-8 border border-outline-variant/20 text-primary font-bold text-sm uppercase tracking-widest rounded-sm hover:bg-surface-container-low transition-colors"
               >
                 View Methodology
-              </a>
+              </Link>
             </div>
           </div>
 
-          {/* Coverage Map */}
-          <div id="coverage" className="lg:col-span-5">
-            <CoverageMap />
+          <div className="lg:col-span-5 flex justify-center">
+            <Image
+              src="/images/site/uk-map-greyscale.png"
+              alt="Greyscale map of the United Kingdom and Ireland"
+              width={514}
+              height={558}
+              priority
+              className="w-full max-w-md h-auto select-none"
+            />
           </div>
         </section>
 

@@ -14,7 +14,6 @@ export type { LocationCard as LocationCardType } from "@/lib/data/locations";
 export { SearchBar } from "./search-bar";
 export { CategoryCard, CategoryCardGrid } from "./category-card";
 export type { ServiceCategory } from "./category-card";
-export { CoverageMap } from "./coverage-map";
 
 // Methodology Components
 export { WeightingBars, CriteriaMatrix } from "./weighting-bar";
