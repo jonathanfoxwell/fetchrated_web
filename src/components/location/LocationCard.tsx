@@ -41,7 +41,8 @@ function getInitials(name: string): string {
 export function LocationCard({ location, className }: LocationCardProps) {
   const badge = location.badge_tier ? badgeConfig[location.badge_tier] : null;
   const initials = getInitials(location.name);
-  const logoSrc = location.logo_url ?? fallbackProfileImage(location.slug);
+  const fallback = location.logo_url ? null : fallbackProfileImage(location.slug);
+  const logoSrc = location.logo_url ?? fallback?.src ?? null;
 
   return (
     <Link href={`/find/location/${location.slug}`} className="block">

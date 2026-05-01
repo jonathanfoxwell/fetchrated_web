@@ -16,15 +16,24 @@ export function LocationHero({
   todayHours,
   yearsOperating,
 }: LocationHeroProps) {
-  const logoSrc = location.logo_url ?? fallbackProfileImage(location.slug);
-  const coverSrc = location.cover_image_url ?? fallbackBannerImage(location.slug);
+  const fallbackProfile = location.logo_url ? null : fallbackProfileImage(location.slug);
+  const fallbackCover = location.cover_image_url ? null : fallbackBannerImage(location.slug);
+  const logoSrc = location.logo_url ?? fallbackProfile?.src ?? null;
+  const coverSrc = location.cover_image_url ?? fallbackCover?.src ?? null;
+  const coverColor = fallbackCover?.color ?? null;
 
   return (
     <div className="relative">
       {/* Cover Image — blurred so it acts as ambient backdrop rather than competing
           for attention with the listing content overlaid below. scale-110 hides
-          the soft edges that the blur introduces at the container border. */}
-      <div className="h-48 md:h-64 bg-gradient-to-br from-primary to-secondary relative overflow-hidden">
+          the soft edges that the blur introduces at the container border.
+          Inline `background` is the photo's dominant colour from the manifest;
+          this replaces the brand-red gradient placeholder so the JPG paints
+          over an already-correct colour with no flash. */}
+      <div
+        className="h-48 md:h-64 bg-gradient-to-br from-primary to-secondary relative overflow-hidden"
+        style={coverColor ? { background: coverColor } : undefined}
+      >
         {coverSrc && (
           <Image
             src={coverSrc}
