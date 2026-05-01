@@ -28,11 +28,20 @@ export interface DirectoryListing {
   // Content
   headline: string | null;
   description: string | null;
+  ai_description: string | null;
+  ai_description_generated_at: string | null;
   logo_url: string | null;
   cover_image_url: string | null;
   gallery_urls: string[] | null;
   services: Service[] | null;
   opening_hours: OpeningHours | null;
+  current_opening_hours_json: CurrentOpeningHours | null;
+
+  // Practice attributes (Google Places)
+  opening_date: string | null;
+  accessibility_json: AccessibilityFlags | null;
+  parking_json: ParkingFlags | null;
+  google_featured_reviews_json: GoogleFeaturedReview[] | null;
 
   // Scores
   profile_strength_score: number | null;
@@ -75,6 +84,69 @@ export interface OpeningHours {
   friday?: { open: string; close: string };
   saturday?: { open: string; close: string };
   sunday?: { open: string; close: string };
+}
+
+/**
+ * Google Places API v1 currentOpeningHours shape (stored verbatim).
+ * `periods` is the structured weekly schedule; `weekdayDescriptions` is a
+ * pre-formatted array of strings for each day.
+ */
+export interface CurrentOpeningHours {
+  openNow?: boolean; // stale at fetch time — never trust without recomputing
+  periods?: Array<{
+    open: { day: number; hour: number; minute: number };
+    close?: { day: number; hour: number; minute: number };
+  }>;
+  weekdayDescriptions?: string[];
+  nextOpenTime?: string;
+  nextCloseTime?: string;
+}
+
+/**
+ * Google Places accessibilityOptions — boolean flags. Always render only
+ * `true` flags; absent/false values often mean "Google doesn't know" rather
+ * than a definitive No, and showing them creates false negatives.
+ */
+export interface AccessibilityFlags {
+  wheelchairAccessibleParking?: boolean;
+  wheelchairAccessibleEntrance?: boolean;
+  wheelchairAccessibleRestroom?: boolean;
+  wheelchairAccessibleSeating?: boolean;
+}
+
+/**
+ * Google Places parkingOptions — boolean flags. Same caveat as accessibility:
+ * render only `true` values.
+ */
+export interface ParkingFlags {
+  freeParkingLot?: boolean;
+  paidParkingLot?: boolean;
+  freeStreetParking?: boolean;
+  paidStreetParking?: boolean;
+  valetParking?: boolean;
+  freeGarageParking?: boolean;
+  paidGarageParking?: boolean;
+}
+
+/**
+ * Google Places API v1 review object (stored as JSONB array).
+ * `text` and `originalText` are nested objects; `authorAttribution` carries
+ * the display name and (optionally) photo URI.
+ */
+export interface GoogleFeaturedReview {
+  name?: string; // Google's review resource ID
+  rating?: number;
+  text?: { text: string; languageCode?: string };
+  originalText?: { text: string; languageCode?: string };
+  authorAttribution?: {
+    displayName: string;
+    uri?: string;
+    photoUri?: string;
+  };
+  publishTime?: string;
+  relativePublishTimeDescription?: string;
+  flagContentUri?: string;
+  googleMapsUri?: string;
 }
 
 export type LocationCard = Pick<
