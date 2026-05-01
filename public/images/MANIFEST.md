@@ -13,7 +13,7 @@ Source resolution: each image is fetched at `w=1600&q=80&fm=jpg&fit=max` from `i
 | File | Unsplash photo ID | Used by |
 |------|-------------------|---------|
 | `hero-vet-with-dog.jpg` | [1581888227599-779811939961](https://unsplash.com/photos/1581888227599-779811939961) | Homepage hero (`src/app/page.tsx`) |
-| `clinic-interior.jpg` | [1629909613654-28e377c37b09](https://unsplash.com/photos/1629909613654-28e377c37b09) | Homepage "For Practices" panel |
+| `clinic-interior.jpg` | [5Bi6MWlWMbw](https://unsplash.com/photos/5Bi6MWlWMbw) | Homepage "For Practices" panel — vet examining a kitten |
 | `methodology-medallion.jpg` | [1551601651-2a8555f1a136](https://unsplash.com/photos/1551601651-2a8555f1a136) | `/how-we-assess` hero medallion |
 | `clinical-examination.jpg` | [1576091160399-112ba8d25d1d](https://unsplash.com/photos/1576091160399-112ba8d25d1d) | `/how-we-assess` weighting section |
 
@@ -40,6 +40,23 @@ Source resolution: each image is fetched at `w=1600&q=80&fm=jpg&fit=max` from `i
 | `puppy-training.jpg` | [1601758228041-f3b2795255f1](https://unsplash.com/photos/1601758228041-f3b2795255f1) | "Puppy training basics" |
 | `pet-insurance.jpg` | [1450778869180-41d0601e046e](https://unsplash.com/photos/1450778869180-41d0601e046e) | "Choosing pet insurance"; "Understanding vet fees" |
 | `emergency-vet.jpg` | [1576201836106-db1758fd1c97](https://unsplash.com/photos/1576201836106-db1758fd1c97) | "Emergency vet: when to go" |
+
+## directory/ — Directory listing imagery pool
+
+Two image types per directory listing slot, each curated via the official Unsplash API and sorted by likes-per-query to bias toward popular / higher-quality photographs:
+
+- **`directory/profiles/`** — symbolic / iconic. Vet-themed objects (stethoscope, paw print), pet accessories (collars, leashes, bowls, tags, brushes), and textures (feathers, fur). Squarish crop. Used as the listing's profile / thumbnail image.
+- **`directory/banners/`** — fun, colourful, landscape. Action and lifestyle: dogs running, kittens playing, pets in fields, beach, snow, autumn light. Used as the listing's banner / cover image.
+
+The split is deliberate. Stock photography of vet *staff* on a real practice's listing implicitly misrepresents that the pictured people work there. Symbolic objects (profiles) and pure animal scenes (banners) sidestep this entirely.
+
+Detailed per-photo metadata (photographer, source URL, search query, dimensions) is at `directory/_manifest.json`.
+
+Curation tool: `scripts/curate-unsplash-vets.mjs` (named for the original brief — pool is now profiles + banners). Re-running is safe; search results are cached in `scripts/.unsplash-search-cache.json` so a re-run does not burn API quota.
+
+Curation tool: `scripts/curate-unsplash-vets.mjs`. Re-running is safe; search results are cached in `scripts/.unsplash-search-cache.json` so a re-run does not burn API quota.
+
+To review the pool visually, run the script and open `scripts/contact-sheet.html` in a browser. Tile-click marks any photo as a veto candidate; the export button copies the veto list to clipboard.
 
 ---
 

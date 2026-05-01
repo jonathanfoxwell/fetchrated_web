@@ -141,7 +141,7 @@ export default async function Home() {
               <div className="md:w-1/3 relative overflow-hidden min-h-[200px]">
                 <Image
                   src="/images/site/clinic-interior.jpg"
-                  alt="Modern veterinary clinic interior"
+                  alt="Veterinarian examining a kitten on the exam table"
                   fill
                   className="object-cover"
                 />
