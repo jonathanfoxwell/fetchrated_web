@@ -1,4 +1,5 @@
 import { Info, Lightbulb, AlertTriangle, AlertCircle } from 'lucide-react';
+import { processDynamicTokens } from '../dynamic-text';
 
 interface CalloutSectionProps {
   variant: 'info' | 'tip' | 'warning' | 'important';
@@ -49,7 +50,7 @@ export function CalloutSection({ variant, title, content }: CalloutSectionProps)
           {title && (
             <p className={`${styles.title} font-semibold`}>{title}</p>
           )}
-          <p className={styles.content}>{content}</p>
+          <p className={styles.content}>{processDynamicTokens(content)}</p>
         </div>
       </div>
     </div>
