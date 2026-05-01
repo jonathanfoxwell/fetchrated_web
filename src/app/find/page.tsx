@@ -190,11 +190,14 @@ export default async function FindPage({ searchParams }: FindPageProps) {
               </div>
             </section>
 
-            {/* Featured Practices */}
+            {/* Notable practices — editorial picks (is_featured = true) drawn from
+                public data. Pre-pilot we haven't independently assessed any of
+                these, so the heading and subtitle stay descriptive rather than
+                claiming a quality signal. */}
             <section className="max-w-7xl mx-auto px-6 lg:px-8 py-24">
               <SectionHeader
-                title={<>Featured <span className="serif-italic">practices</span></>}
-                subtitle="Recently verified practices in our directory"
+                title={<>Notable UK <span className="serif-italic">vet practices</span></>}
+                subtitle="A curated selection from our directory — editorial picks based on the public information available today."
               />
               <LocationCardGrid locations={locations} />
             </section>
