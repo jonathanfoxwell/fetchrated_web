@@ -5,4 +5,6 @@ export { LocationInfo } from './LocationInfo';
 export { LocationServices } from './LocationServices';
 export { LocationGallery } from './LocationGallery';
 export { LocationAssessment } from './LocationAssessment';
+export { LocationReviews } from './LocationReviews';
+export { LocationAccessibility } from './LocationAccessibility';
 export { LocationMap } from './LocationMap';
