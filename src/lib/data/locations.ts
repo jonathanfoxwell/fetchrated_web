@@ -360,7 +360,11 @@ export const getFeaturedListings = unstable_cache(
 
     return (data ?? []) as LocationCard[];
   },
-  ['featured-listings'],
+  // Cache key bumped after the Option A consolidator reconciliation (~1,180
+  // rows updated): legal-entity-first label assignment dropped many
+  // content-only matches. Without bumping, /find would keep serving
+  // pre-reconciliation labels.
+  ['featured-listings-v2'],
   { tags: ['directory'], revalidate: 3600 }
 );
 
@@ -386,7 +390,7 @@ export const getFeaturedLocations = unstable_cache(
 
     return (data ?? []) as LocationCard[];
   },
-  ['featured-locations'],
+  ['featured-locations-v2'],
   { tags: ['directory'], revalidate: 3600 }
 );
 
@@ -411,7 +415,7 @@ export const getLocationsByIds = unstable_cache(
 
     return (data ?? []) as LocationCard[];
   },
-  ['locations-by-ids'],
+  ['locations-by-ids-v2'],
   { tags: ['directory'], revalidate: 3600 }
 );
 
