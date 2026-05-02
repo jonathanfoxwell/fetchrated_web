@@ -80,15 +80,14 @@ export default async function Home() {
         {/* How It Works */}
         <FeatureStrip features={howItWorksFeatures} />
 
-        {/* Featured Practices */}
+        {/* Notable practices — editorial picks (is_featured = true) drawn from
+            public data. Pre-pilot we haven't independently assessed any of
+            these, so the heading and subtitle stay descriptive rather than
+            claiming a quality signal. Mirrors the /find page wording. */}
         <section className="max-w-7xl mx-auto px-6 lg:px-8 py-24">
           <SectionHeader
-            title={
-              <>
-                Featured <span className="serif-italic">Verified</span> Practices
-              </>
-            }
-            subtitle="Recently verified practices in our directory, with strong customer review depth."
+            title={<>Notable UK <span className="serif-italic">vet practices</span></>}
+            subtitle="A curated selection from our directory — editorial picks based on the public information available today."
           />
           <LocationCardGrid locations={featuredLocations} />
         </section>
