@@ -13,7 +13,7 @@ import {
   Badge,
   WebSiteSchema,
 } from "@/components";
-import { pillarGuides } from "@/lib/data";
+import { getPillarArticles } from "@/lib/data/articles";
 import { getFeaturedListings } from "@/lib/data/locations";
 import { ClipboardCheck, Shield, Award, ArrowRight } from "lucide-react";
 
@@ -41,7 +41,10 @@ const howItWorksFeatures = [
 ];
 
 export default async function Home() {
-  const featuredLocations = await getFeaturedListings(3);
+  const [featuredLocations, pillarGuides] = await Promise.all([
+    getFeaturedListings(3),
+    getPillarArticles("consumer"),
+  ]);
   return (
     <div className="min-h-screen bg-surface">
       <WebSiteSchema />

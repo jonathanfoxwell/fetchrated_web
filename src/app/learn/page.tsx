@@ -5,14 +5,42 @@ import {
   GuideCard,
   GuideCardGrid,
 } from "@/components";
-import { pillarGuides, supportingArticles } from "@/lib/data";
+import type { Guide } from "@/components";
+import { getPillarArticles, getArticlesByAudience, type ArticleSummary } from "@/lib/data/articles";
 
 export const metadata = {
   title: "Pet Care Guides | FetchRated",
-  description: "Expert guides on choosing vets, groomers, trainers, and understanding pet care. Make informed decisions for your pet's wellbeing.",
+  description:
+    "Expert guides on choosing a UK vet, verifying RCVS registration, reading reviews, and getting the most from your vet visits.",
 };
 
-export default function LearnPage() {
+// ArticleSummary (DB shape) → Guide (card-component shape)
+function toGuide(a: ArticleSummary): Guide {
+  return {
+    slug: a.slug,
+    title: a.title,
+    excerpt: a.excerpt,
+    category: capitalize(a.category),
+    readTime: a.read_time ?? undefined,
+    imageUrl: a.featured_image_url ?? undefined,
+    isPillar: a.is_pillar,
+  };
+}
+
+function capitalize(s: string): string {
+  return s.charAt(0).toUpperCase() + s.slice(1);
+}
+
+export default async function LearnPage() {
+  const [pillars, allConsumer] = await Promise.all([
+    getPillarArticles("consumer"),
+    getArticlesByAudience("consumer"),
+  ]);
+
+  // Supporting = everything published that isn't a pillar
+  const supporting = allConsumer.filter((a) => !a.is_pillar).map(toGuide);
+  const pillarGuides = pillars.map(toGuide);
+
   return (
     <div className="min-h-screen bg-surface bg-soft-gradient">
       <Navigation currentPath="/learn" />
@@ -25,54 +53,52 @@ export default function LearnPage() {
               Pet care <span className="serif-italic">guides</span>
             </h1>
             <p className="text-xl text-on-surface-variant leading-relaxed">
-              Expert advice to help you make informed decisions about your pet's care.
-              From choosing the right vet to understanding what makes a review trustworthy.
+              Practical, UK-focused advice for pet owners — choosing a vet, verifying
+              credentials, reading reviews, and making the most of every appointment.
             </p>
           </div>
         </section>
 
         {/* Pillar Guides */}
-        <section className="max-w-7xl mx-auto px-6 lg:px-8 py-12">
-          <SectionHeader
-            title={<>Essential <span className="serif-italic">guides</span></>}
-            subtitle="Comprehensive guides covering the most important decisions in pet care"
-          />
-          <div className="space-y-6">
-            {pillarGuides.map((guide) => (
-              <GuideCard key={guide.slug} guide={guide} variant="featured" />
-            ))}
-          </div>
-        </section>
+        {pillarGuides.length > 0 && (
+          <section className="max-w-7xl mx-auto px-6 lg:px-8 py-12">
+            <SectionHeader
+              title={
+                <>
+                  Essential <span className="serif-italic">guides</span>
+                </>
+              }
+              subtitle="Comprehensive guides covering the most important decisions in pet care"
+            />
+            <div className="space-y-6">
+              {pillarGuides.map((guide) => (
+                <GuideCard key={guide.slug} guide={guide} variant="featured" />
+              ))}
+            </div>
+          </section>
+        )}
 
         {/* Supporting Articles */}
-        <section className="bg-surface-container-low py-24">
-          <div className="max-w-7xl mx-auto px-6 lg:px-8">
-            <SectionHeader
-              title="More articles"
-              subtitle="Quick reads on specific topics in pet health and care"
-            />
-            <GuideCardGrid guides={supportingArticles} />
-          </div>
-        </section>
+        {supporting.length > 0 && (
+          <section className="bg-surface-container-low py-24">
+            <div className="max-w-7xl mx-auto px-6 lg:px-8">
+              <SectionHeader
+                title="More articles"
+                subtitle="Quick reads on specific topics in pet health and care"
+              />
+              <GuideCardGrid guides={supporting} />
+            </div>
+          </section>
+        )}
 
-        {/* Categories */}
-        <section className="max-w-7xl mx-auto px-6 lg:px-8 py-24">
-          <SectionHeader
-            title="Browse by topic"
-            subtitle="Find articles on specific areas of pet care"
-          />
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            {["Veterinary", "Grooming", "Training", "Health", "Nutrition", "Reviews"].map((topic) => (
-              <a
-                key={topic}
-                href={`/learn/topic/${topic.toLowerCase()}`}
-                className="p-4 bg-card border border-outline-variant/10 rounded-lg text-center hover:border-primary/20 hover:text-primary transition-colors"
-              >
-                <span className="font-medium">{topic}</span>
-              </a>
-            ))}
-          </div>
-        </section>
+        {/* Empty state — pre-pilot, the supporting set may still be small */}
+        {pillarGuides.length === 0 && supporting.length === 0 && (
+          <section className="max-w-7xl mx-auto px-6 lg:px-8 py-24 text-center">
+            <p className="text-on-surface-variant">
+              New guides are being added. Check back soon.
+            </p>
+          </section>
+        )}
       </main>
 
       <Footer />
