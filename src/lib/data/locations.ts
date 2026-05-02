@@ -66,6 +66,15 @@ export interface DirectoryListing {
   // Computed
   badge_tier: 'outstanding' | 'excellent' | 'verified' | null;
 
+  // Consolidator ownership (sourced from website-scrape group detection,
+  // mapped to the six CMA-named UK veterinary consolidators via the
+  // consolidator_groups reference table). Null = not detected as belonging
+  // to one of those six. Sub-brands (Vets Now, Independent Vetcare, etc.)
+  // resolve to their parent here.
+  consolidator_group_name: string | null;
+  consolidator_group_slug: string | null;
+  consolidator_ownership_type: 'wholly_owned' | 'jv' | null;
+
   // Timestamps
   last_updated_at: string;
 }
@@ -152,7 +161,8 @@ export interface GoogleFeaturedReview {
 export type LocationCard = Pick<
   DirectoryListing,
   'id' | 'name' | 'slug' | 'city' | 'postcode' | 'logo_url' | 'headline' |
-  'average_rating' | 'total_reviews' | 'badge_tier' | 'is_fetchrated_member'
+  'average_rating' | 'total_reviews' | 'badge_tier' | 'is_fetchrated_member' |
+  'consolidator_group_name' | 'consolidator_group_slug'
 > & {
   distance_miles?: number;
 };
@@ -222,7 +232,7 @@ export async function getDirectoryListings(options?: {
 
   let query = supabase
     .from('directory_listings')
-    .select('id, name, slug, city, postcode, logo_url, headline, average_rating, total_reviews, badge_tier, is_fetchrated_member', { count: 'exact' })
+    .select('id, name, slug, city, postcode, logo_url, headline, average_rating, total_reviews, badge_tier, is_fetchrated_member, consolidator_group_name, consolidator_group_slug', { count: 'exact' })
     .order('average_rating', { ascending: false, nullsFirst: false });
 
   const verticalType = options?.verticalType === undefined ? 'vet' : options.verticalType;
@@ -293,6 +303,12 @@ export async function getNearbyListings(options: {
     return { data: [], totalCount: 0 };
   }
 
+  // The nearby_directory_listings RPC has not yet been refreshed to include
+  // consolidator_group_name/slug (its body uses the earthdistance `<@>`
+  // operator which isn't available on every dev DB; refresh deferred to a
+  // follow-up migration). For now, "near me" results don't carry the
+  // consolidator label — falling back to null. Regular directory listings
+  // (via the view) do show the label.
   const rows = data as Array<LocationCard & { distance_miles: number; total_count: number }>;
   return {
     data: rows.map(r => ({
@@ -307,6 +323,8 @@ export async function getNearbyListings(options: {
       total_reviews: r.total_reviews,
       badge_tier: r.badge_tier,
       is_fetchrated_member: r.is_fetchrated_member,
+      consolidator_group_name: null,
+      consolidator_group_slug: null,
       distance_miles: r.distance_miles,
     })),
     totalCount: rows[0]?.total_count ?? 0,
@@ -325,7 +343,7 @@ export const getFeaturedListings = unstable_cache(
 
     const { data, error } = await supabase
       .from('directory_listings')
-      .select('id, name, slug, city, postcode, logo_url, headline, average_rating, total_reviews, badge_tier, is_fetchrated_member')
+      .select('id, name, slug, city, postcode, logo_url, headline, average_rating, total_reviews, badge_tier, is_fetchrated_member, consolidator_group_name, consolidator_group_slug')
       .eq('is_featured', true)
       .eq('vertical_type', 'vet')
       .order('total_reviews', { ascending: false, nullsFirst: false })
@@ -352,7 +370,7 @@ export const getFeaturedLocations = unstable_cache(
 
     const { data, error } = await supabase
       .from('directory_listings')
-      .select('id, name, slug, city, postcode, logo_url, headline, average_rating, total_reviews, badge_tier, is_fetchrated_member')
+      .select('id, name, slug, city, postcode, logo_url, headline, average_rating, total_reviews, badge_tier, is_fetchrated_member, consolidator_group_name, consolidator_group_slug')
       .in('badge_tier', ['outstanding', 'excellent'])
       .order('profile_strength_score', { ascending: false })
       .limit(limit);
@@ -379,7 +397,7 @@ export const getLocationsByIds = unstable_cache(
 
     const { data, error } = await supabase
       .from('directory_listings')
-      .select('id, name, slug, city, postcode, logo_url, headline, average_rating, total_reviews, badge_tier, is_fetchrated_member')
+      .select('id, name, slug, city, postcode, logo_url, headline, average_rating, total_reviews, badge_tier, is_fetchrated_member, consolidator_group_name, consolidator_group_slug')
       .in('id', ids);
 
     if (error) {

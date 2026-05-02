@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { Star, MapPin, Phone, Globe, Mail, Clock, Calendar } from 'lucide-react';
+import { Star, MapPin, Phone, Globe, Mail, Clock, Calendar, Building2 } from 'lucide-react';
 import type { DirectoryListing } from '@/lib/data/locations';
 import { fallbackProfileImage, fallbackBannerImage } from '@/lib/fallback-images';
 
@@ -112,7 +112,7 @@ export function LocationHero({
             </div>
 
             {/* Status chips */}
-            {(todayHours || (yearsOperating && yearsOperating >= 3)) && (
+            {(todayHours || (yearsOperating && yearsOperating >= 3) || location.consolidator_group_name) && (
               <div className="flex flex-wrap items-center gap-2 mt-4">
                 {todayHours && (
                   <span
@@ -132,6 +132,12 @@ export function LocationHero({
                   <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-sm font-medium bg-surface-container text-on-surface-variant">
                     <Calendar className="h-4 w-4" />
                     {yearsOperating}+ years operating
+                  </span>
+                )}
+                {location.consolidator_group_name && (
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-sm font-medium bg-surface-container text-on-surface-variant">
+                    <Building2 className="h-4 w-4" />
+                    Owned by {location.consolidator_group_name}
                   </span>
                 )}
               </div>

@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { MapPin, Star, ArrowRight } from 'lucide-react';
+import { MapPin, Star, ArrowRight, Building2 } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import type { LocationCard as LocationCardType } from '@/lib/data/locations';
@@ -99,6 +99,13 @@ export function LocationCard({ location, className }: LocationCardProps) {
               </span>
             )}
           </div>
+
+          {location.consolidator_group_name && (
+            <div className="flex items-center gap-1.5 text-on-surface-variant text-xs mt-1.5">
+              <Building2 className="w-3 h-3" />
+              <span>Owned by {location.consolidator_group_name}</span>
+            </div>
+          )}
         </CardHeader>
 
         <CardContent>
