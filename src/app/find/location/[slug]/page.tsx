@@ -103,7 +103,16 @@ export default async function LocationPage({ params }: LocationPageProps) {
           <Breadcrumbs
             items={[
               { label: "Find Services", href: "/find" },
-              { label: location.city || "Locations" },
+              location.city
+                ? {
+                    label: location.city,
+                    // /find/vets/<city-slug> renders the dedicated city page.
+                    // generateStaticParams pre-builds the top 50; the rest
+                    // generate on-demand. Slug matches the route's expectation
+                    // (lowercase, spaces → hyphens).
+                    href: `/find/vets/${location.city.toLowerCase().replace(/\s+/g, "-")}`,
+                  }
+                : { label: "Locations" },
               { label: location.name },
             ]}
           />
