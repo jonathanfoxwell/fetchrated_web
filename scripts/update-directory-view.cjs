@@ -123,7 +123,17 @@ SELECT
 FROM locations p
 LEFT JOIN review_aggregates ra ON ra.location_id = p.id
 WHERE p.show_in_directory = TRUE
-  AND p.business_status = 'OPERATIONAL';
+  AND p.business_status = 'OPERATIONAL'
+  -- Suppress bare-page listings: an entry must have something a visitor can read.
+  -- That's at least one review (verified or Google) OR a description (manual or AI).
+  -- Filters out ~7% of Google-classified veterinary_care entries that aren't
+  -- actually consumer-facing clinics (pharmaceutical companies, government
+  -- agencies, art galleries miscategorised as veterinary_care, etc.).
+  AND (
+    COALESCE(ra.total_reviews, p.google_review_count, 0) > 0
+    OR p.description IS NOT NULL
+    OR p.ai_description IS NOT NULL
+  );
 
 COMMENT ON VIEW directory_listings IS
 'Public directory view for fetchrated_website. Exposes only fields needed for location cards and detail pages. Sensitive data remains in locations table.';
