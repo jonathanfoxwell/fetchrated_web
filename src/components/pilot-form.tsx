@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -13,19 +13,45 @@ interface PilotFormData {
   phone: string;
 }
 
+/**
+ * Multi-purpose practice form. Used by both the warm letter-recipient flow
+ * (/for-practices/pilot/[token]) and the cold register-interest flow
+ * (/for-practices/register-interest).
+ *
+ * Submissions land in the same `practice_interest` Supabase table, distinguished
+ * by the `source` prop ('pilot-confirm' for letter recipients, 'register-interest'
+ * for cold visitors), so triage happens in one place.
+ *
+ * Visual context (intro paragraph, area/cohort bar, success state) is supplied
+ * by the caller so the same component reads as warm-and-confirmed for letter
+ * recipients and selection-led for cold visitors without forking.
+ */
 interface PilotFormProps {
+  /** Tag stored on the row in `practice_interest`. Drives downstream triage. */
+  source: "pilot-confirm" | "register-interest";
+  /** Rendered inline once submission succeeds. Required so every flow has a
+   *  context-appropriate thank-you state. */
+  successContent: ReactNode;
+  /** Optional copy rendered above the form fields. */
+  intro?: ReactNode;
+  /** Pre-fill the business name (letter recipients arrive with one). */
   defaultBusinessName?: string;
+  /** Letter-recipient context: "Your place is reserved in: [Area]/[Cohort]". */
   area?: string;
   cohort?: string;
-  onSubmit?: (data: PilotFormData) => Promise<void>;
+  /** Submit button label. Defaults to "Confirm Your Place". */
+  submitLabel?: string;
   className?: string;
 }
 
 export function PilotForm({
+  source,
+  successContent,
+  intro,
   defaultBusinessName = "",
   area,
   cohort,
-  onSubmit,
+  submitLabel = "Confirm Your Place",
   className,
 }: PilotFormProps) {
   const [formData, setFormData] = useState<PilotFormData>({
@@ -35,6 +61,7 @@ export function PilotForm({
     phone: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -43,18 +70,30 @@ export function PilotForm({
     setError(null);
 
     try {
-      if (onSubmit) {
-        await onSubmit(formData);
-      } else {
-        // Default behavior: redirect to confirmed page
-        window.location.href = "/for-practices/pilot/confirmed";
-      }
-    } catch (err) {
+      const res = await fetch("/api/register-interest", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...formData, source }),
+      });
+      if (!res.ok) throw new Error("submit failed");
+      setSubmitted(true);
+    } catch {
       setError("Something went wrong. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
   };
+
+  if (submitted) {
+    return (
+      <Card className={`p-8 md:p-12 border-outline-variant/20 text-center ${className ?? ""}`}>
+        <div className="w-20 h-20 rounded-full bg-tertiary/10 flex items-center justify-center mx-auto mb-6">
+          <CheckCircle className="w-10 h-10 text-tertiary" />
+        </div>
+        {successContent}
+      </Card>
+    );
+  }
 
   return (
     <Card className={`p-8 md:p-12 border-outline-variant/20 ${className ?? ""}`}>
@@ -76,6 +115,10 @@ export function PilotForm({
             )}
           </div>
         </div>
+      )}
+
+      {intro && (
+        <div className="mb-8 text-on-surface-variant leading-relaxed">{intro}</div>
       )}
 
       <form onSubmit={handleSubmit} className="space-y-6">
@@ -143,7 +186,7 @@ export function PilotForm({
           disabled={isSubmitting}
           className="w-full h-14 bg-primary hover:bg-primary-container text-white font-bold text-sm uppercase tracking-widest"
         >
-          {isSubmitting ? "Confirming..." : "Confirm Your Place"}
+          {isSubmitting ? "Submitting..." : submitLabel}
         </Button>
 
         <p className="text-xs text-center text-on-surface-variant mt-4">
@@ -160,6 +203,10 @@ interface ConfirmationCardProps {
   className?: string;
 }
 
+/**
+ * Standalone confirmation card. Kept for the legacy /pilot/confirmed page.
+ * New flows render their success state inline via PilotForm.successContent.
+ */
 export function PilotConfirmation({
   businessName,
   steps = [
@@ -177,12 +224,12 @@ export function PilotConfirmation({
       </div>
 
       <h1 className="text-3xl md:text-4xl font-headline font-bold text-on-surface mb-4">
-        You&apos;re in the pilot
+        Thanks — we&apos;ll be in touch with next steps
       </h1>
 
       {businessName && (
         <p className="text-lg text-on-surface-variant mb-8">
-          Welcome, <span className="font-bold text-on-surface">{businessName}</span>
+          For <span className="font-bold text-on-surface">{businessName}</span>
         </p>
       )}
 

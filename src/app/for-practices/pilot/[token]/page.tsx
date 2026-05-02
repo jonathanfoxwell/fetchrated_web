@@ -1,3 +1,4 @@
+import { redirect } from "next/navigation";
 import {
   Navigation,
   Footer,
@@ -10,24 +11,29 @@ interface PilotPageProps {
 }
 
 export async function generateMetadata({ params }: PilotPageProps) {
-  const { token } = await params;
-
-  // In real app, would decode token to get practice name
+  await params;
   return {
-    title: "Accept Your Pilot Place | FetchRated",
-    description: "Complete your registration for the FetchRated national pilot programme.",
+    title: "Confirm Your Place | FetchRated",
+    description: "Confirm your place in the FetchRated National Pilot Programme.",
   };
 }
 
 export default async function PilotTokenPage({ params }: PilotPageProps) {
   const { token } = await params;
 
-  // In real app, would decode token to get pre-filled data
-  // For demo, we'll use placeholder data
+  // /for-practices/pilot/apply is the legacy cold-visitor URL — collapsed into
+  // the dedicated register-interest flow so the form's positioning stays
+  // selection-led for non-letter visitors.
+  if (token === "apply") {
+    redirect("/for-practices/register-interest");
+  }
+
+  // In real app, would decode token to look up the practice's pre-filled data.
+  // For now we render placeholder context so the form layout demonstrates.
   const practiceData = {
-    name: token === "apply" ? "" : "Sample Practice",
+    name: "Sample Practice",
     area: "Greater London",
-    cohort: "Alpha 2024",
+    cohort: "Alpha 2026",
   };
 
   return (
@@ -35,33 +41,42 @@ export default async function PilotTokenPage({ params }: PilotPageProps) {
       <Navigation currentPath="/for-practices" />
 
       <main className="pt-24 pb-24">
-        {/* Breadcrumbs */}
         <div className="max-w-3xl mx-auto px-6 lg:px-8 py-4">
           <Breadcrumbs
             items={[
               { label: "For Practices", href: "/for-practices" },
-              { label: "Pilot Registration" },
+              { label: "Confirm Your Place" },
             ]}
           />
         </div>
 
-        {/* Form Section */}
         <section className="max-w-3xl mx-auto px-6 lg:px-8 py-8">
           <div className="text-center mb-12">
             <h1 className="text-3xl md:text-4xl font-headline font-bold text-on-surface mb-4">
-              {token === "apply" ? "Join the Pilot" : "Confirm Your Place"}
+              Confirm Your Place
             </h1>
             <p className="text-on-surface-variant text-lg max-w-xl mx-auto">
-              {token === "apply"
-                ? "Enter your details below. We'll review your practice and let you know if there's space in the current cohort."
-                : "You've been selected because your practice is already doing excellent work. Just confirm your details below—it takes less than two minutes."}
+              Your practice has been selected because it&apos;s already doing
+              excellent work. Just confirm your details below — it takes less than
+              two minutes.
             </p>
           </div>
 
           <PilotForm
+            source="pilot-confirm"
             defaultBusinessName={practiceData.name}
-            area={token !== "apply" ? practiceData.area : undefined}
-            cohort={token !== "apply" ? practiceData.cohort : undefined}
+            area={practiceData.area}
+            cohort={practiceData.cohort}
+            successContent={
+              <>
+                <h2 className="text-2xl md:text-3xl font-headline font-bold text-on-surface mb-3">
+                  Thanks — your place is reserved.
+                </h2>
+                <p className="text-on-surface-variant leading-relaxed max-w-md mx-auto">
+                  We&apos;ll be in touch with next steps for the assessment shortly.
+                </p>
+              </>
+            }
           />
 
           <p className="text-center text-sm text-on-surface-variant mt-8">

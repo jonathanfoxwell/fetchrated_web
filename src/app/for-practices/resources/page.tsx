@@ -128,14 +128,15 @@ export default async function ResourcesPage() {
                 Resources coming soon
               </h2>
               <p className="text-on-surface-variant max-w-md mx-auto">
-                We're working on comprehensive guides and resources for veterinary practices.
-                Check back soon or join our pilot to get early access.
+                We&apos;re working on comprehensive guides and resources for veterinary
+                practices. Check back soon, or register your interest in the National
+                Pilot Programme.
               </p>
               <a
-                href="/for-practices"
+                href="/for-practices/register-interest"
                 className="inline-flex items-center justify-center mt-6 px-6 py-3 bg-primary text-white font-medium rounded-lg hover:bg-primary-container transition-colors"
               >
-                Join the Pilot
+                Register Your Interest
               </a>
             </div>
           </section>
@@ -145,18 +146,27 @@ export default async function ResourcesPage() {
         <section className="bg-surface-container py-24">
           <div className="max-w-6xl mx-auto px-6 lg:px-8 text-center">
             <h2 className="text-2xl md:text-3xl font-bold text-on-surface mb-4">
-              Ready to grow your practice?
+              The FetchRated National Pilot Programme
             </h2>
             <p className="text-on-surface-variant max-w-2xl mx-auto mb-8">
-              Join the FetchRated pilot and get verified reviews, increased visibility,
-              and access to exclusive practice resources.
+              Selected practices receive verified reviews, increased visibility, and
+              access to exclusive practice resources. Membership is by invitation —
+              if you&apos;d like us to consider your practice, register your interest.
             </p>
-            <a
-              href="/for-practices"
-              className="inline-flex items-center justify-center px-8 py-3 bg-primary text-white font-bold rounded-lg hover:bg-primary-container transition-colors"
-            >
-              Learn About the Pilot
-            </a>
+            <div className="flex flex-wrap items-center justify-center gap-4">
+              <a
+                href="/for-practices"
+                className="inline-flex items-center justify-center px-8 py-3 bg-primary text-white font-bold rounded-lg hover:bg-primary-container transition-colors"
+              >
+                Learn About the Pilot
+              </a>
+              <a
+                href="/for-practices/register-interest"
+                className="inline-flex items-center justify-center px-8 py-3 border border-outline-variant/30 text-primary font-bold rounded-lg hover:bg-surface-container-low transition-colors"
+              >
+                Register Your Interest
+              </a>
+            </div>
           </div>
         </section>
       </main>

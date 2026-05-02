@@ -139,7 +139,7 @@ export default async function Home() {
                   Received our letter?
                 </h2>
                 <p className="text-on-surface-variant text-lg leading-relaxed">
-                  If you've been invited to the FetchRated pilot, your place is reserved. You'll receive a free visibility audit, verified Google reviews from your customers, and a listing in our directory. With the CMA's new transparency requirements coming for every UK veterinary practice, verified quality data matters more than ever.
+                  If you&apos;ve been invited to the FetchRated National Pilot Programme, your place is reserved. You&apos;ll receive a free visibility audit, verified Google reviews from your customers, and a listing in our directory. With the CMA&apos;s new transparency requirements coming for every UK veterinary practice, verified quality data matters more than ever.
                 </p>
                 <a
                   href="/for-practices"

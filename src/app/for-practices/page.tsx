@@ -13,8 +13,8 @@ import {
 import { Shield, Scale, Eye, Star, BarChart3, Video, MapPin, ChevronDown, FileCheck, ArrowRight } from "lucide-react";
 
 export const metadata = {
-  title: "FetchRated Pilot Programme for Veterinary Practices | By Invitation",
-  description: "Free visibility audit, verified Google reviews, and CMA compliance support for invited UK veterinary practices.",
+  title: "National Pilot Programme for Veterinary Practices | FetchRated",
+  description: "Free visibility audit, verified Google reviews, and CMA compliance support for invited UK veterinary practices. By invitation.",
 };
 
 const qualificationSteps = [
@@ -144,12 +144,15 @@ export default function ForPracticesPage() {
             </Badge>
             <h1 className="font-headline text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-on-surface leading-[1.1] mb-8">
               Your practice has been selected for the{" "}
-              <span className="serif-italic font-medium">FetchRated pilot.</span>
+              <span className="serif-italic font-medium">National Pilot Programme.</span>
             </h1>
-            <p className="text-xl text-on-surface-variant max-w-xl leading-relaxed mb-10">
-              We've identified your practice as one that's already doing excellent work.
-              The pilot gives you a free visibility audit, verified Google reviews from your existing customers,
-              and a listing in our national directory. As the CMA introduces new transparency requirements for UK practices, the pilot also gives you a head start on what's coming.
+            <p className="text-xl text-on-surface-variant max-w-xl leading-relaxed mb-6">
+              If you&apos;ve received our letter, your place is reserved — we&apos;ve identified
+              your practice as one already doing excellent work. The pilot gives you
+              a free visibility audit, verified Google reviews from your existing customers,
+              and a listing in our national directory. As the CMA introduces new
+              transparency requirements for UK practices, the pilot also gives you a
+              head start on what&apos;s coming.
             </p>
             <div className="flex flex-wrap items-center gap-4">
               <Link
@@ -165,6 +168,16 @@ export default function ForPracticesPage() {
                 View Methodology
               </Link>
             </div>
+            <p className="mt-6 text-sm text-on-surface-variant">
+              Not received a letter?{" "}
+              <Link
+                href="/for-practices/register-interest"
+                className="text-primary font-semibold hover:underline"
+              >
+                Register your interest
+              </Link>
+              .
+            </p>
           </div>
 
           <div className="lg:col-span-5 flex justify-center">
