@@ -293,27 +293,27 @@ export default function HowWeAssessPage() {
 
         {/* Verification */}
         <section className="max-w-7xl mx-auto px-6 lg:px-8">
-          <Card className="p-8 md:p-12 bg-on-surface text-card">
+          <Card className="p-8 md:p-12 bg-primary/5 border-primary/20">
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div>
-                <h2 className="text-3xl md:text-4xl font-headline font-bold leading-tight mb-6">
+                <h2 className="text-3xl md:text-4xl font-headline font-bold leading-tight text-on-surface mb-6">
                   Every Badge is{" "}
-                  <span className="serif-italic font-medium text-secondary-container">
+                  <span className="serif-italic font-medium text-primary">
                     Verifiable.
                   </span>
                 </h2>
-                <p className="text-surface-container-high leading-relaxed mb-6">
+                <p className="text-on-surface-variant leading-relaxed mb-6">
                   When you see a FetchRated badge on a practice's website or window, you can verify
                   it's genuine. Each badge links to a verification page showing the practice's
                   current status and assessment date.
                 </p>
-                <p className="text-surface-container-high/70 text-sm">
+                <p className="text-on-surface-variant/80 text-sm">
                   This protects both pet owners (from fake badges) and practices (from competitors
                   misusing the mark).
                 </p>
               </div>
               <div className="flex justify-center">
-                <div className="w-48 h-48 rounded-lg bg-white/10 flex items-center justify-center">
+                <div className="w-48 h-48 rounded-lg bg-primary/10 flex items-center justify-center">
                   <Shield className="w-20 h-20 text-primary" />
                 </div>
               </div>
