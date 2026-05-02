@@ -117,11 +117,19 @@ SELECT
     ELSE NULL
   END as badge_tier,
 
+  -- Consolidator group attribution (for the six CMA-named groups: IVC
+  -- Evidensia, CVS Group, VetPartners, Linnaeus, Medivet, Pets at Home).
+  -- Surfacing the parent group is factual disclosure per the CMA's mandatory
+  -- branding remedy; LocationCard renders an "Owned by ..." label when set.
+  cg.name AS consolidator_group_name,
+  cg.slug AS consolidator_group_slug,
+
   -- Timestamps (for sitemap/caching)
   p.last_updated_at
 
 FROM locations p
 LEFT JOIN review_aggregates ra ON ra.location_id = p.id
+LEFT JOIN consolidator_groups cg ON cg.id = p.consolidator_group_id
 WHERE p.show_in_directory = TRUE
   AND p.business_status = 'OPERATIONAL'
   -- Suppress bare-page listings: an entry must have something a visitor can read.
