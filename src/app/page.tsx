@@ -13,7 +13,7 @@ import {
   Badge,
   WebSiteSchema,
 } from "@/components";
-import { getPillarArticles } from "@/lib/data/articles";
+import { getArticlesByAudience } from "@/lib/data/articles";
 import { getFeaturedListings } from "@/lib/data/locations";
 import { ClipboardCheck, Shield, Award, ArrowRight } from "lucide-react";
 
@@ -41,10 +41,17 @@ const howItWorksFeatures = [
 ];
 
 export default async function Home() {
-  const [featuredLocations, pillarGuides] = await Promise.all([
+  const [featuredLocations, allConsumerGuides] = await Promise.all([
     getFeaturedListings(3),
-    getPillarArticles("consumer"),
+    getArticlesByAudience("consumer"),
   ]);
+  // Pillars first (so the deepest guides lead), then fill with the most recent
+  // supporting articles up to four. Avoids a sparse one-card grid until more
+  // pillars exist.
+  const pillarGuides = [
+    ...allConsumerGuides.filter((a) => a.is_pillar),
+    ...allConsumerGuides.filter((a) => !a.is_pillar),
+  ].slice(0, 4);
   return (
     <div className="min-h-screen bg-surface">
       <WebSiteSchema />
