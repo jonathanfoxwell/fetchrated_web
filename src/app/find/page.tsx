@@ -16,6 +16,11 @@ import { Shield } from "lucide-react";
 
 const ITEMS_PER_PAGE = 24;
 
+// Render at request time. Search/location params change per visit and the
+// listings query is cheap; the alternative is Next.js's data cache pinning
+// supabase results across deploys, which produces stale empty pages.
+export const dynamic = 'force-dynamic';
+
 // Show every planned category. Non-vet categories carry `comingSoon: true` and
 // CategoryCard renders them grayscaled / unlinked — keeps the page conveying
 // the full breadth of FetchRated's coverage while making it clear that only

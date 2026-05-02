@@ -12,6 +12,13 @@ import { MapPin } from "lucide-react";
 
 const ITEMS_PER_PAGE = 24;
 
+// Render at request time. Without this, generateStaticParams pre-builds these
+// pages at deploy time and Vercel's data cache pins the supabase result
+// across deploys. We want fresh data on every request — getDirectoryListings
+// is already cheap, and getFeaturedListings / others that should be cached
+// are wrapped in unstable_cache with explicit tags.
+export const dynamic = 'force-dynamic';
+
 interface LocalVetsPageProps {
   params: Promise<{ location: string }>;
   searchParams: Promise<{ page?: string }>;
