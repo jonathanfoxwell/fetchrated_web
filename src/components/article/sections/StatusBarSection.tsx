@@ -1,4 +1,5 @@
 import { CheckCircle2, Clock, AlertTriangle } from 'lucide-react';
+import { InlineMarkdown } from '../InlineMarkdown';
 
 interface StatusBarSectionProps {
   status: 'active' | 'pending' | 'warning';
@@ -35,8 +36,14 @@ export function StatusBarSection({ status, title, subtitle, metrics }: StatusBar
         <div className="flex items-center gap-3">
           <Icon className="h-6 w-6" />
           <div>
-            <p className="font-semibold">{title}</p>
-            {subtitle && <p className="text-sm opacity-80">{subtitle}</p>}
+            <p className="font-semibold">
+              <InlineMarkdown>{title}</InlineMarkdown>
+            </p>
+            {subtitle && (
+              <p className="text-sm opacity-80">
+                <InlineMarkdown>{subtitle}</InlineMarkdown>
+              </p>
+            )}
           </div>
         </div>
 

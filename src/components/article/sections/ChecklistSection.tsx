@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { Check, ClipboardCheck } from 'lucide-react';
+import { InlineMarkdown } from '../InlineMarkdown';
 
 interface ChecklistSectionProps {
   title?: string;
@@ -71,11 +72,11 @@ export function ChecklistSection({ title, items }: ChecklistSectionProps) {
                         : 'text-on-surface'
                     }`}
                   >
-                    {item.title}
+                    <InlineMarkdown>{item.title}</InlineMarkdown>
                   </p>
                   {item.description && (
                     <p className="text-sm text-on-surface-variant mt-0.5">
-                      {item.description}
+                      <InlineMarkdown>{item.description}</InlineMarkdown>
                     </p>
                   )}
                 </div>

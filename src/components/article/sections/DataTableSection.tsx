@@ -1,3 +1,5 @@
+import { InlineMarkdown } from '../InlineMarkdown';
+
 interface DataTableSectionProps {
   title?: string;
   columns: { key: string; header: string; align?: string }[];
@@ -28,7 +30,7 @@ export function DataTableSection({ title, columns, data }: DataTableSectionProps
                       : 'text-left'
                   }`}
                 >
-                  {col.header}
+                  <InlineMarkdown>{col.header}</InlineMarkdown>
                 </th>
               ))}
             </tr>
@@ -47,7 +49,7 @@ export function DataTableSection({ title, columns, data }: DataTableSectionProps
                         : 'text-left'
                     }`}
                   >
-                    {row[col.key]}
+                    <InlineMarkdown>{row[col.key]}</InlineMarkdown>
                   </td>
                 ))}
               </tr>

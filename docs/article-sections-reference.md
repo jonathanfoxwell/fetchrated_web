@@ -4,6 +4,25 @@
 
 ---
 
+## Markdown is supported in every text field
+
+Inline markdown — `**bold**`, `*italic*`, `[link text](https://example.com)`, `` `code` `` — works in **every** text field on every section type, not just inside `markdown` sections. That covers:
+
+- `callout.title`, `callout.content`
+- `numbered-section.title`, `numbered-section.content`
+- `pro-tip.title`, `pro-tip.quote`
+- `summary-box.title`, `summary-box.content`
+- `checklist.items[].title`, `checklist.items[].description`
+- `data-table.columns[].header`, `data-table.data[].*`
+- `faq.items[].question`, `faq.items[].answer`
+- `key-metrics.metrics[].label`
+- `pull-quote.quote`
+- `status-bar.title`, `status-bar.subtitle`
+
+For multi-paragraph block content (line breaks, multiple paragraphs in one field), use a `markdown` section. The inline helper used elsewhere intentionally flattens paragraph breaks so single-line content stays in its layout container without producing nested `<p>` tags.
+
+---
+
 ## Section Types
 
 ### markdown

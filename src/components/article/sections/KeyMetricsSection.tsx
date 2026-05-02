@@ -1,3 +1,5 @@
+import { InlineMarkdown } from '../InlineMarkdown';
+
 interface KeyMetricsSectionProps {
   metrics: { value: string; unit?: string; label: string }[];
 }
@@ -19,7 +21,7 @@ export function KeyMetricsSection({ metrics }: KeyMetricsSectionProps) {
             )}
           </div>
           <p className="mt-2 text-sm text-on-surface-variant font-medium">
-            {metric.label}
+            <InlineMarkdown>{metric.label}</InlineMarkdown>
           </p>
         </div>
       ))}

@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { ChevronDown, HelpCircle } from 'lucide-react';
+import { InlineMarkdown } from '../InlineMarkdown';
 
 interface FAQSectionProps {
   title?: string;
@@ -30,7 +31,7 @@ export function FAQSection({ title, items }: FAQSectionProps) {
                 className="w-full flex items-center justify-between gap-4 px-6 py-4 text-left hover:bg-surface-container-low transition-colors"
               >
                 <span className="font-medium text-on-surface">
-                  {item.question}
+                  <InlineMarkdown>{item.question}</InlineMarkdown>
                 </span>
                 <ChevronDown
                   className={`h-5 w-5 text-on-surface-variant flex-shrink-0 transition-transform ${
@@ -45,7 +46,7 @@ export function FAQSection({ title, items }: FAQSectionProps) {
                 }`}
               >
                 <div className="px-6 pb-4 text-on-surface-variant">
-                  {item.answer}
+                  <InlineMarkdown>{item.answer}</InlineMarkdown>
                 </div>
               </div>
             </div>

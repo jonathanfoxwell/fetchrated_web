@@ -1,4 +1,5 @@
 import { Quote } from 'lucide-react';
+import { InlineMarkdown } from '../InlineMarkdown';
 
 interface ProTipSectionProps {
   title?: string;
@@ -13,11 +14,13 @@ export function ProTipSection({ title, quote, author, authorRole }: ProTipSectio
       <Quote className="absolute top-4 right-4 h-12 w-12 text-primary/20" />
 
       {title && (
-        <p className="text-sm font-semibold text-primary mb-2">{title}</p>
+        <p className="text-sm font-semibold text-primary mb-2">
+          <InlineMarkdown>{title}</InlineMarkdown>
+        </p>
       )}
 
       <blockquote className="text-lg text-on-primary-container font-medium leading-relaxed mb-4 relative z-10">
-        "{quote}"
+        &ldquo;<InlineMarkdown>{quote}</InlineMarkdown>&rdquo;
       </blockquote>
 
       {(author || authorRole) && (

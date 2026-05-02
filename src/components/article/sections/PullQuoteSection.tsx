@@ -1,3 +1,5 @@
+import { InlineMarkdown } from '../InlineMarkdown';
+
 interface PullQuoteSectionProps {
   quote: string;
   author?: string;
@@ -31,7 +33,7 @@ export function PullQuoteSection({ quote, author, source, variant = 'default' }:
           isFeatured ? 'text-2xl md:text-[1.65rem]' : 'text-lg'
         }`}
       >
-        &ldquo;{quote}&rdquo;
+        &ldquo;<InlineMarkdown>{quote}</InlineMarkdown>&rdquo;
       </p>
 
       {(author || source) && (

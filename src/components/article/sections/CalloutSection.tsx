@@ -1,5 +1,5 @@
 import { Info, Lightbulb, AlertTriangle, AlertCircle } from 'lucide-react';
-import { processDynamicTokens } from '../dynamic-text';
+import { InlineMarkdown } from '../InlineMarkdown';
 
 interface CalloutSectionProps {
   variant: 'info' | 'tip' | 'warning' | 'important';
@@ -48,9 +48,13 @@ export function CalloutSection({ variant, title, content }: CalloutSectionProps)
         <Icon className={`${styles.iconColor} h-5 w-5 flex-shrink-0 mt-0.5`} />
         <div className="space-y-1">
           {title && (
-            <p className={`${styles.title} font-semibold`}>{title}</p>
+            <p className={`${styles.title} font-semibold`}>
+              <InlineMarkdown>{title}</InlineMarkdown>
+            </p>
           )}
-          <p className={styles.content}>{processDynamicTokens(content)}</p>
+          <p className={styles.content}>
+            <InlineMarkdown>{content}</InlineMarkdown>
+          </p>
         </div>
       </div>
     </div>
