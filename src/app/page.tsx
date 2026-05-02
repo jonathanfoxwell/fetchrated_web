@@ -87,7 +87,7 @@ export default async function Home() {
         <section className="max-w-7xl mx-auto px-6 lg:px-8 py-24">
           <SectionHeader
             title={<>Notable UK <span className="serif-italic">vet practices</span></>}
-            subtitle="A curated selection from our directory — editorial picks based on the public information available today."
+            subtitle="A curated selection from our directory — editorial picks drawn from public information."
           />
           <LocationCardGrid locations={featuredLocations} />
         </section>

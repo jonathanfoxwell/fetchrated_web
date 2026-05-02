@@ -90,7 +90,7 @@ export default async function LocalVetsPage({ params, searchParams }: LocalVetsP
               Vets in <span className="serif-italic">{locationName}</span>
             </h1>
             <p className="text-xl text-on-surface-variant max-w-2xl">
-              Browse veterinary practices in {locationName} from our UK directory. Listings are drawn from public information; once the FetchRated pilot is underway, independent assessment results will appear here too.
+              Browse veterinary practices in {locationName} from our UK directory — contact details, opening hours, reviews, and (where available) summaries built from public information.
             </p>
           </div>
         </section>
@@ -143,10 +143,10 @@ export default async function LocalVetsPage({ params, searchParams }: LocalVetsP
             </h2>
             <div className="prose prose-lg text-on-surface-variant max-w-none">
               <p>
-                FetchRated's UK directory pulls veterinary practices from public information — contact details, opening hours, Google reviews, and (where available) AI-generated summaries based on public sources.
+                FetchRated's UK directory combines public information — contact details, opening hours, Google reviews, and AI-generated summaries — with our independent assessment of each practice. As practices complete the FetchRated assessment, their results appear alongside the public data.
               </p>
               <p>
-                The independent FetchRated assessment is being introduced through a pilot programme. Once practices have completed the assessment, you'll see their results published here. For now, treat this directory as a starting point: combine the listing information with your own visit and the questions in our <a href="/learn/questions-to-ask-your-vet">choosing-a-vet guide</a> to make an informed decision.
+                Combine what you read here with your own visit and the questions in our <a href="/learn/questions-to-ask-your-vet">choosing-a-vet guide</a> to make an informed decision.
               </p>
             </div>
           </Card>
