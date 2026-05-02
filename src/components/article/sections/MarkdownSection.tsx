@@ -25,6 +25,10 @@ export function MarkdownSection({ content }: MarkdownSectionProps) {
         'prose-a:text-primary prose-a:no-underline hover:prose-a:underline',
         'prose-strong:text-on-surface',
         'prose-li:text-on-surface-variant',
+        // Zero out top margin on the first child of any markdown block — prevents
+        // prose-h2:mt-10 from stacking with the wrapper's padding when an article
+        // (or any markdown section) opens directly with a heading.
+        '[&>:first-child]:mt-0',
       ].join(' ')}
     >
       <ReactMarkdown>{processDynamicTokens(content)}</ReactMarkdown>
