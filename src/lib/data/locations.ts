@@ -186,11 +186,11 @@ export const getLocationBySlug = unstable_cache(
 
     return data as DirectoryListing;
   },
-  // Cache key bumped to v2 after migration 0034 widened the directory_listings
-  // view (ai_description / featured reviews / accessibility / parking / hours).
-  // Vercel's Data Cache persists across deploys, so the old keyParts kept
-  // serving pre-migration rows; the new key starts a fresh entry.
-  ['location-v2'],
+  // Cache key bumped twice now: v2 after migration 0034 widened the view,
+  // v3 after the Option A consolidator reconciliation invalidated the v2
+  // snapshot. Vercel's Data Cache persists across deploys; bumping is the
+  // only way to force a fresh fetch when the underlying data changed.
+  ['location-v3'],
   { tags: ['directory'], revalidate: 3600 }
 );
 
@@ -213,7 +213,7 @@ export const getLocationById = unstable_cache(
 
     return data as DirectoryListing;
   },
-  ['location-by-id-v2'],
+  ['location-by-id-v3'],
   { tags: ['directory'], revalidate: 3600 }
 );
 
