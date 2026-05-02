@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import Link from "next/link";
 import {
   Navigation,
   Footer,
@@ -10,13 +11,14 @@ import {
   BreadcrumbSchema,
 } from "@/components";
 import { SectionRenderer } from "@/components/article/SectionRenderer";
+import { ArticleActions } from "@/components/article/ArticleActions";
 import {
   getArticleBySlug,
   getRelatedArticles,
   getAllPublishedSlugs,
   type Article,
 } from "@/lib/data/articles";
-import { Clock, Share2, Bookmark } from "lucide-react";
+import { Clock } from "lucide-react";
 
 interface GuidePageProps {
   params: Promise<{ slug: string }>;
@@ -109,7 +111,18 @@ async function DatabaseArticle({ article }: { article: Article }) {
               {article.is_pillar && (
                 <Badge className="bg-primary/10 text-primary">Pillar Guide</Badge>
               )}
-              <Badge variant="outline">{article.category}</Badge>
+              <Link
+                href={`/learn/topic/${article.category.toLowerCase()}`}
+                className="inline-flex"
+                aria-label={`Browse all ${article.category} guides`}
+              >
+                <Badge
+                  variant="outline"
+                  className="hover:border-primary hover:text-primary transition-colors cursor-pointer"
+                >
+                  {article.category}
+                </Badge>
+              </Link>
               {article.read_time && (
                 <span className="flex items-center gap-1 text-sm text-on-surface-variant">
                   <Clock className="w-4 h-4" />
@@ -122,23 +135,16 @@ async function DatabaseArticle({ article }: { article: Article }) {
               {article.title}
             </h1>
 
-            <p className="text-xl text-on-surface-variant leading-relaxed mb-8 max-w-3xl">
+            <p className="text-xl text-on-surface-variant leading-relaxed mb-6 max-w-3xl">
               {article.excerpt}
             </p>
 
-            <div className="flex items-center gap-4 pb-8 border-b border-outline-variant/20">
-              <span className="flex items-center gap-2 text-sm text-on-surface-variant cursor-pointer hover:text-primary transition-colors">
-                <Share2 className="w-4 h-4" />
-                Share
-              </span>
-              <span className="flex items-center gap-2 text-sm text-on-surface-variant cursor-pointer hover:text-primary transition-colors">
-                <Bookmark className="w-4 h-4" />
-                Save
-              </span>
+            <div className="pb-6 border-b border-outline-variant/20">
+              <ArticleActions title={article.title} excerpt={article.excerpt} url={articleUrl} />
             </div>
           </header>
 
-          <div className="py-12">
+          <div className="pt-6 pb-12">
             <article className="article-content">
               <SectionRenderer sections={article.sections} />
             </article>
@@ -146,7 +152,7 @@ async function DatabaseArticle({ article }: { article: Article }) {
         </div>
 
         {relatedArticles.length > 0 && (
-          <section className="bg-surface-container py-24">
+          <section className="bg-surface-container py-24 print:hidden">
             <div className="max-w-6xl mx-auto px-6 lg:px-8">
               <h2 className="text-2xl font-bold mb-8">Related guides</h2>
               <GuideCardGrid
@@ -165,7 +171,7 @@ async function DatabaseArticle({ article }: { article: Article }) {
         )}
 
         {article.cta_type && (
-          <section className="max-w-6xl mx-auto px-6 lg:px-8 py-24">
+          <section className="max-w-6xl mx-auto px-6 lg:px-8 py-24 print:hidden">
             <Card className="p-8 md:p-12 text-center bg-primary/5 border-primary/20">
               <h2 className="text-2xl font-bold mb-4">{getCTATitle(article.cta_type)}</h2>
               <p className="text-on-surface-variant mb-6 max-w-xl mx-auto">

@@ -260,6 +260,36 @@
     @apply font-sans;
   }
 
+  /* Clean print output for article pages — strips chrome (nav, footer, related
+     cards, CTAs, action buttons via the print:hidden utility on the components
+     themselves) and removes background colours that waste ink. */
+  @media print {
+    body {
+      background: white !important;
+      color: black !important;
+    }
+    nav,
+    footer,
+    [data-print-hide],
+    .print-hide {
+      display: none !important;
+    }
+    a {
+      color: inherit !important;
+      text-decoration: underline;
+    }
+    a[href]::after {
+      content: " (" attr(href) ")";
+      font-size: 0.85em;
+      color: #555;
+    }
+    /* Don't append URLs for relative or anchor links — too noisy in print. */
+    a[href^="#"]::after,
+    a[href^="/"]::after {
+      content: "";
+    }
+  }
+
   /* Typography utilities */
   .font-headline {
     font-family: var(--font-headline), serif;
