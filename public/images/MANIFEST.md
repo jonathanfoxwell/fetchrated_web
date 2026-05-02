@@ -39,8 +39,17 @@ Source resolution: each image is fetched at `w=1600&q=80&fm=jpg&fit=max` from `i
 | `vaccination-schedule.jpg` | [1548767797-d8c844163c4c](https://unsplash.com/photos/1548767797-d8c844163c4c) | "Pet vaccination schedule" |
 | `grooming-signs.jpg` | [1534361960057-19889db9621e](https://unsplash.com/photos/1534361960057-19889db9621e) | "5 signs your pet needs grooming" |
 | `puppy-training.jpg` | [1601758228041-f3b2795255f1](https://unsplash.com/photos/1601758228041-f3b2795255f1) | "Puppy training basics" |
-| `pet-insurance.jpg` | [1450778869180-41d0601e046e](https://unsplash.com/photos/1450778869180-41d0601e046e) | "Choosing pet insurance"; "Understanding vet fees" |
+| `pet-insurance.jpg` | [1450778869180-41d0601e046e](https://unsplash.com/photos/1450778869180-41d0601e046e) | "UK Pet Insurance Guide" |
 | `emergency-vet.jpg` | [1576201836106-db1758fd1c97](https://unsplash.com/photos/1576201836106-db1758fd1c97) | "Emergency vet: when to go" |
+| `vet-registration-check-uk.jpg` | [9htTVAs3rAM](https://unsplash.com/photos/9htTVAs3rAM) | "How to Verify Your UK Vet" — photo by [Matt Seymour](https://unsplash.com/@mattseymour) |
+| `questions-to-ask-your-vet.jpg` | [TFJw-mTWw_U](https://unsplash.com/photos/TFJw-mTWw_U) | "10 Questions to Ask Before Registering with a Vet" — photo by [National Cancer Institute](https://unsplash.com/@nci) |
+| `uk-microchipping-rules.jpg` | [F57xLufncj8](https://unsplash.com/photos/F57xLufncj8) | "Microchipping in the UK" — photo by [J. Balla Photography](https://unsplash.com/@jballa) |
+| `understanding-uk-vet-fees.jpg` | [T470rcAf6no](https://unsplash.com/photos/T470rcAf6no) | "UK Vet Fees Explained" — photo by [Thức Trần](https://unsplash.com/@thucne) |
+| `dog-anxiety-at-the-vet.jpg` | [loJL4ijUobg](https://unsplash.com/photos/loJL4ijUobg) | "Dog Anxiety at the Vet" — photo by [Karsten Winegeart](https://unsplash.com/@_karsten) |
+| `cat-stress-at-the-vet.jpg` | [pOpawyTdCxw](https://unsplash.com/photos/pOpawyTdCxw) | "Cat Stress at the Vet" — photo by [Robert Larsson](https://unsplash.com/@squareddesign) |
+| `when-to-neuter-your-pet.jpg` | [DhoOQwfzPqc](https://unsplash.com/photos/DhoOQwfzPqc) | "When to Neuter Your Pet" — photo by [Austin Kirk](https://unsplash.com/@austinkirk) |
+| `senior-pet-care-uk.jpg` | [qtkpOxCpl0Y](https://unsplash.com/photos/qtkpOxCpl0Y) | "Senior Pet Care" — photo by [Priscilla Du Preez](https://unsplash.com/@priscilladupreez) |
+| `pet-first-aid-uk.jpg` | [XMfLEEjyWs8](https://unsplash.com/photos/XMfLEEjyWs8) | "Pet First Aid Before You Reach the Vet" — photo by [Tadeusz Lakota](https://unsplash.com/@tadekl) |
 
 ## directory/ — Directory listing imagery pool
 
