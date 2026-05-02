@@ -32,8 +32,8 @@ export async function generateMetadata({ params }: LocalVetsPageProps) {
     .join(' ');
 
   return {
-    title: `Vets in ${locationName} | FetchRated Verified Practices`,
-    description: `Find verified veterinary practices in ${locationName}. Read independent reviews and compare quality ratings.`,
+    title: `Vets in ${locationName} | FetchRated`,
+    description: `Browse veterinary practices in ${locationName} from our UK directory, drawn from public information.`,
   };
 }
 
@@ -83,7 +83,7 @@ export default async function LocalVetsPage({ params, searchParams }: LocalVetsP
               Vets in <span className="serif-italic">{locationName}</span>
             </h1>
             <p className="text-xl text-on-surface-variant max-w-2xl">
-              Find verified veterinary practices in {locationName}. All practices listed have been independently assessed against FetchRated standards.
+              Browse veterinary practices in {locationName} from our UK directory. Listings are drawn from public information; once the FetchRated pilot is underway, independent assessment results will appear here too.
             </p>
           </div>
         </section>
@@ -97,7 +97,7 @@ export default async function LocalVetsPage({ params, searchParams }: LocalVetsP
         <section className="max-w-7xl mx-auto px-6 lg:px-8 mb-16">
           <div className="flex items-center justify-between mb-8">
             <h2 className="text-2xl font-bold text-on-surface">
-              {totalCount} Verified Vets
+              {totalCount} {totalCount === 1 ? "practice" : "practices"} listed
             </h2>
             <span className="text-sm text-on-surface-variant">
               Sorted by rating
@@ -116,35 +116,30 @@ export default async function LocalVetsPage({ params, searchParams }: LocalVetsP
             <Card className="p-12 text-center">
               <h3 className="text-xl font-bold mb-2">No practices found</h3>
               <p className="text-on-surface-variant mb-6">
-                We don't have verified practices in {locationName} yet. Check back soon or search another location.
+                We don't have any practices listed in {locationName} yet. Try searching another location or browsing the full directory.
               </p>
               <a
-                href="/find/vets"
-                className="inline-flex items-center justify-center h-10 px-6 bg-primary text-white font-semibold text-sm rounded-lg"
+                href="/find"
+                className="inline-flex items-center justify-center h-10 px-6 bg-primary text-on-primary font-semibold text-sm rounded-lg"
               >
-                Browse All Vets
+                Browse the directory
               </a>
             </Card>
           )}
         </section>
 
-        {/* About Local Vets */}
+        {/* About this directory */}
         <section className="max-w-7xl mx-auto px-6 lg:px-8">
           <Card className="p-8 md:p-12 bg-surface-container-low border-outline-variant/10">
             <h2 className="text-2xl font-bold text-on-surface mb-4">
-              About Vets in {locationName}
+              About this listing
             </h2>
             <div className="prose prose-lg text-on-surface-variant max-w-none">
               <p>
-                All veterinary practices listed on FetchRated have been independently
-                assessed against our national standards. We evaluate practices across
-                four key dimensions: online visibility, review quality, review authenticity,
-                and competitive position.
+                FetchRated's UK directory pulls veterinary practices from public information — contact details, opening hours, Google reviews, and (where available) AI-generated summaries based on public sources.
               </p>
               <p>
-                Each practice in {locationName} has earned a FetchRated trust mark—either
-                Verified, Excellent, or Outstanding—based on their assessed performance.
-                This helps you make an informed choice about your pet's healthcare.
+                The independent FetchRated assessment is being introduced through a pilot programme. Once practices have completed the assessment, you'll see their results published here. For now, treat this directory as a starting point: combine the listing information with your own visit and the questions in our <a href="/learn/questions-to-ask-your-vet">choosing-a-vet guide</a> to make an informed decision.
               </p>
             </div>
           </Card>
