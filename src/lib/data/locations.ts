@@ -420,6 +420,40 @@ export const getLocationsByIds = unstable_cache(
 );
 
 /**
+ * Other practices in the same city, excluding the current one. Used for the
+ * "Other vets in [city]" cross-link block on practice detail pages — drives
+ * topical-internal-linking + helps Google understand local clusters.
+ *
+ * Cached separately per (city, excludeId) so unrelated practice pages don't
+ * pollute each other's cache. revalidate: 1h matches getLocationBySlug.
+ */
+export async function getOtherLocationsInCity(
+  city: string,
+  excludeId: string,
+  limit = 6,
+): Promise<LocationCard[]> {
+  if (!city) return [];
+
+  const supabase = createServerClient();
+  const { data, error } = await supabase
+    .from('directory_listings')
+    .select('id, name, slug, city, postcode, logo_url, headline, average_rating, total_reviews, badge_tier, is_fetchrated_member, consolidator_group_name, consolidator_group_slug')
+    .ilike('city', city)
+    .neq('id', excludeId)
+    .eq('vertical_type', 'vet')
+    .order('average_rating', { ascending: false, nullsFirst: false })
+    .order('total_reviews', { ascending: false, nullsFirst: false })
+    .limit(limit);
+
+  if (error) {
+    console.error('Error fetching other locations in city:', error);
+    return [];
+  }
+
+  return (data ?? []) as LocationCard[];
+}
+
+/**
  * Get all location slugs for sitemap.
  */
 export async function getAllLocationSlugs(): Promise<{ slug: string; last_updated_at: string }[]> {

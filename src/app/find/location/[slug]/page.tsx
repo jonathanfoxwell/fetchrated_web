@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import Link from "next/link";
 import {
   Navigation,
   Footer,
@@ -15,8 +16,9 @@ import {
   LocationReviews,
   LocationAccessibility,
   LocationMap,
+  LocationCardGrid,
 } from "@/components/location";
-import { getLocationBySlug } from "@/lib/data/locations";
+import { getLocationBySlug, getOtherLocationsInCity } from "@/lib/data/locations";
 import { getTodayHours, isOpenNow, yearsOperating } from "@/lib/data/opening-hours";
 import ReactMarkdown from "react-markdown";
 
@@ -66,6 +68,15 @@ export default async function LocationPage({ params }: LocationPageProps) {
   const openNow = isOpenNow(location.current_opening_hours_json);
   const years = yearsOperating(location.opening_date);
 
+  // Topical-internal-linking block — other vets in the same city. Helps both
+  // SEO (Google clusters local entities) and user navigation.
+  const otherInCity = location.city
+    ? await getOtherLocationsInCity(location.city, location.id, 6)
+    : [];
+  const citySlug = location.city
+    ? location.city.toLowerCase().replace(/\s+/g, "-")
+    : null;
+
   return (
     <div className="min-h-screen bg-surface">
       <LocalBusinessSchema
@@ -73,6 +84,7 @@ export default async function LocationPage({ params }: LocationPageProps) {
           name: location.name,
           address: location.formatted_address || "",
           city: location.city || "",
+          postcode: location.postcode || undefined,
           phone: location.phone || undefined,
           email: location.email || undefined,
           website: location.website || undefined,
@@ -80,6 +92,9 @@ export default async function LocationPage({ params }: LocationPageProps) {
           averageRating: location.average_rating || undefined,
           totalReviews: location.total_reviews || undefined,
           openingHours: location.opening_hours || undefined,
+          latitude: location.latitude,
+          longitude: location.longitude,
+          image: location.cover_image_url || location.logo_url || undefined,
         }}
       />
       <BreadcrumbSchema
@@ -176,6 +191,25 @@ export default async function LocationPage({ params }: LocationPageProps) {
             </div>
           </div>
         </div>
+
+        {otherInCity.length > 0 && location.city && (
+          <section className="max-w-6xl mx-auto px-6 lg:px-8 py-12 border-t border-outline-variant/10">
+            <div className="flex flex-wrap items-baseline justify-between gap-4 mb-8">
+              <h2 className="text-2xl md:text-3xl font-headline font-bold text-on-surface">
+                Other vets in <span className="serif-italic">{location.city}</span>
+              </h2>
+              {citySlug && (
+                <Link
+                  href={`/find/vets/${citySlug}`}
+                  className="text-sm font-semibold text-primary hover:underline"
+                >
+                  See all in {location.city} →
+                </Link>
+              )}
+            </div>
+            <LocationCardGrid locations={otherInCity} />
+          </section>
+        )}
       </main>
 
       <Footer />

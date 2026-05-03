@@ -71,6 +71,7 @@ interface LocalBusinessSchemaProps {
     name: string;
     address: string;
     city: string;
+    postcode?: string;
     phone?: string;
     email?: string;
     website?: string;
@@ -78,6 +79,9 @@ interface LocalBusinessSchemaProps {
     averageRating?: number;
     totalReviews?: number;
     openingHours?: OpeningHours;
+    latitude?: number | null;
+    longitude?: number | null;
+    image?: string;
   };
 }
 
@@ -92,21 +96,41 @@ const dayMap: Record<string, string> = {
 };
 
 export function LocalBusinessSchema({ location }: LocalBusinessSchemaProps) {
+  const address: Record<string, unknown> = {
+    "@type": "PostalAddress",
+    streetAddress: location.address,
+    addressLocality: location.city,
+    addressCountry: "GB",
+  };
+  if (location.postcode) address.postalCode = location.postcode;
+
   const data: Record<string, unknown> = {
     "@context": "https://schema.org",
     "@type": "VeterinaryCare",
     name: location.name,
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: location.address,
-      addressLocality: location.city,
-      addressCountry: "GB",
-    },
+    address,
     description: location.description,
     telephone: location.phone,
     email: location.email,
     url: location.website,
   };
+
+  // Geo coordinates unlock map-based rich-result variants. Only emit when
+  // both lat and lng are present and finite.
+  if (
+    typeof location.latitude === "number" && Number.isFinite(location.latitude) &&
+    typeof location.longitude === "number" && Number.isFinite(location.longitude)
+  ) {
+    data.geo = {
+      "@type": "GeoCoordinates",
+      latitude: location.latitude,
+      longitude: location.longitude,
+    };
+  }
+
+  if (location.image) {
+    data.image = location.image;
+  }
 
   if (location.averageRating && location.totalReviews) {
     data.aggregateRating = {
