@@ -455,20 +455,32 @@ export async function getOtherLocationsInCity(
 
 /**
  * Get all location slugs for sitemap.
+ *
+ * Paginated because Supabase's REST endpoint caps a single response at 1,000
+ * rows by default. With 4k+ practices in the directory, an unpaginated
+ * `.select()` was silently truncating the sitemap.
  */
 export async function getAllLocationSlugs(): Promise<{ slug: string; last_updated_at: string }[]> {
   const supabase = createServerClient();
+  const PAGE_SIZE = 1000;
+  const all: { slug: string; last_updated_at: string }[] = [];
 
-  const { data, error } = await supabase
-    .from('directory_listings')
-    .select('slug, last_updated_at');
+  for (let from = 0; ; from += PAGE_SIZE) {
+    const { data, error } = await supabase
+      .from('directory_listings')
+      .select('slug, last_updated_at')
+      .range(from, from + PAGE_SIZE - 1);
 
-  if (error) {
-    console.error('Error fetching location slugs:', error);
-    return [];
+    if (error) {
+      console.error('Error fetching location slugs:', error);
+      break;
+    }
+    if (!data || data.length === 0) break;
+    all.push(...data);
+    if (data.length < PAGE_SIZE) break;
   }
 
-  return data ?? [];
+  return all;
 }
 
 /**
@@ -477,23 +489,31 @@ export async function getAllLocationSlugs(): Promise<{ slug: string; last_update
 export const getDirectoryCities = unstable_cache(
   async (): Promise<{ city: string; count: number }[]> => {
     const supabase = createServerClient();
-
-    const { data, error } = await supabase
-      .from('directory_listings')
-      .select('city');
-
-    if (error) {
-      console.error('Error fetching directory cities:', error);
-      return [];
-    }
-
-    // Aggregate in JS since Supabase doesn't support GROUP BY via REST
+    const PAGE_SIZE = 1000;
     const counts: Record<string, number> = {};
-    (data ?? []).forEach((row: { city: string | null }) => {
-      if (row.city) {
-        counts[row.city] = (counts[row.city] || 0) + 1;
+
+    // Page through all listings — same Supabase 1,000-row cap as
+    // getAllLocationSlugs. Without pagination the city aggregate was derived
+    // from only the first 1k listings, undercounting both city count and
+    // per-city totals.
+    for (let from = 0; ; from += PAGE_SIZE) {
+      const { data, error } = await supabase
+        .from('directory_listings')
+        .select('city')
+        .range(from, from + PAGE_SIZE - 1);
+
+      if (error) {
+        console.error('Error fetching directory cities:', error);
+        break;
       }
-    });
+      if (!data || data.length === 0) break;
+      data.forEach((row: { city: string | null }) => {
+        if (row.city) {
+          counts[row.city] = (counts[row.city] || 0) + 1;
+        }
+      });
+      if (data.length < PAGE_SIZE) break;
+    }
 
     return Object.entries(counts)
       .map(([city, count]) => ({ city, count }))
