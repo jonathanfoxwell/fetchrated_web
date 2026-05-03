@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Newsreader, Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
 import { OrganizationSchema } from "@/components/schema";
 import "./globals.css";
@@ -80,6 +81,7 @@ export default function RootLayout({
         <OrganizationSchema />
         {children}
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
