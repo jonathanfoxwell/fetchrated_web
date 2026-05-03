@@ -176,14 +176,6 @@ async function DatabaseArticle({ article }: { article: Article }) {
           </div>
         </div>
 
-        {/* High-intent find-a-vet block — geolocation card + rotating city
-            quick-links. Drives readers from condition/care content into the
-            directory, and gives Google rotating internal-link signals into
-            city pages. Server-rendered (NearMeCard inside is client). */}
-        <div className="bg-surface-container-low print:hidden">
-          <ArticleFindVet />
-        </div>
-
         {relatedArticles.length > 0 && (
           <section className="bg-surface-container py-24 print:hidden">
             <div className="max-w-6xl mx-auto px-6 lg:px-8">
@@ -203,7 +195,16 @@ async function DatabaseArticle({ article }: { article: Article }) {
           </section>
         )}
 
-        {article.cta_type && (
+        {/* Closer: for find-location articles, render the richer ArticleFindVet
+            block (geolocation + rotating city links) — replaces the generic
+            cta_type Card to avoid duplicating the same find-a-vet intent.
+            For non-find-location cta types (join-pilot, get-verified, custom),
+            keep the generic Card since ArticleFindVet doesn't apply. */}
+        {article.cta_type === "find-location" ? (
+          <div className="bg-surface-container-low print:hidden">
+            <ArticleFindVet />
+          </div>
+        ) : article.cta_type ? (
           <section className="max-w-6xl mx-auto px-6 lg:px-8 py-24 print:hidden">
             <Card className="p-8 md:p-12 text-center bg-primary/5 border-primary/20">
               <h2 className="text-2xl font-bold mb-4">{getCTATitle(article.cta_type)}</h2>
@@ -218,7 +219,7 @@ async function DatabaseArticle({ article }: { article: Article }) {
               </a>
             </Card>
           </section>
-        )}
+        ) : null}
       </main>
 
       <Footer />
