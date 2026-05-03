@@ -522,3 +522,22 @@ export const getDirectoryCities = unstable_cache(
   ['directory-cities'],
   { tags: ['directory'], revalidate: 3600 }
 );
+
+/**
+ * Look up the actual city name from a URL slug. Slugs are produced by
+ * `city.toLowerCase().replace(/\s+/g, '-')`. Naive reverse (split on '-' and
+ * title-case) corrupts UK place names that contain hyphens — e.g. the slug
+ * 'sutton-in-ashfield' for the city 'Sutton-in-Ashfield' would reverse to
+ * 'Sutton In Ashfield', which then fails to match the database (city
+ * 'Sutton-in-Ashfield' isn't 'Sutton In Ashfield') and produces 0 results.
+ *
+ * Returns the canonical city name when found, or null when no city in the
+ * directory matches the slug.
+ */
+export async function getCityNameBySlug(slug: string): Promise<string | null> {
+  const cities = await getDirectoryCities();
+  const match = cities.find(
+    (c) => c.city.toLowerCase().replace(/\s+/g, '-') === slug
+  );
+  return match ? match.city : null;
+}

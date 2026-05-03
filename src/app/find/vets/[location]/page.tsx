@@ -11,7 +11,7 @@ import {
 } from "@/components";
 import { LocationCardGrid } from "@/components/location";
 import { Pagination } from "@/components/pagination";
-import { getDirectoryListings, getDirectoryCities } from "@/lib/data/locations";
+import { getDirectoryListings, getDirectoryCities, getCityNameBySlug } from "@/lib/data/locations";
 import { getArticlesByAudience } from "@/lib/data/articles";
 import { MapPin, Star, ChevronDown, BarChart3 } from "lucide-react";
 
@@ -38,7 +38,12 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: LocalVetsPageProps) {
   const { location } = await params;
-  const locationName = location
+
+  // Resolve the slug to the canonical city name — naive title-casing corrupts
+  // hyphenated UK place names (Sutton-in-Ashfield, Stoke-on-Trent, etc.) and
+  // makes the DB query miss. Fall back to title-case only when no match exists.
+  const canonical = await getCityNameBySlug(location);
+  const locationName = canonical ?? location
     .split('-')
     .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
     .join(' ');
@@ -95,8 +100,12 @@ export default async function LocalVetsPage({ params, searchParams }: LocalVetsP
   const { location } = await params;
   const { page } = await searchParams;
 
-  // Convert slug back to city name for DB query
-  const locationName = location
+  // Resolve slug → canonical city name (preserving hyphens in real place names
+  // like 'Sutton-in-Ashfield'). Fall back to naive title-case only when the
+  // slug doesn't match any known city — in that case the DB query will return
+  // 0 results and the no-results card renders, which is the right UX.
+  const canonical = await getCityNameBySlug(location);
+  const locationName = canonical ?? location
     .split('-')
     .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
     .join(' ');
