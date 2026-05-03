@@ -34,8 +34,8 @@ export async function generateMetadata({ params }: CategoryPageProps) {
   }
 
   return {
-    title: `${categoryData.name} | Find Verified ${categoryData.name} | FetchRated`,
-    description: `Find verified ${categoryData.name.toLowerCase()} in your area. ${categoryData.description}`,
+    title: `${categoryData.name} | FetchRated`,
+    description: `${categoryData.description}. Independent UK directory of ${categoryData.name.toLowerCase()}.`,
     alternates: { canonical: `https://fetchrated.com/find/${category}` },
     // Coming-soon categories carry placeholder content only — keep them out of the
     // index until real practice data lands, but let crawlers walk links out.

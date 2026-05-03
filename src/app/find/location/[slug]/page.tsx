@@ -5,6 +5,7 @@ import {
   Footer,
   Breadcrumbs,
   Card,
+  GuideCardGrid,
   LocalBusinessSchema,
   BreadcrumbSchema,
 } from "@/components";
@@ -19,6 +20,7 @@ import {
   LocationCardGrid,
 } from "@/components/location";
 import { getLocationBySlug, getOtherLocationsInCity } from "@/lib/data/locations";
+import { getArticlesByAudience } from "@/lib/data/articles";
 import { getTodayHours, isOpenNow, yearsOperating } from "@/lib/data/opening-hours";
 import ReactMarkdown from "react-markdown";
 
@@ -77,6 +79,14 @@ export default async function LocationPage({ params }: LocationPageProps) {
     ? location.city.toLowerCase().replace(/\s+/g, "-")
     : null;
 
+  // Related guides — complement the "Other vets in city" block with editorial
+  // links into /learn. Pulls from the veterinary category (the strongest match
+  // for any vet practice page); pillar guides surface first.
+  const vetArticles = await getArticlesByAudience("consumer", "veterinary");
+  const relatedGuides = [...vetArticles]
+    .sort((a, b) => Number(b.is_pillar) - Number(a.is_pillar))
+    .slice(0, 3);
+
   return (
     <div className="min-h-screen bg-surface">
       <LocalBusinessSchema
@@ -101,6 +111,9 @@ export default async function LocationPage({ params }: LocationPageProps) {
         items={[
           { name: "Home", url: "https://fetchrated.com" },
           { name: "Find Services", url: "https://fetchrated.com/find" },
+          ...(location.city && citySlug
+            ? [{ name: location.city, url: `https://fetchrated.com/find/vets/${citySlug}` }]
+            : []),
           { name: location.name, url: locationUrl },
         ]}
       />
@@ -208,6 +221,36 @@ export default async function LocationPage({ params }: LocationPageProps) {
               )}
             </div>
             <LocationCardGrid locations={otherInCity} />
+          </section>
+        )}
+
+        {/* Related guides — give the practice page an editorial cross-link
+            into /learn. Improves topical authority and gives the user a
+            natural next step beyond "see other vets". */}
+        {relatedGuides.length > 0 && (
+          <section className="max-w-6xl mx-auto px-6 lg:px-8 py-12 border-t border-outline-variant/10">
+            <div className="flex flex-wrap items-baseline justify-between gap-4 mb-8">
+              <h2 className="text-2xl md:text-3xl font-headline font-bold text-on-surface">
+                Related <span className="serif-italic">guides</span>
+              </h2>
+              <Link
+                href="/learn"
+                className="text-sm font-semibold text-primary hover:underline"
+              >
+                Browse all guides →
+              </Link>
+            </div>
+            <GuideCardGrid
+              guides={relatedGuides.map((a) => ({
+                title: a.title,
+                excerpt: a.excerpt,
+                slug: a.slug,
+                category: a.category,
+                isPillar: a.is_pillar,
+                readTime: a.read_time || undefined,
+                imageUrl: a.featured_image_url ?? undefined,
+              }))}
+            />
           </section>
         )}
       </main>

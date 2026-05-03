@@ -9,6 +9,7 @@ import {
   GuideCardGrid,
   ArticleSchema,
   BreadcrumbSchema,
+  FAQSchema,
 } from "@/components";
 import { SectionRenderer } from "@/components/article/SectionRenderer";
 import { ArticleActions } from "@/components/article/ArticleActions";
@@ -74,6 +75,20 @@ async function DatabaseArticle({ article }: { article: Article }) {
       : `https://fetchrated.com${article.featured_image_url}`
     : undefined;
 
+  // Pull every FAQ section's items into one flat list and strip markdown links
+  // so the schema text renders cleanly in SERPs (Google accepts text only).
+  const faqItems: { question: string; answer: string }[] = [];
+  for (const section of article.sections) {
+    if (section.type === "faq") {
+      for (const item of section.items) {
+        faqItems.push({
+          question: item.question,
+          answer: item.answer.replace(/\[([^\]]+)\]\([^)]+\)/g, "$1"),
+        });
+      }
+    }
+  }
+
   return (
     <div className="min-h-screen bg-surface-container-low">
       <ArticleSchema
@@ -97,6 +112,7 @@ async function DatabaseArticle({ article }: { article: Article }) {
           { name: article.title, url: articleUrl },
         ]}
       />
+      {faqItems.length > 0 && <FAQSchema faqs={faqItems} />}
       <Navigation currentPath="/learn" />
 
       <main className="pt-24">

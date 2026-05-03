@@ -51,3 +51,4 @@ next-env.d.ts
 # generated curation artefacts (regenerate via the curation scripts)
 /scripts/contact-sheet.html
 /scripts/.unsplash-search-cache.json
+.env*.local
