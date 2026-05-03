@@ -2,6 +2,7 @@ import {
   Navigation,
   Footer,
   Breadcrumbs,
+  BreadcrumbSchema,
   SearchBar,
   Card,
 } from "@/components";
@@ -41,6 +42,9 @@ export async function generateMetadata({ params }: LocalVetsPageProps) {
   return {
     title: `Vets in ${locationName} | FetchRated`,
     description: `Browse veterinary practices in ${locationName} from our UK directory, drawn from public information.`,
+    alternates: {
+      canonical: `https://fetchrated.com/find/vets/${location}`,
+    },
   };
 }
 
@@ -67,6 +71,14 @@ export default async function LocalVetsPage({ params, searchParams }: LocalVetsP
 
   return (
     <div className="min-h-screen bg-surface">
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", url: "https://fetchrated.com" },
+          { name: "Find", url: "https://fetchrated.com/find" },
+          { name: "Vets", url: "https://fetchrated.com/find/vets" },
+          { name: locationName, url: `https://fetchrated.com/find/vets/${location}` },
+        ]}
+      />
       <Navigation currentPath="/find" />
 
       <main className="pt-32 pb-24">

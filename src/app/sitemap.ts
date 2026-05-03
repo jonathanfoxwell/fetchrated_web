@@ -17,19 +17,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/about`, priority: 0.6, changeFrequency: 'monthly' },
   ];
 
-  // Articles from database
+  // Articles from database. Only consumer-audience articles have a public route
+  // (`/learn/<slug>`); the `/for-practices/resources/<slug>` route doesn't exist
+  // yet, so practice-audience articles are excluded to avoid advertising 404s.
   const articles = await getAllPublishedSlugs();
-  const articlePages: MetadataRoute.Sitemap = articles.map((article) => {
-    const basePath = article.audience === 'practice'
-      ? '/for-practices/resources'
-      : '/learn';
-    return {
-      url: `${baseUrl}${basePath}/${article.slug}`,
+  const articlePages: MetadataRoute.Sitemap = articles
+    .filter((article) => article.audience !== 'practice')
+    .map((article) => ({
+      url: `${baseUrl}/learn/${article.slug}`,
       lastModified: new Date(article.updated_at),
       priority: article.is_pillar ? 0.8 : 0.6,
       changeFrequency: 'monthly' as const,
-    };
-  });
+    }));
 
   // Locations from database
   const locations = await getAllLocationSlugs();

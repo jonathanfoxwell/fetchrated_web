@@ -192,6 +192,7 @@ export function ArticleSchema({
       "@id": url,
     },
     articleSection: guide.category,
+    ...(guide.imageUrl && { image: guide.imageUrl }),
     ...(guide.readTime && { timeRequired: `PT${guide.readTime}M` }),
     ...(datePublished && { datePublished }),
     ...(dateModified && { dateModified }),

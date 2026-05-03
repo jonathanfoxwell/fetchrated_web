@@ -66,6 +66,13 @@ export default async function GuidePage({ params }: GuidePageProps) {
 async function DatabaseArticle({ article }: { article: Article }) {
   const relatedArticles = await getRelatedArticles(article.slug);
   const articleUrl = `https://fetchrated.com/learn/${article.slug}`;
+  // Schema.org expects absolute URLs in `image`. featured_image_url may be
+  // stored as a site-relative path; prefix with origin when so.
+  const articleImage = article.featured_image_url
+    ? article.featured_image_url.startsWith('http')
+      ? article.featured_image_url
+      : `https://fetchrated.com${article.featured_image_url}`
+    : undefined;
 
   return (
     <div className="min-h-screen bg-surface-container-low">
@@ -77,6 +84,7 @@ async function DatabaseArticle({ article }: { article: Article }) {
           category: article.category,
           isPillar: article.is_pillar,
           readTime: article.read_time || undefined,
+          imageUrl: articleImage,
         }}
         url={articleUrl}
         datePublished={article.published_at}

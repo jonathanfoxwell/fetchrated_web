@@ -30,10 +30,23 @@ interface FindPageProps {
   searchParams: Promise<{ q?: string; location?: string; lat?: string; lng?: string; page?: string }>;
 }
 
-export const metadata = {
-  title: "Find Verified Pet Care | FetchRated",
-  description: "Independently verified UK veterinary practices. Real reviews from real customers.",
-};
+export async function generateMetadata({ searchParams }: FindPageProps) {
+  const { q, location } = await searchParams;
+  // Canonical preserves search intent (q/location) but strips pagination and
+  // user-specific geo (lat/lng) so paginated/coord-based variants consolidate
+  // onto a single canonical URL.
+  const params = new URLSearchParams();
+  if (q) params.set("q", q);
+  if (location) params.set("location", location);
+  const qs = params.toString();
+  return {
+    title: "Find Verified Pet Care | FetchRated",
+    description: "Independently verified UK veterinary practices. Real reviews from real customers.",
+    alternates: {
+      canonical: `https://fetchrated.com/find${qs ? `?${qs}` : ""}`,
+    },
+  };
+}
 
 export default async function FindPage({ searchParams }: FindPageProps) {
   const { q, location, lat, lng, page } = await searchParams;
