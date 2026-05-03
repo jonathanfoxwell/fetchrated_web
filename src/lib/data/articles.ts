@@ -209,12 +209,12 @@ export const getRelatedArticles = unstable_cache(
 /**
  * Get all published article slugs for sitemap generation.
  */
-export async function getAllPublishedSlugs(): Promise<{ slug: string; updated_at: string; is_pillar: boolean; audience: string }[]> {
+export async function getAllPublishedSlugs(): Promise<{ slug: string; updated_at: string; is_pillar: boolean; audience: string; category: string }[]> {
   const supabase = createServerClient();
 
   const { data, error } = await supabase
     .from('articles')
-    .select('slug, updated_at, is_pillar, audience')
+    .select('slug, updated_at, is_pillar, audience, category')
     .eq('status', 'published');
 
   if (error) {
