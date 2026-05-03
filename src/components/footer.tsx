@@ -17,7 +17,7 @@ const footerSections: FooterSection[] = [
     title: "Standards",
     links: [
       { label: "Methodology", href: "/how-we-assess" },
-      { label: "Peer Review Process", href: "/how-we-assess#peer-review", highlight: true },
+      { label: "Peer Review Process", href: "/how-we-assess#peer-review" },
       { label: "Ethical Standards", href: "/how-we-assess#ethics" },
     ],
   },

@@ -26,6 +26,11 @@ export type { Guide } from "./guide-card";
 // Form Components
 export { PilotForm, PilotConfirmation } from "./pilot-form";
 
+// Article CTA — server component that combines geolocation + city quick-links.
+// Drop into article render for a high-intent find-a-vet block at the bottom.
+export { ArticleFindVet } from "./article-find-vet";
+export { NearMeCard } from "./near-me-card";
+
 // Schema Components (JSON-LD)
 export {
   JsonLd,

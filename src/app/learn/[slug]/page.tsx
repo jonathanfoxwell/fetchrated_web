@@ -10,6 +10,7 @@ import {
   ArticleSchema,
   BreadcrumbSchema,
   FAQSchema,
+  ArticleFindVet,
 } from "@/components";
 import { SectionRenderer } from "@/components/article/SectionRenderer";
 import { ArticleActions } from "@/components/article/ArticleActions";
@@ -173,6 +174,14 @@ async function DatabaseArticle({ article }: { article: Article }) {
               <SectionRenderer sections={article.sections} />
             </article>
           </div>
+        </div>
+
+        {/* High-intent find-a-vet block — geolocation card + rotating city
+            quick-links. Drives readers from condition/care content into the
+            directory, and gives Google rotating internal-link signals into
+            city pages. Server-rendered (NearMeCard inside is client). */}
+        <div className="bg-surface-container-low print:hidden">
+          <ArticleFindVet />
         </div>
 
         {relatedArticles.length > 0 && (
