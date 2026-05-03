@@ -7,11 +7,13 @@ import {
   FAQSchema,
   SearchBar,
   Card,
+  GuideCardGrid,
 } from "@/components";
 import { LocationCardGrid } from "@/components/location";
 import { Pagination } from "@/components/pagination";
 import { getDirectoryListings, getDirectoryCities } from "@/lib/data/locations";
-import { MapPin, Star } from "lucide-react";
+import { getArticlesByAudience } from "@/lib/data/articles";
+import { MapPin, Star, ChevronDown, BarChart3 } from "lucide-react";
 
 const ITEMS_PER_PAGE = 24;
 
@@ -115,8 +117,53 @@ export default async function LocalVetsPage({ params, searchParams }: LocalVetsP
   // rating then review count, so the first three are the best evidence.
   const topRated = currentPage === 1 && locations.length >= 4 ? locations.slice(0, 3) : [];
 
-  // City-specific FAQs are emitted as FAQPage JSON-LD on every city page.
+  // City-wide stats panel — page 1 only. Pulls all city practices in one
+  // shot (cap 1000, comfortably above any UK city) and aggregates locally.
+  // City profile is the same regardless of which paginated page you're on,
+  // so showing it on page 1 keeps the page useful without duplicating across
+  // pagination.
+  const allInCity = currentPage === 1 && totalCount > 0
+    ? (await getDirectoryListings({ city: locationName, limit: 1000 })).data
+    : [];
+
+  const cityStats = (() => {
+    if (allInCity.length === 0) return null;
+    let ratingSum = 0;
+    let ratingCount = 0;
+    let highRated = 0;
+    let totalReviews = 0;
+    let withReviews = 0;
+    for (const p of allInCity) {
+      if (p.average_rating != null) {
+        ratingSum += p.average_rating;
+        ratingCount += 1;
+        if (p.average_rating >= 4.5) highRated += 1;
+      }
+      if (p.total_reviews) {
+        totalReviews += p.total_reviews;
+        withReviews += 1;
+      }
+    }
+    return {
+      avgRating: ratingCount > 0 ? ratingSum / ratingCount : 0,
+      highRated,
+      totalReviews,
+      withReviews,
+    };
+  })();
+
+  // City-specific FAQs are emitted as FAQPage JSON-LD on every city page,
+  // and also rendered as a visible accordion at the bottom (Google rewards
+  // schema-content alignment, plus it's genuinely useful for visitors).
   const cityFaqs = totalCount > 0 ? getCityFaqs(locationName, totalCount) : [];
+
+  // Related guides — pulls 3 veterinary-category articles, pillars first.
+  // Mirrors the practice-detail-page block: directory pages route users to
+  // editorial content as a natural next step (and improves topical authority).
+  const vetArticles = await getArticlesByAudience("consumer", "veterinary");
+  const relatedGuides = [...vetArticles]
+    .sort((a, b) => Number(b.is_pillar) - Number(a.is_pillar))
+    .slice(0, 3);
 
   return (
     <div className="min-h-screen bg-surface">
@@ -162,6 +209,58 @@ export default async function LocalVetsPage({ params, searchParams }: LocalVetsP
             </p>
           </div>
         </section>
+
+        {/* City stats panel — aggregated across all practices in the city.
+            Page 1 only; gives the page a city-profile feel and contributes
+            unique-per-city numbers (avg rating, high-rated count, review
+            volume). Pure data render, no editorial cost. */}
+        {cityStats && (
+          <section className="max-w-7xl mx-auto px-6 lg:px-8 mb-8">
+            <Card className="p-6 md:p-8 bg-surface-container-low border-outline-variant/10">
+              <h2 className="text-xl font-bold text-on-surface mb-6 flex items-center gap-2">
+                <BarChart3 className="w-5 h-5 text-primary" />
+                {locationName} at a glance
+              </h2>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div>
+                  <div className="text-3xl font-headline font-bold text-on-surface">
+                    {totalCount}
+                  </div>
+                  <div className="text-sm text-on-surface-variant mt-1">
+                    Verified {totalCount === 1 ? 'practice' : 'practices'}
+                  </div>
+                </div>
+                <div>
+                  <div className="text-3xl font-headline font-bold text-on-surface">
+                    {cityStats.avgRating > 0 ? cityStats.avgRating.toFixed(1) : '—'}
+                    {cityStats.avgRating > 0 && (
+                      <span className="text-base text-on-surface-variant font-normal">/5</span>
+                    )}
+                  </div>
+                  <div className="text-sm text-on-surface-variant mt-1">
+                    Average rating
+                  </div>
+                </div>
+                <div>
+                  <div className="text-3xl font-headline font-bold text-on-surface">
+                    {cityStats.highRated}
+                  </div>
+                  <div className="text-sm text-on-surface-variant mt-1">
+                    Rated 4.5★ or above
+                  </div>
+                </div>
+                <div>
+                  <div className="text-3xl font-headline font-bold text-on-surface">
+                    {cityStats.totalReviews.toLocaleString()}
+                  </div>
+                  <div className="text-sm text-on-surface-variant mt-1">
+                    Customer reviews
+                  </div>
+                </div>
+              </div>
+            </Card>
+          </section>
+        )}
 
         {/* Top-rated highlights — page-1 only, gives the page unique editorial
             content beyond the listings grid (variation per city = real SEO
@@ -236,6 +335,66 @@ export default async function LocalVetsPage({ params, searchParams }: LocalVetsP
             </Card>
           )}
         </section>
+
+        {/* Pet care guides — same data we serve from the FAQPage JSON-LD,
+            now also rendered as visible text. Schema-content alignment is
+            a positive ranking signal, and the questions are useful to a
+            visitor on this page. */}
+        {relatedGuides.length > 0 && (
+          <section className="max-w-7xl mx-auto px-6 lg:px-8 mb-16">
+            <div className="flex flex-wrap items-baseline justify-between gap-4 mb-8">
+              <h2 className="text-2xl md:text-3xl font-headline font-bold text-on-surface">
+                Pet care <span className="serif-italic">guides</span>
+              </h2>
+              <Link
+                href="/learn"
+                className="text-sm font-semibold text-primary hover:underline"
+              >
+                Browse all guides →
+              </Link>
+            </div>
+            <GuideCardGrid
+              guides={relatedGuides.map((a) => ({
+                title: a.title,
+                excerpt: a.excerpt,
+                slug: a.slug,
+                category: a.category,
+                isPillar: a.is_pillar,
+                readTime: a.read_time || undefined,
+                imageUrl: a.featured_image_url ?? undefined,
+              }))}
+            />
+          </section>
+        )}
+
+        {/* Common questions — visible accordion mirroring the FAQPage JSON-LD
+            above. Same questions, embedded city name, gives the page real
+            visible-content depth (vs invisible schema-only content). */}
+        {cityFaqs.length > 0 && (
+          <section className="max-w-7xl mx-auto px-6 lg:px-8 mb-16">
+            <h2 className="text-2xl md:text-3xl font-headline font-bold text-on-surface mb-6">
+              Common questions about vets in <span className="serif-italic">{locationName}</span>
+            </h2>
+            <div className="space-y-3">
+              {cityFaqs.map((faq) => (
+                <details
+                  key={faq.question}
+                  className="group bg-surface-container-low rounded-xl border border-outline-variant/10 overflow-hidden"
+                >
+                  <summary className="flex items-start justify-between gap-4 p-5 md:p-6 cursor-pointer list-none">
+                    <h3 className="text-base md:text-lg font-semibold text-on-surface pr-4">
+                      {faq.question}
+                    </h3>
+                    <ChevronDown className="w-5 h-5 text-on-surface-variant flex-shrink-0 mt-1 transition-transform group-open:rotate-180" />
+                  </summary>
+                  <div className="px-5 md:px-6 pb-5 md:pb-6 text-on-surface-variant leading-relaxed">
+                    {faq.answer}
+                  </div>
+                </details>
+              ))}
+            </div>
+          </section>
+        )}
 
         {/* About this directory */}
         <section className="max-w-7xl mx-auto px-6 lg:px-8">
