@@ -1,5 +1,6 @@
 import { MapPin, Phone, Mail, Globe, Clock } from 'lucide-react';
 import type { DirectoryListing, OpeningHours } from '@/lib/data/locations';
+import { TrackedContactLink } from './TrackedContactLink';
 
 interface LocationInfoProps {
   location: DirectoryListing;
@@ -28,12 +29,14 @@ export function LocationInfo({ location }: LocationInfoProps) {
         {location.phone && (
           <div className="flex gap-3">
             <Phone className="h-5 w-5 text-on-surface-variant flex-shrink-0" />
-            <a
+            <TrackedContactLink
+              event="call_click"
+              practiceSlug={location.slug}
               href={`tel:${location.phone}`}
               className="text-primary hover:underline"
             >
               {location.phone}
-            </a>
+            </TrackedContactLink>
           </div>
         )}
 
@@ -54,14 +57,16 @@ export function LocationInfo({ location }: LocationInfoProps) {
         {location.website && (
           <div className="flex gap-3">
             <Globe className="h-5 w-5 text-on-surface-variant flex-shrink-0" />
-            <a
+            <TrackedContactLink
+              event="website_click"
+              practiceSlug={location.slug}
               href={location.website}
               target="_blank"
               rel="noopener noreferrer"
               className="text-primary hover:underline truncate"
             >
               {location.website.replace(/^https?:\/\//, '')}
-            </a>
+            </TrackedContactLink>
           </div>
         )}
 

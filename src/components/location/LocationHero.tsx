@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { Star, MapPin, Phone, Globe, Mail, Clock, Calendar, Building2 } from 'lucide-react';
 import type { DirectoryListing } from '@/lib/data/locations';
 import { fallbackProfileImage, fallbackBannerImage } from '@/lib/fallback-images';
+import { TrackedContactLink } from './TrackedContactLink';
 
 interface LocationHeroProps {
   location: DirectoryListing;
@@ -146,16 +147,20 @@ export function LocationHero({
             {/* Contact Links */}
             <div className="flex flex-wrap gap-4 mt-6">
               {location.phone && (
-                <a
+                <TrackedContactLink
+                  event="call_click"
+                  practiceSlug={location.slug}
                   href={`tel:${location.phone}`}
                   className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-on-primary rounded-lg font-medium hover:bg-primary/90 transition-colors"
                 >
                   <Phone className="h-4 w-4" />
                   Call
-                </a>
+                </TrackedContactLink>
               )}
               {location.website && (
-                <a
+                <TrackedContactLink
+                  event="website_click"
+                  practiceSlug={location.slug}
                   href={location.website}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -163,7 +168,7 @@ export function LocationHero({
                 >
                   <Globe className="h-4 w-4" />
                   Website
-                </a>
+                </TrackedContactLink>
               )}
               {location.email && (
                 <a
