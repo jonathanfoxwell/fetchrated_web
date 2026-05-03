@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import { Newsreader, Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
 import { OrganizationSchema } from "@/components/schema";
 import "./globals.css";
@@ -21,9 +22,45 @@ const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
 });
 
+const SITE_URL = "https://fetchrated.com";
+const SITE_TITLE = "FetchRated | The Independent Authority in UK Pet Care Verification";
+const SITE_DESCRIPTION = "FetchRated is the independent UK organisation for pet care standards. We verify quality so you can choose with confidence.";
+
 export const metadata: Metadata = {
-  title: "FetchRated | The Independent Authority in UK Pet Care Verification",
-  description: "FetchRated is the independent UK organisation for pet care standards. We verify quality so you can choose with confidence.",
+  // metadataBase resolves all relative URLs in this file (including OG
+  // image references) to absolute URLs. Without it, Next emits warnings
+  // and social-share previews can fall back to localhost.
+  metadataBase: new URL(SITE_URL),
+  title: SITE_TITLE,
+  description: SITE_DESCRIPTION,
+  alternates: {
+    canonical: "/",
+  },
+  // Default Open Graph card. Per-page metadata exports (e.g. the
+  // practice detail page) override title / description / images here;
+  // the layout-level defaults apply everywhere else.
+  openGraph: {
+    type: "website",
+    siteName: "FetchRated",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    url: SITE_URL,
+    locale: "en_GB",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "FetchRated — the trusted guide to pet care",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    images: ["/og-image.png"],
+  },
 };
 
 export default function RootLayout({
@@ -39,6 +76,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
         <OrganizationSchema />
         {children}
+        <Analytics />
       </body>
     </html>
   );

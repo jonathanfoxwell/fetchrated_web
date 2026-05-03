@@ -5,14 +5,16 @@ import { getAllLocationSlugs } from '@/lib/data/locations';
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://fetchrated.com';
 
-  // Static pages
+  // Static pages — keep this in sync with the actual routes under src/app/.
+  // /methodology was a stale reference; the route is /how-we-assess.
   const staticPages: MetadataRoute.Sitemap = [
     { url: baseUrl, priority: 1.0, changeFrequency: 'weekly' },
     { url: `${baseUrl}/learn`, priority: 0.9, changeFrequency: 'weekly' },
     { url: `${baseUrl}/find`, priority: 0.9, changeFrequency: 'weekly' },
     { url: `${baseUrl}/for-practices`, priority: 0.8, changeFrequency: 'monthly' },
     { url: `${baseUrl}/for-practices/resources`, priority: 0.8, changeFrequency: 'weekly' },
-    { url: `${baseUrl}/methodology`, priority: 0.7, changeFrequency: 'monthly' },
+    { url: `${baseUrl}/how-we-assess`, priority: 0.7, changeFrequency: 'monthly' },
+    { url: `${baseUrl}/about`, priority: 0.6, changeFrequency: 'monthly' },
   ];
 
   // Articles from database
