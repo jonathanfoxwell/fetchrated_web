@@ -147,7 +147,7 @@ export default async function LocationPage({ params }: LocationPageProps) {
         </div>
 
         <div className="max-w-6xl mx-auto px-6 lg:px-8 py-8">
-          <div className="grid lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2 space-y-8">
               {aboutText && (
                 <Card className="p-6 md:p-8">
