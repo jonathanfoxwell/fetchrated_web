@@ -307,12 +307,6 @@ export async function getNearbyListings(options: {
     return { data: [], totalCount: 0 };
   }
 
-  // The nearby_directory_listings RPC has not yet been refreshed to include
-  // consolidator_group_name/slug (its body uses the earthdistance `<@>`
-  // operator which isn't available on every dev DB; refresh deferred to a
-  // follow-up migration). For now, "near me" results don't carry the
-  // consolidator label — falling back to null. Regular directory listings
-  // (via the view) do show the label.
   const rows = data as Array<LocationCard & { distance_miles: number; total_count: number }>;
   return {
     data: rows.map(r => ({
@@ -327,8 +321,8 @@ export async function getNearbyListings(options: {
       total_reviews: r.total_reviews,
       badge_tier: r.badge_tier,
       is_fetchrated_member: r.is_fetchrated_member,
-      consolidator_group_name: null,
-      consolidator_group_slug: null,
+      consolidator_group_name: r.consolidator_group_name,
+      consolidator_group_slug: r.consolidator_group_slug,
       distance_miles: r.distance_miles,
     })),
     totalCount: rows[0]?.total_count ?? 0,
