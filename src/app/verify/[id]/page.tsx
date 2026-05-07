@@ -24,6 +24,9 @@ export async function generateMetadata({ params }: VerifyPageProps) {
   return {
     title: `Verify ${verifiedLocation.name} | FetchRated`,
     description: `Verify the FetchRated trust mark for ${verifiedLocation.name}. This location has been independently assessed and verified.`,
+    // Verification pages render badge tier + assessment metadata. Until the
+    // pilot ships and assessments are real, keep these out of search results.
+    robots: { index: false, follow: true },
   };
 }
 

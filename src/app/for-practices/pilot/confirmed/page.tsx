@@ -7,6 +7,7 @@ import {
 export const metadata = {
   title: "Welcome to the Pilot | FetchRated",
   description: "You're now part of the FetchRated national pilot programme.",
+  robots: { index: false, follow: true },
 };
 
 export default function PilotConfirmedPage() {

@@ -15,6 +15,9 @@ export async function generateMetadata({ params }: PilotPageProps) {
   return {
     title: "Confirm Your Place | FetchRated",
     description: "Confirm your place in the FetchRated National Pilot Programme.",
+    // Token-gated cohort URLs: keep them out of search results even if a
+    // referrer leak exposes one to a crawler.
+    robots: { index: false, follow: true },
   };
 }
 
