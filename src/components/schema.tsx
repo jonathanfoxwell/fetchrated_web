@@ -25,12 +25,6 @@ export function OrganizationSchema() {
     logo: "https://fetchrated.com/logo.png",
     description: "The independent UK organisation for pet care standards. We verify quality so you can choose with confidence.",
     foundingDate: "2024",
-    founders: [
-      {
-        "@type": "Person",
-        name: "Jonathan Foxwell",
-      },
-    ],
     contactPoint: {
       "@type": "ContactPoint",
       email: "hello@fetchrated.com",
