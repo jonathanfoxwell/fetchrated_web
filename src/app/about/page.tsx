@@ -8,6 +8,7 @@ import { Mail, Shield, Users, Target, Building2, FileCheck } from "lucide-react"
 export const metadata = {
   title: "About FetchRated | Independent UK Pet Care Verification",
   description: "Independent UK pet care verification, aligned with the CMA's March 2026 transparency findings.",
+  alternates: { canonical: "/about" },
 };
 
 export default function AboutPage() {

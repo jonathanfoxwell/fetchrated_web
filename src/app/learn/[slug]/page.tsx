@@ -46,6 +46,7 @@ export async function generateMetadata({ params }: GuidePageProps) {
   return {
     title: article.meta_title || `${article.title} | FetchRated`,
     description: article.meta_description || article.excerpt,
+    alternates: { canonical: `/learn/${slug}` },
     openGraph: {
       title: article.title,
       description: article.excerpt,

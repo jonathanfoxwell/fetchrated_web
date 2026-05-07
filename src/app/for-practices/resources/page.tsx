@@ -5,6 +5,7 @@ import { BookOpen, TrendingUp, Shield, Users } from "lucide-react";
 export const metadata = {
   title: "Resources for Veterinary Practices | FetchRated",
   description: "Guides, templates, and resources to help your veterinary practice grow, improve client experience, and build trust.",
+  alternates: { canonical: "/for-practices/resources" },
 };
 
 const categoryInfo = {

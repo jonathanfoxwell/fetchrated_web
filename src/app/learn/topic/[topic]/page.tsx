@@ -56,6 +56,7 @@ export async function generateMetadata({ params }: TopicPageProps) {
   return {
     title: `${label} guides | FetchRated`,
     description: `Practical UK pet care guides on ${label.toLowerCase()} — independently written and grounded in current UK guidance.`,
+    alternates: { canonical: `/learn/topic/${topic}` },
   };
 }
 

@@ -34,6 +34,7 @@ const petOwnerFaqs = [
 export const metadata = {
   title: "How FetchRated Assesses Practices | Methodology",
   description: "Independent methodology aligned with the CMA's transparency principles. Verified reviews, online visibility, review authenticity, and local competitive position.",
+  alternates: { canonical: "/how-we-assess" },
 };
 
 export default function HowWeAssessPage() {

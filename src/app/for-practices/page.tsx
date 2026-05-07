@@ -15,6 +15,7 @@ import { Shield, Scale, Eye, Star, BarChart3, Video, MapPin, ChevronDown, FileCh
 export const metadata = {
   title: "National Pilot Programme for Veterinary Practices | FetchRated",
   description: "Free visibility audit, verified Google reviews, and CMA compliance support for invited UK veterinary practices. By invitation.",
+  alternates: { canonical: "/for-practices" },
 };
 
 const qualificationSteps = [

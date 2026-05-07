@@ -3,6 +3,7 @@ import { Navigation, Footer } from "@/components";
 export const metadata = {
   title: "Terms of Service | FetchRated",
   description: "FetchRated's terms of service govern your use of our website and services.",
+  alternates: { canonical: "/terms" },
 };
 
 export default function TermsPage() {

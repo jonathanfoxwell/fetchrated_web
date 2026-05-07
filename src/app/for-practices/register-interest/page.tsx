@@ -4,6 +4,7 @@ export const metadata = {
   title: "Register Your Interest | FetchRated",
   description:
     "The National Pilot Programme is by invitation. If you'd like FetchRated to consider your practice for an upcoming cohort, leave your details.",
+  alternates: { canonical: "/for-practices/register-interest" },
 };
 
 export default function RegisterInterestPage() {

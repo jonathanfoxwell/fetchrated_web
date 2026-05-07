@@ -3,6 +3,7 @@ import { Navigation, Footer } from "@/components";
 export const metadata = {
   title: "Privacy Policy | FetchRated",
   description: "FetchRated's privacy policy explains how we collect, use, and protect your personal information.",
+  alternates: { canonical: "/privacy" },
 };
 
 export default function PrivacyPage() {

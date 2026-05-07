@@ -12,6 +12,7 @@ export const metadata = {
   title: "Pet Care Guides | FetchRated",
   description:
     "Expert guides on choosing a UK vet, verifying RCVS registration, reading reviews, and getting the most from your vet visits.",
+  alternates: { canonical: "/learn" },
 };
 
 // ArticleSummary (DB shape) → Guide (card-component shape)
