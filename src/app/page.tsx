@@ -20,6 +20,9 @@ import { ClipboardCheck, Shield, Award, ArrowRight } from "lucide-react";
 export const metadata = {
   title: "FetchRated | Independent UK Veterinary Verification",
   description: "Independent UK pet care verification with verified reviews and a three-tier quality standard for veterinary practices.",
+  alternates: {
+    canonical: "/",
+  },
 };
 
 const howItWorksFeatures = [

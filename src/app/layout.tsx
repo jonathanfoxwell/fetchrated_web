@@ -34,9 +34,11 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: SITE_TITLE,
   description: SITE_DESCRIPTION,
-  alternates: {
-    canonical: "/",
-  },
+  // Intentionally no `alternates.canonical` here. A layout-level canonical
+  // cascades to every child page that doesn't override `alternates`, so a
+  // shared default like "/" makes Google treat every inheriting page as a
+  // duplicate of the homepage. Each page sets its own canonical instead;
+  // pages that don't are self-canonicalized by Google.
   // Default Open Graph card. Per-page metadata exports (e.g. the
   // practice detail page) override title / description / images here;
   // the layout-level defaults apply everywhere else.

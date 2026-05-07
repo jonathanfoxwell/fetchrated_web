@@ -43,6 +43,9 @@ export async function generateMetadata({ params }: LocationPageProps) {
   return {
     title: `${location.name} | FetchRated`,
     description: location.headline || description?.slice(0, 160) || `${location.name} in ${location.city}. View reviews and learn more about this practice.`,
+    alternates: {
+      canonical: `/find/location/${slug}`,
+    },
     openGraph: {
       title: location.name,
       description: location.headline || description?.slice(0, 160) || undefined,
